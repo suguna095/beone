@@ -1,0 +1,48 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showabout();">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_generalSetting'|translate}} </li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_About_Us'|translate}} </li>
+                </ol>
+    </nav>
+	<div class = "container">
+	<div class="hk-pg-header">
+		<h4><i data-feather="arrow-left-circle"></i></i> 
+        <span class="text-semibold">{{'lang_Datatables'|translate}} </span> -{{'lang_Upload_App'|translate}}  </h4>
+	</div>
+	
+	<section class="hk-sec-wrapper">
+	<h5 class="hk-sec-title">{{'lang_Show_About_Us'|translate}}</h5><br>
+	<form name="" method="post" action="#">
+	<table id="datable_1" class="table table-hover w-100 display pb-30">
+	    <thead>
+		    <tr>
+			    <th>{{'lang_srNo'|translate}} </th>
+                <th>{{'lang_Add_About_Us'|translate}} </th>
+                <th>{{'lang_action'|translate}} </th>
+			</tr>
+		</thead>
+		<tbody>
+		    <tr ng-repeat="data in showabout">
+			    <td>{{index+1}}</td>
+                <td>{{data.heading_en}}</td> 
+				<td>
+				<div class="btn-group">
+                    <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">{{'lang_Toggle_Dropdown'|translate}} </span>
+                    </button>
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(138px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+					
+					<a class="dropdown-item" ui-sref="edit_about_us({rid:data.id})"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp;{{'lang_edit'|translate}} </a>
+						<a class="dropdown-item" ng-click="GetAbtsdelete(data.id)" ng-confirm-click="Do you want to Delete?"><i class="fa fa-trash-o fa-fw"></i>&nbsp;{{'lang_Delete'|translate}} </a>
+                    </div>
+				</div>	
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</form>
+	</section>
+		 
+		

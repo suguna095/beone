@@ -1,0 +1,74 @@
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="gettodayofd();">
+    <ol class="breadcrumb breadcrumb-light bg-transparent">
+        <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{'lang_Ofd_reports'|translate}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{'lang_Show_Detail'|translate}}</li>
+    </ol>
+</nav>
+
+
+<section class="hk-sec-wrapper" style="margin: 2%;">
+<div class="breadcrumb-line">
+    <div class="hk-pg-header">
+        <h4><i data-feather="arrow-left-circle"></i></i>  
+        <span class="text-semibold"></span>Daily Report</h4>
+    </div>
+</div>
+
+      <div class="table-responsive">
+     <table class="table datatable-show-all table-bordered table-hover datatable-highlight" id="printSectionId">
+    <thead>
+              
+            <tr>
+             <th>Date</th>
+            <th class="head0">{{'lang_AwbNo'|translate}}</th>
+              <th class="head0">Delivery Attempts</th>
+              <th class="head0">Call Attempts</th>
+            <th class="head0">Origin</th>
+            <th class="head0">Destination</th>
+            <th class="head0">Pieces</th>
+            <th class="head1">{{'lang_sender'|translate}}</th> 
+            <th class="head0">{{'lang_Receiver'|translate}}</th>
+            
+          
+            <th class="head0">Status Schedule</th>
+            <th class="head0">Schedule Channel</th>
+              
+            <th class="head1">Driver Name</th>
+<!--<th class="head0">{{'lang_action'|translate}}</th>            </tr>-->  
+    </thead>
+        
+    <tbody>
+      <tr ng-repeat="data in totalofdlist">  
+       <!-- <td>{{$index+1}}</td>-->
+        
+        <td>{{data.entrydate}}</td> 
+        <td>{{data.slip_no}}</td> 
+        <td>{{data.d_attempt}}</td>
+         <td>{{data.call_attempt}}</td>  
+        <td>{{data.origin}}</td>
+        <td>{{data.destination}}</td>  
+        <td>{{data.pieces}}</td> 
+         <td>{{data.sender_name}}</td>   
+       <td>{{data.reciever_name}}</td>  
+      
+       
+       <td> <span ng-if="data.schedule_status=='N'" class="btn btn-danger"> No</span>
+    <span ng-else="" class="btn btn-success">Yes</span></td>   
+       <td>{{data.schedule_type}}</td>
+       
+        <td>{{data.messangerName}}</td> 		   
+       
+        </tr>
+		<tr>
+					<td ng-if="totalofdlist==''" colspan="12" align="center" style="text-align:center;">
+						{{'lang_NoRecords_Found'|translate}}
+					</td> 
+					
+                </tr>  
+            </tbody>
+</table>
+</div> 
+</section>		
+
+

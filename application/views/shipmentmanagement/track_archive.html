@@ -1,0 +1,237 @@
+<style>
+.panel-default > .panel-heading {
+	color: #333333;
+	background-color: #dedddd;
+	border-color: #ddd;
+	padding: 15px;
+}
+.panel-heading {
+	position: relative;
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+}
+</style>
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showlistship(1,0);showOriginDrop();">
+  <ol class="breadcrumb breadcrumb-light bg-transparent">
+    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> {{'lang_Home'|translate}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_shipmentManagement'|translate}}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_details'|translate}}</li>
+  </ol>
+</nav>
+<section class="hk-sec-wrapper" ng-init="GetArchieveDetailshow();">
+<div class="content-wrapper">
+  <div class="page-header page-header-default">
+    <div class="page-header-content">
+      <div class="page-title">
+        <h6> <span class="text-semibold"> {{'lang_details'|translate}}  - ({{'lang_TrackingNo'|translate}}. :{{DetailListArray.slip_no}}) /  ({{'lang_ReferenceNo'|translate}}. :{{DetailListArray.booking_id}}) </span></h6>
+        <input type="hidden" name="slip_no" ng-model="DetailListArray.slip_no" />
+         </div>
+      <div class="heading-elements" style="float:right">
+        <div class="heading-btn-group"> <a href="awbArchievePrint/{{DetailListArray.slip_no}}" class=" btn btn-info btn-sm" target="_blank">{{'lang_labels'|translate}}</a> <!--<a href="" class="btn btn-success btn-sm" target="_blank">{{'lang_lAbel'|translate}}</a>--> </div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="row" style="margin-top: 5%;">
+      <div class="col-md-12"> </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">{{'lang_senderInfo'|translate}}</div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered">
+                <tbody>
+                  <tr>
+                    <td class="bold">{{'lang_SenderAccountno'|translate}}</td>
+                    <td class="captial">{{DetailListArray.uniqueid}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_SenderName'|translate}}</td>
+                    <td class="captial">{{DetailListArray.sender_name}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_Sender_Mobile'|translate}}</td>
+                    <td class="captial">{{DetailListArray.sender_phone}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_senderAddress'|translate}}</td>
+                    <td class="captial">{{DetailListArray.sender_address}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">{{'lang_receiverInfo'|translate}}</div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered">
+                <tbody>
+                  <tr>
+                    <td class="bold">{{'lang_ReceiverName'|translate}}</td>
+                    <td class="captial">{{DetailListArray.reciever_name}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_ReceiverMobile'|translate}}</td>
+                    <td class="captial">{{DetailListArray.reciever_phone}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_ReceiverAddress'|translate}}</td>
+                    <td class="captial">{{DetailListArray.reciever_address}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">{{'lang_ShipmentInfo'|translate}}</div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered">
+                <tbody>
+         
+                  <tr>
+                    <td class="bold">{{'lang_ShipperReferenceNo'|translate}}.</td>
+                    <td class="captial"><span ng-if="DetailListArray.shippers_ref_no"> {{DetailListArray.shippers_ref_no}}</span>
+                    <span  ng-if="!DetailListArray.shippers_ref_no"> --</span></td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_EntryDate'|translate}}</td>
+                    <td class="captial">{{DetailListArray.entrydate | date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_origin'|translate}}</td>
+                    <td class="captial"> {{DetailListArray.origin}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_destination'|translate}}</td>
+                    <td class="captial">{{DetailListArray.destination}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_No_of_Pieces'|translate}}</td>
+                    <td class="captial">{{DetailListArray.pieces}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_PaymentMode'|translate}}</td>
+                    <td class="captial">{{DetailListArray.mode}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_ScheduleChanel'|translate}}</td>
+                    <td class="captial"><span class="btn btn-danger" style="font-size: 12px;padding: 5px;">{{'lang_NA'|translate}}</span></td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_Shipping_Zone'|translate}}</td>
+                    <td class="captial">{{DetailListArray.shipping_zone}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_Shelveno'|translate}}</td>
+                    <td class="captial">{{DetailListArray.shelv_no}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_ShelveLocation'|translate}}</td>
+                    <td class="captial">{{DetailListArray.menifest_location}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_OnHold'|translate}}</td>
+                    <td class="captial">{{DetailListArray.onHold_Confirm}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_netPrice'|translate}}</td>
+                    <td class="captial">{{DetailListArray.topay_amount}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_Scheduled'|translate}}</td>
+                    <td class="captial"> {{DetailListArray.schedule_status}} </td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_Weight'|translate}}</td>
+                    <td class="captial">{{DetailListArray.weight}} Kg</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_status'|translate}} :</td>
+                  
+                    <td class="captial" ng-if="DetailListArray.mode=='COD'" style="background-color:#AEFFAE;" ng-bind-html="DetailListArray.showstatus">
+                   
+                     </td>
+                       <td class="captial" ng-if="DetailListArray.booking_mode=='Pay at pickup'" style="background-color:#AEFFAE;" ng-bind-html="DetailListArray.showstatus">
+                    </td>
+                       <td class="captial"  ng-if="DetailListArray.total_cod_amt=!=0" style="background-color:#AEFFAE;" ng-bind-html="DetailListArray.showstatus">
+                   </td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_StoreLink'|translate}}</td>
+                    <td class="captial">{{DetailListArray.store_link}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_userType'|translate}}</td>
+                    <td class="captial" ><span ng-if="DetailListArray.VIP_user=='Y'">{{'lang_VIP'|translate}}</span><span ng-if="DetailListArray.VIP_user=='N'">{{'lang_Normal'|translate}}</span></td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_ProductType'|translate}}</td>
+                    <td class="captial">{{DetailListArray.product_type}}</td>
+                  </tr>
+                  <tr>
+                    <td class="bold">{{'lang_ProductDescription'|translate}}</td>
+                    <td class="captial">{{DetailListArray.status_describtion}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">{{'lang_Scheduling_History'|translate}}</div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover" style="font:8px;">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>{{'lang_AreaStreet'|translate}}</th>
+                    <th>{{'lang_Area'|translate}}</th>
+                    <th>{{'lang_Channel'|translate}}</th>
+                    <th>{{'lang_ScheduleDate'|translate}}</th>
+                    <th>{{'lang_time'|translate}}</th>
+                    <th>{{'lang_Update_By'|translate}}</th>
+                    <th>{{'lang_name'|translate}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="sdata in SchedulingHistory">
+                        <td >{{$index+1}}</td>
+                      
+                      
+                        <td>{{sdata.area_street}}</td>
+                          <td>{{sdata.area}}</td>
+                           <td>{{sdata.schedule_type}}</td>
+                        <td>{{sdata.update_date}}</td>
+                        <td>{{sdata.update_time}}</td>
+                      
+                       
+                          <td>{{sdata.type}}</td>
+                     <td>{{sdata.username}}</td>
+
+                    </tr>
+                  <tr ng-if="SchedulingHistory==''">
+                    <td colspan="8">{{'lang_recordNotFound'|translate}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+</div>

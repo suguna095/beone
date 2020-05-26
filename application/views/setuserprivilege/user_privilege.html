@@ -1,0 +1,61 @@
+
+
+
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="Getuserlistpre();">
+<ol class="breadcrumb breadcrumb-light bg-transparent">
+<li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+<li class="breadcrumb-item active" aria-current="page"> {{'lang_setUserPrivilege'|translate}}</li>
+</nav>
+<div class=""> 
+  <!-- Title -->
+  
+  <section class="hk-sec-wrapper">
+  <div class="hk-pg-header">
+      <h4><i data-feather="arrow-left-circle"></i></i> <span class="text-semibold"></span>{{'lang_setUserPrivilege'|translate}}</h4>
+    </div>
+    <div class="col-sm">
+      <form class="user"  name="add_staff" >
+      <div class="row">    
+        <select class="form-control custom-select mt-15" ng-model="user_id" required>
+          <option value="">{{'lang_Select_Staff'|translate}} </option>
+          <option ng-repeat="udata in UsersData" value="{{udata.id}}">{{udata.name}}</option>  
+        
+        </select>
+        <div class="col-md-3"> <span class="input-group-btn" >
+          <button class="btn btn-primary" type="button" style="margin-top: 10px;" ng-disabled="add_staff.$invalid"   ng-click="getUserprivilegeData(user_id)"></i>{{'lang_Get_List'|translate}}</button>
+          </span> </div>
+      </div>
+	  </form>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+   
+        <div class="panel-heading" style="margin-top: 10px;"><i class=""></i></div>
+        &nbsp;
+        <table class="table datatable-show-all table-bordered table-hover datatable-highlight" style="align-items: center;">
+          <thead>
+            <tr>
+              <th class="head0">{{'lang_sNO'|translate}}</th>
+              <th class="head1">{{'lang_Privilege_Name'|translate}}</th>
+               <th class="head1">&nbsp;</th>
+            </tr>
+          </thead>
+           
+                       
+          <tbody>
+          
+            <tr ng-if="privilege_detailsData!=''" ng-repeat="data in privilege_detailsData">
+              <td>{{$index+1}}</td>
+              <td>{{data.privilege_name}}</td>
+                <td>   <div class="custom-control custom-checkbox checkbox-teal">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck{{$index}}" value="{{data.CheckAccess}}" ng-model="data.CheckAccess"  ng-checked="data.CheckAccess" ng-change="GetupdatePrivilageData(data.CheckAccess,data.id);">
+                                                <label class="custom-control-label" for="customCheck{{$index}}"></label>
+                                            </div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+</div>

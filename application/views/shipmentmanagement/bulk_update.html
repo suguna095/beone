@@ -1,0 +1,172 @@
+
+
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="GetmainstatusDrop();">
+  <ol class="breadcrumb breadcrumb-light bg-transparent">
+    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> {{'lang_Home'|translate}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_shipmentManagement'|translate}}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_bulkUpdate'|translate}}</li>
+  </ol>
+</nav>
+<div class = "">
+ 
+  <section class="hk-sec-wrapper">   
+  <div class="panel panel-flat">
+    <div class="panel-heading">
+      <h5 class="panel-title"> {{'lang_bulkUpdate'|translate}}</h5>
+    </div>
+    <br>
+    <div class="panel-body">
+    
+    
+     <div class="col-md-12" ng-if="courier_error">
+        <div class="alert alert-danger" ng-if="courier_error">{{courier_error}}</div>
+      </div>
+     <div class="col-md-12" ng-if="mainstatusEmpty">
+        <div class="alert alert-danger" ng-if="mainstatusEmpty">{{mainstatusEmpty}}</div>
+      </div>
+      <div class="col-md-12" ng-if="messArray1!=0">
+        <div class="alert alert-danger" ng-repeat="mdata in messArray1">{{'lang_wrong_AWB_no'|translate}} {{mdata}}</div>
+      </div>
+      <div class="col-md-12" ng-if="messArray2!=0">
+        <div class="alert alert-danger" ng-repeat="mdata in messArray2"> {{'lang_Delivered_AWB_no'|translate}}{{mdata}}</div>
+      </div>
+      <div class="col-md-12" ng-if="messArray3!=0">
+        <div class="alert alert-danger" ng-repeat="mdata in messArray3"> {{'lang_on_hold_AWB_no'|translate}}
+          {{mdata}} </div>
+      </div>
+      <div class="col-md-12" ng-if="messArray4!=0">
+        <div class="alert alert-danger" ng-repeat="mdata in messArray4">  {{'lang_menifested_hipment'|translate}}
+          {{mdata}} </div>
+      </div>
+      <div class="col-md-12" ng-if="messArray5!=0">
+        <div class="alert alert-danger" ng-repeat="mdata in messArray5">  {{'lang_not_proper_status'|translate}}
+          {{mdata}} </div>
+      </div>
+      <div class="col-md-12" ng-if="messArray6!=0">
+        <div class="alert alert-danger" ng-repeat="mdata in messArray6">{{'lang_schedule_issue'|translate}}
+          {{mdata}} </div>
+      </div>
+      <div class="col-md-12" ng-if="messArray7!=0">
+        <div class="alert alert-danger" ng-repeat="mdata in messArray7"> {{'lang_not_ready_for_delivery'|translate}}
+          {{mdata}} </div>
+      </div>
+      <div class="col-md-12" ng-if="messArray8!=0">
+        <div class="alert alert-danger" ng-repeat="mdata in messArray8">{{'lang_RTC_AWB_no'|translate}}
+          {{mdata}} </div>
+      </div>
+      <div class="col-md-12" ng-if="messArray9!=0">
+        <div class="alert alert-success" ng-repeat="mdata in messArray9"> {{'lang_UpdateStatusAWBno'|translate}} 
+          {{mdata}} </div>
+      </div>
+      <div class="col-md-12" ng-if="messArray10!=0">
+        <div class="alert alert-success" ng-repeat="mdata in messArray10">  {{'lang_received_inbound_Received_Manifest_AWB_no'|translate}}
+          {{mdata}}</div>
+      </div>
+      <div class="col-md-12" ng-if="messArray11!=0">
+        <div class="alert alert-success" ng-repeat="mdata in messArray11"> {{'lang_shipmentnoreceived_inbound'|translate}}  
+          {{mdata}} </div>
+      </div>
+      <div class="col-md-12" ng-if="messArray12!=0">
+        <div class="alert alert-danger" ng-repeat="mdata in messArray12"> {{'lang_shipmentnot_shelved'|translate}}
+          {{mdata}} </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <textarea rows="8" id="show_awb_no" name="slip_no" required="" class="form-control" ng-model="userselected.slip_no"></textarea>
+      </div>          
+    </div>
+    <div class="row">
+      <div class="col-md-4">  
+        <div class="form-group">
+          <label>{{'lang_selectStatus'|translate}} </label>
+          <select name="userid" ng-change="getdetails()" ng-model="userselected.userid" class="form-control  input-lg"  >
+            <option value="">{{'lang_PleaseSelectStatus'|translate}} </option>
+            <option ng-repeat="maindata in MainStatusArr" value="{{maindata.id}}" >{{maindata.main_status}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{'lang_comment'|translate}} </label>
+          <textarea rows="3" name="comment" class="form-control"  ng-model="userselected.comment" ></textarea>
+        </div>
+      </div>
+      <div class="col-md-4" ng-show='result'>
+        <div class="form-group">
+          <label>{{'lang_Select_Reason'|translate}} </label>
+          <span id="show_sub_status">
+          <select name="sub_category" id="sub_category" class="form-control"  ng-model="userselected.sub_category" >
+            <option value="" >{{'lang_Please_Select'|translate}} </option>
+            <option ng-repeat="subdata in subStactusArr" value="{{subdata.code}}">{{subdata.sub_status}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4" id="show_shelve_number" ng-show='result1' style="display:none">
+        <div class="form-group">
+          <label>{{'lang_ShelveNumber'|translate}} </label>
+          <select name="shelv_no" id="shelv_no" class="form-control"  ng-model="userselected.shelv_no1" >
+            <option value="" >{{'lang_ShelveNumber'|translate}} </option>
+            <option ng-repeat="sdata in originArr" value="{{sdata.shelv_no}}">{{sdata.shelv_no}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4 container" ng-init="shelveList();" ng-show='result1' >    
+        <label>{{'lang_ShelveNumber'|translate}} </label>
+        <input type="text" name="shelv_no" id="show_Shelve_dropdown"  placeholder="Shelve no" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="userselected.shelv_no">       
+       </div>
+
+      <div class="col-md-4" id="deliver_number" ng-show='result2'>
+        <div class="form-group">
+          <label>{{'lang_Receivermobile'|translate}} </label>
+          <input type="text" name="reciever_number" id="reciever_name" class="form-control"  ng-model="userselected.reciever_number" >
+        </div>
+      </div>
+      <div class="col-md-4" id="deliver_name" ng-show='result2'>
+        <div class="form-group">
+          <label>{{'lang_ReceiverName'|translate}} </label>
+          <input type="text" name="reciever_name" id="reciever_number" class="form-control"  ng-model="userselected.reciever_name" >
+        </div>
+      </div>
+
+      <div class="form-group col-md-4 container" ng-init="fetchUsers();" ng-show='result3'>
+        <label>{{'lang_Messagner_Name'|translate}} </label>
+        <input type="text" name="messanger_id" id="show_messanger_dropdown"  placeholder="Courier" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="userselected.messanger_id">       
+        <span style="color:#F00">(don't remove the data of auto fill, it must be like (<strong>RUH-109/Ameen-Test/1</strong>))</span>
+
+
+        <!--<input class="form-control" type='text' ng-keyup="fetchUsers(searchText)" ng-model='searchText' placeholder='Enter Messanger Name'>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="result in searchResult"  ng-click="setValue(messanger_id)" ng-model="userselected.messanger_id">    
+              {{ result.messenger_code}}
+          </li>
+        </ul>-->
+     
+      </div>    
+      
+  
+      <div class="col-md-4" id="massenger_name" ng-show='result3' style="display:none">
+        <div class="form-group">
+          <label>{{'lang_Messagner_Name'|translate}} </label>
+          <select name="messanger_id" id="messanger_id" class="form-control"  ng-model="userselected.messanger_id1">    
+            <option value="" >{{'lang_Messagner_Name'|translate}} </option>  
+            <option ng-repeat="mdata in messangerArr" value="{{mdata.messenger_code}}/{{mdata.messenger_name}}/{{mdata.cor_id}}">{{mdata.messenger_name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label>&nbsp;</label>
+        <button type="submit" class="btn btn-primary form-control" ng-click="bulkUpdateform(userselected);">{{'lang_Submit'|translate}} </button>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+</div>
+<script>
+
+
+
+
+</script>

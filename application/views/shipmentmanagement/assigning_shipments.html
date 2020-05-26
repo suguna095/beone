@@ -1,0 +1,123 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb"   ng-init="GetCsaStaffLis();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_shipmentManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Assigning_Shipment'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+<div class="panel panel-flat">
+        <div class="panel-heading"> <h5 class="panel-title">{{'lang_Assigning_Shipment'|translate}}</h5></div><br>
+
+<div class="panel-body">
+            <div class="col-md-12"> 
+            
+             <div class="alert alert-danger" ng-if="errorshowwrongAbw.errmess!='' && errorshowwrongAbw!=''">{{errorshowwrongAbw.errmess}}</div>
+         
+          
+				<div class="alert alert-danger" ng-if="errorshowwrongAbw!=''" ng-repeat="mdata in errorshowwrongAbw.wrong_awb">
+					 {{'lang_wrong_AWB_no'|translate}}  {{mdata}} 
+				</div>
+                <div class="alert alert-success" ng-if="errorshowwrongAbw!=''" ng-repeat="mdata in errorshowwrongAbw.updatesAwb">
+					{{'lang_UpdateStatusAWBno'|translate}}  {{mdata}} 
+				</div>
+          
+          
+            
+        </div>
+            
+  <form action="" method="post" name="traking">
+            <div class="col-md-12">
+            <div class="form-group">
+			
+			<textarea rows="8" name="awb_no" placeholder="Please Enter Your AWB Number"  ng-model="editshipmentArray.awb_no" required="" class="form-control"></textarea>
+       
+            </div>
+            
+            </div>  <div class="col-md-4">
+            <div class="form-group">       
+				
+					<select name="csa_id" id="csa_id" class="form-control  input-lg" ng-model="editshipmentArray.csa_id">
+                        <option value="">{{'lang_Please_Select_CSA'|translate}} </option>
+                        <option ng-repeat="sdata in AssignStaffArr" value="{{sdata.id}}">{{sdata.name}}</option>
+                       
+                    </select> 
+				</div> 
+                   <div class="form-group"> 
+           
+            <button type="button" class="btn btn-primary" ng-click="AssignShipmentform(editshipmentArray);">{{'lang_Submit'|translate}} </button>					
+            </div>	 </div>  
+                
+                
+			
+    		
+            </form>
+</div>
+
+</div><br>
+</section>
+<section class="hk-sec-wrapper">
+	<div class="panel panel-flat">
+			<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Show_Assigning_Shipment'|translate}}</h5>
+			</div>
+			<div class="panel-body">
+			<div style="float:right; margin-bottom: 10px;">
+       
+				<input type="submit" class="btn btn-primary"  name="submit" value="Export To Excel"  ng-click="exportToExcel('#tableId')">
+			</div>
+            <table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+           			 <tr>
+										
+						<th colspan="3">
+							<input type="date"  class="form-control" ng-model="SearchAssignarr.searchdate" >
+						</th>
+						<th colspan="4">
+							<select  id="csa_id" ng-model="SearchAssignarr.csa_id" class="form-control  input-lg">
+				   <option value="">{{'lang_Please_Select_CSA'|translate}} </option>
+                    <option ng-repeat="sdata in AssignStaffArr" value="{{sdata.id}}">{{sdata.name}}</option>
+                    </select> 
+						</th>
+						<th colspan="4">
+							<input type="submit" name="Submit" class="btn btn-primary" value="Search" ng-click="showassigningship(SearchAssignarr);">
+						</th>
+					
+										
+					</tr>
+            </table>
+		<table class="table datatable-show-all table-bordered table-hover datatable-highlight" id="tableId">   
+				 <thead>
+					
+					<tr>
+						<th>#</th>
+						<th>{{'lang_AWB_No'|translate}}.</th> 
+						<th>{{'lang_Customer_Service_Assistant'|translate}} </th>
+						<th>{{'lang_Assig_Date'|translate}} </th>
+						<th>{{'lang_Scheduled'|translate}} </th>
+           				<th>{{'lang_Scheduled_Channel'|translate}} </th>
+           				<th>{{'lang_Reason'|translate}} </th>
+           				<th>{{'lang_comment'|translate}} </th>	  
+					</tr>
+				</thead>
+						 
+				<tbody>
+                
+					<tr ng-repeat="data in listassigningData">		
+                        <td>{{$index+1}}</td>
+                        <td>{{data.slip_no}}</td>
+                        <td>{{data.csa_id}}</td>
+                        <td>{{data.assign_date}}</td>
+                        <td><span ng-if="data.schedule_status=='Y'">{{'lang_Yes'|translate}}</span><span ng-if="data.schedule_status==''">{{'lang_No'|translate}}</span></td>
+                        <td><span ng-if="data.schedule_type!=''">{{data.schedule_type}}</span><span ng-if="data.schedule_type==''">{{'lang_NA'|translate}}</span></td> 
+                        <td><span ng-if="data.reason!=''">{{data.reason}}</span><span ng-if="data.reason==''">{{'lang_NA'|translate}}</span></td>
+                        <td><span ng-if="data.comment!=''">{{data.comment}}</span><span ng-if="data.comment==''">{{'lang_NA'|translate}}</span></td>	
+                    </tr>
+               </tbody>
+				
+	 
+		</table>
+		</div>
+		</div>
+	</section>

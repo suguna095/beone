@@ -1,0 +1,117 @@
+   <style>
+.marquee-text .card {
+	border-radius: 0 !important;
+}
+.overlay {
+	background-color:#FFFFFF;  
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 9999999;
+	top: 0px;
+	left: 0px;
+	opacity: .5; /* in FireFox */
+	filter: alpha(opacity=50); /* in IE */
+}
+.loader {
+	position:fixed;
+	top:34%;
+	border: 16px solid #FFFFFF;
+	border-radius: 50%;
+	border-top: 16px solid #00CC67;
+	width: 200px;
+	height: 200px;
+	-webkit-animation: spin 2s linear infinite; /* Safari */ 
+	animation: spin 2s linear infinite;
+	text-align:center;
+	margin-left: 30%;
+	z-index: 9999999999999 !important;
+	opacity: .5; /* in FireFox */
+	filter: alpha(opacity=50); /* in IE */
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+ 0% {
+-webkit-transform: rotate(0deg);
+}
+ 100% {
+-webkit-transform: rotate(360deg);
+}
+}
+ @keyframes spin {
+ 0% {
+transform: rotate(0deg);
+}
+ 100% {
+transform: rotate(360deg);
+}
+}
+
+.m-0.marquee-text.pcoded-content {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 69px;
+}
+</style>
+   
+   	 <nav class="hk-breadcrumb" aria-label="breadcrumb">   
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Notification'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Add_Notification'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">   
+      <!-- <div class="loader logloder" ></div>-->
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Add_Notification'|translate}}</h5> 
+		</div><br>
+		<div class="panel-body">
+	<div class="row">
+		<div class="col-lg-12">
+        	<div class="panel panel-default">
+                <div class="panel-body">
+                
+					<form class="stdform" name="add_notification" enctype="multipart/form-data">
+                     
+                    <div class="form-group">
+                    <label>{{'lang_Title'|translate}}</label><span id="heading_id" class="alert"></span>
+                    <input type="text" name="title" class="form-control" ng-model="notificationArray.title" Required>
+					<span class="text-danger" ng-show="add_notification.title.$error.required">{{'lang_Title_is_required'|translate}}</span>
+                    </div>
+                
+                    <div class="form-group">
+                    <label>{{'lang_Notification_Description'|translate}}</label>
+                    <span id="content_id" class="alert"></span>
+					<textarea class="form-control mt-15"  name="notification_desc" rows="6" placeholder="Textarea" ng-model="notificationArray.notification_desc" Required></textarea>
+					<span class="text-danger" ng-show="add_notification.notification_desc.$error.required">{{'lang_Description_required'|translate}}</span>
+                    </div>
+                     
+                    <div class="form-group">
+                    <label>{{'lang_Entry_Date'|translate}}</label><span id="entry_date" class="alert"></span>
+                    <input type="date" name="entry_date" class="form-control" ng-model="notificationArray.entry_date" Required>   
+					<span class="text-danger" ng-show="add_notification.entry_date.$error.required">{{'lang_Entry_Date_is_Required'|translate}}</span>  
+                    </div> 
+                    
+					<div class="form-group">
+                    <label>{{'lang_Expiry_Date'|translate}}</label><span id="expiry_date" class="alert"></span>
+                    <input type="date" name="expiry_date" class="form-control" ng-model="notificationArray.expiry_date" Required>   
+					<span class="text-danger" ng-show="add_notification.expiry_date.$error.required">{{'lang_Expiry_Date_is_Required'|translate}}</span>
+                    </div> 
+                    <input name="id" type="hidden" value="">
+                    <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="add_notification.$invalid" ng-click="AddNotificationform(notificationArray);">
+                    
+                    	
+					</form>
+                    
+        		</div>
+			</div>
+		</div>
+	</div>
+</div>
+</section>	
+

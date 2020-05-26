@@ -1,0 +1,97 @@
+   <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="ShowAmsData(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Address_Management'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Shipment_Address'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "container">
+	<div class="breadcrumb-line">
+	   
+	</div>
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Shipment_Address'|translate}}</h5>
+		</div><br>
+		<section class="hk-sec-wrapper">
+		<div class="panel-body ng-scope">
+			 <div class="row">
+
+		<div class="col-md-5 form-group"> 
+        <label>{{'lang_Source'|translate}} </label>
+        <select name="sel_source" ng-model="sel_source" id="sel_country" class="form-control ng-pristine ng-untouched ng-valid ng-empty">
+			<option value="" selected="selected">{{'lang_Please_Select_Source'|translate}} </option>
+		
+		
+				<option value="drapp">{{'lang_Driver_App'|translate}} </option>
+			<option value="blSch">Blind Schedule</option>
+			<option value="othr">CS</option>
+			<option value="sms">SMS</option>
+		
+		</select>
+        </div>
+		</div>
+					<div class="row">
+					<div class="col-sm">
+                    <div class="row">
+					<div class="col-md-5 form-group" id="phone">
+                    <label>{{'lang_shipment'|translate}} </label>
+                    <input type="text" name="phone"  id="phone" placeholder="Enter Shipment" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-required" value="">
+                    </div><br>
+					
+					
+					</div>
+					</div>
+					</div>
+					
+					<div class="row">
+					<div class="col-md-8"> 
+					<button type="button" class="btn btn-info">{{'lang_search'|translate}} </button>
+					<button type="reset" class="btn btn-info">{{'lang_Reset"'|translate}} </button>
+                    </div>
+		            </div>
+
+					<hr>
+					
+					<div class="row col-md-12 form-group">
+					
+				    <div class="panel-body">
+                    </div>
+                    </div>
+				   
+            <div class="col-md-12" style="overflow-x:auto;">
+           
+            <img src="" style="position: absolute;left: 330px;margin-top: 56px;" class="ng-hide"><span class="ng-binding">{{'lang_Your_search_has_returned_record'|translate}} </span><table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>{{'lang_sNO'|translate}} .</th>
+                    <th>{{'lang_Name'|translate}} </th>
+                    <th>{{'lang_Contact_No'|translate}} .</th>
+                    <th>{{'lang_address'|translate}} </th>
+                    <th>{{'lang_city'|translate}} </th>
+                    <th>{{'lang_Zip_Code'|translate}} </th>
+                    <th>{{'lang_Created_Date'|translate}} </th>
+                    <th>{{'lang_Updated_Date'|translate}} </th>
+                    <th>{{'lang_AwbNo'|translate}} </th>
+	                <th>{{'lang_action'|translate}} </th>  
+			    </tr>
+                </thead>
+                <tbody>
+				<tr ng-repeat="data in amsListArray">
+                    <td>{{$index+1}}</td>
+					<td>{{data.name}}</td>
+					<td>{{data.mobile}}</td>
+					<td>{{data.address}}</td>
+					<td>{{data.city}}</td>
+					<td>{{data.zip_code}}</td>
+					<td>{{data.entryDate}}</td>
+					<td></td> 
+					<td></td>
+					<td></td>
+				</tr>	
+                </tbody>
+            </table>
+                             
+		</div>
+	
+</section>

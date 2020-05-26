@@ -1,0 +1,66 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="gettotalcod();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Show_Detail'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_Detail'|translate}}</li>
+        </ol>
+    </nav>
+	
+	<div class="breadcrumb-line">
+	    
+	</div>
+	<section class="hk-sec-wrapper" style="margin: 2%;">
+        <div class="hk-pg-header">
+            <h4><i data-feather="arrow-left-circle"></i></i>  
+            <span class="text-semibold"></span>{{'lang_Show_Detail'|translate}}</h4>   
+		</div>
+          
+
+        
+
+        <table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+            <tr ng-repeat="data in totalcodlist">
+            <th colspan="12">
+              <span  style="float:right"><a class="dropdown-item" href="printCODDetails/{{data.slip_no}}" target="_blank" style="float:right"> <i class="fa fa-file-pdf-o" ></i>&nbsp;Print</a> </span>  
+      
+            </th>
+            </tr>   
+        </table>
+		 <table class="table datatable-show-all table-bordered table-hover datatable-highlight" id="printSectionId">
+        <thead>
+                  
+       		 <tr>
+                <th class="head1">{{'lang_srNo'|translate}}</th>
+                <th class="head0">{{'lang_AwbNo'|translate}}</th>
+                <th class="head0">{{'lang_ProductType'|translate}}</th>
+				<th class="head0">{{'lang_ShipmentType'|translate}}</th>
+                <th class="head1">{{'lang_Courier_Name'|translate}}</th>
+				<th class="head0">{{'lang_CODAmount'|translate}}</th>
+                <th class="head1">{{'lang_status'|translate}}</th>            
+            </tr> 
+        </thead>
+        	
+        <tbody>
+          <tr ng-repeat="data in totalcodlist">
+            <td>{{$index+1}}</td>
+            <td>{{data.slip_no}}</td> 
+        	<td>{{data.nrd}}</td>
+			<td>{{data.mode}}</td>   
+		   <td>{{data.messangerName}}</td>   
+		   <td>{{data.total_cod_amt}}</td>	   
+		   <td><span ng-if="data.delivery_status=='Y'">{{'lang_Delivered'|translate}}</span>
+			<span ng-if="data.delivery_status!='Y'" ng-bind-html="data.showstatus"></span>
+           </td> 
+             
+          
+        </tr>
+            <tr>        
+            <td ng-if="editdelivereddrsDataArray==''" colspan="6"  style="text-align:center;"> 
+					 {{'lang_Records_Not_Found'|translate}}
+			</td> 
+			</tr>
+                </tbody>
+	</table>
+    </section>		
+
+

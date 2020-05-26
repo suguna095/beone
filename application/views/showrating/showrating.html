@@ -1,0 +1,83 @@
+  	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getShowratingData(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Tickets'|translate}} </li>
+			<li class="breadcrumb-item active" aria-current="page"> {{'lang_Show_Rating'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	</div>
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading"> 
+				<h5 class="panel-title"> {{'lang_Show_Rating'|translate}}</h5>   
+		</div><br>
+		<table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+           <form method="post" action=""></form>
+        
+            <thead>
+                <tr>
+				<th colspan="2" ng-init="DropDriversData();">
+                 {{'lang_Drivers'|translate}}  
+         <select name="driver_id" class="form-control input" ng-model="filterData.driver_id" >
+					<option value="" selected="selected">{{'lang_PleaseSelectService'|translate}}</option>
+					<option ng-repeat="data in DriverlistArray" value="{{data.cor_id}}">{{data.messenger_name}}</option>
+					</select></th>
+        		<th colspan="2">
+				{{'lang_AWB_No'|translate}} .
+            <input type="text" class="form-control" name="awb_no" value="" placeholder="Search awb"  ng-model="filterData.awb_no"></th>
+             <th colspan="1">
+			 {{'lang_Rating'|translate}}  
+        <select name="rating" class="form-control input" ng-model="filterData.rating">
+					<option value="" selected="selected">{{'lang_Please_Select_rating'|translate}} </option>';
+	
+			
+				
+				<option value="1">One Star</option>
+				<option value="2">Two Star</option>
+				<option value="3">Three Star</option>
+				<option value="4">Four Star</option>
+				<option value="5">Five Star</option>   
+
+		
+		</select></th>
+            	<th colspan="2"><br>
+            <input type="button" name="bt_search" value="{{'lang_search'|translate}}" class="btn btn-primary" ng-click="getShowratingData(1,1);">
+        
+    				
+              
+                </tr>                      
+        </thead><thead>
+            <tr>
+                <th class="head0">{{'lang_srNo'|translate}} .</th>
+                <th class="head1">{{'lang_Customer_Order'|translate}} </th> 
+                <th class="head0">{{'lang_Driver_name'|translate}} </th>
+                
+                <th class="head0"> {{'lang_Score'|translate}} </th> 
+                <th class="head1">{{'lang_Created_Date'|translate}}</th> 
+				<th class="head1">{{'lang_comment'|translate}} </th>
+            </tr>
+        </thead>
+                        
+        <tbody>
+                  <tr ng-repeat="data in service_detailData">          
+                <td>{{$index+1}}</td> 
+                <td>{{data.awb_no}}</td>  
+                <td>{{data.driver_id}}</td>  
+                <td ng-if="data.rating=='1'"> <i class="fa fa-star"></td>   
+				<td ng-if="data.rating=='2'"><i class="fa fa-star" ><i class="fa fa-star"></td> 
+				<td ng-if="data.rating=='3'"><i class="fa fa-star" ><i class="fa fa-star"><i class="fa fa-star" ></td> 
+				<td ng-if="data.rating=='4'"><i class="fa fa-star" ><i class="fa fa-star" ><i class="fa fa-star" ><i class="fa fa-star" ></td> 
+				<td ng-if="data.rating=='5'"><i class="fa fa-star" ><i class="fa fa-star"><i class="fa fa-star" ><i class="fa fa-star"><i class="fa fa-star" ></td> 
+                <td>{{data.update_date}}</td>
+                <td>{{data.comment}}</td> 
+                 </tr>
+				<tr>
+					<td ng-if="service_detailData==''" colspan="6" align="center" style="text-align:center;">
+						{{'lang_NoRecords_Found'|translate}}
+					</td> 
+					
+                </tr>  
+        </tbody>
+	</table>
+</section>		

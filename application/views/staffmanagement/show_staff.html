@@ -1,0 +1,100 @@
+   <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getStafflist(1,0);">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_StaffManagement'|translate}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_showStaff'|translate}}</li>
+                </ol>
+            </nav>
+  <div class="">
+                <!-- Title -->
+            
+        
+           
+     <section class="hk-sec-wrapper">
+      <div class="panel-heading">
+            <h5 class="panel-title">{{'lang_showStaff'|translate}} </h5>
+        </div><br>
+    <div class="row">
+    
+    
+    <div class="col-md-12">
+
+      
+       <tr> 
+            <th class="head1" colspan="4">
+            <input type="text" name="searchstaff" ng-model="filterData.searchstaff" placeholder="{{'lang_SearchingByNameMobileNoEmail'|translate}}" class="form-control" onfocus="this.value=''">
+            </th><br>
+            
+            <th class="head1" colspan="1">
+            <input type="submit" name="Search" class="btn btn-primary" value="Search" ng-click="getStafflist(1,1);"> 
+            </th><br><br>
+            </tr>
+			<div class="table-responsive">
+     <table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+  
+                                
+        <thead>
+            <tr>
+                <th class="head0">{{'lang_srNo'|translate}}.</th>
+                <th class="head1">{{'lang_name'|translate}}</th>
+                <th class="head1">{{'lang_hubCity'|translate}}</th>
+                <th class="head0">{{'lang_phone'|translate}}</th>
+                <th class="head0">{{'lang_email'|translate}}</th>
+                <th class="head1">{{'lang_Designation'|translate}}</th>
+                <th>Status</th>
+            <th class="head0">{{'lang_action'|translate}}</th>
+            
+            </tr>
+        </thead>
+                                
+        <tbody> 
+                <tr ng-repeat="data in StafflistArray">
+                    <td>{{$index+1}}</td>
+                    <td>{{data.name}}</td>
+                    <td>{{data.branch_location}}</td>
+                    <td>{{data.phone}}</td>
+                    <td>{{data.email}}</td>
+                    <td><span ng-if="data.privilege=='CSM'">{{'lang_Customer_Services_Manager'|translate}}</span>
+                    <span ng-if="data.privilege=='OPA'">{{'lang_Customer_Permission_Manager'|translate}} </span>
+                    <span ng-if="data.privilege=='RTO'">{{'lang_Return_To_Officer'|translate}} </span>
+                    <span ng-if="data.privilege=='CSA'">{{'lang_Customer_Services_Assistant'|translate}}</span>
+                    <span ng-if="data.privilege=='FIN'">{{'lang_Finance'|translate}} </span>
+                    <span ng-if="data.privilege=='IT'">{{'lang_Information_Tech'|translate}} </span>
+                    <span ng-if="data.privilege==''">{{'lang_NA'|translate}}</span>
+                    </td>
+                    <td><span class="badge badge-success ng-binding ng-scope" ng-if="data.onlinestatus=='Y'">{{'lang_active'|translate}}</span>
+                                <span class="badge badge-danger ng-binding ng-scope" ng-if="data.onlinestatus=='N'">{{'lang_Inactive'|translate}}</span>
+                                </td> 
+                    <td>
+                        <div class="btn-group dropdown">
+                                <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu w-210p">
+                                <a class="dropdown-item" style="cursor: pointer" ng-click="ShowactiveStatus(data.id,'N')" ng-if="data.onlinestatus=='Y'" ng-confirm-click="Do you want to Inactive?"><i class="glyphicon glyphicon-remove"></i>&nbsp;Inactive</a> 
+                                    <a class="dropdown-item" style="cursor: pointer" ng-click="ShowactiveStatus(data.id,'Y')" ng-if="data.onlinestatus=='N'" ng-confirm-click="Do you want to Active?"><i class="fa fa-check fa-fw"></i>&nbsp;Active</a>
+                                <!--<a class="dropdown-item" href="#"><i class="fa fa-check fa-fw"></i>&nbsp;Call Record Activate</a>-->
+                                <a class="dropdown-item" ui-sref="edit_staff({staffid:data.id})"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp;{{'lang_edit'|translate}}</a>
+                                <a class="dropdown-item" style="cursor:pointer" ng-click="GetStaffdelete(data.id)" ng-confirm-click="Do you want to Delete?"><i class="fa fa-trash-o fa-fw"></i>&nbsp;Delete</a> 
+                                
+                                </div> 
+                            </div>
+                    </td>
+                </tr>
+                
+            </tbody>    
+    </table>
+       <button ng-hide="StafflistArray.length==totalCount" class="btn btn-info" ng-click="getStafflist(count=count+1,0);" ng-init="count=1">{{'lang_Load_More'|translate}}</button>
+
+        </div>
+ </div>
+</section>
+</div>
+
+  
+
+
+
+    
+
+      

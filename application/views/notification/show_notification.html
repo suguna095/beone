@@ -1,0 +1,63 @@
+  	 <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getNotificationlist(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Notification'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_Notification'|translate}}</li> 
+        </ol>
+    </nav>
+	<div class = "">
+	
+	</div>
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Show_Notification'|translate}}</h5>
+		</div><br>
+		<table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+                        
+            <thead>
+                <tr>
+                    <th class="head0">{{'lang_sNO'|translate}}</th>
+                    <th class="head1">{{'lang_Title'|translate}}</th>                            	
+                    <th class="head1">{{'lang_Notification_Description'|translate}}</th>
+                    <th class="head1">{{'lang_Expiry_Date'|translate}}</th>
+                    <th class="head0">Status</th>
+					<th class="head1">{{'lang_action'|translate}}</th>
+                </tr>
+            </thead>
+                        
+            <tbody>
+         	    <tr ng-repeat="data in NotificationlistArray">
+                	<td>{{$index+1}}</td>
+					<td>{{data.title}}</td>
+					<td>{{data.notification_desc}}</td>  
+					<td>{{data.expiry_date}}</td>
+					<td><span class="badge badge-success ng-binding ng-scope" ng-if="data.status=='Y'">{{'lang_active'|translate}}</span>
+						<span class="badge badge-danger ng-binding ng-scope" ng-if="data.status=='N'">{{'lang_Inactive'|translate}}</span></td>
+					<td>
+					   <div class="btn-group">
+						<button type="button" class="btn btn-primary"><i class="icon-list"></i></button>   
+						<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="sr-only">{{'lang_Toggle_Dropdown'|translate}}</span>  
+						</button>
+						<div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(138px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+						<a class="dropdown-item" style="cursor: pointer" ng-click="ShowactiveStatus(data.id,'N')" ng-if="data.status=='Y'" ng-confirm-click="Do you want to Inactive?"><i class="fa fa-check fa-fw"></i>&nbsp;Active</a> 
+							<a class="dropdown-item" style="cursor: pointer" ng-click="ShowactiveStatus(data.id,'Y')" ng-if="data.status=='N'" ng-confirm-click="Do you want to Active?"><i class="glyphicon glyphicon-remove"></i>&nbsp;Inactive</a>  
+						<a class="dropdown-item" ui-sref="edit_notification({notifyid:data.id})"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp;{{'lang_edit'|translate}}</a> 
+						<a class="dropdown-item" ng-click="GetNotifydelete(data.id)" ng-confirm-click="Do you want to Delete?"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+						 
+						</div> 
+						</div>
+					</td>
+					
+                </tr>
+            	<tr>
+					<td ng-if="NotificationlistArray==''" colspan="6" align="center" style="text-align:center;">
+						{{'lang_NoRecords_Found'|translate}}
+					</td> 
+					
+                </tr>  
+        			
+            </tbody>
+		</table>
+		<button ng-hide="NotificationlistArray.length==totalCount" class="btn btn-info" ng-click="getNotificationlist(count=count+1,0);" ng-init="count=1">{{'lang_Load_More'|translate}}</button>
+    </section>		

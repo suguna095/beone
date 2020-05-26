@@ -1,0 +1,80 @@
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="ViewCountryListAll(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>    {{'lang_Home'|translate}} </a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Location_Management'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Location_List'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">{{'lang_Location_List'|translate}} </h5>
+    </div> <br>    
+     
+    <table class="table table-striped table-bordered table-hover">
+    <tbody><tr>
+        <th class="head1" colspan="5">
+        <form method="POST" id="bar_code_Frm" name="bar_code_Frm">
+         
+        
+                <a ui-sref="add_city" title="Add New City">
+        <button type="button" class="btn btn-primary">{{'lang_Add_City'|translate}}</button></a>        
+                </form>
+        </th>
+        
+        <form name="search_form" method="post" action=""></form>     
+        <th colspan="12">
+        <input type="text" name="search_val" placeholder="Please Enter Your City" class="form-control" ng-model="filterData.searchfield">
+        </th>
+        
+        <th>
+        <input type="submit" class="btn btn-primary" name="submit" ng-click="ViewCountryListAll(1,1);" value="Search">
+        <label><div id="search_val" style="display:inline;"></div></label>
+        </th>
+        
+        
+	</tr> 
+	</tbody></table>
+    
+    <table class="table table-striped table-bordered table-hover">
+             
+    <thead>
+        <tr>
+            <th width="5%">{{'lang_srNo'|translate}}</th>
+            <th width="20%">{{'lang_Country_Name'|translate}}</th>
+            <th width="20%">{{'lang_city'|translate}}</th>
+            <th width="10%">{{'lang_CityCode'|translate}} </th>
+            <th width="10%"> {{'lang_SMSA_City'|translate}}</th>
+            <th width="20%">{{'lang_actions'|translate}}</th>                                    
+        </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="data in ShowAllcountryList">
+        <td>{{$index+1}}</td>
+        <td>
+        <a href="">{{data.country}}</a></td>
+        <td>{{data.city}}</td>  
+        <td>{{data.city_code}}</td>  
+        <td>{{data.samsa_city}}</td>  
+                
+        <td>
+           <a ui-sref="edit_city({id:data.id})" class="fa fa-pencil-square-o label label-info" title="Edit"></a> &nbsp;                
+        
+                <a style="cursor:pointer;" ng-click="CountryAlldatadelete(data.id);" title="Delete" ng-confirm-click="Do You  want to delete ?" class="fa fa-trash-o label label-danger"></a> 
+               &nbsp; 
+				<a style="cursor: pointer" ng-click="ShowactiveStatus(data.id,'N')" ng-if="data.status=='Y'" ng-confirm-click="Do you want to Inactive?"><i class="fa fa-thumbs-up label label-primary"></i></a> 
+				<a style="cursor: pointer" ng-click="ShowactiveStatus(data.id,'Y')" ng-if="data.status=='N'" ng-confirm-click="Do you want to Active?"><i class="fa fa-thumbs-down label label-danger"></i></a>
+			
+                
+       
+                
+                                
+                </td>
+        </tr>
+		</tbody>
+	</table>
+                    
+</div>	
+	</section>

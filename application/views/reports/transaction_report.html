@@ -1,0 +1,237 @@
+  	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showTransactionReport(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_reports'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_TransactionReport'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "" ng-controller="reportCtrl">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_ShowTransactionReport'|translate}}</h5>
+		</div><br>
+        <table class="table datatable-show-all table-bordered table-hover datatable-highlight panel panel-flat" style="height:200px !important;">   
+        
+			<thead>
+				
+				<form name="" method="post" action=""></form>
+				
+				<input type="HIDDEN" name="show_type" value="">
+				<tr style="height:125px;">
+				<td colspan="8">
+				<div class="row">
+					<div class="col-md-3" ng-init="showOriginDrop();">{{'lang_Hub'|translate}}
+					
+					  <input type="text" name="sel_country" id="show_city_dropdown"  placeholder="City" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="filterData.city_id"> 
+					</div>
+					<div class="col-md-3">{{'lang_FromDate'|translate}}
+					    <input type="date" name="start_date" id="start_date" class="form-control" ng-model="filterData.start_date">
+					</div>
+					<div class="col-md-3">{{'lang_ToDate'|translate}}
+					    <input type="date" name="end_date" id="end_date" class="form-control" ng-model="filterData.end_date">
+					</div>
+				  
+					<div class="col-md-3"> {{'lang_status'|translate}}
+						<select name="main_status" class="form-control" ng-model="filterData.main_status">
+						<option value=""> {{'lang_status'|translate}}</option>
+						<option value="11"> {{'lang_Delivered'|translate}}</option>
+						<option value="1"> {{'lang_Not_Delivered'|translate}}</option>
+				  </select>
+					</div>
+					 
+				</div>	
+				<div class="row" style="margin-top:10px"> 
+					<div class="col-md-10">
+						      <input type="button" name="bt_search" value="{{'lang_search'|translate}}" class="btn btn-primary" ng-click="showTransactionReport(1,1);">
+					</div>
+					
+					<div class="col-md-2">						
+						   <input class="btn-info" type="button"  value="Export to Zip" ng-click="exportToExcel('#transaction_report')">
+				
+				</div>	
+					</div>				
+				</td>
+				</tr>
+								
+			
+			</thead>
+		
+        </table>
+        <div class = "table-responsive">
+		    <table id="transaction_report" class="table table-striped table-bordered table-hover">
+													
+			    <thead>
+				    <tr>
+						<th>{{'lang_sNO'|translate}}</th>
+						<th>{{'lang_date'|translate}}</th>
+						<th>{{'lang_time'|translate}}</th>
+						<th>{{'lang_reference'|translate}}</th>
+						<th>{{'lang_AWB'|translate}}#</th>
+						<th>{{'lang_clientName'|translate}}</th>
+						<th>{{'lang_DeliveryAttempts'|translate}}</th>
+						<th>{{'lang_origin'|translate}}</th>
+						<th>{{'lang_destination'|translate}}</th>
+						<th>{{'lang_RecieverName'|translate}} </th>
+						<th>{{'lang_RecieverAddress'|translate}} </th>
+						<th>{{'lang_RecieverPhone'|translate}}</th>
+						<th>{{'lang_Mode'|translate}}</th>
+						<th>{{'lang_CODAmount'|translate}}</th>
+						<th>{{'lang_status'|translate}}</th>
+						<th>{{'lang_Reason'|translate}}</th>
+						<th>{{'lang_driverName'|translate}} </th>
+						<th>{{'lang_Supplier_Name'|translate}} </th>
+						<th>{{'lang_DriverComment'|translate}}</th>
+						<th>{{'lang_ScheduleChanel'|translate}} </th>
+						<th>{{'lang_OnHold'|translate}} </th>
+						<th>{{'lang_Shelve'|translate}} </th>
+						<th>{{'lang_Customer_Account'|translate}} </th>
+						<th>{{'lang_scheduleDate'|translate}} </th>
+						<th>{{'lang_ScheduleChanel'|translate}}</th>
+						<th>{{'lang_TimeSlot'|translate}} </th>
+						<th>{{'lang_AreaStreet'|translate}} </th> 
+						<th>{{'lang_Area'|translate}}</th>
+						<th>{{'lang_latitudelongitude'|translate}}</th>
+				    </tr>
+			    </thead>
+			<tbody>
+								
+				  <tr ng-repeat="data in listData">
+				    <td>{{$index+1}}</td>
+				    <td>{{data.status_date}}</td>
+					<td>{{data.rto_datetime}}</td>
+					<td>{{data.booking_id}}</td>
+					<td>{{data.slip_no}}</td>
+				    <td>{{data.company}}</td>
+				    <td>{{data.total_attempted}}</td>
+				    <td class="text_cap">{{data.origin}}</td>
+				    <td class="text_cap"> {{data.reciever_city}}</td>
+                    <td class="text_cap">{{data.reciever_name}}</td>
+				    <td class="text_cap">{{data.reciever_address}}</td>
+                    <td class="text_cap">{{data.reciever_phone}}</td> 
+				    <td class="text_cap">{{data.mode}}</td>
+				    <td><span ng-if="data.client_type=='B2C' && data.mode=='COD'">{{data.total_cod_amt}}</span><span ng-if="data.mode=='COD'">{{data.total_count}}</span></td>
+					
+                    <td><span ng-if="data.delivery_status=='Y'">{{'lang_Delivered'|translate}}</span> <span ng-else>{{'lang_Not_Delivered'|translate}}</span> </td>  
+					
+                    <td><span ng-if="data.delivery_status=='Y'">{{data.Details}}</span><span ng-else>Shipment Delivered</span></td>
+					
+				    <td>{{data.messenger_name}}</td> 
+				    <td>{{data.supplier_name}}</td>
+				    <td><span ng-if="data.delivery_status=='N'">{{data.comment}}</span><span ng-else>Shipment Delivered</span></td>
+					
+				    <td><span ng-if="data.schedule_status=='' || data.schedule_status=='N'" class="btn btn-danger  btn-xs">{{'lang_No'|translate}}</span><span ng-else class="btn btn-success  btn-xs">{{'lang_Yes'|translate}}</span></td>
+					
+				    <td>{{data.refused}}</td>
+				    <td>{{data.shelv_no}}</td> 
+				    <td>{{data.uniqueid}}</td>
+                    <td>{{data.schedule_date}}</td>
+				    <td><span class="label label-success">{{data.schedule_type}}</span></td>
+                    <td>{{data.time_slot}}</td>
+				    <td>{{data.area_street}}</td>
+				    <td>{{data.area}}</td>
+				    <td>{{data.dest_lat}},{{data.dest_lng}}</td>
+				</tr>
+				 
+			<tr>
+					<td ng-if="listData==''" colspan="29" style="text-align:center;">
+						{{'lang_NoRecords_Found'|translate}}   
+					</td> 
+					
+                </tr>  
+                   
+			</tbody>  
+
+            </table>
+			<button ng-hide="listData.length==totalCount" class="btn btn-info" ng-click="showTransactionReport(count=count+1,0);" ng-init="count=1">{{'lang_Load_More'|translate}}</button>
+        </div>		
+
+
+
+ <!--<div style="display:none;" ng-init="ShowTransactionExcel(1,0);"> 
+		    <table id="transaction_report" class="table table-striped table-bordered table-hover">
+													
+			    <thead>
+				    <tr>
+						<th>{{'lang_sNO'|translate}}</th>
+						<th>{{'lang_date'|translate}}</th>
+						<th>{{'lang_time'|translate}}</th>
+						<th>{{'lang_reference'|translate}}</th>
+						<th>{{'lang_AWB'|translate}}#</th>
+						<th>{{'lang_clientName'|translate}}</th>
+						<th>{{'lang_DeliveryAttempts'|translate}}</th>
+						<th>{{'lang_origin'|translate}}</th>
+						<th>{{'lang_destination'|translate}}</th>
+						<th>{{'lang_RecieverName'|translate}} </th>
+						<th>{{'lang_RecieverAddress'|translate}} </th>
+						<th>{{'lang_RecieverPhone'|translate}}</th>
+						<th>{{'lang_Mode'|translate}}</th>
+						<th>{{'lang_CODAmount'|translate}}</th>
+						<th>{{'lang_status'|translate}}</th>
+						<th>{{'lang_Reason'|translate}}</th>
+						<th>{{'lang_driverName'|translate}} </th>
+						<th>{{'lang_Supplier_Name'|translate}} </th>
+						<th>{{'lang_DriverComment'|translate}}</th>
+						<th>{{'lang_ScheduleChanel'|translate}} </th>
+						<th>{{'lang_OnHold'|translate}} </th>
+						<th>{{'lang_Shelve'|translate}} </th>
+						<th>{{'lang_Customer_Account'|translate}} </th>
+						<th>{{'lang_scheduleDate'|translate}} </th>
+						<th>{{'lang_ScheduleChanel'|translate}}</th>
+						<th>{{'lang_TimeSlot'|translate}} </th>
+						<th>{{'lang_AreaStreet'|translate}} </th> 
+						<th>{{'lang_Area'|translate}}</th>
+						<th>{{'lang_latitudelongitude'|translate}}</th>
+				    </tr>
+			    </thead>
+			<tbody>
+								
+				  <tr ng-repeat="data in ExcelTransacList">
+				    <td>{{$index+1}}</td>
+				    <td>{{data.status_date}}</td>
+					<td>{{data.rto_datetime}}</td>
+					<td>{{data.booking_id}}</td>
+					<td>{{data.slip_no}}</td>
+				    <td>{{data.company}}</td>
+				    <td>{{data.total_attempted}}</td>
+				    <td class="text_cap">{{data.origin}}</td>
+				    <td class="text_cap"> {{data.reciever_city}}</td>
+                    <td class="text_cap">{{data.reciever_name}}</td>
+				    <td class="text_cap">{{data.reciever_address}}</td>
+                    <td class="text_cap">{{data.reciever_phone}}</td>
+				    <td class="text_cap">{{data.mode}}</td>
+				    <td><span ng-if="data.client_type=='B2C' && data.mode=='COD'">{{data.total_cod_amt}}</span><span ng-if="data.mode=='COD'">{{data.total_count}}</span></td>
+					
+                    <td><span ng-if="data.delivery_status=='Y'">{{'lang_Delivered'|translate}}</span> <span ng-else>{{'lang_Not_Delivered'|translate}}</span> </td>  
+					
+                    <td><span ng-if="data.delivery_status=='Y'">{{data.Details}}</span><span ng-else>Shipment Delivered</span></td>
+					
+				    <td>{{data.messenger_name}}</td> 
+				    <td>{{data.supplier_name}}</td>
+				    <td><span ng-if="data.delivery_status=='N'">{{data.comment}}</span><span ng-else>Shipment Delivered</span></td>
+					
+				    <td><span ng-if="data.schedule_status=='' || data.schedule_status=='N'" class="btn btn-danger  btn-xs">{{'lang_No'|translate}}</span><span ng-else class="btn btn-success  btn-xs">{{'lang_Yes'|translate}}</span></td>
+					
+				    <td>{{data.refused}}</td>
+				    <td>{{data.shelv_no}}</td> 
+				    <td>{{data.uniqueid}}</td>
+                    <td>{{data.schedule_date}}</td>
+				    <td><span class="label label-success">{{data.schedule_type}}</span></td>
+                    <td>{{data.time_slot}}</td>
+				    <td>{{data.area_street}}</td>
+				    <td>{{data.area}}</td>
+				    <td>{{data.dest_lat}},{{data.dest_lng}}</td>
+				</tr>
+				 
+			<tr>
+					<td ng-if="ExcelTransacList==''" colspan="29" style="text-align:center;">
+						{{'lang_NoRecords_Found'|translate}}   
+					</td> 
+					
+                </tr>  
+                   
+			</tbody>  
+
+            </table>
+			
+        </div>	-->	

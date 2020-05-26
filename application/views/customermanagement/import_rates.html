@@ -1,0 +1,59 @@
+  	<nav class="hk-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>    {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_customerManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page"> {{'lang_ImportRatesinShipments'|translate}}</li>  
+        </ol>
+    </nav>
+	<div class = "">
+	
+	</div>
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title"> {{'lang_ImportRatesinShipments'|translate}}</h5>  
+		</div><br>
+	<div id="contentwrapper" class="contentwrapper">
+     <div class="loader logloder" ng-show="loadershow"></div>         
+    			<div class="alert alert-info">
+    				<div class="row">
+        				<div class="col-md-8">{{'lang_Note_To_import_bulk_shipments_use_this_import_feature_Below_are_the_columns_you_must_have_according_to_serial_number_in_the_excel_csv_file'|translate}} 2. {{'lang_ImportRatesinShipments'|translate}}  </div>
+        				<div class="col-md-4" align="center">
+      					<a href="Excel_export/ImportratesFile" target="_blank"> <i class="fa fa-file-excel-o fa-2x"></i> <br> {{'lang_ImportRateData'|translate}}</a>
+           				</div>
+  					</div>
+				</div>
+                
+                <div class="alert alert-danger" ng-repeat="edata in Warningshow.inValidAbw">{{'lang_Invalid_AWB_No'|translate}}{{edata}}</div>
+                <div class="alert alert-success" ng-repeat="edata in Warningshow.validrows">{{'lang_Added_AWB_No'|translate}}{{edata}}</div>
+            <section class="hk-sec-wrapper">
+                <div class="panel panel-default">
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered table-hover">
+								<tbody>
+									<tr>
+										<td>(1){{'lang_AWBNoExisting'|translate}}</td>
+										<td>(2) {{'lang_ServiceCharge'|translate}}</td>   
+										<td>(3) {{'lang_CodFees'|translate}}</td>
+										<td>(4) {{'lang_ReturnFees'|translate}}</td>
+										<td>(4) {{'lang_PODFees'|translate}}</td>
+									</tr>  
+								</tbody>
+							</table>
+							   
+						<span class="alert" style="color:#F00;"> </span>
+							  
+						<form class="" method="post" enctype="multipart/form-data" name="add_ship" action="">
+							<label><strong>{{'lang_ImportFile'|translate}}</strong></label><br>
+							<span class="field">
+							<input type="file" ng-file='uploadfiles' size="20" class="btn btn" required>
+							<span id="weight" class="alert"></span></span><br><br>
+							<button type="button" class="btn btn-primary" id='upload' ng-click='upload()'>{{'lang_addShipment'|translate}}</button>
+						</form>
+				 
+						</div>
+					</div>
+                </div>
+            </section>    
+	</div>
+    </section>		

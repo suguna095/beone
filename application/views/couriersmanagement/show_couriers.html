@@ -1,0 +1,174 @@
+  <script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip.js"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip-utils.js"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/FileSaver.js"></script> 
+  <nav class="hk-breadcrumb" aria-label="breadcrumb"  ng-init="viewcourier(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>    {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_CouriersManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_Couriers'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Show_Couriers'|translate}} </h5>  
+		</div><br>
+		<div class="panel-body">
+        
+        <div class = "row">
+		
+		<div class = "col-md-3">
+        <span class="alert" style="color:#F00;"> </span>
+                      
+        <form class="" method="post" enctype="multipart/form-data" name="add_ship" action="">
+			<label><strong>{{'lang_ImportFile'|translate}}</strong></label><br>
+			<span class="field">
+			<input type="file" ng-file='uploadfiles' size="20" class="btn btn-info"  required>
+			<span id="weight" class="alert"></span></span><br><br>
+			<button type="button" class="btn btn-primary" id='upload' ng-click='upload()'>{{'lang_UpLoad'|translate}}</button>
+		</form>                                          
+        </div>
+		
+		
+         <div class = "col-md-6">
+		 </div>
+        <div class="heading-elements">
+       <a href="Excel_export/ImportCourierFile" target="_blank"> <i class="fa fa-file-excel-o fa-2x"></i> <br> {{'lang_ImportRateData'|translate}}</a>
+        </div>  
+        
+        </div>
+		<div class="alert alert-danger" ng-repeat="edata in Warningshow.inValidAbw">{{'lang_Already_email_ID_Exits'|translate}}{{edata}}</div>
+        <div class="alert alert-success" ng-repeat="edata in Warningshow.validrows"> {{'lang_Added'|translate}} {{edata}}</div>
+				
+				
+		</div><br>
+		<div class="table-responsive">
+        <table class="table table-hover mb-0" >
+			<thead>
+				<tr> 
+				<form name="search_form" method="post" action="">
+				<th colspan="7">
+				<input type="text" class="form-control" name="searchfield" ng-model="filterData.searchfield" placeholder="Enter Messanger Name ,Code,Branch,Mobile,Email,Vehicle number, City">
+				</th>
+				
+				<th colspan="1">                
+				<input type="submit" name="Submit" class="btn btn-primary" value="Search" ng-click="viewcourier(1,1);">
+				</th>
+				</form>
+				<th colspan="2">
+				<input class="btn-danger" type="button" onclick="create_zip();" value="Export to Zip" style="float:right;">
+				</th>
+				
+				</tr>
+			
+				<tr>
+					<th>#</th>
+					<th>{{'lang_Name'|translate}} </th>
+					<th>{{'lang_upplier'|translate}} </th>
+					<th>{{'lang_Code'|translate}} </th>
+					<th>{{'lang_city'|translate}} </th>
+					<th>{{'lang_mobile'|translate}} </th>
+					<th>{{'lang_email'|translate}} </th>
+					<th>{{'lang_VehicleNumber'|translate}} </th>
+					<th>{{'lang_Image'|translate}} </th>
+					<th>{{'lang_status'|translate}}</th>
+					<th>{{'lang_action'|translate}} </th>
+				</tr>
+			</thead>
+			<tbody>
+			    <tr ng-repeat="data in viewcourierData">
+					<td>{{$index+1}}</td>
+					<td class="text_cap">{{data.messenger_name}}</td>
+					 <td class="text_cap">{{data.supplier}}</td>
+					<td><span class="label label-warning">{{data.messenger_code}}</span></td>
+					<td class="text_cap">{{data.city_id}}</td>
+					<td>{{data.mobile}}</td>
+					<td>{{data.email}}</td>
+					<td>{{data.vehicle_number}}</td>
+					<td><span ng-if="data.messanger_image==''"><img  src="assets/images/notimage.png" class="img-fluid" width="70px;" height="70px;"></span><span ng-else><img  src="{{data.messanger_image}}" class="img-fluid" width="70px;" height="70px;"></span></td>
+				   <td> 
+						
+			             <span class="badge badge-danger" ng-if="data.online_offline_status=='N'">{{'lang_Inactive'|translate}}</span>
+                         <span class="badge badge-success"  ng-if="data.online_offline_status=='Y'">{{'lang_active'|translate}}</span> 
+						</td>
+					<td>
+						<div class="btn-group dropdown">
+									<button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									</button>
+									<div class="dropdown-menu w-210p">
+									<a class="dropdown-item" style="cursor: pointer" ng-click="ShowCoractiveStatus(data.cor_id,'Y')" ng-if="data.online_offline_status=='N'" ng-confirm-click="Do you want to Active?"><i class="fa fa-check fa-fw"></i>&nbsp;Active</a> 
+				                    <a class="dropdown-item" style="cursor: pointer" ng-click="ShowCoractiveStatus(data.cor_id,'N')" ng-if="data.online_offline_status=='Y'" ng-confirm-click="Do you want to Inactive?"><i class="glyphicon glyphicon-remove"></i>&nbsp;Inactive</a> 
+									<a class="dropdown-item" ui-sref="edit_couriers({courierid:data.cor_id})"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp;{{'lang_edit'|translate}} </a>
+									<a class="dropdown-item" style="cursor:pointer" ng-click="GetCourierdelete(data.cor_id)" ng-confirm-click="Do you want to Delete?"><i class="fa fa-trash-o fa-fw"></i>&nbsp;Delete</a>
+									<a class="dropdown-item" ui-sref="drivers_details({courierid:data.cor_id})"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;{{'lang_Viewdetail'|translate}} </a>
+									<a class="dropdown-item" ui-sref="odo_details({courierid:data.cor_id})"><i class="fa fa-tachometer"></i>&nbsp;{{'lang_OdoMeterDetail'|translate}} </a> 
+									<a class="dropdown-item" ui-sref="assign_route({courierid:data.cor_id})"><i class="fa fa-file-o fa-fw"></i>&nbsp;{{'lang_AssignRoute'|translate}} </a>
+									
+									</div>  
+								</div>
+					</td>
+					</tr>
+					
+			
+			</tbody>
+		</table>
+		<button ng-hide="viewcourierData.length==totalCount" class="btn btn-info" ng-click="viewcourier(count=count+1,0);" ng-init="count=1">{{'lang_Load_More'|translate}}</button>
+		</div>	
+</section>		
+   <!-- Export To Excel -->
+   <table style="display:none" id="print">
+   <tr>
+					<th>#</th>
+					<th>{{'lang_Name'|translate}} </th>
+					<th>{{'lang_upplier'|translate}} </th>
+					<th>{{'lang_Code'|translate}} </th>
+					<th>{{'lang_city'|translate}} </th>
+					<th>{{'lang_mobile'|translate}} </th>
+					<th>{{'lang_email'|translate}} </th>
+					<th>{{'lang_VehicleNumber'|translate}} </th>
+					<th>{{'lang_Name'|translate}}</th>
+					<th>{{'lang_iqama_ID'|translate}}</th>
+					<th>{{'lang_upplier'|translate}}</th>
+					<th>{{'lang_Join_Date'|translate}}</th>    
+				</tr>
+				<tr ng-repeat="data in viewcourierData">
+				   <td>{{$index+1}}</td>
+					<td class="text_cap">{{data.messenger_name}}</td>
+					 <td class="text_cap">{{data.supplier}}</td>
+					<td><span class="label label-warning">{{data.messenger_code}}</span></td>
+					<td class="text_cap">{{data.city_id}}</td>
+					<td>{{data.mobile}}</td>
+					<td>{{data.email}}</td>
+					<td>{{data.vehicle_number}}</td>
+					<td>{{data.typVehicle}}</td>
+					<td>{{data.iqama}}</td>
+					<td>{{data.supplier}}</td>
+					<td>{{data.joinDate}}</td> 
+				</tr>
+   </table>
+   <SCRIPT>
+
+function create_zip() {
+var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel"><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/>';
+ tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+ tab_text = tab_text + '<x:Name>Courier Details</x:Name>';
+ tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+ tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"></head><body>';
+ tab_text = tab_text + "<table border='1px'>";
+//get table HTML code
+ tab_text = tab_text + $('#print').html();
+ tab_text = tab_text + '</table></body></html>';
+  
+  var zip = new JSZip();
+zip.file(Date()+" Couriers.xls", tab_text);
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    saveAs(content, Date()+"Couriers.zip");
+});
+  
+
+}
+
+</SCRIPT>

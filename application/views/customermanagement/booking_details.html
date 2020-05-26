@@ -1,0 +1,64 @@
+  	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="ShowBookDetails(1,0); EditCustomershow();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_customerManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page"> {{'lang_Customer_Booking_Details'|translate}}({{editcustomerArray.company}})</li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Customer_Booking_Details_for'|translate}}({{editcustomerArray.company}})</h5>    
+		</div><br>
+		
+		<table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+    <thead>
+        <tr>
+        <th>{{'lang_Date'|translate}}</th>
+        <th>{{'lang_AWB'|translate}}</th>
+        <th>{{'lang_CODValue'|translate}}</th>
+        <th>{{'lang_Shipment_Amount'|translate}}</th>      
+        <th>{{'lang_Collect_fees'|translate}}</th>
+        <th>{{'lang_status'|translate}}</th>
+        <th>{{'lang_Total'|translate}}</th>
+        <th>{{'lang_comment'|translate}}</th>
+        </tr>
+    </thead>
+
+    <tbody>
+	     <tr ng-repeat="datas in Bookdetlist">
+	  
+		<td>{{datas.entrydate}}</td>
+		<td> <a ui-sref="details({shid:datas.id})">{{datas.slip_no}}</a></td> 
+		<td>{{datas.total_amt}}</td>
+		<td>{{datas.service_charge}}</td>
+		<td>{{datas.cod_fees}}</td>  
+		<td> <span width="130" style="background-color:#AEFFAE;" ng-if="datas.booking_mode=='COD'"></span>
+        <span class="col_bg_piksech">{{datas.delivered}}</span>
+		<span class="col_bg_piksech" ng-if="datas.code=='T'">{{datas.delivered}}</span>
+		<span class="col_bg_delay" ng-if="datas.code=='DL'">{{'lang_Delay'|translate}}</span>
+		<span class="col_bg_in_trnst" ng-if="datas.code=='IT'">{{'lang_Transit'|translate}}</span>
+		<span class="col_bg_delever" ng-if="datas.code=='B'">{{'lang_comment'|translate}}</span>
+		<span class="col_bg_pickup" ng-if="datas.code=='PP'">{{'lang_proceed'|translate}}</span>
+		<span class="col_bg_delever" ng-if="datas.code=='D'">{{'lang_Delivered'|translate}}</span>
+		<span class="col_bg_delever" ng-if="datas.code=='R'">{{'lang_Return_To_Shipper'|translate}}</span>
+		<span class="col_bg_delever" ng-if="datas.code=='HFP'">{{'lang_Hold_for_Pickup'|translate}}</span>
+		<span class="col_bg_delever" ng-if="datas.code=='GUP'">{{'lang_General_Update'|translate}}</span>
+		<span class="col_bg_delever" ng-if="datas.code=='HCNRC'">{{'lang_Hold_Customer_not_Responded_Closed'|translate}}</span>
+		<span class="col_bg_delever" ng-if="datas.code=='SHNI'">{{'lang_Shipment_in_Hold_Need_more_information'|translate}}</span>
+		<span class="col_bg_delever" ng-if="datas.code=='C'">{{'lang_Cancelled'|translate}}</span>
+		<span class="col_bg_delever" ng-if="datas.code=='RTS'">{{'lang_Return_To_Shipper'|translate}}</span>
+		<span class="col_bg_delever" ng-if="datas.code=='SHC'">{{'lang_Shipment_Hold_In_Customs_For_Checking'|translate}}</span>
+		</td>
+		<td>{{datas.total_collection}}</td>
+		<td>{{datas.status_describtion}}</td> 
+		</tr>
+		  
+        <td ng-if="Bookdetlist==''" colspan="8" align="center"> 
+        <h4 style="color:red;">{{'lang_No_data_Found'|translate}}</h4>
+	</tbody>
+	</table>
+    <button  class="btn btn-info" ng-click="ShowBookDetails(count=count+1,0);" ng-init="count=1">{{'lang_Load_More'|translate}}</button>  
+    </section>		
+</div>

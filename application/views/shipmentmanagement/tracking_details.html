@@ -1,0 +1,295 @@
+
+
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="GettrackDetailsshow();">
+    <ol class="breadcrumb breadcrumb-light bg-transparent">
+      <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> {{'lang_Home'|translate}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Tracking Parcel List</li>
+      <li class="breadcrumb-item active" aria-current="page">Tracking Parcel List</li>
+    </ol>
+  </nav>
+  <div class = "">
+   
+    <section class="hk-sec-wrapper">   
+    <div class="panel panel-flat">
+      <div class="panel-heading">
+        <h5 class="panel-title"> Tracking Parcel List</h5>
+      </div>    
+      <br>
+      <div class="panel-body">
+      
+      
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="white">   
+                            <div class="tab_container_set" ng-repeat="data in DetailListArray"> 
+                            <br>
+                             
+    
+                               
+                              
+                       
+                                
+                             <b> Tracking Result for AWB# {{data.slip_no}}</b>
+                            <table class="table table-striped">
+                            <tbody><tr>
+                                <td><b class="size-2">Date</b></td>
+                                <td><b class="size-2">Origin</b></td>
+                                <td><b class="size-2">Destination</b></td>
+                                <td><b class="size-2">Pieces</b></td>
+                                <td><b class="size-2">On hold</b></td>
+                                 <td><b class="size-2">Schedule</b></td>
+                                 <td><b class="size-2">Channel</b></td>
+                                <td><b class="size-2">Weight</b></td>
+                                <td><b class="size-2">Status</b></td>
+                            </tr>
+            
+                              <tr class="light">
+                                <td>{{data.entrydate}}</td>
+                                <td>{{data.origin}}</td>
+                                <td>{{data.destination}}</td>
+                                <td>{{data.pieces}}</td>
+                                  <td><span ng-if="data.refused=='YES'"><button class="btn btn-danger">{{data.refused}}</button></span> 
+                                    <span ng-else><button class="btn btn-info">{{data.refused}}</button></span></td>
+                                 <td><span ng-if="data.schedule_status=='YES'"><button class="btn btn-success">YES</button></span> 
+                                  <span ng-else><button class="btn btn-info">NO</button></span></td>
+                                  <td><span ng-if="data.schedule_status=='YES'"><button class="btn btn-success">{{data.schedule_type}}</button></span> 
+                                    <span ng-else><button class="btn btn-warning">N/A</button></span> </td>  
+                                <td>{{data.weight}}Kg</td>       
+                                <td style="background-color:#AEFFAE; ">
+                                  <span ng-bind-html="data.showstatus"></span></td>
+                            </tr>
+                            
+           
+                            <tr>   
+                            <td colspan="6">   <a ui-sref="details({shid:data.id})" target="_blank">   
+                              <button class="btn btn-primary" type="submit"  value="Track" name="submit">View Details</button></a></td>      
+                            </tr>
+                                                      </tbody></table>
+                                                                         
+                                                    
+                            </div>
+                        </div>
+                      </div>
+                </div>
+                <div style="display:none;">
+                <table id="testTable_new">
+        
+              
+            <thead>
+                      <tr>
+                <th>Date</th>
+                <th>Picked up Date</th>
+                <th>Reference#</th>
+                <th>Shipper Reference#</th>
+                <th>AWB#</th>
+                <th>Delivery Attempts</th>
+                 <th>Call Attempts</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Sender</th>
+                <th>Sender Address</th>
+                <th>Sender Zip</th>
+                <th>Sender Phone</th>
+                <th>Reciever</th>
+                <th>Reciever Address </th>
+                <th>Reciever Zip</th>
+                <th>Reciever Phone</th>
+                <th>Mode</th>
+                <th>Status</th>
+                <th>COD Amount</th>
+                <th>Pay Status</th>
+                <th>Sub Category 1</th> 
+                <th>driver comment 1</th>
+                
+                <th>Sub Category 2</th>
+                 <th>Driver Commnet 2</th>
+                 <th>Sub Category 3</th>
+                 <th>Driver Commnet 3</th>
+            
+                 <th>Shelv location </th>
+                <th>Schedule </th>
+                <td>Schedule Channel</td>
+                <th>On Hold </th>
+                  <th>On Hold Reason</th>
+                <th>Driver Name </th>
+                 <th>Driver Code </th>
+                 <th>Driver Mobile </th>
+                  
+                
+                <th>Driver Supplier </th>
+                <th>Warehouse </th>
+                <th>Shelve </th>
+                <th>UID Account</th>
+                <th>Schedule Date </th>
+                <th>Time Slot </th>
+                <th>Area Street </th>
+                <th>Area</th>
+                <th>latitude , longitude</th>
+                 <th>Update Date</th>
+                 <th>Deliver Date</th>
+                 <th>Pieces</th>
+                 <th>Weight</th>
+                <th>Description</th>
+                <th>Forward Through</th>
+                <th>Forward Awb</th>
+                </tr>
+            </thead>
+            <tbody>
+                                 
+        
+             
+    
+              
+            <tr>
+                 <td>
+            28-04-2020        </td>
+             <td>
+            28-04-2020        </td>
+                           <td>ZB568d42</td>
+                               <td>ZB568d4</td>
+                    <td>EMX9014570028</td>
+            <td>1</td>
+            <td>0</td>
+            <td class="text_cap">
+            Riyadh
+            </td>
+            <td class="text_cap">   
+            Riyadh
+            </td>
+            <td class="text_cap">Fastcoo</td>
+            <td class="text_cap">Olaya</td>
+            <td class="text_cap"></td>
+            <td class="text_cap">0598979742</td>
+            <td class="text_cap">Ashar</td>
+            <td class="text_cap">Olaya</td>
+            <td class="text_cap"></td>
+            <td class="text_cap">598979742</td>
+            <td class="text_cap">COD</td>
+            <td>
+            <span class="icon-bus"></span> Out for delivery&nbsp;
+            </td>
+            <td> 132.00</td>
+            <td> Pending  </td>
+           
+            <td></td>
+             <td></td>
+             <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+             
+     
+            <td></td>
+            <td><span class="btn btn-danger">No</span></td>
+               <td><span class="label label-danger">N/A</span></td>
+    
+            <td> NO</td>
+            <td></td>
+            <td>Driver 4</td>
+             <td>RUH004</td>
+                      <td>0506766761</td>
+            <td></td>
+            <td>-- </td>
+            <td></td>
+            <td>8326945</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+           <td> 0 ,0</td>
+            <td> </td>
+            <td> </td>
+            <td>1 </td>
+            <td>15 </td>
+            <td>bulk test</td>
+                <td></td>
+              <td></td>
+        </tr>
+                    
+                         
+        
+             
+    
+              
+            <tr>
+                 <td>
+            28-04-2020        </td>
+             <td>
+                    --
+                    </td>
+                           <td>87878</td>
+                               <td>-</td>
+                    <td>EMX8077973452</td>
+            <td>0</td>
+            <td>0</td>
+            <td class="text_cap">
+            Riyadh
+            </td>
+            <td class="text_cap">   
+            Dammam
+            </td>
+            <td class="text_cap">Fastcoo</td>
+            <td class="text_cap">Olaya</td>
+            <td class="text_cap"></td>
+            <td class="text_cap">0598979742</td>
+            <td class="text_cap">nomitestshipment</td>
+            <td class="text_cap">test address</td>
+            <td class="text_cap"></td>
+            <td class="text_cap">0500140384</td>
+            <td class="text_cap">COD</td>
+            <td>
+            <span class="icon-package"></span> Booked-Pickup Scheduled&nbsp;
+            </td>
+            <td> 12.00</td>
+            <td> Pending  </td>
+           
+            <td></td>
+             <td></td>
+             <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+             
+     
+            <td></td>
+            <td><span class="btn btn-danger">No</span></td>
+               <td><span class="label label-danger">N/A</span></td>
+    
+            <td> NO</td>
+            <td></td>
+            <td></td>
+             <td></td>
+                      <td></td>
+            <td></td>
+            <td>-- </td>
+            <td></td>
+            <td>8326945</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+           <td> 0 ,0</td>
+            <td> </td>
+            <td> </td>
+            <td>1 </td>
+            <td>1 </td>
+            <td>test shipment donot process it</td>
+                <td></td>
+              <td></td>
+        </tr>
+                    
+          
+            </tbody> 
+        
+            
+            </table>
+            </div>
+                <div>&nbsp;</div>
+            </div>
+        </div>
+    </div>
+  </div>
+  </section>
+  </div>

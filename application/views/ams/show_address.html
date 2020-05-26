@@ -1,0 +1,105 @@
+  	 <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="ShowAmsData(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Address_Management'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_Address'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "container">
+	<div class="breadcrumb-line">
+	    
+	</div>
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Show_Address'|translate}}</h5> 
+		</div><br>
+		<section class="hk-sec-wrapper">
+		<div class="panel-body ng-scope">
+			 <div class="row">
+
+		<div class="col-md-5 form-group"> 
+        <label>{{'lang_Source'|translate}} </label>
+        <select name="sel_source"  id="sel_country" class="form-control ng-pristine ng-untouched ng-valid ng-empty">
+			<option value="" selected="selected">{{'lang_Please_Select_Source'|translate}} </option>
+		
+		
+				<option value="drapp">{{'lang_Driver_App'|translate}} </option>
+			<option value="blSch">Blind Schedule</option>
+			<option value="othr">CS</option>
+			<option value="sms">SMS</option>
+		
+		</select>
+        </div>
+		</div>
+					<div class="row">
+					<div class="col-sm">
+                    <div class="row">
+					<div class="col-md-5 form-group" id="phone">
+                    <label>{{'lang_phone'|translate}} </label>
+                    <input type="text" name="phone"  id="phone" placeholder="Enter Phone Number" class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-required" value="">
+                    </div><br>
+	                </div>
+					</div>
+					</div>
+	<section class="hk-sec-wrapper">				
+	    <div class="row">
+            <div class="col-sm">
+                <div class="row">
+				<div class = "col-md-4">					
+				<label><strong>{{'lang_city'|translate}} </strong></label><br>
+				<span class="field">
+					<input type="file" name="uploadedfile" value="" size="20" class="btn btn-info">
+					<span id="weight" class="alert"></span>
+				</span></div><br>
+				<div class = "col-md-4">
+				</div>
+				<div class = "col-md-4">
+					<a href="" class=""> <i class="fa fa-file-excel-o fa-2x"></i> <br>{{'lang_Import_CSV_Address_Management'|translate}} </a>
+				</div><br>
+				<button type="button" class="btn btn-outline-success" ng-click="amsSearch()">{{'lang_search'|translate}} </button>
+					<a href="" class="submit btn btn-outline-success" name="submit" value="Submit">{{'lang_New'|translate}} </a>
+					<button type="reset" class="btn btn-outline-success" ng-click="resetdata()">{{'lang_Reset'|translate}} </button>
+				<button type="submit" class="btn btn-primary" name="submit" value="submit" onclick="">{{'lang_Import_Address_Management'|translate}} </button>
+			
+			<div class="heading-elements">
+			  
+			</div>  
+		
+			</div>
+        </div>
+     </div>	<br>
+	 
+		<img src=""style="position: absolute;left: 330px;margin-top: 56px;" class="ng-hide"><span class="ng-binding">{{'lang_Your_search_has_returned_record'|translate}} </span><table class="table table-bordered">
+            <thead>
+				<tr>
+                   <th>{{'lang_sNO'|translate}} .</th>
+                    <th>{{'lang_Name'|translate}} </th>
+                    <th>{{'lang_Contact_No'|translate}} .</th>
+                    <th>{{'lang_address'|translate}} </th>
+                    <th>{{'lang_city'|translate}} </th>
+                    <th>{{'lang_Zip_Code'|translate}} </th>
+                    <th>{{'lang_AreaStreet'|translate}} </th>
+                    <th>{{'lang_Created_Date'|translate}}</th>
+                    <th>{{'lang_Source'|translate}} </th>
+				</tr>								
+            </thead>
+            <tbody>
+                                          
+                <tr ng-repeat="data in amsListArray">
+				    <td>{{$index+1}}</td>
+					<td>{{data.name}}</td>
+					<td>{{data.mobile}}</td>
+					<td>{{data.address}}</td>
+					<td>{{data.city}}</td>
+					<td>{{data.zip_code}}</td>
+					<td>{{data.area_street}}</td>
+					<td>{{data.entryDate}}</td>
+					<td>{{data.source}}</td>
+												
+				</tr>
+            </tbody>
+            </table>
+                              
+		
+	</div>
+    </section>	 

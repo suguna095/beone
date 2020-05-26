@@ -1,0 +1,76 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> {{'lang_Home'|translate}}  </a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Branch_Management'|translate}} </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_AddBranch'|translate}}</li>
+                </ol>
+            </nav>
+   <div class="container">
+                <!-- Title -->
+                            <div class="breadcrumb-line">
+                <div class="hk-pg-header">
+                <h4><i data-feather="arrow-left-circle"></i></i> 
+                <span class="text-semibold"></span>{{'lang_AddBranch'|translate}}</h4>
+                </div>
+            </div>
+        
+           
+<section class="hk-sec-wrapper">
+   <div class="panel-heading">
+            <h5 class="panel-title">{{'lang_AddBranch'|translate}}</h5>
+        </div><br>
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+        			<form class="stdform" name="add_branch">
+                    
+                    <div class="form-group"> 
+                   <label>{{'lang_country'|translate}} </label>
+                    <select name="sel_country" id="sel_country" class="form-control" onchange="createCityDropdownById_messanger(this.value);">
+			        <option value="">{{'lang_Please_Select'|translate}} </option><option value="1">{{'lang_SaudiArabia'|translate}} </option></select>
+                    </div>
+                    
+                    <div class="form-group" ng-init="ShowBranchCityDrop();">
+                    <label>{{'lang_Branch_City'|translate}} </label>
+                    <span id="city_dropdown_show"> <select name="city" id="city" class="form-control">
+					<option value="" selected="selected">{{'lang_Please_Select'|translate}} </option>
+					<option ng-repeat="data in BranchCityArray" value="{{data.id}}">{{data.city}}</option>
+					</select>
+                    </div>
+                  
+                    <div class="form-group">
+                    <label>{{'lang_Branch_Name'|translate}} </label>
+                 	<input type="text"  class="form-control" name="branch_city" ng-model="branchArray.branch_city" required>
+					<span class="text-danger" ng-show="add_branch.branch_city.$error.required">{{'lang_Branch_Name_required'|translate}} .</span>
+                    </div>
+                    
+                    <div class="form-group">
+                    <label>{{'lang_Branch_Management'|translate}} </label>
+                    <input type="text"  class="form-control"  name="branch_person" ng-model="branchArray.branch_person" required>
+					<span class="text-danger" ng-show="add_branch.branch_person.$error.required">{{'lang_Branch_Management'|translate}}  .</span>
+                    </div>
+                        
+                    <div class="form-group">
+                    <label>{{'lang_Branch_address'|translate}}</label>
+                    <textarea name="branch_address"  class="form-control" ng-model="branchArray.branch_address" required></textarea>
+					<span class="text-danger" ng-show="add_branch.branch_address.$error.required">{{'lang_Branch_address_required'|translate}} .</span>
+                    </div>
+                        
+                    <div class="form-group">
+                    <label>{{'lang_Contact_No'|translate}} </label>
+                    <input type="text"  class="form-control" maxlength="10" minlength="10" pattern="[0-9]*" name="branch_contact" ng-model="branchArray.branch_contact" required>
+					<span class="text-danger" ng-show="add_branch.branch_contact.$error.required">{{'lang_Contact_No_required'|translate}} .</span>
+                    </div>
+                     
+                    <input name="id" type="hidden" value="">
+                    <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="add_branch.$invalid" ng-click="Addbranchform(branchArray);">
+	
+					</form> 
+ 				</div>
+			</div>
+		</div>
+</section>
+
+
+  
+    

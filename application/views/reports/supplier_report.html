@@ -1,0 +1,73 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showSupplierReport(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_reports'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_supplierReport'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "" ng-controller="reportCtrl">
+	
+	
+		<section class="hk-sec-wrapper">
+        <div class="panel-heading">
+				<h5 class="panel-title">{{'lang_supplierReport'|translate}}</h5>
+		</div><br>
+		<div class="row">
+            <div class="col-sm">
+                <div class="row">
+                    <div class="col-md-3">
+                         <select name="supplier" id="supplier" class="form-control  input-lg" ng-model="filterData.supplier" ng-init="showSupplierDrop();">
+							<option value="">{{'lang_SelectSupplier'|translate}}</option>
+							<option ng-repeat="data in supplierlist" value="{{data.id}}">{{data.name}}</option>
+						  </select>
+                    </div>
+					<div class="col-md-3">
+					    <select name="search_month" id="search_month" class="form-control input-lg" ng-model="filterData.search_month">
+							<option value="">{{'lang_selectMonth'|translate}}</option>
+							<option value="1">{{'lang_January'|translate}}</option>
+							<option value="2">{{'lang_February'|translate}}</option>
+							<option value="3">{{'lang_March'|translate}}</option>
+							<option value="4">{{'lang_April'|translate}}</option>
+							<option value="5">{{'lang_May'|translate}}</option>
+							<option value="6">{{'lang_June'|translate}}</option>
+							<option value="7">{{'lang_July'|translate}}</option>
+							<option value="8">{{'lang_August'|translate}}</option>
+							<option value="9">{{'lang_September'|translate}}</option>
+							<option value="10">{{'lang_October'|translate}}</option>
+							<option value="11">{{'lang_November'|translate}}</option>
+							<option value="12">{{'lang_December'|translate}}</option>
+							</select>
+					</div>
+					<div class="col-md-3">
+					    <input type="number" min="2017" max="2019" name="search_year" id="search_year" placeholder="2019" class="form-control" value="2019" ng-model="filterData.search_year">
+					</div>
+					<div class="col-md-3">  
+					    <button type="button" class="btn btn-primary" ng-click="SupplierReport(filterData.supplier, filterData.search_month,filterData.search_year); exportToExcelPaymentReport('#supplierreport')">{{'lang_DownloadExcel'|translate}}</button>
+					</div>
+				</div>
+				
+				<div  style="display:none"> 
+					<table id="supplierreport" class="table table-striped table-bordered table-hover">
+												
+					<thead>
+						<tr>
+							<th>{{'lang_InvoceId'|translate}}</th>
+							<th>{{'lang_PaidAmount'|translate}}</th>
+							<th>{{'lang_PaymentMode'|translate}}</th>
+							<th>{{'lang_PaidDate'|translate}}</th>
+							<th>{{'lang_comment'|translate}}</th>
+
+					</tr>
+					</thead>
+						<tr ng-repeat="data in PaymentlistArray">
+							<td>{{data.invoice_id}}</td>
+							<td>{{data.paid_amount}}</td>
+							<td>{{data.payment_mode}}</td>
+							<td>{{data.paid_date}}</td>
+							<td>{{data.payment_comment}}</td>
+					</div>
+							
+            </div>
+        </div>
+    </section>		
+    </section>		

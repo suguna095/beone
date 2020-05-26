@@ -1,0 +1,238 @@
+   
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip.js"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip-utils.js"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/FileSaver.js"></script>
+   <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getCustomerlist(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_customerManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_ShowCustomer'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	 <div class="loader logloder" ng-show="loadershow"></div>
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_ShowCustomer'|translate}}</h5>
+		</div><br>
+		<section class="hk-sec-wrapper">
+		<div class="table-responsive">
+            <table class="table table-hover mb-0">
+				<thead>
+				
+				
+					<tr>
+					
+					    <form name="search_form" method="post"  action=""> 
+						<th colspan="4">
+							<input type="text" name="searchfield" class="form-control" ng-model="filterData.searchfield" placeholder="Enter a Unique id or enter name or enter email or enter mobile number" onfocus="this.value=''"></th>
+						<th colspan="1">
+						<input type="submit" name="Submit" class="btn btn-primary clear" value="Search" ng-click="getCustomerlist(1,1);"></th>
+						<th colspan="1">
+				        <input class="btn-primary" type="button" value="Export to Zip" style="float:right;" onclick="create_zip();" >
+						</th>
+						</form>		  
+					</tr>
+					
+						 
+					<tr>
+							<th># <input type="checkbox" name="update_all[]" ng-model="data.checked" ng-click="selectAll()" /><br>{{'lang_SelectAll'|translate}}</th>
+							<th>{{'lang_UID_Account_Number'|translate}}</th>
+							<th>{{'lang_Companyname'|translate}}</th> 
+							<th>{{'lang_name'|translate}}</th>
+							<th>{{'lang_Companypicture'|translate}}</th>
+							<th>{{'lang_phone'|translate}} 1</th>			
+							
+							<th>{{'lang_email'|translate}}</th>
+							<th>{{'lang_status'|translate}}</th>
+							<th>{{'lang_action'|translate}}</th>    
+					</tr>
+				</thead>
+			    <tbody>
+				    <tr ng-repeat="data in CustomerlistArray|filter:searchuniqueid">
+						<td>{{$index+1}}<br>
+						  <input name="all" type="checkbox" ng-model="data.checked" value="{{data.id}}"/></td>
+						<td>{{data.uniqueid}}</td>
+					<td>{{data.company}} </td> 
+						<td>{{data.name}}</td> 
+						<td><span ng-if="data.cmp_image==''"><img src="assets/images/notimage.png" class="img-fluid" width="70px;" height="70px;"></span>
+						<span ng-else><img src="{{data.cmp_image}}" class="img-fluid" width="70px;" height="70px;"></span></td> 
+						<td>{{data.phone}}</td> 
+						 
+						<td>{{data.email}}</td> 
+						<td><span class="badge badge-success ng-binding ng-scope" ng-if="data.status=='Y'">{{'lang_active'|translate}}</span>
+						<span class="badge badge-danger ng-binding ng-scope" ng-if="data.status=='N'">{{'lang_Inactive'|translate}}</span>
+						</td> 
+						<td>
+							<div class="btn-group dropdown" style="word-wrap: break-word;"> 
+							<button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							</button>
+							<div class="dropdown-menu w-240p">     
+							<a class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="Active" style="cursor: pointer" ng-click="ShowactiveStatus(data.id,'N')" ng-if="data.status=='Y'" ng-confirm-click="Do you want to Inactive?"><i class="fa fa-check fa-fw"></i>&nbsp;Active</a> 
+							<a class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="Inactive" style="cursor: pointer" ng-click="ShowactiveStatus(data.id,'Y')" ng-if="data.status=='N'" ng-confirm-click="Do you want to Active?"><i class="glyphicon glyphicon-remove"></i>&nbsp;Inactive</a>
+							<a class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="{{'lang_edit'|translate}}" ui-sref="edit_customer({cusid:data.id})"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp;{{'lang_edit'|translate}}</a>
+							<a class="dropdown-item" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="Delete" ng-click="GetCustomerdelete(data.id)" ng-confirm-click="Do you want to Delete?"><i class="fa fa-trash-o fa-fw"></i>&nbsp;Delete</a>
+							<a class="dropdown-item" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="account no" ng-click="Getpopoprncustdetais(data.id,'#account_detail','one');"><i class="fa fa-money fa-fw"></i>&nbsp;account no</a>
+							<!--<a class="dropdown-item" ui-sref="pay_info({cusid:data.id})"><i class="fa fa-money fa-fw"></i>&nbsp;{{'lang_PaymentDetail'|translate}}</a>  
+							<a class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="{{'lang_BookingDetails'|translate}}" ui-sref="booking_details({cusid:data.id})"><i class="fa fa-exclamation fa-fw"></i>&nbsp;{{'lang_BookingDetails'|translate}}</a>
+							<a class="dropdown-item" data-toggle="tooltip" data-placement="bottom" title="{{'lang_B2CClient'|translate}}" href="#"><i class="fa fa-user"></i>&nbsp;{{'lang_B2CClient'|translate}}</a> -->
+							<a class="dropdown-item" style="word-wrap: break-word;" data-toggle="tooltip" data-placement="bottom" title="{{'lang_SetPricefor'|translate}} {{data.name}}" ui-sref="zone_rate({uniqueid:data.id})"><i class="fa fa-list"></i>&nbsp;{{'lang_SetPricefor'|translate}} {{data.name}}</a>  
+							<a class="dropdown-item" ui-sref="weight_range({uniqueid:data.id})" data-toggle="tooltip" data-placement="bottom" title="{{'lang_SetWeight_range_for'|translate}} {{data.name}}" style="overflow-wrap: break-word;"><i class="fa fa-balance-scale"></i>{{'lang_SetWeight_range_for'|translate}}<br/>&nbsp;&nbsp;{{data.name}}</a> 
+							<!--<a class="dropdown-item" ng-click="Getpopoprncustdetais(data.id,'#exampleModalCenter1');"><i class="fa fa-credit-card"></i>&nbsp;Rate Template</a>--> 
+							</div>
+						    </div>  
+						</td> 
+                    </tr> 
+					
+				</tbody>      
+			</table>   
+
+			<button ng-hide="CustomerlistArray.length==totalCount" class="btn btn-info" ng-click="getCustomerlist(count=count+1,0);" ng-init="count=1">{{'lang_Load_More'|translate}}</button>  
+
+		</div>
+				
+		</section>
+    </section>		
+</div>
+<div class="modal" id="account_detail" tabindex="-1" role="dialog" aria-labelledby="account_detail" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">{{'lang_AccountDetail'|translate}}({{editcustomerArray.name}})</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    
+													<div class="form-group">
+													<label class="col-sm-6 control-label" for="inputEmail3">{{'lang_BankName'|translate}} :</label>
+												       {{editcustomerArray.bank_name}}
+													   
+													<hr>
+													</div>
+													
+													<div class="form-group">	 
+													<label class="col-sm-6 control-label" for="inputEmail3">{{'lang_AccountNumber'|translate}}  :</label>
+													 
+													 {{editcustomerArray.account_number}}
+													<hr>
+													</div>
+													
+													<div class="form-group">    
+													<label class="col-sm-6 control-label" for="inputEmail3">{{'lang_IbanNumber'|translate}} :</label> 
+													{{editcustomerArray.iban_number}}
+													            <hr>
+													</div>
+													
+													</div>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+									
+									
+									
+									<div class="modal" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content"> 
+                                                <div class="modal-header" >
+                                                    <h5 class="modal-title">{{'lang_UpdatetheCustomerTemplate'|translate}}</h5>  
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+												<form class="stdform" method="post" action="" name="add_template" enctype="multipart/form-data">
+												<input type="hidden" name="id" ng-model="tempArray.id" />
+                                               <div class="modal-body">
+													<div class="form-group">
+													<label class="col-sm-2 control-label" for="inputEmail3">{{'lang_Template'|translate}}</label>
+													<div class="col-sm-10">
+													<select class="form-control" name="template_id" ng-model="tempArray.template_id" required="required"> 
+													<option value="">{{'lang_PleaseSelectthetemplate'|translate}}</option>
+													<option value="1">Template One</option>
+													<option value="2">Template Two</option>
+													<option value="3">Template Three</option>
+													<option value="4">Template Four</option>
+													<option value="0">Default</option> 
+													</select>
+													
+													</div>
+													</div> 
+													</div>
+                                               <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'lang_Close'|translate}}</button>
+                                                    <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="add_template.$invalid" ng-click="Templateform(tempArray);">
+                                                </div>
+												</form> 
+                                            </div>
+                                        </div>
+										
+			<div style="display:none" ng-init="ShowcustomerExcel(1,0);">						
+					<table id="testTable_new">
+					<thead>
+	                     <tr>
+							<th>#</th>
+							<th>{{'lang_UID_Account_Number'|translate}}</th>
+							<th>{{'lang_Companyname'|translate}}</th> 
+							<th>{{'lang_name'|translate}}</th>
+							
+							<th>{{'lang_phone'|translate}} 1</th>			
+							
+							<th>{{'lang_email'|translate}}</th>
+							<th>{{'lang_status'|translate}}</th>
+							    
+					</tr>
+				</thead>
+			    <tbody>
+				    <tr ng-repeat="data in ExcelCustList">
+						<td>{{$index+1}}<br>
+						  <input name="all" type="checkbox" ng-model="data.checked" value="{{data.id}}"/></td>
+						<td>{{data.uniqueid}}</td>
+					<td>{{data.company}} </td> 
+						<td>{{data.name}}</td> 
+						
+						<td>{{data.phone}}</td> 
+						 
+						<td>{{data.email}}</td> 
+						<td><span class="badge badge-success ng-binding ng-scope" ng-if="data.status=='Y'">{{'lang_active'|translate}}</span>
+						<span class="badge badge-danger ng-binding ng-scope" ng-if="data.status=='N'">{{'lang_Inactive'|translate}}</span>
+						</td> 
+						 
+                    </tr> 
+					
+				</tbody>      
+			</table>  
+</div>			
+										
+      <SCRIPT>
+
+function create_zip() {
+var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+ tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+ tab_text = tab_text + '<x:Name>Test Sheet</x:Name>';
+ tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+ tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+ tab_text = tab_text + "<table border='1px'>";
+//get table HTML code
+ tab_text = tab_text + $('#testTable_new').html();
+ tab_text = tab_text + '</table></body></html>';
+ 
+	
+	/*var zip = new JSZip();
+	zip.add(Date()+"_manifest details.xls", tab_text);
+	content = zip.generate(); 
+	zip.file(Date()+"_manifest details.xls"); // the file
+	location.href="data:application/zip;base64," + content;*/
+	
+	var zip = new JSZip();
+zip.file(Date()+" Show Customer.xls", tab_text);
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    saveAs(content, Date()+" Show Customer.zip");
+});
+	
+
+}
+</SCRIPT>                               </div>

@@ -1,0 +1,88 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getwarehouselist(1,0);">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_InventoryManagement'|translate}}</li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_ShowShelveLocation'|translate}}</li>
+                </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+	<h5>{{'lang_ShowShelveLocation'|translate}}</h5><br>
+	<section class="hk-sec-wrapper">
+        <div class = "row">
+   
+            <div class = "col-md-12">
+                <div class="alert alert-warning" role="alert" ng-repeat="edata in Warningshow.shelv_locationErr">
+                    {{'lang_ShelvLocation_error'|translate}} {{edata}}
+                </div> 
+    
+                <div class="alert alert-warning" role="alert" ng-repeat="edata in Warningshow.cityiderr">
+                    {{'lang_City_Name_error'|translate}} {{edata}}
+                </div> 
+    
+    
+                <div class="alert alert-success" role="alert" ng-repeat="edata in Warningshow.valid">
+                    {{'lang_added_row'|translate}} {{edata}}
+                </div>
+                <div class="col-md-12 row">
+                <div class = "col-md-6 ">
+                    <label><strong>{{'lang_ImportFile'|translate}}</strong></label><br>
+                    <input type='file' name='file' id='file' ng-file='uploadfiles' class="btn btn-info" required><br/><br/>
+                </div>
+                <div class = "col-md-6 ">
+                    <div class="heading-elements pull-right"><br>
+                        <a href="Excel_export/shelveLocationBulkFormat" target="_blank"> <i class="fa fa-file-excel-o fa-2x"></i> <br />Import Shelve Location </a>
+                    </div>  
+                </div>
+                <div class = "col-md-6">      
+                    <button type="button" class="btn btn-primary" id='upload' ng-click='uploadShelveLocation()' value="submit" >Add Shelve Location</button>                                  
+                </div>    
+            </div>       
+           </div>
+        </div>
+        <br>
+	<div class="row">
+                                <div class="col-sm">
+                                    <div class="table-wrap">
+                                        <table id="datable_1" class="table table-hover w-100 display pb-30">
+										
+                                            <thead>
+                                                <tr>
+                                                    <th>{{'lang_srNo'|translate}}</th>
+                                                    <th>{{'lang_city'|translate}}</th>
+                                                    <th>{{'lang_ShelveLocationwarehouse'|translate}}</th>   
+                                                    <th>{{'lang_action'|translate}}</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="data in WarehouselistArray">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>{{data.city_id}}</td>
+													<td>{{data.shelv_location}}</td>
+                                                   
+                                                    <td>
+													<div class="btn-group">
+                                                       <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                               <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                       <span class="sr-only">{{'lang_Toggle_Dropdown'|translate}}</span>
+                                                       </button>
+            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(138px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                <a class="dropdown-item" ui-sref="edit_location({loid:data.id})"><i class="fa fa-pencil-square-o"></i> {{'lang_edit'|translate}}</a>
+                                   <a class="dropdown-item" style="cursor:pointer;" ng-click="GetWarehousedelete(data.id)" ng-confirm-click="Do you want to Delete?"><i class="fa fa-trash-o"></i> Delete</a> 
+                                                
+                                                       </div>  
+                                                    </div>
+													</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                            
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+    </section>
+    </section>	
+ 

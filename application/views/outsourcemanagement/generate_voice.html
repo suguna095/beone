@@ -1,0 +1,80 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_OutsourceManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Generate_Invoice'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Generate_Invoice'|translate}}</h5>
+		</div><br>
+		
+		 
+		<div class="panel panel-flat">
+        
+        <div class="panel-body">
+
+           <!--<div class="col-md-12" ng-if="warninsArr">
+                <div class="alert alert-warning" ng-if="warninsArr">{{warninsArr}}</div>
+            </div>-->
+           
+        
+
+            <form name="reschedule">
+                   
+           <!-- <input type="submit" name="Bulk_cod_Invoice" class="btn btn-primary" style="float:right" value="Show Bulk Invoice Page">--> 
+                                     
+            
+            <br><br>
+           
+               
+               
+
+             <div class="col-md-12">
+
+                <div class="col-md-12"  ng-if="warninsArr">  
+                    <div class="alert alert-success" ng-repeat="edata in warninsArr.success_update">{{'lang_UpdateStatusAWBno'|translate}}  {{edata}} </div>
+                    <div class="alert alert-warning" ng-repeat="edata in warninsArr.wrong_awb">{{'lang_wrong_AWB_no'|translate}} {{edata}} </div>
+                    <div class="alert alert-warning" ng-repeat="edata in warninsArr.status_not_delivered">{{'lang_on_hold_AWB_no'|translate}} {{edata}} </div>
+                    <div class="alert alert-warning" ng-repeat="edata in warninsArr.invoice_present">Invoice Already Created {{edata}} </div>
+                    <div class="alert alert-warning" ng-if="warninsArr.not_belong" ng-repeat="edata in warninsArr.not_belong">{{'lang_Shipment_does_not_belong_to_this_client'|translate}} {{edata}}</div>
+                </div>
+        <div class="form-group">
+          <textarea rows="8" ng-model="scan.awb_no" ng-keypress="($event.charCode==13)? GetcheckCounter() : return" required class="form-control" placeholder="{{'lang_PleaseEnterYourAWBNumber'|translate}}"></textarea>
+        </div>
+      </div>
+             <div class="row"> 
+                <div class="col-sm">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-12 col-12 mb-20">   
+                            <label>{{'lang_Row_Count'|translate}} </label>
+                            &nbsp; <span class="badge-success badge badge-pill"> {{scan.counterval}}</span>&nbsp;&nbsp;&nbsp;   
+                        </div>
+               
+            <div class="col-md-3" ng-init="ShowInvcSuppDrop();"> 
+           
+            <label>{{'lang_upplier'|translate}} </label>
+           <select name="supplier" class="form-control" id="supplier" ng-model="scan.supplier" required>
+					<option value="" selected="selected">{{'lang_pleaseSelectsupplier'|translate}} </option>       
+					<option ng-repeat="data in InvcSuppArray" value="{{data.id}}">{{data.name}}</option>
+					</select>
+            </div>
+           
+				<div class="col-md-4">	
+                <label>&nbsp;</label>		
+         
+                <button type="button" class="btn btn-primary form-control text-white"  ng-hide="reschedule.$invalid" ng-click="GetCreateInvocieAwb();">{{'lang_Generate_Invoice'|translate}} </button>  </div>            			
+           
+				 			
+            </div> 
+           	
+			</div>	
+        </div>   
+    </form>
+        </div>    
+    	</div>
+    </section>		

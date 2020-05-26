@@ -1,0 +1,74 @@
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="GetcustomerData();">
+  <ol class="breadcrumb breadcrumb-light bg-transparent">
+    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> {{'lang_Home'|translate}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_invoiceManagements'|translate}}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_Create_Bulk_Invoice'|translate}} </li>
+  </ol>
+</nav>
+<div class="">     
+  <!-- Title -->
+
+    
+ 
+  <section class="hk-sec-wrapper">
+   <h5 class="hk-sec-title">{{'lang_Create_Bulk_Invoice'|translate}}</h5><br>
+   <div class="breadcrumb-line">
+    <div class="hk-pg-header">  
+      <!--<h4><i data-feather="arrow-left-circle"></i></i> <span class="text-semibold"></span>{{'lang_Create_Bulk_Invoice'|translate}}</h4>-->
+    </div>
+  </div>
+   <div class="alert alert-warning" ng-if="WarninsArr.empty">{{WarninsArr.empty}} </div>
+   <div class="alert alert-warning" ng-if="WarninsArr.wrong_awb" ng-repeat="edata in WarninsArr.wrong_awb"> {{'lang_Shipment_details_are_not_properly_updated_for_these_shipments_please_contact_your_IT'|translate}}{{edata}}</div>
+   <div class="alert alert-warning" ng-if="WarninsArr.status_not_delivered" ng-repeat="edata in WarninsArr.status_not_delivered">{{'lang_Not_Delivered'|translate}} {{edata}}</div>
+   <div class="alert alert-warning" ng-if="WarninsArr.invoice_present" ng-repeat="edata in WarninsArr.invoice_present"> {{'lang_Invoice_for_this_shipment_is_already_created'|translate}}{{edata}}</div>
+   <div class="alert alert-success" ng-if="WarninsArr.success_update" ng-repeat="edata in WarninsArr.success_update">{{'lang_Insert_in_invoice_AWB_no'|translate}} {{edata}}</div>
+   <div class="alert alert-warning" ng-if="WarninsArr.price_issue" ng-repeat="edata in WarninsArr.price_issue"> {{'lang_Service_Charge_Issue'|translate}} {{edata}}</div>
+   <div class="alert alert-warning" ng-if="WarninsArr.cod_deliver_awb" ng-repeat="edata in WarninsArr.cod_deliver_awb">{{'lang_Payment_mode_doesn_match'|translate}} {{edata}}</div>
+    <div class="alert alert-warning" ng-if="WarninsArr.cod_return_awb" ng-repeat="edata in WarninsArr.cod_return_awb"> {{'lang_Payment_mode_doesn_match'|translate}}{{edata}}</div>
+    <div class="alert alert-warning" ng-if="WarninsArr.cc_awb" ng-repeat="edata in WarninsArr.cc_awb">{{'lang_Payment_mode_doesn_match'|translate}} {{edata}}</div>
+    <div class="alert alert-warning" ng-if="WarninsArr.not_belong" ng-repeat="edata in WarninsArr.not_belong">{{'lang_Shipment_does_not_belong_to_this_client'|translate}} {{edata}}</div>
+   
+   	<form class="stdform"  name="add_staff" >     
+
+    <div class="row">
+
+      <div class="col-md-12"> <a class="btn btn-primary" ui-sref="cod_invoices" style="float: right; margin-bottom: 05px;">{{'lang_Show_Bluk_Invoice_Page'|translate}} </a> </div>
+	 <div class="col-md-12">
+        <div class="form-group">
+          <textarea rows="8" ng-model="scan.awb_no" ng-keypress="($event.charCode==13)? GetcheckCounter() : return" required class="form-control" placeholder="Enter AWB no."></textarea>
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-12 col-12 mb-20">
+        <label>{{'lang_Row_Count'|translate}} </label>
+        &nbsp; <span class="badge-success badge badge-pill"> {{scan.counterval}}</span>&nbsp;&nbsp;&nbsp;   
+	</div>
+      <div class="col-md-5 col-sm-12 col-12 mb-20">
+        <div class="form-group row"> 
+          <div class="col-sm-10" style="margin-top:09px;">
+            <select class="form-control"  ng-model="scan.user_name" required>
+              <option value="">{{'lang_selectCustomer'|translate}} </option>
+              <option  ng-repeat="cdata in CustomerDropdata" value="{{cdata.id}}">{{cdata.company}}/{{cdata.uniqueid}}</option> 
+            
+            </select>
+          </div>
+        </div>
+      </div>
+	  <div class="col-md-5 col-sm-12 col-12 mb-20">
+      <div class="form-group row">    
+        <div class="col-sm-10" style="margin-top:09px;">      
+          <select class="form-control custom-select" ng-model="scan.inv_type" required>
+            <option value="">{{'lang_SelectInvoiceType'|translate}} </option>
+      
+			    <option value="COD"> {{'lang_CODDelivered'|translate}}</option>
+			    <option value="CC" >{{'lang_CC_and_Return'|translate}}</option>
+			    <option value="All" >{{'lang_CC_COD_and_Return'|translate}}</option> 
+          </select>
+        </div>
+      </div> 
+	  </div> 
+       <button type="button" class="btn btn-primary form-control text-white" ng-disabled="add_staff.$invalid"  ng-click="GetCreateInvocieAwb();">{{'lang_Generate_Invoice'|translate}} </button> 
+	
+	   </div>
+	   	</form>
+  </section>
+</div>

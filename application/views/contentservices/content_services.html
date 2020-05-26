@@ -1,0 +1,64 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getContentservicesData(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Content_Service'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_Service'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "container">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Show_Service'|translate}}</h5>
+		</div><br>
+		<table class="table datatable-show-all table-bordered table-hover datatable-highlight"> 
+                          
+            <thead>
+            <tr>
+            <th class="head1" colspan="8">   
+            <div class="form-group">
+            <label>{{'lang_Add_Services'|translate}}</label>
+            <input type="text" name="services_name" class="form-control" ng-model="serveArray.services_name" Required>
+			<span class="text-danger" ng-show="add_services.services_name.$error.required">{{'lang_Add_Services'|translate}}</span>
+            </div>
+            <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="add_services.$invalid" ng-click="AddServicesform(serveArray);">
+            </th>
+            </tr>
+            
+            <tr>
+            <th class="head0">{{'lang_srNo'|translate}}</th>
+            <th class="head1">{{'lang_Services_Name'|translate}}</th>
+             <th class="head0">{{'lang_status'|translate}}</th>
+            <th class="head0">{{'lang_action'|translate}}</th>
+            </tr>
+            
+            </thead>
+                        
+            <tbody ng-repeat="data in service_detailData"> 
+            <tr>
+            <td> {{$index+1}}</td>
+            <td>{{data.services_name}}</td>
+            <td><span class="badge badge-success ng-binding ng-scope" ng-if="data.status=='Y'">{{'lang_active'|translate}}</span>
+				<span class="badge badge-danger ng-binding ng-scope" ng-if="data.status=='N'">{{'lang_Inactive'|translate}}</span>
+			</td> 
+           <td>
+           <div class="btn-group dropdown">
+					    <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        <div class="dropdown-menu w-210p">
+                        	<a class="dropdown-item" style="cursor: pointer" ng-click="ShowactiveStatus(data.id,'N')" ng-if="data.status=='Y'" ng-confirm-click="Do you want to Inactive?"><i class="fa fa-check fa-fw"></i>&nbsp;{{'lang_active'|translate}}</a> 
+							<a class="dropdown-item" style="cursor: pointer" ng-click="ShowactiveStatus(data.id,'Y')" ng-if="data.status=='N'" ng-confirm-click="Do you want to Active?"><i class="glyphicon glyphicon-remove"></i>&nbsp;{{'lang_Inactive'|translate}}</a>
+					
+						<a class="dropdown-item" ui-sref="edit_content_services({conid:data.id})"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp;{{'lang_edit'|translate}}</a>
+						<a class="dropdown-item" ng-click="GetContentrdelete(data.id)" ng-confirm-click="Do you want to Delete?"><i class="fa fa-trash-o fa-fw"></i>&nbsp;{{'lang_Delete'|translate}}</a>
+						
+                        </div> 
+                    </div>
+           </td>
+            </tr>
+            
+            </tbody>
+            
+                    </table>
+    </section>		

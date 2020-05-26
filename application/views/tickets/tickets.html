@@ -1,0 +1,146 @@
+   <nav class="hk-breadcrumb" aria-label="breadcrumb"  ng-init="viewticket(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Tickets'|translate}} </li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_Ticket'|translate}}  </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title"> {{'lang_Show_Ticket'|translate}}</h5>
+		</div><br>
+		<div class="table-responsive">
+            <table class="table table-hover mb-0">
+			<thead>
+                <tr>
+                
+        		<th colspan="4">
+				 <input name="searchfield" type="text" class="form-control" ng-model="filterData.searchfield"  placeholder="search awb/ticket" required="">
+				
+
+          </th>
+            
+            	<th colspan="1">
+            <input type="submit" name="Submit" class="btn btn-primary" value="Search" ng-click="viewticket(1,1);">
+        </th>
+        
+    				
+                <th colspan="4"></th>    
+                </tr>                 
+        </thead>
+		<thead>
+            <tr>
+                <th class="head0">{{'lang_srNo'|translate}} .</th>
+                <th class="head1">{{'lang_date'|translate}} </th>
+                <th class="head0">{{'lang_AWBRefNo'|translate}}</th>
+                <th class="head1">{{'lang_name'|translate}} </th>
+                <th class="head0">{{'lang_phone'|translate}} </th>
+                <th class="head1">{{'lang_email'|translate}} </th>
+                <th class="head0">{{'lang_Subject'|translate}} </th>
+                 <th class="head0">{{'lang_Ticket_No'|translate}} .</th>
+                <th class="head1">{{'lang_status'|translate}} </th>
+                <th class="head0">{{'lang_action'|translate}} </th>  
+            </tr>
+        </thead>
+		    <tbody>
+			    <tr ng-repeat="data in viewticketData"> 
+                <td>{{$index+1}}</td>
+                <td>{{data.entry_date}}</td>
+                <td> <a style="cursor:pointer;color:green" ng-click="GetEmailTicketsPopup(data.id,'#exampleModalForms1');">{{data.awb_no}}</a></td>
+                <td>{{data.name}}</td>
+                <td>{{data.mobile}}</td>
+                <td>{{data.email}}</td>
+                <td> {{data.subject}}</td>
+                <td> {{data.ticket_no}}</td>
+                <td><span class="badge badge-secondary ng-binding ng-scope" ng-if="data.ticket_status=='Open'">{{'lang_Open'|translate}}</span>
+						<span class="badge badge-danger ng-binding ng-scope" ng-if="data.ticket_status=='Closed'">{{'lang_Close'|translate}}</span>
+						<span class="badge badge-success ng-binding ng-scope" ng-if="data.ticket_status=='Resolved'">{{'lang_Resolved'|translate}}</span></td>
+                 <td>
+			     <div class="btn-group">
+                <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  
+                <span class="sr-only">{{'lang_Toggle_Dropdown'|translate}} </span>
+                </button>
+                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(138px, 40px, 0px); top: 0px; left: 0px; will-change: transform;"> 
+               <!--  <a class="dropdown-item" style="cursor:pointer" ng-click="GetEmailSendPopup(data.id,'#exampleModalForms');"><i class="fa fa-share "></i>&nbsp;{{'lang_Send_Email'|translate}} </a> -->
+				<a class="dropdown-item" style="cursor:pointer" ng-click="GetTicketdelete(data.id)" ng-confirm-click="Do you want to Delete?"><i class="fa fa-trash-o fa-fw"></i>&nbsp;Delete</a> 
+				<a class="dropdown-item" ui-sref="ticket_reply({id:data.id})"><i class="fa fa-reply"></i>&nbsp;{{'lang_Reply'|translate}} </a>
+                </div>
+                </div>
+            </td>
+            </tr>
+			 
+		
+			</tbody>
+		</table>
+		</div>	
+</section>		
+ <div class="modal" id="exampleModalForms" tabindex="-1" role="dialog" aria-labelledby="exampleModalForms" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">{{'lang_Send_Your_Inquiry'|translate}}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form  name="send_inquiry" id="send_inquiry" method="post" action="" class="form-horizontal">
+
+														<div class="form-group">
+														<input type="text" name="sendermail" class="form-control" placeholder="To" ng-model="MailDataArray.email" ng-confirm-click="Do you want to Delete?">
+														</div>
+
+														<div class="form-group">
+														<input type="text" class="form-control" ng-model="MailDataArray.subject"  name="subject" placeholder="Subject" />
+														</div>
+
+														<div class="form-group">
+														<textarea name="message"   class="form-control" rows="5" cols="5"></textarea>
+														<span id="msg_info" class="alert"></span>
+														</div>
+														
+														<div class="form-group">
+														<input type="submit" name="send_emailcustomer" value="Send" class="btn btn-danger"/>
+														</div>
+														
+													</form> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+									
+			<div class="modal" id="exampleModalForms1" tabindex="-1" role="dialog" aria-labelledby="exampleModalForms1" aria-hidden="true">
+                        <div class="modal-dialog" role="document" ng-init="GetEmailTicketsPopup();">
+                              <div class="modal-content">
+                               <div class="modal-header">
+                                <h5 class="modal-title">{{'lang_Ticket_Detail_of'|translate}}-{{TicketsDataArray.ticket_no}}</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                   </button>
+                                    </div>
+                                   <div class="modal-body">
+                                       <div class="modal-body">
+                                    <h6 class="text-semibold">{{'lang_AWBNumber'|translate}}</h6>
+										<p> {{TicketsDataArray.awb_no}}</p> 
+										
+										<hr>
+										<h6 class="text-semibold">{{'lang_Contact_center_issue'|translate}}</h6>  
+										<p>{{TicketsDataArray.message}}</p>
+
+										<hr>
+										<h6 class="text-semibold">{{'lang_status'|translate}}</h6>
+											<p> {{TicketsDataArray.ticket_status}}</p> 
+										<hr>
+										<h6 class="text-semibold">{{'lang_Reply'|translate}}</h6>
+											<p>{{TicketsDataArray.reply_comment}} </p> 
+										<hr>
+										<h6 class="text-semibold">{{'lang_EntryDate'|translate}}</h6>
+										<p>{{TicketsDataArray.entry_date}}</p> 
+									</div> 
+                                                </div>
+                                            </div>
+                                    </div>
+                                    </div>

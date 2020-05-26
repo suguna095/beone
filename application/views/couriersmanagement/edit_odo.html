@@ -1,0 +1,101 @@
+  		<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="EditOdoData();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>    {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_CouriersManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Edit_Odo_Meter'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	<div class="breadcrumb-line">
+	    <div class="hk-pg-header">
+            <h4><i data-feather="arrow-left-circle"></i></i> 
+            <span class="text-semibold"></span>{{'lang_Edit_Odo_Meter_Details'|translate}} </h4> 
+		</div>
+	</div>
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Edit_Odo_Meter_for'|translate}}  {{editodoArray.messenger_name}}</h5> 
+		</div><br>
+		<div class="panel-body">
+
+        			<form class="stdform"  name="edit_odo" enctype="multipart/form-data"> 
+                    <input type="hidden" name="odoid" ng-model="editodoArray.odoid" />
+                    
+                    <div class="row"> 
+					<div class="col-md-6">
+                    <div class="form-group">
+                    <label>{{'lang_Start_Km'|translate}} </label>
+                    <input type="text" name="start_km" class="form-control" ng-model="editodoArray.start_km">
+                    </div>
+                    </div> 
+					<div class="col-md-6">
+                    <div class="form-group">
+                    <label>{{'lang_End_Km'|translate}} </label>
+                    <input type="text" name="end_km" class="form-control" ng-model="editodoArray.end_km">
+                    </div>
+				    </div>
+                    </div> 
+				    <div class="row"> 
+					<div class="col-md-6">
+				    <div class="form-group">
+                    <label>{{'lang_Start_Time'|translate}} </label>
+                    <input type="text" name="s_time"  class="form-control" ng-model="editodoArray.s_time">
+                    </div>
+                    </div>
+					<div class="col-md-6"> 
+                    <div class="form-group">
+                    <label>{{'lang_EndTime'|translate}} </label>
+                    <input type="text" name="e_time"  class="form-control" ng-model="editodoArray.e_time">
+                    </div>
+					</div> 
+					</div>
+                    
+					<div class="row"> 
+					<div class="col-md-6">
+				    <div class="row"> 
+					<div class="col-md-6">
+					<div class="form-group">
+					<label> {{'lang_Start_Image'|translate}} </label>
+					
+					<input type="file" name="s_img" fileread="editodoArray.s_img" accept="image/*" class="btn btn-primary btn-file" Required><br><br>
+                     <img  src="{{editodoArray.s_img}}" class="img-fluid" width="90px;" height="90px;"> 
+					
+					</div>
+				    </div>
+					<div class="col-md-6">
+					</div>
+				    </div>
+					</div>
+					<div class="col-md-6">
+				    <div class="row"> 
+					<div class="col-md-6">
+					<div class="form-group">
+					<label>{{'lang_End_Image'|translate}}  </label>       
+					
+					<input type="file" name="e_img" fileread="editodoArray.e_img" accept="image/*" class="btn btn-primary btn-file" Required><br><br>
+                     <img  src="{{editodoArray.e_img}}" class="img-fluid" width="90px;" height="90px;"> 
+					
+					</div>
+					</div>
+					<div class="col-md-6"> <br> <p style="color: red"></p></div>	
+					</div>
+					</div> 
+					</div>
+						
+					<div class="col-md-3">
+                    <div class="form-group">
+                    <label>{{'lang_Extra_Previous_Leters'|translate}} </label>
+                    <input type="text" step="0.01" name="pre_e_ltr" class="form-control" ng-model="editodoArray.pre_e_ltr">
+                    </div>
+					</div>
+					<div class="col-md-9">
+                    <div class="form-group">
+ 					<input name="id" type="hidden">
+                    <input name="submit" type="submit" class="btn btn-primary" value="Update" ng-disabled="edit_odo.$invalid" ng-click="EditOdoform(editodoArray);">
+                    </div>
+					</div>  
+                    </form>
+ 			
+      			</div>
+    </section>		
+</div>

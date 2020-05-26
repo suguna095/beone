@@ -1,0 +1,78 @@
+   <nav class="hk-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_shipmentManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_In_transit_Scanned_not_listed'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+	<div class="panel panel-flat"><!---->
+    <div class="panel-heading"><!---->
+		<h5 class="panel-title">{{'lang_Show_In_transit_Scanned_not_listed_Shipment'|translate}}  <input class="btn-primary" type="button" onclick="create_zip();" value="Export to Zip"></h5>
+	</div>
+    <section class="hk-sec-wrapper">                     
+	<table class="table table-hover mb-0">
+        <thead>
+         <form action="" method="POST" id="bar_code_Frm" name="bar_code_Frm"></form>
+         <tr>
+         <th class="head1" colspan="2">
+           
+            <input type="text" name="hub_name" id="hub_name" value="" placeholder="Enter Hub Name." class="form-control">	
+            
+            </th>
+            <th class="head1" colspan="2">
+           
+            <input type="text" name="staff_name" id="staff_name" value="" placeholder="Enter Staff Name." class="form-control">	
+            
+            </th>
+            <th class="head1" colspan="2">
+           
+            <input type="date" name="from" id="from" value="" placeholder="Enter From Date" class="form-control">	
+            
+            </th>
+             <th class="head1">
+           
+            <input type="date" name="to" id="to" value="" placeholder="Enter To Date" class="form-control">	
+            
+            </th>
+                       
+            <th colspan="2"><br>
+            <input type="submit" name="submit_btn" value="Search" class="btn btn-primary" onclick="return Valid_search(document.search_form);">
+            <label>
+			<div id="search_val" style="display:inline;"></div>
+			</label>
+            </th>
+            </tr>
+            
+                <form name="search_form" method="post" action=""></form>
+                    <input type="HIDDEN" name="show_type" value="">
+					<tr>
+						<th>{{'lang_date'|translate}}</th>
+						<th>  
+						<a href="">{{'lang_AWB'|translate}}<img src=""> </a>  </th>  
+						<th>{{'lang_Hub_Name'|translate}}</th>
+                        <th>{{'lang_origin'|translate}}</th>
+                        <th>{{'lang_destination'|translate}} </th>
+                        <th>{{'lang_StaffName'|translate}}</th>
+                        <th>{{'lang_details'|translate}}</th>
+						<th>{{'lang_status'|translate}}</th>
+                    </tr>
+		</thead>
+			<tbody>
+                                                           
+                     <tr>
+					        <td colspan="18" align="center">
+						    <form action="" method="post">
+                            <input type="hidden" name="all" value="1">
+							<input type="hidden" name="pageval" id="pagevalid" value="0">
+							</form>
+							</td>
+                    </tr>
+			</tbody>  
+	</table>
+	</section>
+    </div>
+	
+	</section>

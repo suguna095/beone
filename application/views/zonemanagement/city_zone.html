@@ -1,0 +1,130 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="ShowCityZone(1,0);GetshowZoneDrop();">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_zoneManagement'|translate}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Set_City_Zone'|translate}}</li>
+                </ol>
+            </nav>
+   <div class="">
+                <!-- Title -->
+                           
+        
+           
+    <section class="hk-sec-wrapper">
+  <div class="content-wrapper">
+
+<!-- Content area -->
+<div class="content">
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">{{'lang_Set_Default_City_Zone'|translate}}</h5>
+    </div>
+     
+    <div class="panel-body">  
+        <div class="panel panel-default">
+            <div class="panel-body">
+             	
+                    <input type="hidden" name="customer_id" value=" 0 ">
+                    
+                                                            
+                    <input type="hidden" name="country_id" id="country_id" value="">
+                      
+                    
+                    <br>
+                    <div align="center">
+					<a href="#" name="A" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'A');" ><span ng-if="alphabetic=='A'" style="color:#00F">A</span><span ng-else>A</span>|</a>
+                    <a href="#" name="B" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'B');"><span ng-if="alphabetic=='B'" style="color:#00F">B</span><span ng-else>B</span>|</a>
+                    <a href="#" name="C" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'C');"><span ng-if="alphabetic=='C'" style="color:#00F">C</span><span ng-else>C</span>|</a>
+                    <a href="#" name="D" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'D');"><span ng-if="alphabetic=='D'" style="color:#00F">D</span><span ng-else>D</span>|</a>
+					<a href="#" name="E" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'E');"><span ng-if="alphabetic=='E'" style="color:#00F">E</span><span ng-else>E</span>|</a>   
+					<a href="#" name="F" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'F');"><span ng-if="alphabetic=='F'" style="color:#00F">F</span><span ng-else>F</span>|</a>
+                    <a href="#" name="G" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'G');"><span ng-if="alphabetic=='G'" style="color:#00F">G</span><span ng-else>G</span>|</a>
+                    <a href="#" name="H" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'H');"><span ng-if="alphabetic=='H'" style="color:#00F">H</span><span ng-else>H</span>|</a>
+                    <a href="#" name="I" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'I');"><span ng-if="alphabetic=='I'" style="color:#00F">I</span><span ng-else>I</span>|</a>
+					<a href="#" name="J" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'J');"><span ng-if="alphabetic=='J'" style="color:#00F">J</span><span ng-else>J</span>|</a> 
+					<a href="#" name="K" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'K');"><span ng-if="alphabetic=='K'" style="color:#00F">K</span><span ng-else>K</span>|</a>
+                    <a href="#" name="L" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'L');"><span ng-if="alphabetic=='L'" style="color:#00F">L</span><span ng-else>L</span>|</a>
+                    <a href="#" name="M" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'M');"><span ng-if="alphabetic=='M'" style="color:#00F">M</span><span ng-else>M</span>|</a>
+                    <a href="#" name="N" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'N');"><span ng-if="alphabetic=='N'" style="color:#00F">N</span><span ng-else>N</span>|</a>
+					<a href="#" name="O" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'O');"><span ng-if="alphabetic=='O'" style="color:#00F">O</span><span ng-else>O</span>|</a> 
+					<a href="#" name="P" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'P');"><span ng-if="alphabetic=='P'" style="color:#00F">P</span><span ng-else>P</span>|</a>
+                    <a href="#" name="Q" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'Q');"><span ng-if="alphabetic=='Q'" style="color:#00F">Q</span><span ng-else>Q</span>|</a>
+                    <a href="#" name="R" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'R');"><span ng-if="alphabetic=='R'" style="color:#00F">R</span><span ng-else>R</span>|</a>
+                    <a href="#" name="S" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'S');"><span ng-if="alphabetic=='S'" style="color:#00F">S</span><span ng-else>S</span>|</a>
+					<a href="#" name="T" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'T');"><span ng-if="alphabetic=='T'" style="color:#00F">T</span><span ng-else>T</span>|</a>  
+					<a href="#" name="U" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'U');"><span ng-if="alphabetic=='U'" style="color:#00F">U</span><span ng-else>U</span>|</a> 
+					<a href="#" name="V" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'V');"><span ng-if="alphabetic=='V'" style="color:#00F">V</span><span ng-else>V</span>|</a>
+                    <a href="#" name="W" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'W');"><span ng-if="alphabetic=='W'" style="color:#00F">W</span><span ng-else>W</span>|</a>
+                    <a href="#" name="X" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'X');"><span ng-if="alphabetic=='X'" style="color:#00F">X</span><span ng-else>X</span>|</a>
+                    <a href="#" name="Y" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'Y');"><span ng-if="alphabetic=='Y'" style="color:#00F">Y</span><span ng-else>Y</span>|</a>
+					<a href="#" name="Z" ng-model="filterData.alphabetic" ng-click="ShowCityZone(1,1,'Z');"><span ng-if="alphabetic=='Z'" style="color:#00F">Z</span><span ng-else>Z</span></a>      
+                    
+                    </div>
+                    <br><br>
+                    
+                    <div class="col-md-2">{{'lang_Search_city'|translate}}</div>
+                    <div class="col-md-8"> 
+                    <input type="text" ng-model="filterData.searchfield" class="form-control" Required>
+                    </div><br>
+                    
+                    <div class="col-md-2">
+                    <input type="submit" class="btn btn-primary" name="submit" ng-click="ShowCityZone(1,1);" value="Search">         
+                    </div><br><br>                        
+                    </form>
+                    <div class="row" >
+					<div class="col-md-4" style="margin-bottom: 2%;font-weight: bold;">
+					<div class="col-md-12" style="width:47%; float:left;">
+					{{'lang_city'|translate}}
+					</div>
+					<div class="col-md-12" style="width:53%; float:left;">
+					 	{{'lang_Select_Zone'|translate}} 
+					</div>
+					</div>
+					<div class="col-md-4" style="margin-bottom: 2%;font-weight: bold;">
+					<div class="col-md-12" style="width:47%; float:left;">
+					{{'lang_city'|translate}}
+					</div>
+					<div class="col-md-12" style="width:53%; float:left;">
+					 	{{'lang_Select_Zone'|translate}} 
+					</div>
+					</div>
+					<div class="col-md-4" style="margin-bottom: 2%;font-weight: bold;">
+					<div class="col-md-12" style="width:47%; float:left;">
+					{{'lang_city'|translate}}
+					</div>
+					<div class="col-md-12" style="width:53%; float:left;">
+					 	{{'lang_Select_Zone'|translate}}  
+					</div>
+					</div>
+
+					<div data-loading style="padding-left:45%;"> </div>
+					<div class="col-md-4"  ng-repeat="data in ShowCityZoneArray" style="margin-bottom: 2%;">
+					<div class="col-md-12" style="width:47%; float:left;">
+					{{data.city}}<input type="hidden" name="city_3" value="3">
+					</div>
+					<div class="col-md-12" style="width:53%; float:left;">
+					 <select name="name" class="form-control" ng-model="data.zone_id" ng-change="updatezone_id(data.zone_id,data.id)">
+                    <option value="" selected="selected">{{'lang_Please_Select'|translate}} </option> 
+                    <option ng-repeat="datas in CityZonelist" value="{{datas.id}}" >{{datas.name}}</option> 
+                    </select> 
+					</div>
+					</div>
+					<div ng-if="ShowCityZoneArray==''"  style="padding-left: 45%;color:#acb0b1">
+								{{'lang_NoRecords_Found'|translate}} 
+					</div>
+							
+							
+					</div>
+					</div>
+                 
+                    
+            </div>
+    </div>
+</div>
+</div>  
+</div>
+    </section>
+
+
+  
+    

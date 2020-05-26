@@ -1,0 +1,96 @@
+   <nav class="hk-breadcrumb" aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_generalSetting'|translate}} </li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_SMTP_Setting'|translate}} </li>
+                </ol>
+            </nav>
+            <!-- /Breadcrumb -->
+
+    
+        <div class="container">
+                <!-- Title -->
+            <div class="breadcrumb-line">
+	            <div class="hk-pg-header">
+			    <h4><i data-feather="arrow-left-circle"></i></i> 
+                <span class="text-semibold"></span>{{'lang_SMTP_Configuration'|translate}} </h4>
+			    </div>
+			</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="panel-body">
+	        <form role="form"  method="post"  name="smtp" enctype="multipart/form-data" id="smtp">
+	            <div class="panel panel-default">
+	            
+				    <section class="hk-sec-wrapper">
+                    <h5 class="hk-sec-title">{{'lang_Social_Setting'|translate}}</h5><br>
+					    <div class="row">
+						        <div class="col-sm-8">
+								            <label>{{'lang_Mail_On_Off'|translate}} </label>&nbsp;&nbsp;
+											 
+                                              {{'lang_Yes'|translate}} <input type="radio" id="smtp_onoff" name="smtp_onoff" ng-model="smtpArray.smtp_onoff" value="Y" ng-checked="false"/>&nbsp;&nbsp;
+                                              {{'lang_No'|translate}} <input type="radio" id="smtp_onoff" name="smtp_onoff" ng-model="smtpArray.smtp_onoff" value="N" ng-checked="false"/>
+                                
+								</div>
+                                <div class="col-sm-8">
+                                   
+                                        <div class="form-group">
+                                            <label for="inputText">{{'lang_Port'|translate}} </label>
+                                            <input type="text" name="smtp_port" class="form-control" aria-describedby="textHelpBlock" ng-model="smtpArray.smtp_port" required>
+											<span class="text-danger"  ng-show="smtp.smtp_port.$error.required">{{'lang_Port_required'|translate}} .</span>
+                                        </div>   
+                                </div>
+							</div>
+							<div class="row">
+                                <div class="col-sm-8">
+                                   
+                                        <div class="form-group">
+                                            <label for="inputText">{{'lang_Secure'|translate}} </label>
+                                            <input type="text" name="smtp_secure" class="form-control" aria-describedby="textHelpBlock" ng-model="smtpArray.smtp_secure" required>
+											<span class="text-danger"  ng-show="smtp.Secure.$error.required">{{'lang_Secure_required'|translate}} .</span>
+                                        </div>   
+                                </div>
+							</div>
+							<div class="row">
+                                <div class="col-sm-8">
+                                   
+                                        <div class="form-group">
+                                            <label for="inputText">{{'lang_Host'|translate}} </label>
+                                            <input type="text" name="smtp_host" class="form-control" aria-describedby="textHelpBlock" ng-model="smtpArray.smtp_host" required>
+											<span class="text-danger"  ng-show="smtp.smtp_host.$error.required">{{'lang_Host_required'|translate}} .</span>
+                                        </div>   
+                                </div>
+							</div>
+							<div class="row">
+                                <div class="col-sm-8">
+                                   
+                                        <div class="form-group">
+                                            <label for="inputText">{{'lang_userName'|translate}} </label>
+                                            <input type="text" name="smtp_user_name" class="form-control" aria-describedby="textHelpBlock" ng-model="smtpArray.smtp_user_name" required>
+											<span class="text-danger"  ng-show="smtp.smtp_user_name.$error.required">{{'lang_Usernameisrequired'|translate}}.</span>
+                                        </div>   
+                                </div>
+							</div>
+							<div class="row">
+                                <div class="col-sm-8">
+                                   
+                                        <div class="form-group">
+                                            <label for="inputText">{{'lang_password'|translate}} </label>
+                                            <input type="password" name="smtp_password" class="form-control" aria-describedby="passwordHelpBlock" ng-model="smtpArray.smtp_password" required>
+											<span class="text-danger"  ng-show="smtp.smtp_password.$error.required">{{'lang_Passwordisrequired'|translate}}.</span>
+                                        </div>   
+                                </div>
+							</div>
+							
+							 <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="smtp.$invalid" ng-click="smtpform(smtpArray);">
+						</div>
+                    </section>
+	
+	            </div>
+			</form>
+	    </div>
+	</div>
+</div>
+	
+	
+			

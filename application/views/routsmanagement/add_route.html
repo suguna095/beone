@@ -1,0 +1,80 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="GetCountryDropshow();">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_RouteManagement'|translate}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_AddRoute'|translate}}</li>
+                </ol>
+            </nav>
+   <div class="">
+                <!-- Title -->
+                           
+        
+           
+ <section class="hk-sec-wrapper">
+   <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">{{'lang_AddRoute'|translate}}</h5>  
+        </div><br>
+
+<div class="panel-body">
+	<div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+               <div class="loader logloder" ng-show="loadershow"></div>
+       
+        			<form class="stdform stdform2" name="add_route">
+                    <div class="form-group">
+                    <label>{{'lang_SelectCountry'|translate}} <span style="color:red">*</span></label>
+                  
+                    <select name="country_id" class="form-control " ng-model="routeArray.country_id" ng-change="ShowRouteCityDrop(routeArray.country_id)" required>
+					<option value="">{{'lang_Please_Select'|translate}}</option>
+                    <option ng-repeat="ctdata in CountryData" value="{{ctdata.id}}">{{ctdata.country}}</option></select>
+					<span class="text-danger" ng-show="add_route.country_id.$error.required">{{'lang_Country_is_Required'|translate}}</span>
+                    </div>
+                        
+                    <div class="form-group">
+                    <label>{{'lang_selectCity'|translate}}  <span style="color:red">*</span></label>
+                  
+					<input type="text" name="city_id" id="show_city_dropdown"  placeholder="City" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="routeArray.city_id"> 
+				
+					<span class="text-danger" ng-show="add_route.city_id.$error.required">{{'lang_City_is_Required'|translate}}</span>
+					</select>
+                 
+                    </div>
+                       <div class="form-group">
+                    <label>{{'lang_Route'|translate}}  <span style="color:red">*</span></label> 
+                    <input type="text" class="form-control" name="route"  ng-model="routeArray.route" required >
+					<span class="text-danger" ng-show="add_route.route.$error.required">{{'lang_Routeisrequired'|translate}}.</span>
+                    </div>  
+                    <div class="form-group">
+                    <label>{{'lang_Route_code'|translate}}  <span style="color:red">*</span></label>
+                    <input type="text" class="form-control" name="routecode"  ng-model="routeArray.routecode" required >
+					<span class="text-danger" ng-show="add_route.routecode.$error.required">{{'lang_RouteCodeisrequired'|translate}}.</span>
+                    </div> 
+                    <div class="form-group">
+                    <label>{{'lang_ArabicKeyword'|translate}}  <span style="color:red">*</span></label>
+                    <input type="text" class="form-control" name="keyword" ng-model="routeArray.keyword" required >
+					<span class="text-danger" ng-show="add_route.keyword.$error.required">{{'lang_ArabicKeywordisrequired'|translate}}</span> 
+                    </div> 
+                        
+                  
+                        
+                    <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="add_route.$invalid" ng-click="AddRouteform(routeArray);"> 
+                    
+                    </form>
+ 			       
+ 			    </div>
+                               
+             </div>
+        </div>
+    </div>
+</div>
+ 
+</div>
+</section>
+
+
+  
+		
+		

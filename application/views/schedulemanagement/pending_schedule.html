@@ -1,0 +1,43 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_ScheduleManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_BulkReschedule'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	<div class="breadcrumb-line">
+	  
+	</div>
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_BulkReschedule'|translate}}</h5>
+		</div><br>
+		<section class="hk-sec-wrapper">
+		 <div class="row">
+        <div class="col-sm">
+        <div class="row">
+         <div class="col-md-4">
+          
+            <label>{{'lang_TimeSlot'|translate}}</label>
+            <select name="time" class="form-control" required="">
+				 <option value="8:00 PM To 12:00 AM">8:00 PM To 12:00 AM</option>
+              <option value="10:00 AM - 4:00 PM">10:00 AM-4:00 PM</option>
+              <option value="4:00 PM - 8:00 PM">4:00 PM-8:00PM</option>
+              <option value="Any Time">Any Time</option>
+            </select>
+          
+        </div>
+        <div class="col-md-4">
+         
+            <label>{{'lang_ScheduleDate'|translate}}</label>
+			<input type="date" class="form-control" name="schedule_date">  
+        </div>
+     
+         
+        
+    </form>
+    </div>
+</div>	
+    </div>
+</section>		

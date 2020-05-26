@@ -1,0 +1,57 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showStaffDropData();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_reports'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page"> {{'lang_SalesByClient'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "" >
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title"> {{'lang_SalesByClient'|translate}}</h5>
+		</div><br>
+		<div class="panel-body">
+    <section class="hk-sec-wrapper">
+    <p style="padding-left:20px;">
+    <strong>{{'lang_Here_you_can_export_Sales_by_client_data_in_excle_CSV_Format'|translate}}</strong>
+    </p><br>   
+    <div class="form-group" >
+    <label>{{'lang_selectCustomer'|translate}}</label>
+    
+        <select name="company" class="form-control input-lg  input-lg" ng-model="company" ng-change="getallCustomerdata(company);">
+		<option>{{'lang_Please_Select'|translate}}</option>   
+		<option ng-repeat="data in CustDroplistArray" value="{{data.id}}">{{data.company}} ({{data.uniqueid}})</option>
+    </select>
+    </div>
+	 <button type="button" class="btn btn-primary" name="clientSubmit" ng-click="exportToExcelClientReport('#tableId')" value="Submit"> {{'lang_DownloadExcel'|translate}}</button>
+	 
+    </div>
+                </div> 
+	</section>		
+
+<table id="tableId" style="display:none">  
+ <thead>
+          <tr>
+       		<th>{{'lang_InvoiceID'|translate}}</th>
+            <th>{{'lang_PaidAmount'|translate}}</th>
+            <th>{{'lang_PaymentMode'|translate}}</th>
+            <th>{{'lang_PaidDate'|translate}}</th>
+            <th>{{'lang_comment'|translate}}</th>
+          
+            
+          </tr>
+        </thead>
+        <tbody>  
+		 <tr>
+        	<td>{{orderArray.invoice_id}}</td>
+            <td>{{orderArray.paid_amount}}</td>  
+            <td>{{orderArray.payment_mode}}</td>
+            <td>{{orderArray.paid_date}}</td>
+            <td>{{orderArray.payment_comment}}</td>
+            
+            
+           </tr>
+       </tbody>
+       </table>	
+    </section>		

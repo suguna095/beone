@@ -1,0 +1,46 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="EditServicesshow();">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_ServiceManagement'|translate}}</li>   
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Edit_Services'|translate}}</li>
+                </ol>
+            </nav>
+   <div class="">
+                <!-- Title -->  
+                           
+        
+           
+ <section class="hk-sec-wrapper">
+   <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">{{'lang_Edit_Services'|translate}}</h5>      
+        </div><br>
+
+        <div class="col-lg-12">
+    		<div class="panel panel-default">
+    			<div class="panel-body">
+       
+					<form class="stdform" name="edit_service">
+        
+                    <div class="form-group">
+                    <label>{{'lang_Services_Name'|translate}}</label><span id="heading_info" class="alert"></span>
+                    
+                    <input type="text" class="form-control" id="services_name" name="services_name" ng-model="serviceeditArray.services_name" Required>   
+                    
+					<span class="text-danger" ng-show="edit_service.services_name.$error.required">{{'lang_ServiceName_is_Required'|translate}}</span>   
+					</div>
+                  
+                    <input name="id" type="hidden" value="">
+                    <input name="submit" type="submit" value="Update" ng-disabled="edit_service.$invalid" class="btn btn-primary" ng-click="UpdateServiceName(serviceeditArray);">
+                    
+					</form>
+                    
+ 			  	</div>
+            </div>
+        </div>
+</section>
+
+
+  
+		
+		

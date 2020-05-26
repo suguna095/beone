@@ -1,0 +1,293 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="EditCustomershow();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_customerManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_EditCustomer'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_EditCustomer'|translate}}</h5>    
+		</div><br>
+		<section class="hk-sec-wrapper">
+		<div class="panel-body">
+
+        		<form class="stdform"  name="edit_customer" enctype="multipart/form-data">	
+                    <input type="hidden" name="cusid" ng-model="editcustomerArray.cusid" />
+                    <div class="form-group">
+						<p style="display:none;">
+						<label>{{'lang_accountNo'|translate}}.</label>
+						<input type="text" name="uniqueid" readonly="1" class="form-control" value="8216374">
+						</p>
+					</div>
+                        
+                    <div class="form-group">
+						<label>{{'lang_name'|translate}}<span style="color:red">*</span></label>
+						<input type="text" class="form-control" id="name" name="name" ng-model="editcustomerArray.name" required>
+                    </div>  
+                    
+                    <div class="form-group">
+						<p style=" display:none;">
+						<label>{{'lang_userName'|translate}} <span style="color:red">*</span></label> <span id="alert_user_name"></span>
+						<input type="text" class="form-control" name="user_name" value="">
+						</p>
+					</div>
+                       
+                    <div class="form-group">
+                        <label>{{'lang_company'|translate}} <span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="company" name="company" ng-model="editcustomerArray.company" Required>
+                    </div>
+                        
+					                     
+                    <div class="form-group" style="display:none">
+						<label>{{'lang_Zip_Code'|translate}}</label>
+						<input type="text" class="form-control" id="sender_zip" name="pincode" value="" onblur="stateandcityadmin_user(this.value)">
+						<input type="hidden" name="city_id" class="form-control" id="city_send_id">
+                    </div>  
+                     
+                   
+					<div class="form-group" ng-init="showOriginDrop();"> 
+						<label>{{'lang_city'|translate}} <span style="color:red">*</span></label><span id="city"></span>
+						
+                       <input type="text" name="city" id="show_city_dropdown"  placeholder="City" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="editcustomerArray.city""> 
+                    </div> 
+                                                 
+                    <div class="form-group">
+						<label>{{'lang_address'|translate}} <span style="color:red">*</span></label>
+						<input type="text" class="form-control" id="address" name="address" ng-model="editcustomerArray.address" Required>
+                    </div>
+                        
+                    <div class="form-group">
+						<label>{{'lang_phone'|translate}} <span style="color:red">*</span></label>
+						<input type="text" name="phone" class="form-control" id="phone" ng-model="editcustomerArray.phone" Required>
+                    </div>
+                    
+                    <div class="form-group">
+						<label>{{'lang_OnHoldPeriod'|translate}} <span style="color:red">*</span></label>
+						<input type="text" name="OnHold_Period" class="form-control" id="onhold_period" ng-model="editcustomerArray.OnHold_Period" Required> 
+                    </div>
+					
+                    <!--<div class="form-group">
+						<label>{{'lang_Alternate_No'|translate}} <span style="color:red">*</span> </label>
+						<input type="text" name="fax" class="form-control" id="fax" ng-model="editcustomerArray.fax" Required>
+                    </div>
+                   
+                    
+                        
+                    <div class="form-group"> 
+						<label> {{'lang_StoreLink'|translate}}: <span style="color:red">*</span> </label>
+						<input class="form-control" type="text" name="store_link" id="store_link"  placeholder=" Store Link" ng-model="editcustomerArray.store_link" Required>
+                    </div>-->
+                      
+ 
+                    <div class="form-group">
+						<label>{{'lang_BankName'|translate}} <span style="color:red">*</span></label>
+						<input type="text" class="form-control" name="bank_name" id="bank_name" ng-model="editcustomerArray.bank_name" Required>
+                    </div>   
+                        
+                    <div class="form-group">
+						<label>{{'lang_BankAccountNumber'|translate}} <span style="color:red">*</span></label>
+						<input type="text" class="form-control" name="account_number" id="account_number" ng-model="editcustomerArray.account_number" Required>
+                    </div> 
+                        
+                    <div class="form-group">
+						<label>{{'lang_AccountManager'|translate}} <span style="color:red">*</span></label>
+						<input type="text" class="form-control" name="account_manager" id="account_manager" ng-model="editcustomerArray.account_manager" Required>
+                    </div> 
+                     <div class="form-group">
+						<label>{{'lang_ManagerEmail'|translate}} <span style="color:red">*</span></label>
+						<input type="email" class="form-control" ng-pattern="/^([a-z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?)|[7-9][0-9]{9}$/" id="email" name="managerEmail" ng-model="editcustomerArray.managerEmail" Required>
+					 <span ng-if="editcustomerArray.managerEmail.$error.pattern" style="color:red">{{'lang_entervalidemail'|translate}}</span>
+					 
+                    </div>  
+                  
+						
+                    <div class="form-group">
+						<label>{{'lang_ManagerNumber'|translate}} <span style="color:red">*</span></label>
+						<input type="text" class="form-control" name="managerMobileNo" id="account_manager" ng-model="editcustomerArray.managerMobileNo" Required>
+                    </div> 
+                        
+                    <div class="form-group">
+						<label>{{'lang_IbanNumber'|translate}} <span style="color:red">*</span></label>
+						<input type="text" class="form-control" name="iban_number" id="iban_number" ng-model="editcustomerArray.iban_number" Required>
+                    </div>
+                        
+                     
+                    <div class="form-group">
+						<label>{{'lang_BankFee'|translate}}: <span style="color:red">*</span></label>
+						<input type="num" class="form-control" name="bankfee" id="bankfee" ng-model="editcustomerArray.bank_fees" >
+                    </div>
+					 <div class="form-group">
+                     <label> {{'lang_ContractDate'|translate}} <span style="color:red">*</span></label>
+                    <input class="form-control" type="text" name="entrydate" id="datepicker1" ng-model="editcustomerArray.entrydate" Required>  
+                     </div>
+					 <div class="form-group"> 
+						<label> {{'lang_VatNo'|translate}} <span style="color:red">*</span></label>
+						<input class="form-control" type="text" name="vat_no" ng-model="editcustomerArray.vat_no" Required>  
+                     </div>
+                   
+                    <div class="form-group"> 
+                        <label>{{'lang_Upload_Files'|translate}}</label><br>    
+                        <label class="switch"> 
+                            <input type="checkbox" ng-model="editcustomerArray.uploadFiles" >  
+                            <span class="slider round"></span>
+                        </label>   
+                     </div> 
+
+                   
+                   <div class="form-group">
+						<label> {{'lang_UploadCRpdf'|translate}} <span style="color:red">*</span></label>
+                        <div class="row">     
+									  <div class="row col-md-12" ng-if="editcustomerArray.upload_cr!=''">
+										 <div class="fileinput input-group ng-isolate-scope fileinput-exists col-md-10" data-provides="fileinput" fileread="editcustomerArray.upload_cr">  
+								
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_Upload'|translate}}</span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}}</span><span class="fileinput-exists">{{'lang_Change'|translate}}</span>
+                                                <input type="hidden" value="" name=""><input type="file" name="upload_cr" fileread="editcustomerArray.upload_cr" accept="application/pdf" class="ng-isolate-scope">
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}}</a>
+                                                </span>
+                                         </div>
+										<div class="col-md-2">
+												<a href="{{editcustomerArray.upload_cr}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 30px;color: red;"></i></a>     
+										</div>
+                                    </div>
+                                    <div class="col-md-12" ng-else>
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput" required>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_Upload'|translate}} </span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}} </span><span class="fileinput-exists">{{'lang_Change'|translate}} </span>
+                                                <input type="file" name="upload_cr" fileread="editcustomerArray.upload_cr" accept="application/pdf" required>
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}} </a>
+                                                </span>
+                                            </div>
+                                    </div>
+								</div>	  
+									  
+                                   <br>  
+						<label> {{'lang_UploadIDpdf'|translate}} <span style="color:red">*</span></label>
+					  
+										
+                        <div class="row">	
+										<div class="row col-md-12" ng-if="editcustomerArray.upload_id!=''">
+										 <div class="fileinput input-group ng-isolate-scope fileinput-exists col-md-10" data-provides="fileinput" fileread="editcustomerArray.upload_id">  
+								
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_Upload'|translate}}</span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}}</span><span class="fileinput-exists">{{'lang_Change'|translate}}</span>
+                                                <input type="hidden" value="" name=""><input type="file" name="upload_id" fileread="editcustomerArray.upload_id" accept="application/pdf" class="ng-isolate-scope">
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}}</a>
+                                                </span>
+                                         </div>
+										<div class="col-md-2">
+												<a href="{{editcustomerArray.upload_id}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 30px;color: red;"></i></a>     
+										</div>
+                                    </div>
+                                    <div class="col-md-12" ng-else>
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput" required>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_Upload'|translate}} </span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}} </span><span class="fileinput-exists">{{'lang_Change'|translate}} </span>
+                                                <input type="file" name="upload_id" fileread="editcustomerArray.upload_id" accept="application/pdf" required>
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}} </a>
+                                                </span>
+                                            </div>
+                                    </div>
+									  
+								</div>		
+                                    <br>
+						<label> {{'lang_UploadContractpdf'|translate}} <span style="color:red">*</span></label>
+						
+                        <div class="row">
+                            		<div class="row col-md-12" ng-if="editcustomerArray.upload_contact!=''">
+										 <div class="fileinput input-group ng-isolate-scope fileinput-exists col-md-10" data-provides="fileinput" fileread="editcustomerArray.upload_contact">  
+								
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_Upload'|translate}}</span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}}</span><span class="fileinput-exists">{{'lang_Change'|translate}}</span>
+                                                <input type="hidden" value="" name=""><input type="file" name="upload_contact" fileread="editcustomerArray.upload_contact" accept="application/pdf" class="ng-isolate-scope">
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}}</a>
+                                                </span>
+                                         </div>
+										<div class="col-md-2">
+												<a href="{{editcustomerArray.upload_contact}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 30px;color: red;"></i></a>     
+										</div>
+                                    </div>
+                                    <div class="col-md-12" ng-else>
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput" required>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_Upload'|translate}} </span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}} </span><span class="fileinput-exists">{{'lang_Change'|translate}} </span>
+                                                <input type="file" name="upload_contact" fileread="editcustomerArray.upload_contact" accept="application/pdf" required>
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}} </a>
+                                                </span>
+                                            </div>
+                                    </div>
+								</div>	  
+						<br>
+                    
+                   
+                        <div class="form-group"> 
+                            <label>{{'lang_Image'|translate}} <span style="color:red">*</span></label><br>
+                            <input type="file" name="cmp_image" fileread="editcustomerArray.cmp_image" accept="image/*"class="btn btn-primary btn-file"><br><br>
+                            <img src="{{editcustomerArray.cmp_image}}"  class="img-fluid" width="90px;" height="90px;">
+                            </div>
+
+                 </div>
+                         
+                         <div class="form-group"> 
+                            <label>{{'lang_email'|translate}} <span style="color:red">*</span></label>
+                            <input type="email" class="form-control" id="email" name="email" ng-model="editcustomerArray.email" disabled>
+                            <span ng-show="(edit_customer.email.$dirty || submitted) && edit_customer.email.$error.required" style="color:red" >
+                            {{'lang_Required'|translate}}     
+                            </span>
+                        </div>  
+      
+                       
+                        
+                        <div class="form-group">
+                        <label>{{'lang_password'|translate}} </label>
+                        <input type="password" class="form-control" name="password1" ng-model="editcustomerArray.password1">                             
+                        </div>
+                          
+                        <div class="form-group">   
+                        <label>{{'lang_ConfirmPassword'|translate}} </label>
+                        <input type="password" class="form-control" name="conf_password" id="alert_conf_password" ng-model="editcustomerArray.conf_password" >
+                         <span ng-show="(edit_customer.conf_password.$dirty || submitted) && edit_customer.conf_password.$error.required" style="color:red" >{{'lang_Required'|translate}}   </span>
+                              <span ng-if="editcustomerArray.conf_password != editcustomerArray.password1 && editcustomerArray.conf_password" style="color:red" >{{'lang_Password_Not_Match'|translate}}</span>
+                             <span ng-if="editcustomerArray.conf_password == editcustomerArray.password1 && editcustomerArray.conf_password" style="color:green" >{{'lang_Password_Matched'|translate}}</span>
+                        </div>
+					<input name="id" type="hidden" value="">
+                    <input name="submit" type="submit" class="btn btn-primary" value="Update" ng-disabled="edit_customer.$invalid" ng-click="EditCustomerform(editcustomerArray);"> 
+                      
+                    </form>  
+ 			
+      		
+		</section>		
+    </section>		

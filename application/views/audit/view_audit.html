@@ -1,0 +1,172 @@
+   <script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip.js"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip-utils.js"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/FileSaver.js"></script>
+   
+   <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="viewaudit(1,0);"> 
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>    {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Audit'|translate}}</li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_ViewAudit'|translate}}</li>
+                </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+	<h5 class="panel-title">{{'lang_ViewAudit'|translate}}&nbsp;<i class="fa fa-check-circle" style="font-size:15px;color:green">&nbsp;{{'lang_CompleteOrders'|translate}}:  {{total_complete}}</b></i>&nbsp;&nbsp;<i class="fa fa-warning" style="font-size:15px;color:red">&nbsp;{{'lang_PendingOrders'|translate}} :  {{total_pending}}</b></i></h5>
+	<br>
+	  
+				   
+		<table class="table datatable-show-all table-bordered table-hover datatable-highlight panel panel-flat" style="height:200px !important;">
+        
+        <thead>
+     
+        
+        <tr style="height:125px;">
+        <td colspan="8">
+        <div class="row">
+		
+        <div class="col-md-3" style="margin-top:20px;">
+		      <input type="text" name="searchfield" ng-model="filterData.slip_no" placeholder="{{'lang_EnteAWBNo'|translate}}" value="" class="form-control">
+        					
+        </div>
+		
+       
+		 <div class="col-md-3" style="margin-top:20px;">
+		<select  class="form-control input-lg" ng-model="filterData.destination" ng-init="showOriginDrop();">
+		  <option value="">{{'lang_selectDestination'|translate}}</option>
+		  <option ng-repeat="data in originlist" value="{{data.id}}">{{data.city}}</option>
+		 </select>
+        					
+        </div>
+        <div class="col-md-3" style="margin-top:20px;">
+		
+        <select name="hub" id="hub" class="form-control"  ng-model="filterData.hub">
+        <option  value="">{{'lang_DestnationHub'|translate}}</option> 
+        <option  selected="selected" value="29663">{{'lang_Riyadh'|translate}}</option>
+        <option  selected="selected"   value="7">{{'lang_Jeddah'|translate}}</option>
+         <option selected="selected"   value="3">{{'lang_Dammam'|translate}}</option>
+        </select>  </div>
+		<div class="col-md-3">
+		<b>{{'lang_From'|translate}}</b>
+        <input type="text"  ng-model="filterData.start_date" id="datepicker1" class="form-control" placeholder="dd-mm-yy" />
+        </div>
+         <div class="col-md-3">
+		<b>{{'lang_To'|translate}}</b>
+        <input type="text"  ng-model="filterData.end_date" id="datepicker2" class="form-control" placeholder="dd-mm-yy" />
+        </div>  
+         <div class="col-md-3" style="margin-top:20px;" ng-init="getStatusDrop();"> 
+		
+        <select name="city" class="form-control" id="city" ng-model="filterData.audit_status" >
+			<option value="">{{'lang_PleaseSelectStatus'|translate}}</option>
+			<option ng-repeat="data in statuslist" value="{{data.comment}}">{{data.comment}}</option>
+		  </select> 
+		</div>
+		<div class="col-md-3"> 
+		 </div>
+		 <div class="col-md-1"> 
+		 </div>
+		<div class="col-md-2" style="margin-top:20px;"> 
+		<input type="button" name="submit" value="Search" style="float:right;" class="btn btn-danger" ng-click="viewaudit(1,1);">
+        
+        </div>								
+        </td>
+        </tr>
+        					
+        
+        </thead>
+		
+        </table> 
+	<div class = "table-responsive">
+	  <input class="btn-primary" type="button" value="Export to Zip" style="float:right;" onclick="create_zip();" >
+	<table id="testTable_new" class="table table-striped table-bordered table-hover" align="center">
+	        <thead>
+			<tr><th colspan="18">
+         
+            </th></tr>
+                <tr>
+                                <th><input type="checkbox" name="update_all[]" ng-modal="data.checked" ng-click="selectAllFriends()" />
+                                <br/>
+                                {{'lang_SelectAll'|translate}}</th>
+								<th>{{'lang_AuditerName'|translate}}</th>
+                                <th>{{'lang_AWBNumber'|translate}}</th>
+								<th>{{'lang_scheduleChannel'|translate}}</th>
+								<th>{{'lang_Driver_name'|translate}}</th>
+                                <th>{{'lang_Shipmentstatus'|translate}}</th>
+                                <th>{{'lang_CallAttempts'|translate}}</th>
+								<th>{{'lang_origin'|translate}}</th>
+                                <th>{{'lang_destination'|translate}}</th>
+                                <th>{{'lang_SenderName'|translate}}</th>
+                                <th>{{'lang_customerName'|translate}}</th>
+                                <th>{{'lang_Mobilenumber'|translate}}</th>
+								<th>{{'lang_Addressawb'|translate}}</th>
+                                <th>{{'lang_CSaddress'|translate}}</th>
+								<th>{{'lang_AuditStatus'|translate}}</th>
+                                <th>{{'lang_AuditComment'|translate}}</th>
+								<th>{{'lang_EntryDate'|translate}}</th>
+                                
+                </tr>
+            </thead>
+			<tbody>
+			    <tr ng-repeat="data in viewauditData">
+				    <td>{{$index+1}} <br>
+					    <input  type="checkbox" name="CheckshidIds[]" ng-model="data.checked" value="{{data.slip_no}}"/></td>
+					<td>{{data.auditor_name}}</td>
+					<td>{{data.slip_no}}</td>
+					<td>{{data.schedule_channel}}</td>
+					<td>{{data.driverName}}</td>
+					<td>{{data.shipment_status}}</td>
+					<td>{{data.call_attempt}}</td>
+					<td>{{data.origin}}</td>
+					<td>{{data.destination}}</td>
+					<td>{{data.sender_name}}</td>
+					<td>{{data.receiver_name}}</td>
+					<td>{{data.mobile_no}}</td>
+					<td>{{data.awb_address}}</td>
+					<td>{{data.schedule_address}}</td>
+					<td ng-if="data.audit_status=='Y'">{{'lang_YES'|translate}}</td>
+					<td ng-elseif="data.audit_status=='N'">{{'lang_NO'|translate}}</td>
+					<td>{{data.audit_comment}}</td>
+                    <td>{{data.entry_date}}</td>
+				</tr>
+				
+				<tr ng-if="viewauditData==''" >
+				<td colspan='15'> {{'lang_NoRecords_Found'|translate}}</td>
+				<tr>
+			</tbody>
+			
+	    </table>
+		<button ng-hide="viewauditData.length==totalCount" class="btn btn-info" ng-click="viewaudit(count=count+1,0);" ng-init="count=1">{{'lang_Load_More'|translate}}</button>  
+		</div>
+	</section>		
+
+    <SCRIPT>
+
+function create_zip() {
+var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+ tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+ tab_text = tab_text + '<x:Name>{$lang_Test_Sheet}</x:Name>';
+ tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+ tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+ tab_text = tab_text + "<table border='1px'>";
+//get table HTML code
+ tab_text = tab_text + $('#testTable_new').html();
+ tab_text = tab_text + '</table></body></html>';
+ 
+	
+	/*var zip = new JSZip();
+	zip.add(Date()+"_manifest details.xls", tab_text);
+	content = zip.generate();
+	zip.file(Date()+"_manifest details.xls"); // the file
+	location.href="data:application/zip;base64," + content;*/
+	
+	var zip = new JSZip();
+zip.file(Date()+" Show Couriers.xls", tab_text);
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    saveAs(content, Date()+" Show Couriers.zip");
+});
+	
+
+}
+</SCRIPT>	
+			

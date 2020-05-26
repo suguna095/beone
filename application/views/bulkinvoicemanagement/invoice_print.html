@@ -1,0 +1,160 @@
+
+<div class="contenttitle2" ng-init="invoice_print();">
+  <h3> {{'lang_Invoice_Detail'|translate}} ({{invoiceArray.invoice_no}}) </h3>
+  <br>
+</div>
+<a onclick="javascript:printDiv('printme')" style="cursor:pointer;">
+<button style="float:right;" class="btn btn-danger">{{'lang_Print'|translate}}</button>
+</a>
+<input class="btn-primary" type="button" onclick="create_zip();" value="Export to Excel" style="float:;">
+<br>
+<div id="printme" style="100%;"> 
+  <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script> 
+  <script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip.js"></script> 
+  <script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip-utils.js"></script> 
+  <script type="text/javascript" src="https://tamco.fast-option.com/templates/js/FileSaver.js"></script> 
+  <!-- This code is for print button --> 
+  <script language="javascript">
+		  function create_zip() {
+var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel"><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/>';
+ tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+ tab_text = tab_text + '<x:Name>Test Sheet</x:Name>';
+ tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+ tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"></head><body>';
+ tab_text = tab_text + "<table border='1px'>";
+//get table HTML code
+ tab_text = tab_text + $('#print').html();
+ tab_text = tab_text + '</table></body></html>';
+  
+  var zip = new JSZip();
+zip.file(Date()+" Invoice.xls", tab_text);
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    saveAs(content, Date()+"invoice.zip");
+});
+  
+
+}
+
+
+            function printDiv(divName)
+			 {
+                  var printContents = document.getElementById(divName).innerHTML;
+                  var originalContents = document.body.innerHTML;
+ 
+                  document.body.innerHTML = printContents;
+                  window.print();
+                  document.body.innerHTML = originalContents;
+            }
+     </script> 
+  
+  <!-- Export To Excel --> 
+  
+  <!-- Export To Excel -->
+  
+  <style type="text\css" media="print">
+	@media #print
+	{
+	  
+	  .slimScrollBar{ background-color:#fff !important;}
+	  
+	}
+	</style>
+  <style>
+  .slimScrollBar{ background-color:#fff !important;}
+    table, th, td
+	{
+    border: 1px solid black;
+    padding:2px;
+	background-color:#fff;
+    }
+    th 
+	{background-color:#fff;
+    
+    }
+    </style>
+  <br>
+  <table id="print" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
+    <!--<div>
+<span style="float:left;"><b style="font-size:22px;">Invoice Number:- </b><br />
+            <b>Customer Name:-&nbsp;sam</b> <br />
+            <b>Date:- </b></span>
+            <span style="float:right; "><img src="https://tamco.fast-option.com/logofolder/logo1567638297.png"  /><br />TAM EXPRESS COMPANY</span>
+</div>
+<br /><br /><br /><br /><br />-->
+    <tbody>
+      <tr>
+        <td colspan="4"></td>
+        <td colspan="3" style="text-align:center;"><strong>{{'lang_Tax_Invoice'|translate}} - فاتورة ضريبية</strong></td>
+        <td colspan="8"></td>
+      </tr>
+      <tr>
+        <td colspan="4" style="padding:2%;"><b>{{'lang_UIDAccountNumber'|translate}}:-&nbsp;{{invoiceArray.uniqueid}} - رقم الحساب</b><br>
+          <b>{{'lang_Customers_Name'|translate}}:-&nbsp;{{invoiceArray.company}}  - اسم العميل</b> <br>
+          <b>{{'lang_address'|translate}}:-&nbsp;{{invoiceArray.address}} {{invoiceArray.cityname}} {{invoiceArray.country}}  - عنوان</b><br>
+          <b>{{'lang_BankAccountNumber'|translate}}: -{{invoiceArray.account_number}} - الحساب البنكي</b><br>
+          <b>{{'lang_AccountManager'|translate}} :- {{invoiceArray.account_manager}}</b> <br>
+          <b>{{'lang_VatId_No'|translate}}.:-&nbsp;{{invoiceArray.vat_no}}  - الرقم الضريبي </b> <br>
+          <b>{{'lang_Currency'|translate}}:-{{'lang_SAR'|translate}}</b></td>
+        <td colspan="3" align="center"><img src="{{invoiceArray.logo}}" height="100px;"></td>
+        <td colspan="8"><b align="left">{{invoiceArray.company_name}} –  {{invoiceArray.company_address}} </b><br>
+          <b>{{'lang_VatId_No'|translate}}.:-&nbsp;{{invoiceArray.site_vat}}  - الرقم الضريبي </b><br>
+          <b>{{'lang_Invoice_No'|translate}}:-&nbsp;{{invoiceArray.invoice_no}}  - رقم الفاتورة</b><br>
+          <b>{{'lang_Invoice_Date'|translate}}:-&nbsp;{{invoiceArray.invoice_date}}  - تاريخ الفاتورة</b></td>
+      </tr>
+      <tr>
+        <td colspan="15" align="justify">&nbsp;</td>
+      </tr>
+      <tr>
+        <th>{{'lang_srNo'|translate}}.</th>
+        <th>{{'lang_Ref_No'|translate}}. / الرقم المرجعي</th>
+        <th>{{'lang_AWB_No'|translate}}  / رقم البوليصة</th>
+        <th>{{'lang_Close_Date'|translate}}  / تاريخ التوصيل</th>
+        <th>{{'lang_DeliveryAttempts'|translate}}</th>
+        <th>{{'lang_origin'|translate}}  / المصدر</th>
+        <th>{{'lang_destination'|translate}}  / الوجهة</th>
+        <th>{{'lang_WEIGHT'|translate}}  (Kg) / الوزن</th>
+        <th>{{'lang_No_of_Pieces'|translate}}  / عدد القطع</th>
+        <th>{{'lang_Service_Type'|translate}}  / نوع الخدمة</th>
+        <th>{{'lang_CODAmount'|translate}}  / قيمة التحصيل</th>
+      </tr>
+      <tr ng-repeat="data in invoiceArrayAll">
+        <td align="center">{{$index+1}}</td>
+        <td align="center">{{data.refrence_no}}</td>
+        <td align="center">{{data.awb_no}}</td>
+        <th>{{data.close_date}}</th>
+        <td align="center">{{data.d_attempt}}</td>
+        <td align="center">{{data.origin}}</td>
+        <td align="center">{{data.destination}}</td>
+        <td style="background-color:#AEFFAE; ">{{data.weight}} Kg</td>
+        <td align="center">{{data.qty}}</td>
+        <td align="center">{{data.mode}}</td>
+        <td align="center">{{data.cod_amount}}</td>
+      </tr>
+      <tr>
+        <td colspan="9" style="text-align:center; ">&nbsp;</td>
+        <td style="text-align:right; font-size:18px;"><b> {{'lang_Total'|translate}}  ({{'lang_SAR'|translate}}) </b></td>
+        <td style="text-align:right; font-size:18px;"><b> {{total_cod_amount}}</b></td>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr>
+        <td colspan="17"><table align="left" width="30%">
+            <tbody>
+              <tr>
+                <th colspan="2">{{'lang_Summary'|translate}}  - ملخص</th>
+              </tr>
+              <tr>
+                <th>{{'lang_Total_Customer_Collection'|translate}}  – اجمالي تحصيلات العميل</th>
+                <th>{{'lang_SAR'|translate}}  {{total_cod_amount}}</th>
+              </tr>
+              <tr>
+                <th align="justify">{{'lang_Amount_To_be_Transfered'|translate}} - اجمالي المبلغ الواجب تحويله</th>
+                <th>{{'lang_SAR'|translate}}  {{total_cod_amount}}</th>
+              </tr>
+            </tbody>
+          </table></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

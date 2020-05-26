@@ -1,0 +1,100 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="GetBlindSchedule(1,0)">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_ScheduleManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_BlindSchedule'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	<div class="breadcrumb-line">
+	   
+	</div>
+	<section class="hk-sec-wrapper" ng-show = "IsVisible" style="margin: 20px;">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_BlindSchedule'|translate}}</h5>   
+		</div><br>
+		<div class="col-md-12" > 
+          <div id="message">
+          <div class="row">
+                                                  
+          </div>
+         </div>
+      
+            <br>
+       <form  name="schedule" class="ng-pristine ng-valid">    
+        <div class="col-md-12">
+          <div class="form-group" id="not_schedule_box">
+            <textarea rows="8" name="searchfield" ng-model="filterData.searchfield" placeholder="Please Enter Your AWB Number" class="form-control" required></textarea>
+          </div>
+        </div>
+        <div class="row">
+      
+         <div class="col-md-4">
+          
+            <label>{{'lang_TimeSlot'|translate}}</label>
+            <select name="time" class="form-control" ng-model="filterData.timeslot" required>
+				 <option value="8:00 PM To 12:00 AM">8:00 PM To 12:00 AM</option>
+              <option value="10:00 AM - 4:00 PM">10:00 AM-4:00 PM</option>
+              <option value="4:00 PM - 8:00 PM">4:00 PM-8:00PM</option>
+              <option value="Any Time">{{'lang_Any_Time'|translate}}</option>    
+            </select>
+          
+        </div>
+        
+        <div class="col-md-4">
+         
+            <label>{{'lang_ScheduleDate'|translate}}</label>
+			<input type="text" class="form-control" id="datepicker1" name="schedule_date" ng-model="filterData.schedule_date" placeholder="DD-MM-YY" required>   
+        </div>
+     
+              
+              
+          <div class="col-md-4">
+           
+            <label>&nbsp;</label>
+            <button type="submit" name="Submit" class="btn btn-danger form-control" style="color:white" ng-hide="schedule.$invalid" ng-click="GetBlindSchedule(1,1);">{{'lang_Get_List'|translate}}</button>
+          </div>
+        
+
+    </div>  
+	
+    </form>
+	</div>
+	</section>
+	
+	   <section class="hk-sec-wrapper" ng-hide = "IsVisible1">        
+     <div class="row" > 
+         
+    <div class="col-md-2 " style="background-color:#29ABA3;  color:#fff; padding:3px; border-top:solid #000; border-left:solid #000;border-bottom:solid #000;"><strong>{{'lang_AwbNo'|translate}}</strong>.</div>
+    <div class="col-md-4" style="background-color:#29ABA3; color:#fff; padding:3px; border-top:solid #000; border-left:solid #000;border-bottom:solid #000;"><strong>{{'lang_RecieverAddress'|translate}}</strong></div>
+    <div class="col-md-2" style="background-color:#29ABA3; color:#fff; padding:3px; border-top:solid #000; border-left:solid #000;border-bottom:solid #000;"><strong>{{'lang_destination'|translate}}</strong></div>
+	<div class="col-md-3  " style="background-color:#29ABA3;  color:#fff; padding:3px;  border-top:solid #000; border-left:solid #000;border-bottom:solid #000;"><strong>{{'lang_Area'|translate}}</strong></div>
+    <div class="col-md-2  " style="background-color:#29ABA3;  color:#fff; padding:3px;display:none"><strong>{{'lang_date'|translate}}</strong></div>
+    <div class="col-md-2  " style="background-color:#29ABA3;  color:#fff; padding:3px;display:none"><strong>{{'lang_TimeSlot'|translate}}</strong></div>
+    <div class="col-md-1  " style="background-color:#29ABA3; color:#fff;  padding:3px; border-top:solid #000;border-bottom:solid #000; border-right:solid #000; border-left:solid #000">{{'lang_Save'|translate}}</div>
+  
+    </div> 
+            
+       
+       
+    <div class="row"  ng-repeat="data in Blindlist" >
+	<input type="hidden" ng-model="filterData.slip_no">
+	<input type="hidden" ng-model="filterData.schedule_date">
+	<input type="hidden" ng-model="filterData.timeslot">
+  <input type="hidden" ng-model="filterData.timeslot">
+    <div class="col-md-2  " style="background-color:#EBEBEB; padding:3px; border-bottom:solid #000; border-left:solid #000"  >{{data.slip_no}}</div>
+    <div class="col-md-4 " style="background-color:#EEF2F1; padding:3px;border-bottom:solid #000; border-left:solid #000">{{data.reciever_address}}</div> 
+     <div class="col-md-2 " style="background-color:#EEF2F1; padding:3px;border-bottom:solid #000; border-left:solid #000">{{data.destination}}</div>
+    <div class="col-md-3  " style="background-color:#EEF2F1;border-bottom:solid #000; border-left:solid #000"  ng-init="rootList();">  
+      <input type="text" name="root" id="show_root_dropdown"  placeholder="Area" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="data.area">   
+               
+		  
+		 </div>
+     <div class="col-md-2  " style="background-color:#EEF2F1; display:none"><input type="date"  value="{$curent_date}" id="date_box_{$smarty.section.i.index+1}" />{{filterData.schedule_date}}</div>
+      <div class="col-md-2  " style="background-color:lavender; display:none"> 
+	  <input type="text" name="time" placeholder="time Slot" >{{data.time_slot}}</div>   
+        
+      <div class="col-md-1  " style="background-color:#EEF2F1; border-bottom:solid #000; border-right:solid #000; border-left:solid #000"><button  class=" btn-info" name="submit_button" ng-click="blindshedule(filterData);">{{'lang_Save'|translate}}</button></div>
+          
+  </div> 
+</section>		

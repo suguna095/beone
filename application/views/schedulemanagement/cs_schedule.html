@@ -1,0 +1,335 @@
+<link href="{$site_url}/templates/css/awesomplete.css" rel="stylesheet">
+<script type="text/javascript" src="{$site_url}/templates/js/awesomplete.js"></script>
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css
+" >
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js" ></script>
+<script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/src/js/bootstrap-datetimepicker.js" ></script>
+
+
+<style>
+.datepicker-inline {
+    width: 100%;
+}
+.datepicker table {
+    width: 100%;
+}
+body,html,#map_canvas{height:100%;margin:0;}
+#map_canvas .centerMarker{
+  position:absolute;
+  /*url of the marker*/
+  background:url('../templates/images/pin2.png') no-repeat;
+  /*center the marker*/
+  top:50%;left:50%;
+  z-index:1;
+  /*fix offset when needed*/
+  margin-left:-10px;
+  margin-top:-34px;
+  /*size of the image*/
+  height:38px;
+  width:38px;
+  cursor:pointer;
+}
+</style>
+
+<div class="content-wrapper">
+  <nav class="hk-breadcrumb" aria-label="breadcrumb"> 
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_ScheduleManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_CSSchedule'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	<div class="breadcrumb-line">    
+	   
+	</div>
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_CSSchedule'|translate}}</h5>
+		</div><br>
+          
+          <!--<div class="alert alert-success"> {{'lang_listofUpdateStatusAWBno'|translate}}. 
+          </div>-->  
+		
+      <div class="panel-body"> 
+      
+        <div class="col-md-12"  ng-if="retunArr2">
+          <div class="alert alert-success" ng-repeat="edata in retunArr2.success_update">{{'lang_UpdateStatusAWBno'|translate}}  {{edata}} </div>
+            <div class="alert alert-warning" ng-repeat="edata in retunArr2.wrong_awb">{{'lang_wrong_AWB_no'|translate}} {{edata}} </div>
+            <div class="alert alert-warning" ng-repeat="edata in retunArr2.onholdArray">{{'lang_on_hold_AWB_no'|translate}} {{edata}} </div>
+            <div class="alert alert-warning" ng-repeat="edata in retunArr2.Already_delvrd_return">{{'lang_Delivered_Or_Return_AWB_no'|translate}} {{edata}} </div>
+   
+      </div> 
+
+	  <input type="hidden" name="slip_no"  />
+          <div class="col-md-4">
+          <div class="form-group">
+            <label>{{'lang_CallStatus'|translate}}</label>
+            <select name="sch_type" id="sch_type" class="form-control" onchange="changeView(this.value)" required>
+              <option value="">{{'lang_selectStatus'|translate}}</option>
+              <option value="YES">{{'lang_schedule'|translate}}</option>
+              <option value="NO">{{'lang_Not_schedule'|translate}}</option>
+            </select>
+          </div>
+          </div>
+		  
+		
+		  
+          <div id="schedule_no" style="display:none">
+          <div class="col-md-12">
+            <div class="form-group" id="not_schedule_box">
+              <textarea rows="8"  name="slip_no" placeholder="Please Enter Your AWB Number" ng-model="notschedArray.slip_no" required class="form-control" ></textarea>
+            </div>
+          </div>
+		  <div class="col-md-12">
+		  <div class="row">
+         <div class="col-md-4" ng-init="showReasonDrop();"> 
+          <div class="form-group">
+          <label>{{'lang_Reason'|translate}}</label>
+          
+            <select name="sub_category" ng-model="notschedArray.sub_category" class="form-control">
+              <option value="">{{'lang_Select_Reason'|translate}}</option>  
+              <option ng-repeat="data in categorylist" value="{{data.code}}">{{data.sub_status}}</option> 
+                    
+            </select>  
+           
+          </div>
+          </div>
+          <div class="col-md-4">
+             <div class=" form-group">         
+            <label>{{'lang_comment'|translate}}</label>
+            <input class="form-control" name="status_comment" ng-model="notschedArray.status_comment"  placeHolder="CSA Comment"/>
+          </div> 
+</div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>&nbsp;</label> 
+              <button type="button" name="not_schedule_submitbtn" style="color:#dffaf8;" class="btn btn-danger form-control"  ng-click="UpdatenotSched(notschedArray);">{{'lang_Update'|translate}}</button>
+            </div>
+          </div>
+       </div>
+          </div>
+      </div>
+      <form  method="post" name="schedule" ng-submit="UpdateSched(scheduledArray);" >
+	  <input type="hidden" name="slip_no"  />
+        <div id="schedule_yes"  style="display:none" >
+		<div class="col-sm-12">
+		<div class="row">
+        <div class="col-md-12">
+          <div class="form-group" id="not_schedule_box">
+            <textarea rows="8" id="show_awb_no" name="slip_no" ng-model="scheduledArray.slip_no" placeholder="Please Enter Your AWB Number" required class="form-control" ></textarea>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group" >
+            <label>{{'lang_Channel'|translate}}</label>
+            <select name="schedule_type" id="sch_type" class="form-control" ng-model="scheduledArray.schedule_type" onchange="changeType(this.value)" required>
+             <option selected>{{'lang_Select_Channel'|translate}}</option>
+              <option value="CSA">{{'lang_CSA'|translate}}</option>
+              <!--<option value="BULK">{{'lang_bulk'|translate}}</option>
+              <option value="BLIND">{{'lang_Blind'|translate}}</option>-->    
+             
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4" >
+          <div class="form-group" >
+            <label>{{'lang_TimeSlot'|translate}}</label>
+            <select name="time_slot" class="form-control" ng-model="scheduledArray.time_slot" required >
+              <option value="10:00 AM - 4:00 PM"  >10:00 AM-4:00 PM</option>
+              <option value="4:00 PM - 8:00 PM" >4:00 PM-8:00PM</option>
+              <option value="Any Time" >{{'lang_Any_Time'|translate}}</option>
+            </select>
+          </div>
+        </div>
+      <div class="col-md-4">
+         
+            <label>{{'lang_ScheduleDate'|translate}}</label>
+			<input type="text" class="form-control" name="schedule_date" id="datepicker1" ng-model="scheduledArray.schedule_date"/>
+        </div>
+        </div>
+        <div  id="route_code" style="display:none;">  </div>
+      
+           <div class="col-md-4" id="massenger_name" style="display:none;">
+          <div class="form-group" >
+            <label>{{'lang_Messagner_Name'|translate}}</label>
+          
+            <input type="text" name="nrd" id="show_messanger_dropdown"  ng-model="scheduledArray.nrd" autofocus data-list="{$functions->messangerData()}"  placeholder="Courier" class="awesomplete ui-autocomplete-input watermark width_set form-control">
+          </div>
+        </div>
+		<div class="col-sm-12">
+      
+
+		<div class="row">
+		
+        <div class="col-md-4" id="ltlng" style="display:block;"> 
+          <div class="form-group" >
+            <label>{{'lang_latitudelongitude'|translate}}</label>
+            <input type="text" name="dest_lng" value="" class="form-control"  ng-model="scheduledArray.dest_lng" />
+            <span style="color:red">{{'lang_Enter_your_lat_and_long_in_comma_format'|translate}} (Ex.24.7129231,46.715907)</span> 
+			</div>
+         </div>
+            <div class="col-md-8" id="area_street" style="display:block;"> 
+			<div class="row">
+               <div class="col-md-6" >
+               <div class="form-group" ng-init="rootList();">
+                  <label>{{'lang_Area'|translate}}</label>
+                  <input type="text" name="root" id="show_root_dropdown"  placeholder="Area" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="scheduledArray.area">     
+              </div>
+              </div>
+              <div class="col-md-6" >
+              <div class="form-group" >
+                  <label>{{'lang_Street'|translate}}</label>
+                  <input type="text" name="area_street" class="form-control" placeholder="Street" value="" ng-model="scheduledArray.area_street"/>
+                  <h6 class="text-semibold"></h6>
+                 {{'lang_To_get_latitude_and_longitude'|translate}}<a href="https://www.google.com/maps/search/24.7129231,46.715907/@24.7129231,46.715907,12" target="_blank"> {{'lang_Click_here'|translate}}</a> 
+            	</div>
+          	</div>
+          </div>
+		  </div>
+		 </div>
+		 </div> 
+		 <div class="row">
+		 <div class="col-md-4">
+		 </div> 
+          <div class="col-md-4">
+            <div class="form-group" >
+            <label>&nbsp;</label> 
+            <button type="submit" name="Schedule_submitbtn"  style="color:#dffaf8;" class="btn btn-danger form-control" >{{'lang_schedule'|translate}}</button> 
+          </div>
+        </div>
+		</div>
+		</div>
+      </form>
+    </div>
+  </div>
+  </div>
+  </section>
+  </div>
+<div class="">
+  <div class="panel panel-flat">
+  <section class="hk-sec-wrapper">
+    <div class="panel-heading">
+      <h5 class="panel-title">{{'lang_UpdateWrongArea'|translate}} </h5>
+    </div><br>
+    <div class="panel-body">
+      <div id="contentwrapper" class="contentwrapper">
+        <div class="alert alert-info">
+          <div class="row">
+            <div class="col-md-8"></div> 
+            <div class="col-md-4" align="center"> <a href="Excel_export/ImportWrongAreaFile" target="_blank"> <i class="fa fa-file-excel-o fa-2x"></i> <br />
+             {{'lang_UpdateWrongArea'|translate}}</a> </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover">
+                <tr>
+                  <td>(1) {{'lang_AWBNoExisting'|translate}}</td> 
+                  <td>(2) {{'lang_Area'|translate}}</td>
+                  <td>(2) {{'lang_Channel'|translate}}</td>
+                </tr>
+              </table>
+              <span class="alert" style="color:#F00;" ></span>
+              <form class="stdform" >
+                <label><strong>{{'lang_ImportFile'|translate}}</strong></label>  
+                <br />
+                <span class="field">
+                <input type="file" ng-file='uploadfiles' value="" size='20' class="btn btn-info" required>
+                <span id="weight" class="alert"></span>
+                </span>
+                <br/> <br/>
+                <button type="submit" class="btn btn-primary" name="submit" ng-click='uploadExcel()' value="submit" >{{'lang_UpLoad'|translate}}</button>    
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+</div>
+</div>
+<!-- /content area --> 
+
+<script>
+function changeView(type)
+{
+	if(type=='YES')
+	{
+		document.getElementById('schedule_yes').style.display='block';
+		document.getElementById('schedule_no').style.display='none';
+	}
+	else
+	{
+		document.getElementById('schedule_yes').style.display='none';
+		document.getElementById('schedule_no').style.display='block';
+		$scope.showReasonDrop();
+		}
+}
+function changeType(type)
+{
+	  
+	//alert(type);
+	if(type=='CSA')
+	{
+		document.getElementById('route_code').style.display='none';
+		document.getElementById('massenger_name').style.display='none';
+		document.getElementById('area_street').style.display='block';
+		document.getElementById('ltlng').style.display='block';
+		}
+		else if(type=='BULK') 
+		{
+		document.getElementById('route_code').style.display='block';
+		document.getElementById('massenger_name').style.display='block';
+		document.getElementById('area_street').style.display='none';
+		document.getElementById('ltlng').style.display='none';
+			}
+			else
+			{
+				document.getElementById('route_code').style.display='none';
+				document.getElementById('massenger_name').style.display='none';
+				document.getElementById('area_street').style.display='none';
+		        document.getElementById('ltlng').style.display='none';
+				
+				}
+	
+	}
+</script> 
+
+<script>
+
+var todayDate = new Date().getDate();
+$('#datetimepicker1').datetimepicker({
+                inline: true,
+               
+				daysOfWeekDisabled: [5],
+				minDate: new Date(new Date().setDate(todayDate )),
+                maxDate: new Date(new Date().setDate(todayDate + 7)),
+				format: 'YYYY-MM-DD',
+				 widgetPositioning: {
+        vertical: 'auto',
+        horizontal: 'auto'
+    }
+            });
+
+$(document).ready(function()
+{
+	
+	$('.myinput').change(function(e)
+	{
+    	var d = new Date(e.target.value)
+      	if(d.getDay() === 5) {
+        $('.mysubmit').attr('disabled',true)
+      	$(".datewarning").text('You can\'t select Friday!');
+     } 
+	 else
+	 {
+	    $('.mysubmit').attr('disabled',false);
+		$(".datewarning").text('');
+     }
+	})
+});
+</script> 

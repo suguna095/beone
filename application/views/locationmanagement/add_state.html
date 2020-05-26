@@ -1,0 +1,72 @@
+<nav class="hk-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>  {{'lang_Home'|translate}}  </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> {{'lang_Location_Management'|translate}}  </li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Add_City'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title"> {{'lang_Add_State'|translate}}</h5>   
+		</div><br>
+		<div class="row">
+     	<div class="col-lg-12">
+        <div class="panel panel-default">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-12">
+                        
+        				<form  name="add_state">
+        				<input type="hidden" name="edit_id" value="">  
+        				<input type="hidden" name="Country_name" value="">  
+        				<input type="hidden" name="old_state_name" value="">
+       
+                        
+                         <div class="form-group" ng-init="ShowCourierCityDrop();">
+                <label>{{'lang_SelectCountry'|translate}}</label>
+                <span id="alert_country" class="alert"></span>
+                
+                                <select name="country" id="sel_country" ng-model="StateArray.country" class="form-control input-lg" required>
+					<option value="" >{{'lang_Please_Select'|translate}}</option>
+					<option ng-repeat="data in CourierCityArray" value="{{data.country}}">{{data.country}}</option></select>
+					<span class="text-danger" ng-show="add_state.country.$error.required">{{'lang_Country_is_Required'|translate}}</span>
+                                </div>
+                        
+                        <div class="form-group">
+                        <label>{{'lang_State_Name'|translate}}</label>
+                        <input type="text" name="state" ng-model="StateArray.state" id="state_name" class="form-control" required>
+						<span class="text-danger" ng-show="add_state.state.$error.required">{{'lang_State_is_Required'|translate}}</span>   
+                        </div>
+                        
+                        <div class="form-group">
+                        <label>{{'lang_Title'|translate}}</label><span id="alert_title" class="alert"></span>
+                        <input type="text" name="title" ng-model="StateArray.title" id="title" class="form-control" required>
+							<span class="text-danger" ng-show="add_state.title.$error.required">{{'lang_Title_is_required'|translate}}</span>
+                        </div>
+                        
+                        <div class="form-group">
+                        <label>{{'lang_Description'|translate}}</label><span class="alert"></span>
+                        <textarea name="descen" ng-model="StateArray.descen" id="alert_description" class="form-control" required></textarea>
+						<span class="text-danger" ng-show="add_state.descen.$error.required">{{'lang_Description_is_required'|translate}}</span>
+                        </div>
+                        
+                        <div class="form-group">
+                        <label>{{'lang_Keyword'|translate}}</label><span class="alert"></span>
+                        <textarea name="keyword" id="alert_keyword" ng-model="StateArray.keyword" class="form-control" required></textarea>
+						<span class="text-danger" ng-show="add_state.keyword.$error.required">{{'lang_Keyword_is_required'|translate}}</span>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" name="submit" value="submit" ng-disabled="add_state.$invalid"    ng-click="AddStateList(StateArray);">{{'lang_Submit'|translate}}</button>
+                        
+                    </form>
+                    
+						</div>
+					</div>
+				</div>
+			</div>
+ 		 </div>
+ 
+          </div>
+		</section>

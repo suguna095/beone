@@ -1,0 +1,61 @@
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getBannerlist();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>  {{'lang_Home'|translate}} </a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Banner_Management'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page"> {{'lang_Show_Banner'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "container">
+	
+	<section class="hk-sec-wrapper">   
+		<div class="panel-heading">
+				<h5 class="panel-title"> {{'lang_Show_Banner'|translate}}</h5>
+		</div><br>
+		<div class="table-responsive">
+		<table class="table table-striped table-bordered table-hover">
+                        <colgroup>
+                            <col class="con0">
+                            <col class="con1">
+                            <col class="con0">
+                            <col class="con1">
+                            <col class="con0">
+                        </colgroup>
+                        
+                        <thead>
+                        	
+                            <tr>
+                              	<th class="head0" width="10%">{{'lang_srNo'|translate}} .</th>
+                                <th class="head1" width="30%">{{'lang_Title'|translate}} </th>
+                                <th class="head0" width="30%">{{'lang_URL'|translate}} </th>
+                                <th class="head1" width="15%">{{'lang_Image'|translate}} </th>
+                                <th class="head0" width="10%">{{'lang_action'|translate}} </th>
+                            	
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                      			<tr ng-repeat="data in BannerlistArray">
+                            
+                            	<td>{{$index+1}}</td>
+								<td>{{data.title}}</td>
+								<td>{{data.url}}</td>
+								<td><img src="" width="100" height="50" title=".">{{data.image_path}}</td>
+                                <td>
+								    <div class="btn-group dropdown">
+							        <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+							        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							        </button>
+							        <div class="dropdown-menu w-210p">
+							        <a class="dropdown-item" ui-sref="edit_banner({banid:data.id})">{{'lang_edit'|translate}} </a> 
+							
+							</div>
+						</div>
+								</td>
+                                </tr> 
+								
+                   
+                        </tbody>
+                    </table>
+					</div>
+		</section>
+	

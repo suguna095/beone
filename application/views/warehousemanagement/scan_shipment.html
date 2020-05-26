@@ -1,0 +1,122 @@
+
+   <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="warehouse_manage();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> {{'lang_WarehouseManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_ScanShipment'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	 <input type="text" name="destination[]" ng-model="inputValue" style="display:none"/>     
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_ScanShipment'|translate}}</h5>     
+		</div><br>
+        <div class="panel-body">
+             
+             
+                  <div class="form-group">
+           <param name="SRC" value="y" />
+                  <div style="display:none">   
+            <audio id="audio" controls>  
+            <source src="https://tamco.fast-option.com/templates/js/apx_tone_alert_7.mp3" type="audio/ogg">
+                     </audio></div>
+                            </div>
+              
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>{{'lang_ScanShelveShipments'|translate}} </label>
+                   <!-- <p><input type="text"></p> -->
+                     <input type="text" id="scan_awb" my-enter="doSomething()" ng-model="slip_no"class="form-control" />
+                   <!--<input type="text" id="scan_awb" my-enter="doSomething()" ng-model="slip_no" class="form-control ng-valid ng-dirty ng-empty ng-touched">-->
+                    
+                   
+                  </div>   
+                </div>  
+    
+                
+        </div>
+            <div class="row"> 
+                <div class="col-lg-6">
+                <div ng-if="warning!=''" class="alert alert-warning">{{warning}} </div>
+                  <div ng-if="Message!=''" class="alert alert-success">{{Message}} </div>
+                </div>
+                <div class="col-lg-6"><input class="btn-primary" type="button" onclick="create_zip();" value="Export to Zip" style="float:right;"></div>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover" id="show_messanger_print">
+                <thead>
+                  <tr>
+                    <th class="head1">{{'lang_srNo'|translate}}</th>
+                    <th class="head0">{{'lang_AwbNo'|translate}}</th>
+                    <th class="head0">{{'lang_No_ShelveNo'|translate}}</th>   
+                    <th class="head0">{{'lang_origin'|translate}}</th>
+                    <th class="head1">{{'lang_destination'|translate}}</th>  
+                    <th class="head1">{{'lang_schedule'|translate}}</th>
+                    <th class="head0">{{'lang_Channel'|translate}}</th>
+                    <th class="head1">{{'lang_scheduleDate'|translate}}</th>
+                    <th class="head1">{{'lang_OnHold'|translate}}</th>
+                    <th class="head1">{{'lang_OnholdConfirm'|translate}}</th>
+                    <th class="head0">{{'lang_DriverCode'|translate}}</th>
+                    <th class="head0">{{'lang_Last_Ofd'|translate}}</th>
+					
+                  </tr>
+                </thead>
+                <tbody>
+                
+                
+                <tr  ng-repeat=" data in shipments"> 
+                  <td>{{$index+1}}</td>
+                  <td>{{data.slip_no}}</td>
+                  <td>{{data.shelv_no}}</td>
+                  <td>{{data.origin}}</td>
+                  <td>{{data.destination}}</td>
+                  <td>{{data.schedule_status}}</td>
+                  <td>{{data.schedule_type}}</td>
+                  <td>{{data.schedule_date}}</td>
+                  <td>{{data.refused}}</td>  
+				   <td ng-if="data.onHold_Confirm == 'YES'" style="color:red;"> {{data.onHold_Confirm}}</td>
+				  <td ng-else-if="data.onHold_Confirm == 'NO'"> {{data.onHold_Confirm}}</td> 
+                  <td>{{data.messanger_code}}</td>
+                  <td>{{data.lastofd}}</td>   
+				  
+                </tr>
+                 
+                  </tbody>
+              </table>
+			  </div>
+			    </div>
+			</div>
+            
+    </section>		
+    
+    <SCRIPT>
+
+function create_zip() {
+var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+ tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+ tab_text = tab_text + '<x:Name>{$lang_Test_Sheet}</x:Name>';
+ tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+ tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+ tab_text = tab_text + "<table border='1px'>";
+//get table HTML code
+ tab_text = tab_text + $('#show_messanger_print').html();
+ tab_text = tab_text + '</table></body></html>';
+ 
+	
+	/*var zip = new JSZip();
+	zip.add(Date()+"_manifest details.xls", tab_text);
+	content = zip.generate();
+	zip.file(Date()+"_manifest details.xls"); // the file
+	location.href="data:application/zip;base64," + content;*/
+	
+	var zip = new JSZip();
+zip.file(Date()+" Show Couriers.xls", tab_text);
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    saveAs(content, Date()+" Show Couriers.zip");
+});
+	
+
+}
+</SCRIPT>

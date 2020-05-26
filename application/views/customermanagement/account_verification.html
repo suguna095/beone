@@ -1,0 +1,157 @@
+
+    	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="AccountShow();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_customerManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page"> {{'lang_SearchCustomer'|translate}}</li> 
+        </ol>
+    </nav>
+
+
+	<div class = "">
+	
+	<section class="hk-sec-wrapper"> 
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Customer_Details'|translate}}</h5>  
+		</div><br>
+		
+		<form name="search_form" >
+		<div class="input-group">
+			<input type="text" class="form-control" name="searchfield" ng-model="filterData.searchfield" value="" placeholder="{{'lang_EnterUniqueIdNameEmailMobileNo'|translate}}" >
+			<span class="input-group-btn">
+			<input type="submit" name="Submit" class="btn btn-primary" value="search" ng-click="AccountShow(1,1);">
+			</span> 
+        </div><br>
+		
+	
+   
+       
+        
+    <div class="row" ng-repeat="data in GetAccountlist">
+  
+	<div class="col-md-12 row">
+<div class="alert alert-danger" ng-show="GetAccountlist.count==0"> {{'lang_Sorry_Results_Not_Found'|translate}} 
+          </div> 	
+	<div class="col-md-6 uk-overflow-auto" style="padding:12px;padding-left: 30px;">
+	<h4>{{'lang_Customer_Details'|translate}}</h4><br><br/>
+					<table>
+						<tbody>
+                      <tr> 
+                        <td><div class="form-group"><strong>{{'lang_name'|translate}} </strong></div></td>
+                        <td> : {{data.name}}</td>
+                      </tr>
+                      <tr>
+                        <td><div class="form-group"><strong>{{'lang_company'|translate}} </strong></div></td>
+                        <td> : {{data.company}}</td>
+                      </tr>
+                       <tr>
+                        <td><div class="form-group"><strong>{{'lang_EmailID'|translate}} </strong></div></td>
+                        <td> : {{data.email}}</td>
+                      </tr>
+                       <tr>
+                        <td><div class="form-group"><strong>{{'lang_phone'|translate}} </strong></div></td>
+                        <td> : {{data.phone}}</td>
+                      </tr>
+                       <tr>
+                        <td><div class="form-group"><strong>{{'lang_address'|translate}} </strong></div></td>
+                        <td> : {{data.address}}</td>
+                      </tr>
+                    <tr>
+                        <td><div class="form-group"><strong>{{'lang_city'|translate}} </strong></div></td>
+                        <td> : {{data.city}}</td>
+                      </tr>
+                     
+                     
+                      
+                    
+                      
+                      <!-- <td><button  class="btn btn-danger" ng-click="loadMore(1,1);" >Search</button></td>-->
+                      
+                    </tbody>
+					</table>
+				</div>
+				
+	
+        <div class="col-md-6">
+	<div class="row">	
+	<div class="uk-overflow-auto" style="padding:12px;width: 100%;">
+	<h4>{{'lang_AccountDetails'|translate}}</h4><br><br/>  
+					<table >
+						<tbody>
+                      <tr> 
+                        <td><div class="form-group"><strong>{{'lang_BankName'|translate}} </strong></div></td>
+                        <td style="padding-left: 10%;"> : {{data.bank_name}}</td>
+                      </tr>
+                      <tr>
+                        <td><div class="form-group"><strong>{{'lang_BankAccountNumber'|translate}} </strong></div></td>
+                        <td style="padding-left: 10%;"> : {{data.account_number}}</td>
+                      </tr>
+                       <tr>
+                        <td><div class="form-group"><strong>{{'lang_AccountManager'|translate}}</strong></div></td>
+                        <td style="padding-left: 10%;"> : {{data.account_manager}}</td>
+                      </tr>
+                       <tr>
+                        <td><div class="form-group"><strong>{{'lang_IbanNumber'|translate}} </strong></div></td>
+                        <td style="padding-left: 10%;"> : {{data.iban_number}}</td>
+                      </tr>
+                     
+                     
+                     
+                      
+                    
+                      
+                      <!-- <td><button  class="btn btn-danger" ng-click="loadMore(1,1);" >Search</button></td>-->
+                      
+                    </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+       </div> 
+        <br />  <br />
+		
+			<div class="row" style="width: 100%">	
+	<div class="uk-overflow-auto" style="padding:28px;"> 
+	<h4  style="padding-left: 5%;">{{'lang_OtherDetails'|translate}} </h4> 
+					<table >
+						<tbody> 
+                      <tr> 
+                        <td><div class="form-group" style="padding-left: 10%;"><strong>{{'lang_Company_Logo'|translate}}</strong></div></td>
+                        <td style="padding-left: 10%;"> : &nbsp;<img  src="{{data.cmp_image}}" class="img-fluid"  width="50px;" height="50px;" > </td>  
+                      </tr>
+                      <tr>
+                        <td><div class="form-group" style="padding-left: 10%;"><strong>{{'lang_UploadCRpdf'|translate}} </strong></div></td>
+                        <td style="padding-left: 10%;"> :&nbsp;<a href="{{data.upload_cr}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 30px;color: red;"></i></a>  
+		 </td> 
+                      </tr>
+					   <tr>
+                        <td><div class="form-group" style="padding-left: 10%;"><strong>{{'lang_UploadIDpdf'|translate}} </strong></div></td>
+                        <td style="padding-left: 10%;"> :&nbsp;<a href="{{data.upload_id}}"  target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 30px;color: red;"></i> </a>
+        
+		 </td>
+                      </tr>
+                       <tr>
+                        <td><div class="form-group" style="padding-left: 10%;"><strong>{{'lang_UploadContractpdf'|translate}}</strong></div></td>
+                        <td style="padding-left: 10%;"> :&nbsp;<a href="{{data.upload_contact}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 30px;color: red;"></i></a>
+    </td>
+                      </tr>
+                     
+                     
+                     
+                      
+                    
+                      
+                      <!-- <td><button  class="btn btn-danger" ng-click="loadMore(1,1);" >Search</button></td>--> 
+                      
+                    </tbody>
+					</table>
+				</div>
+			</div>
+
+	 
+        
+        
+       
+    
+    </div>
+	</section>

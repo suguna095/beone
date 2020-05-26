@@ -1,0 +1,29 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="EditContentshow();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Content_Service'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Edit_Content_Service'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "container">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Edit_Content_Service'|translate}}</h5>
+		</div><br>
+		<table class="table datatable-show-all table-bordered table-hover datatable-highlight">   
+                        
+            <thead>
+            <tr>
+            <th class="head1" colspan="8">
+			 <input type="hidden" name="conid" ng-model="editserveArray.conid" />
+            <div class="form-group">
+           
+            <input type="text" name="services_name" class="form-control" ng-model="editserveArray.services_name" Required> 
+            </div>
+            <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="edit_services.$invalid" ng-click="EditServicesform(editserveArray);">
+            </th>
+            </tr>
+            </table>
+    </section>		
+</div>

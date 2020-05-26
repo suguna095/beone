@@ -1,0 +1,79 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="gettotalofd();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_shipmentManagement'|translate}}</li>
+        </ol>
+    </nav>
+	
+	<div class="breadcrumb-line">
+	    <div class="hk-pg-header">
+            <h4><i data-feather="arrow-left-circle"></i></i>  
+            <span class="text-semibold"></span>{{'lang_shipment_in_Shelve_No'|translate}}</h4>
+		</div>
+	</div>
+	<section class="hk-sec-wrapper" style="margin: 2%;">
+	
+          
+		 <table class="table datatable-show-all table-bordered table-hover datatable-highlight" id="printSectionId">
+        <thead>
+                  
+       		<tr>
+				<th> {{'lang_srNo'|translate}}</th>
+				<th> {{'lang_Shelve'|translate}}</th>
+				<th>{{'lang_AWB'|translate}}#</th>
+				<th>{{'lang_DeliveryAttempts'|translate}}</th>
+				<th>{{'lang_CallAttempts'|translate}}</th>
+				<th>{{'lang_origin'|translate}}</th>
+				<th>{{'lang_destination'|translate}}</th>
+				 <th>{{'lang_Pieces'|translate}}</th>
+				<th>{{'lang_sender'|translate}}  </th>
+				<th>{{'lang_reciever'|translate}}</th>
+				<th>{{'lang_status'|translate}}</th>
+				<th>{{'lang_schedule'|translate}} </th>
+				<th>{{'lang_scheduleChannel'|translate}} </th>
+				<th>{{'lang_OnHold'|translate}} </th>
+				<th>{{'lang_driverName'|translate}} </th>
+				<th>{{'lang_Warehouse'|translate}} </th>
+				<th>{{'lang_ScheduleDate'|translate}}</th>
+				<th>{{'lang_Weight'|translate}}</th>
+        </tr>
+        </thead>
+        	
+        <tbody>
+          <tr ng-repeat="data in totalShelvelist">
+            <td>{{$index+1}}</td>
+            <td>{{data.shelv_no}}</td> 
+        	<td>{{data.slip_no}}</td>
+			<td>{{data.d_attempt}}</td>  
+             <td>{{data.call_attempt}}</td>   
+           <td>{{data.origin}}</td>  
+		   <td>{{data.destination}}</td>   
+		   <td>{{data.pieces}}</td>
+			<td>{{data.sender_name}}</td> 	
+			<td>{{data.reciever_name}}</td> 			
+		   <td ng-if="data.mode=='Y'" style="background-color:#AEFFAE;"><span ng-if="data.booking_mode=='Pay at pickup' && data.total_cod_amt!='0'" style="background-color:#AEFFAE; ">{{data.citydata}}&nbsp;
+		   <span ng-if="data.total_cod_amt!='' && data.total_cod_amt!='0'" style="background-color:#AEFFAE; ">
+		   {{data.total_cod_amt}}
+		   </span>
+		   <span ng-else>{{daat.totaldata}}</span>
+		   </span>
+		   </td>
+		   <td ng-if="data.schedule_status!='Y'" class="label label-success">{{'lang_Yes'|translate}}</td>  
+			<td ng-else class="label label-danger">{{'lang_No'|translate}}</td>
+			<td ng-if="data.schedule_type!=''" class="label label-success">{{data.schedule_type}}</td>  
+			<td ng-else class="label label-danger">---</td>
+		 
+		 <td ng-if="data.refused!='YES'" class="label label-success">{{'lang_Yes'|translate}}</td>  
+         <td ng-else class="label label-danger">{{'lang_No'|translate}}</td>
+		 
+        </tr>
+            <tr>       
+            <td ng-if="totalShelvelist==''" colspan="6" align="center" style="text-align:center;">
+					 {{'lang_Records_Not_Found'|translate}}
+			</td> 
+			</tr>
+                </tbody>
+	</table>
+    </section>		
+
+

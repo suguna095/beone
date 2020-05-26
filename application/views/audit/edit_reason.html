@@ -1,0 +1,55 @@
+   <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="EditReasonshow();">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Audit'|translate}}</li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_Edit_Reason'|translate}}</li>
+                </ol>
+    </nav>
+	<div class = "">
+	
+ 					<section class="hk-sec-wrapper">
+                        <h5>{{'lang_Edit_Reason'|translate}}</h5><br>
+                    					
+                    <section class="hk-sec-wrapper">						
+                        <div class="row">
+                            <div class="col-sm">
+								<div class="col-sm-8">
+                                    <form name="edit_reason" enctype="multipart/form-data">
+                                        
+                                     <input type="hidden" name="reid" ng-model="editreasonArray.reid" />         
+                                        
+										<div class="form-group">
+            
+                                         <label>{{'lang_Select_Reason'|translate}}</label>
+										  <select class="form-control custom-select" name="audit_type" ng-model="editreasonArray.audit_type" required>
+                                                <option value="1">{{'lang_OperationAudit'|translate}}</option>
+                                                <option value="2">{{'lang_CSAudit'|translate}}</option>
+                                               
+                                            </select>
+										
+			                               <span class="text-danger" ng-show="edit_reason.audit_type.$error.required">{{'lang_Select_Reason'|translate}}</span>
+                                        </div>
+										<div class="form-group">
+            
+                                        <label>{{'lang_AuditReason'|translate}}</label>
+                                        <textarea name="comment" class="form-control" ng-model="editreasonArray.comment" required></textarea>
+										<span class="text-danger" ng-show="edit_reason.comment.$error.required">{{'lang_AuditReason'|translate}}</span>
+                                        </div>
+			
+		                            <div class="form-group"> 
+                                     <label>{{'lang_AuditStatus'|translate}}</label>
+									 <select class="form-control custom-select" name="audit_status" ng-model="editreasonArray.audit_status" required>
+                                        <option value="Y">{{'lang_Yes'|translate}}</option>
+                                        <option value="N">{{'lang_No'|translate}}</option>
+                                    </select>
+								
+									<span class="text-danger" ng-show="edit_reason.audit_status.$error.required">{{'lang_AuditStatus'|translate}}</span> 		
+			                        </div><br>
+                                     <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="edit_reason.$invalid" ng-click="AddEditReasonform(editreasonArray);">
+                                    </form>
+                                </div>
+                            </div>
+						</div>
+					</section>
+                    </section>	
+			

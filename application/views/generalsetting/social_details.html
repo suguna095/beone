@@ -1,0 +1,111 @@
+
+   <nav class="hk-breadcrumb" aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_generalSetting'|translate}} </li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_Social_Details'|translate}}  </li>
+                </ol>
+            </nav>
+            <!-- /Breadcrumb -->
+
+
+    
+        <div class="container">
+                <!-- Title -->
+            <div class="breadcrumb-line">
+	            <div class="hk-pg-header">
+			    <h4><i data-feather="arrow-left-circle"></i></i> 
+                <span class="text-semibold"></span>{{'lang_Social_Details'|translate}}</h4>
+			    </div>
+			</div>
+	
+	<div class="row">
+    <div class="col-xl-12">
+	<div class="panel-body">
+	<form role="form"  method="post"  enctype="multipart/form-data" name="social_detail"  id="social_detail">
+	<div class="panel panel-default">
+	<section class="hk-sec-wrapper">
+	
+	    <h5 class="hk-sec-title">{{'lang_Social_Setting'|translate}} </h5><br>
+	        <section class="hk-sec-wrapper">
+                            <h6 class="hk-sec-title"><i class="fa fa-facebook-square fa-1x default_color"></i>  {{'lang_Facebook_Setting'|translate}}  </h6><br>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                   
+                                        <div class="form-group">
+                                            <label for="inputText"  >{{'lang_Facebook_Page_Name'|translate}}  </label>
+                                            <input type="text" name="facebook"  class="form-control" aria-describedby="textHelpBlock" ng-model="socialArray.facebook" required>
+											<span class="text-danger" ng-show="social_detail.facebook.$error.required">{{'lang_generalSetting'|translate}} </span>
+                                        </div>   
+                                </div>
+							</div>
+							<div class="form-group">
+                <label>{{'lang_Facebook_Status'|translate}}  </label><br>
+              {{'lang_Yes'|translate}}     <input type="radio" id="facebook_status" name="facebook_status" ng-model="socialArray.facebook_status" value="Y" ng-checked="false"/>&nbsp;&nbsp;
+               {{'lang_No'|translate}}   <input type="radio" id="facebook_status" name="facebook_status" ng-model="socialArray.facebook_status" value="N" ng-checked="false"/>
+                </div>
+            </section>
+			<section class="hk-sec-wrapper">
+                            <h6 class="hk-sec-title"><i class="fa fa-twitter-square fa-1x default_color"></i> {{'lang_Twitter_Setting'|translate}}  </h6><br>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                   
+                                        <div class="form-group">
+                                            <label for="inputText">{{'lang_Twitter_Page_Name'|translate}} </label>
+                                            <input type="text" name="twitter" class="form-control" aria-describedby="textHelpBlock" ng-model="socialArray.twitter" required>
+											<span class="text-danger" ng-show="social_detail.twitter.$error.required">{{'lang_Twitter_Page_Name_required'|translate}}  .</span>
+                                        </div>   
+                                </div>
+							</div>
+							 <label>{{'lang_Twitter_Status'|translate}}  </label><br>
+               {{'lang_Yes'|translate}}    <input type="radio" id="twitter_status" name="twitter_status" ng-model="socialArray.twitter_status" value="Y" ng-checked="false"/>&nbsp;&nbsp;
+               {{'lang_No'|translate}}  <input type="radio" id="twitter_status" name="twitter_status" ng-model="socialArray.twitter_status" value="N" ng-checked="false"/>
+                
+			</section>
+			<section class="hk-sec-wrapper">
+                            <h6 class="hk-sec-title"><i class="fa fa-youtube-square fa-1x default_color"></i>{{'lang_Youtube_Setting'|translate}}    </h6><br>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                   
+                                        <div class="form-group">
+                                            <label for="inputText">{{'lang_Youtube_Page_Name'|translate}}  </label>
+                                            <input type="text" name= "youtube" class="form-control" aria-describedby="textHelpBlock" ng-model="socialArray.youtube" required>
+											<span class="text-danger" ng-show="social_detail.youtube.$error.required">{{'lang_Youtube_Page_Name'|translate}}  </span>
+                                        </div>   
+                                </div>
+							</div>
+							 <label>{{'lang_Youtube_Status'|translate}} </label><br>
+              {{'lang_Yes'|translate}}    <input type="radio" id="youtube_status" name="youtube_status" ng-model="socialArray.youtube_status" value="Y" ng-checked="false"/>&nbsp;&nbsp;
+              {{'lang_No'|translate}}   <input type="radio" id="youtube_status" name="youtube_status" ng-model="socialArray.youtube_status" value="N" ng-checked="false"/>
+                
+            </section>
+			<section class="hk-sec-wrapper">
+                            <h6 class="hk-sec-title"><i class="fa fa-instagram fa-1x default_color"></i> {{'lang_Instagram_Setting'|translate}}   </h6><br>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                   
+                                        <div class="form-group">
+                                            <label for="inputText">{{'lang_Instagram_Page_Name'|translate}}  </label>
+                                            <input type="text" name="istagram" class="form-control" aria-describedby="textHelpBlock" ng-model="socialArray.istagram" required>
+											<span class="text-danger" ng-show="social_detail.istagram.$error.required">{{'lang_Instagram_Page_Name'|translate}} </span>
+                                        </div>   
+                                </div>
+								
+							</div>
+							
+							 <label>{{'lang_Instagram_Status'|translate}} </label><br>
+             {{'lang_Yes'|translate}}    <input type="radio" id="istagram_status" name="istagram_status" ng-model="socialArray.istagram_status" value="Y" ng-checked="false"/>&nbsp;&nbsp;
+               {{'lang_No'|translate}} <input type="radio" id="istagram_status" name="istagram_status" ng-model="socialArray.istagram_status" value="N" ng-checked="false"/>
+               
+            </section>  
+			
+			&nbsp;<input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="social_detail.$invalid" ng-click="socialform(socialArray);">
+	</section>
+	</div>
+	</div>
+	</div>
+	</div>
+	
+	
+	
+	

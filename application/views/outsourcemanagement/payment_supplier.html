@@ -1,0 +1,98 @@
+ 	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="PaymentDetailShow(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_OutsourceManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Payment_Information'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+<section class="hk-sec-wrapper">
+	<div class="panel panel-flat">
+        <div class="panel-heading">   
+        <h5 class="panel-title">{{'lang_Payment_Information'|translate}}({{payRateArray}}) </h5>  
+        </div><br>
+        <table class="table table-striped table-bordered table-hover">
+      
+        <thead>
+            <tr>
+				<th class="head1" colspan="5">
+					<form name="search_monthyear">
+					<div class="row">
+					<div class="col-sm-12">
+					<div class="row">
+						<div class="col-md-4">				
+							<select  ng-model="searchfield.invoice_month"  class="form-control input-lg">
+							<option selected>{{'lang_selectMonth'|translate}} </option>
+							<option value="1">lang_January'|translate}} {{'</option>
+							<option value="2">{{'lang_February'|translate}} </option>
+							<option value="3">{{'lang_March'|translate}} </option>
+							<option value="4">{{'lang_April'|translate}} </option>
+							<option value="5">{{'lang_May'|translate}} </option>
+							<option value="6">{{'lang_June'|translate}} </option>
+							<option value="7">{{'lang_July'|translate}} </option>
+							<option value="8">{{'lang_August'|translate}} </option>
+							<option value="9">{{'lang_September'|translate}} </option>
+							<option value="10">{{'lang_October'|translate}} </option>
+							<option value="11">{{'lang_November'|translate}} </option>
+							<option value="12">{{'lang_December'|translate}} </option> 
+							</select>
+						</div>				
+						<div class="col-md-4">
+							<input type="text" name="year"  placeholder="Select Year" class="form-control" ng-model="searchfield.invoice_year"> 
+                             							
+						</div>				
+						<div class="col-md-4">
+							<input type="button" name="Submit" class="btn btn-primary" ng-click="PaymentDetailShow(1,1,searchfield);" value="Search">
+						</div>				
+						<label><div id="search_val" style="display:inline;"></div></label>
+						</div>
+						</div>
+						</div>
+					</form>
+				</th>
+            </tr>
+            <tr>
+				<th class="head0">{{'lang_srNo'|translate}} .</th>
+                <th class="head1">{{'lang_Invoice_No'|translate}}</th>
+				<th class="head0" >{{'lang_Month_Year'|translate}}  </th>
+				<th class="head1">{{'lang_Rate'|translate}}  </th>
+                <th class="head0">{{'lang_Total_Amount'|translate}}</th> 
+                <th class="head1">{{'lang_Pay_Status'|translate}}</th>
+                 <th class="head0">{{'lang_action'|translate}}  </th>
+			</tr>
+        </thead>
+        <tbody>  
+               <tr ng-repeat="data in payDetailsArray">
+			       <td>{{$index+1}}</td>
+				   <td>{{data.invoice_no}}</td>
+				   <td ng-if="data.invoice_month=='1'">lang_January'|translate}} -{{data.invoice_year}}</td>
+				   <td ng-else-if="data.invoice_month=='2'">{{'lang_February'|translate}}-{{data.invoice_year}}</td>
+				   <td ng-else-if="data.invoice_month=='3'">{{'lang_March'|translate}}-{{data.invoice_year}}</td>
+				   <td ng-else-if="data.invoice_month=='4'">{{'lang_April'|translate}}-{{data.invoice_year}}</td>
+				   <td ng-else-if="data.invoice_month=='5'">{{'lang_May'|translate}}-{{data.invoice_year}}</td>
+				   <td ng-else-if="data.invoice_month=='6'">{{'lang_June'|translate}}-{{data.invoice_year}}</td>
+				   <td ng-else-if="data.invoice_month=='7'">{{'lang_July'|translate}}-{{data.invoice_year}}</td>
+				   <td ng-else-if="data.invoice_month=='8'">{{'lang_August'|translate}}-{{data.invoice_year}}</td>
+				   <td ng-else-if="data.invoice_month=='9'">{{'lang_September'|translate}}-{{data.invoice_year}}</td>
+				   <td ng-else-if="data.invoice_month=='10'">{{'lang_October'|translate}}-{{data.invoice_year}}</td>
+				   <td ng-else-if="data.invoice_month=='11'">{{'lang_November'|translate}}-{{data.invoice_year}}</td>
+				   <td ng-else-if="data.invoice_month=='12'">{{'lang_December'|translate}}-{{data.invoice_year}}</td>
+				  <td ng-else>-</td>
+				   <td>{{data.charge_val}}</td>
+				   <td>{{data.t_charge}}</td>
+				    <td  ng-if="data.service_pay_status=='Y'"><span class="btn btn-primary">{{'lang_Yes'|translate}}</span></td>
+					<td  ng-else-if="data.service_pay_status=='N'"><span class="btn btn-danger">{{'lang_No'|translate}}</span></td>
+				   <td ng-if="data.service_pay_status=='N'" ><a ng-click="GetConfirm(data.invoice_no,data.service_pay_status)" ng-confirm-click="Are You Sure?"><span class="btn btn-success">{{'lang_Pay'|translate}}</span></a></td>
+				    <td ng-else="data.service_pay_status=='Y'"><span class="btn btn-danger">{{'lang_Paid'|translate}}</span> </td>
+			   </tr>		
+                <!-- <tr ng-if="payDetailsArray==''"><td colspan="9" class="center alert">Records Not Found</td> 
+                </tr>-->
+				
+				</tbody>
+    	</table>
+	</div>	
+</section>	
+<script>
+document.getElementById("year").innerHTML = new Date().getFullYear();
+</script>

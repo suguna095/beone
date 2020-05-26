@@ -1,0 +1,80 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getPickupmanagementData(1,0);">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_PickupManagement'|translate}}</li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_Pickup_List'|translate}}</li>
+                </ol>
+    </nav>
+	<div class = "container">
+	
+    <section class="hk-sec-wrapper">
+	<h5>{{'lang_All_Pickup_List'|translate}}</h5><br>
+	<table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+    <thead>
+            <tr>
+            <th class="head1" colspan="3">
+            
+            <input type="text" name="barcode_id" id="barcode_id"  placeholder="Enter Barcode || Pickup Unique ID" ng-model="searchText" class="form-control"/>	
+            </form>
+            
+            
+           <!-- <th class="head1" colspan="3">
+            <input type="text" class="form-control" name="search_val" placeholder="Enter Pickup Unique ID" ng-model="searchText" onfocus="" value=""/>
+            </th>-->
+            <th colspan="2"><br>
+            <button type="submit" name="submit" class="btn btn-primary form-control">{{'lang_search'|translate}}</button>
+            <label><div id='search_val' style="display:inline;"></div></label>
+            </th>
+            </tr>
+        
+            
+            <tr>
+            <th>#</th>
+            <th>Unique id</th>
+           <th>         
+            Date 
+          
+             
+             
+                        </th> 
+            <th>{{'lang_city'|translate}}</th>
+            <th>{{'lang_Route_code'|translate}}</th>
+            <th>{{'lang_Driver'|translate}}</th>
+            <th>{{'lang_status'|translate}}</th>
+            <th>{{'lang_action'|translate}}</th>
+         </tr>
+            
+    </thead>
+	
+    <tbody>
+     <tr>
+              <td colspan="10" ><div data-loading> </div></td>
+            </tr>
+        <tr ng-repeat="data in pickup_listData|filter:searchText|filter:searchtext"> 
+            <td>{{$index+1}}</td>
+            <td align="center"><img src="{{data.barcodeImage}}" /><br />{{data.drs_unique_id}}</td>
+            <td>{{data.drs_date}}</td>
+            <td>{{data.city_id}}</td>
+            <td>{{data.routecode}}</td>
+            <td>{{data.messanger_name}}</td>
+            <td><span ng-if="data.delivered=='Y'" class="badge badge-success mt-15 mr-10">Picked UP Delivered {{data.Total_pickup}}/{{data.Total_pickup}}</span>
+            <span ng-if="data.delivered=='N'" class="badge badge-warning mt-15 mr-10">Proceed For Pickup {{data.Total_pickup}}/{{data.Total_pickup}}</span>
+            </td>
+			<td><div class="btn-group">
+                <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">{{'lang_Toggle_Dropdown'|translate}}</span>
+                </button>
+                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(138px, 40px, 0px); top: 0px; left: -177px; will-change: transform;">
+                <a class="dropdown-item" href="printPickup/{{data.drs_unique_id}}" target="_blank"><i class="fa fa-print fa-fw"></i>{{'lang_Print'|translate}}</a>  
+				<a class="dropdown-item" ui-sref="showpickup_detail({drs_unique_id:data.drs_unique_id})"><i class="fa fa-exclamation fa-fw"></i>{{'lang_View'|translate}}</a> 
+				
+                </div>
+             </div></td>
+        </tr>  
+     </tbody>
+              
+		</table>
+         <button ng-hide="pickup_listData.length==totalCount" class="btn btn-info" ng-click="getPickupmanagementData(count=count+1,0);" ng-init="count=1">{{'lang_Load_More'|translate}}</button>
+    </section>	
+			

@@ -1,0 +1,72 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="formeditdatashow();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_News'|translate}} </li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Edit_News'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "container">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Edit_News'|translate}} </h5>
+		</div><br>	
+		<div class="row" >
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+                
+                    <form class="stdform" method="post" enctype="multipart/form-data"  name="add_news"  id="add_news">
+                    <input type="hidden" name="editid" ng-model="editArray.editid" />
+                    <div class="form-group">
+                        <label>{{'lang_Heading'|translate}}</label>
+                       <input type="text" name="heading" class="form-control"  ng-model="editArray.heading" required>
+                    
+                         <span class="text-danger" ng-show="add_news.heading.$error.required">{{'lang_heading_is_required'|translate}}.</span>
+
+                    </div>
+                    
+					<div class="form-group">
+                        <label>
+						{{'lang_Heading_Arabic'|translate}} </label>
+                       <input type="text" name="heading_ar" class="form-control" ng-model="editArray.heading_ar" required>
+                       <span class="text-danger" ng-show="add_news.heading_ar.$error.required">{{'lang_heading_Arabic_is_required'|translate}}.</span>
+                    </div>
+              
+                    <div class="form-group">
+                        <label>{{'lang_Content'|translate}} </label>
+                         <textarea  ng-model="editArray.content"  class="form-control"></textarea>
+					
+                        
+                         <span class="text-danger" ng-show="add_news.content.$error.required">{{'lang_Content_is_required'|translate}}.</span>
+                    </div>
+					
+					 <div class="form-group">
+                        <label>{{'lang_Content_Arabic'|translate}}</label>
+                        <textarea  ng-model="editArray.content_ar"  class="form-control"></textarea>
+                        
+                                    
+                              
+                                    
+						
+                        <span class="text-danger" ng-show="add_news.content_ar.$error.required">{{'lang_Content_Arabic_required'|translate}}.</span>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'lang_Image'|translate}}</label>
+                        <input type="file" name="pro_image" fileread="editArray.image" accept="image/*"  class="form-control"><br>
+                       <input type="hidden" name="old_image_con" ng-model="editArray.image_con" />
+                        <img ng-if="editArray.image_con" src="{{editArray.image_con}}" class="img-fluid">
+                        
+                       
+                        </div>
+                    
+                   <input name="id" type="hidden" value="">
+                   <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="add_news.$invalid" ng-click="Addform_update(editArray	);">
+                
+                    </form>
+                        
+       			 </div>
+        	</div>
+        </div>
+	</div>
+		</section>

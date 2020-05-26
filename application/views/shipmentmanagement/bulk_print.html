@@ -1,0 +1,55 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_shipmentManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_BulkPrint'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+<div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">{{'lang_BulkPrint'|translate}} </h5>
+        </div><br>
+
+    <div class="panel-body">
+        
+            <div class="col-md-12" id="message">
+            </div>
+ <form action="ShipmentManagement/BulkPrintAwbNo" method="post" name="traking">
+       
+        <div class="col-md-12">
+            <div class="form-group">
+                <textarea rows="8" name="awbNos" placeholder="Please Enter Your AWB Number" required="" class="form-control"></textarea>
+                
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-sm">
+            <div class="row">   
+            <div class="col-md-2">	
+                <label>&nbsp;</label>	
+                <button type="submit" name="print_submitbtn"  class="btn btn-success">{{'lang_labels'|translate}} </button>		
+            </div>	
+           <!-- <div class="col-md-2">	
+                <label>&nbsp;</label>	
+                <button type="submit" name="label_printbtn"  class="btn btn-success">{{'lang_lAbel'|translate}} </button>		
+            </div>	
+		    <div class="col-md-2">	
+                <label>&nbsp;</label>	
+                <button type="submit" name="smsa_printbtn"  class="btn btn-success">{{'lang_SMSA'|translate}} </button>		
+            </div>	
+           <div class="col-md-2">	
+                <label>&nbsp;</label>	
+                <button type="submit" name="speedzi_printbtn"  class="btn btn-success">{{'lang_Speedzi'|translate}} </button>		
+           </div>	-->
+	    </div>
+		</div>
+		</div>
+</form>
+	</div>
+       
+     
+</div>
+	</section>

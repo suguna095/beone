@@ -1,0 +1,133 @@
+  
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="Editproductshow();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_ProductType'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Edit_ProductType'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "container">
+	
+	<section class="hk-sec-wrapper">
+	<h5 class="hk-sec-title">{{'lang_Edit_ProductType'|translate}}</h5><br>
+	<form class="stdform stdform2" method="post" action="" name="edit_product"  enctype="multipart/form-data">
+                    
+       				<input type="hidden" name="prid" ng-model="editproductArray.prid" /> 
+	<div class="form-group">
+                <label>{{'lang_ProductType_Name'|translate}}</label>
+                <span id="alert_package_title_info" class="alert"></span>
+                <input type="text" class="form-control" name="title" ng-model="editproductArray.title">
+                </div>
+				<div class="contenttitle2">
+                <h5>{{'lang_Weight_Range_Setup'|translate}}</h5>
+                </div>
+				<div><div class="form-group">
+                <label>&nbsp;</label>
+                <table class="table table-striped table-bordered table-hover">
+                             
+                <thead>
+                    <tr> 
+                    	<th width="10%">{{'lang_srNo'|translate}}</th>
+                        <th>{{'lang_Start_Range_In_Kg'|translate}}</th>
+                        <th>{{'lang_End_Range_In_Kg'|translate}}</th>
+                        <!--  <th style="border:solid 1px #000;" >End Range</th>-->
+					</tr>
+                </thead>
+                
+                <tbody>
+                                <tr>
+                    <td> <strong>#1</strong></td> 
+                    <td><input type="text" class="form-control input-lg  input-lg" name="start_weight_range" ng-model="editproductArray.start_weight_range"></td>
+                    <td><input type="text" class="form-control input-lg  input-lg" name="end_weight_range" ng-model="editproductArray.end_weight_range"></td>
+                    <!--<td><input type="text" class="text" name="range_price_1" value="" id="range_price_1"/></td>-->
+                </tr> 
+                   
+                               
+                </tbody>
+                                    
+               </table>
+                </div></div>
+				<div class="contenttitle2">
+                <h5>{{'lang_Weight_Info'|translate}}</h5>
+                </div>
+				<div class="form-group">
+                <label>{{'lang_Maximum_Weightkg'|translate}}</label>
+                <input type="text" name="dimesion_weight" class="form-control" placeholder="Maximum Weight In kg" ng-model="editproductArray.dimesion_weight">
+                </div>
+				<div class="contenttitle2">    
+                <h5>{{'lang_Diamention_Setup'|translate}}&nbsp;&nbsp;</h5>
+                </div>
+				<div class="form-group">
+                <label>{{'lang_Do_You_want_to_Set_Diamention'|translate}}</label>
+                {{'lang_Yes'|translate}}<input type="radio" id="service_type" name="service_type" ng-model="editproductArray.service_type" value="L_D_O" ng-checked="false"/>
+                {{'lang_No'|translate}} <input type="radio" id="service_type" name="service_type" ng-model="editproductArray.service_type" value="C_S" ng-checked="false"/>
+                </div>
+				<div class="form-group">
+                <label>{{'lang_Maximum_Height'|translate}}</label>
+                <span id="alert_end_range_info" class="alert"></span>
+                <input type="text" name="dimesion_height" class="form-control" placeholder="Maximum Height in Cm" ng-model="editproductArray.dimesion_height">
+                </div>
+				<div class="form-group">
+                <label>{{'lang_Maximum_Width'|translate}}</label>
+                <span id="alert_end_range_info" class="alert"></span>
+                <input type="text" name="dimesion_width" class="form-control" placeholder="Maximum Width in Cm" ng-model="editproductArray.dimesion_width">
+                </div>
+				<div class="form-group">
+                <label>{{'lang_Maximum_Length'|translate}}</label>
+                <span id="alert_end_range_info" class="alert"></span>
+                <input type="text" name="dimesion_girth" class="form-control" placeholder="Maximum Length in Cm" ng-model="editproductArray.dimesion_girth">
+                </div>
+				<div class="contenttitle2">
+                <h5>{{'lang_Service_Type_Info'|translate}}</h5>
+                </div><br>
+				<div class="form-group">
+                <label>{{'lang_Select_Type'|translate}}</label>
+                <span id="alert_end_range_info" class="alert"></span> 
+                <input type="radio" name="pikup_service_type" id="pikup_service_type" ng-model="editproductArray.pikup_service_type" value="DO" ng-checked="false"/>&nbsp;{{'lang_Local_Drop_Off'|translate}}
+               
+                &nbsp;<input type="radio" name="pikup_service_type" id="pikup_service_type" ng-model="editproductArray.pikup_service_type" value="CS" ng-checked="false"/>&nbsp;{{'lang_Collection_Service'|translate}}
+                </div>
+				<div class="form-group">
+                <label>{{'lang_Pickup_Charge'|translate}}</label>
+                <span id="alert_end_range_info" class="alert"></span>
+                <input type="text" name="pickupcharge" class="form-control" ng-model="editproductArray.pickupcharge">
+                </div>
+				<div class="form-group">
+                <label>{{'lang_time'|translate}}</label><br>
+                <strong>{{'lang_From'|translate}}</strong> 
+                <input type="time" class="form-control" name="from_time" ng-model="editproductArray.from_time">
+                	
+                <strong>{{'lang_To'|translate}}</strong>
+                <input type="time" class="form-control" name="to_time" ng-model="editproductArray.to_time">		
+                </div>
+				<div class="contenttitle2">
+                <h5>{{'lang_Info'|translate}}</h5>
+                </div>
+				<div class="form-group">
+                <label></label>
+                <span id="alert_end_range_info" class="alert"></span>
+                <input type="radio" id="prienter_required" name="prienter_required" ng-model="editproductArray.prienter_required" value="Y" ng-checked="false"/>&nbsp;&nbsp;{{'lang_Yes'|translate}}&nbsp; 
+                   &nbsp; <input type="radio" id="prienter_required" name="prienter_required" ng-model="editproductArray.prienter_required" value="N" ng-checked="false"/>&nbsp;&nbsp;{{'lang_No'|translate}} 
+                </div>
+				<div class="contenttitle2">
+                <h5>{{'lang_More_Info'|translate}}</h5>
+                </div>
+				<div class="form-group">
+                <label>{{'lang_Compensation'|translate}}</label>
+                <span id="alert_end_range_info" class="alert"></span>
+                <textarea name="compensation" class="form-control" ng-model="editproductArray.compensation"> </textarea>
+                </div>
+				<div class="form-group">
+                <label>{{'lang_Description'|translate}}</label>
+                <span id="alert_end_range_info" class="alert"></span>
+                <textarea  name="description" class="form-control" ng-model="editproductArray.description"></textarea>
+                <script> CKEDITOR.replace( 'editor1' );</script>
+                </div>
+				<p align="center">
+                <input name="id" type="hidden" value="">
+                 <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="edit_product.$invalid" ng-click="EditProductform(editproductArray);">
+                </p>
+				</form>
+    </section> 	
+
+      

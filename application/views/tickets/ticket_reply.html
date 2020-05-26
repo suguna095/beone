@@ -1,0 +1,123 @@
+
+<nav class="hk-breadcrumb" aria-label="breadcrumb" >
+  <ol class="breadcrumb breadcrumb-light bg-transparent">
+    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> {{'lang_Home'|translate}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_Tickets'|translate}} </li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_Show_Ticket'|translate}} </li>
+  </ol>
+</nav>
+<style>
+
+
+.container1 {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;   
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;  
+}
+
+.container1::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container1 img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.container1 img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999; 
+}
+</style>
+<div class = "">
+  <section class="hk-sec-wrapper" ng-init="ReplyMsgshow(1,0);">
+  <div class="">
+    <div class="panel-heading">
+      <h6 class="panel-title">{{'lang_Ticket_Detail'|translate}}({{ReplyDataArray.ticket_no}})</h6>
+    </div>
+    <br>
+   <!-- <div class="row mt-5">
+      <div class="col-md-6 offset-md-3 col-sm-6 offset-sm-3 col-12 comments-main pt-4 rounded">
+        <ul class="p-0" ng-if="ReplyDataArray.q_type=='Q'">
+          <li>
+            <div class="row comments mb-2">
+              <div class="col-md-2 col-sm-2 col-3 text-center user-img"> <img id="profile-photo" src="http://nicesnippets.com/demo/man01.png" class="rounded-circle" style="height: 50%;"/> </div>
+              <div class="col-md-9 col-sm-9 col-9 comment rounded mb-2">
+                <h4 class="m-0"><a href="#">{{ReplyDataArray.message}}</a></h4>
+                <time class="text-black ml-3">{{ReplyDataArray.entry_date}}</time>
+              </div>
+            </div>
+          </li>
+          <ul class="p-0" ng-if="ReplyDataArray.q_type=='R'">
+            <li>
+              <div class="row comments mb-2">
+                <div class="col-md-2 offset-md-2 col-sm-2 offset-sm-2 col-3 offset-1 text-center user-img"> <img id="profile-photo" src="http://nicesnippets.com/demo/man02.png" class="rounded-circle" style="height: 50%;"/> </div>
+                <div class="col-md-7 col-sm-7 col-8 comment rounded mb-2">
+                  <h4 class="m-0"><a href="#">Steve Alex</a></h4>
+                  <time class="text-black ml-3">1 week ago</time>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </div>
+  </div>-->   
+  <div class="panel-body">
+ <!-- <div>
+    <div class="container1" ng-if="ReplyDataArray.q_type=='Q'"> <img src=""  style="width:100%;">
+      <p>{{ReplyDataArray.message}}</p>
+      <span class="time-right">{{ReplyDataArray.entry_date}}</span> </div>
+    <div class="container1 darker" ng-if="ReplyDataArray.q_type=='R'"> <img src=""  class="right" style="width:100%;">
+      <p>{{ReplyDataArray.reply_comment}}</p>
+      <span class="time-left">{{ReplyDataArray.entry_date}}</span> </div>
+      </div>-->
+       <div ng-repeat="data in ticketHistory">
+    <div class="container1" ng-if="data.q_type=='Q'"> <img src=""  style="width:100%;">
+      <p>{{data.message}}</p>
+      <span class="time-right">{{data.entry_date}}</span> </div>
+    <div class="container1 darker" ng-if="data.q_type=='R'"> <img src=""  class="right" style="width:100%;">
+      <p>{{data.message}}</p>
+      <span class="time-left">{{data.entry_date}}</span> </div>
+      </div>
+    <form ng-submit="authenticate()" name="chat" >
+      <textarea name="sendmess" class="form-control content-group required" rows="3" cols="1" ng-model="ReplyDataArray.sendmess" placeholder="Enter your message..." required="" ng-if="ReplyDataArray.ticket_status=='Open'"></textarea>
+      
+      <br>
+      <input type="hidden"  ng-model="ReplyDataArray.id">
+      <div class="row">
+      <div class="col-xs-6">
+        <button type="button" style="margin-left:15px" ng-if="ReplyDataArray.ticket_status=='Open'" ng-click="ShowTicketStatus(ReplyDataArray.id,'Closed')"  ng-confirm-click="Do you want to Close?" class="btn bg-teal-500 btn-danger btn-labeled btn-labeled-right"><b><span class="icon-label"><i class="fa fa-angle-right"></i> </span></b>Close Ticket</button>
+        <button type="button" style="margin-left:15px" ng-if="ReplyDataArray.ticket_status!='Open'"  ng-click="ShowTicketStatus(ReplyDataArray.id,'Open')" ng-confirm-click="Do you want to Open?" class="btn bg-teal-500 btn-info btn-labeled btn-labeled-right"><b><span class="icon-label"><i class="fa fa-angle-right"></i></b>Open Ticket</button>
+      </div>
+      <div class="col-xs-6 text-right">
+      <button type="button" ng-click="UpdateTicketReply(ReplyDataArray);"  style="margin-left:820px"  ng-if="ReplyDataArray.ticket_status=='Open'" class="btn bg-teal-400 btn-success btn-labeled btn-labeled-right"><b><span class="icon-label"><i class="fa fa-angle-right"></i> </span></b> {{'lang_Send'|translate}}</button>
+      <button type="button" style="margin-left:820px" ng-if="ReplyDataArray.ticket_status=='Resolved'"  class="btn bg-teal-400 btn-success btn-labeled btn-labeled-right"><b><i class="icon-circle-right2"></i></b> {{'lang_Resolved'|translate}}</button>
+    </form>
+  </div>
+</div>
+</div>
+</section>

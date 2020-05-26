@@ -1,0 +1,211 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="EditCouriershow();GetCountryDropshow();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>    {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_CouriersManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_EditCouriers'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	<div class="breadcrumb-line">
+	    
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_EditCouriers'|translate}}</h5>
+		</div><br>
+		<section class="hk-sec-wrapper">
+		<div class="panel-body">
+		<form class="stdform"  name="edit_couriers" enctype="multipart/form-data">
+			<div class="row">
+    			<div class="col-lg-12">
+    
+					
+						<input type="hidden" name="courierid" ng-model="editcourierArray.courierid" />
+           					<div class="form-group"> 
+              				<label>{{'lang_Name'|translate}} <span style="color:red">*</span></label>
+              				<input type="text" name="messenger_name"  class="form-control" ng-model="editcourierArray.messenger_name" Required> 
+                            
+               				</div> 
+                              
+                           
+                  			                                
+                            <div class="form-group"> 
+                            <label>{{'lang_country'|translate}} <span style="color:red">*</span></label>
+                           
+							
+							<select class="form-control custom-select mt-8" name="country_id" ng-model="editcourierArray.country_id" ng-change="Getcitydropdata(editcourierArray.country_id);" Required>
+				        <option value="">--{{'lang_select'|translate}}--</option>
+                        <option ng-repeat="ctdata in CountryData" value="{{ctdata.id}}">{{ctdata.country}}</option>
+                       
+                          </select>
+                            </div>
+            				                            
+                            <div class="form-group">  
+                            <label>{{'lang_city'|translate}} <span style="color:red">*</span> </label>
+                           
+							<input type="text" name="city" id="show_city_dropdown"  placeholder="City" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="editcourierArray.city">    
+                            </div> 
+                                 
+            			<div class="form-group"> 
+                            <label>{{'lang_Code'|translate}}  <span style="color:red">*</span></label>
+                            
+                           <span id="rout_dropdown_show">  <input type="text" name="messenger_code" class="form-control" ng-model="editcourierArray.messenger_code" Required></span>
+                            </div>  
+                            
+                            <div class="form-group"> 
+                            <label>{{'lang_mobile'|translate}}  <span style="color:red">*</span></label>
+                            <input type="tel" maxlength="10" minlength="10" name="mobile" class="form-control" ng-model="editcourierArray.mobile" Required> 
+                            </div>
+                            
+													
+                         
+              
+                            <div class="form-group"> 
+                            <label>{{'lang_iqama_ID'|translate}} <span style="color:red">*</span></label>
+                            <input type="text" class="form-control" name="iqama" ng-model="editcourierArray.iqama" Required> 
+                            </div>    
+								
+							<div class="form-group"> 
+                            <label>{{'lang_Typeofvehicle'|translate}}   <span style="color:red">*</span></label>
+                            <input type="text" class="form-control"  name="typVehicle" ng-model="editcourierArray.typVehicle"> 
+                            </div>   
+              
+                            <!--<div class="form-group"> 
+                            <label>{{'lang_Color'|translate}}  </label>
+                            <input type="color" class="form-control" name="color" ng-model="editcourierArray.color"> 
+                            </div>  -->
+							
+							<div class="form-group" ng-init="ShowCourierSupplierDrop();"> 
+                            <label>{{'lang_upplier'|translate}} <span style="color:red">*</span></label>
+								<span id="city_dropdown_show">
+								<select class="form-control custom-select mt-8" name="city_id" ng-model="editcourierArray.supplier" Required>
+									<option value="" selected="selected">--Select--</option>
+									 <option ng-repeat="cdata in supplierDropArr" value="{{cdata.id}}">{{cdata.name}}</option>
+								</select>
+								</span>
+                            </div> 
+							
+                            <div class="form-group"> 
+                            <label>{{'lang_Joindate'|translate}}  <span style="color:red">*</span></label>
+                            <input type="text" class="form-control" id="datepicker1"  name="joinDate" ng-model="editcourierArray.joinDate" Required>
+                            </div>    
+              
+                        
+                            <div class="form-group"> 
+                          	<label>{{'lang_VehicleNumber'|translate}}  <span style="color:red">*</span></label>
+                          	<input type="text"  class="form-control input-lg  input-lg" name="vehicle_number" ng-model="editcourierArray.vehicle_number" Required> 
+                           	</div>  
+                            
+                               <div class="form-group"> 
+                                <label>{{'lang_Upload_Files'|translate}} </label><br>    
+                                <label class="switch"> 
+                                    <input type="checkbox" ng-model="editcustomerArray.uploadFiles" >  
+                                    <span class="slider round"></span>
+                                </label>   
+                             </div>  
+								 
+							 <div class="form-group">
+							 
+											
+											<div class="row">     
+									  <div class="row col-md-12" ng-if="editcourierArray.iqama_id!=''">
+										 <div class="fileinput input-group ng-isolate-scope fileinput-exists col-md-10" data-provides="fileinput" fileread="editcourierArray.iqama_id">  
+								
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_Upload'|translate}}</span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}}</span><span class="fileinput-exists">{{'lang_Change'|translate}}</span>
+                                                <input type="hidden" value="" name=""><input type="file" name="iqama_id" fileread="editcourierArray.iqama_id" accept="application/pdf" class="ng-isolate-scope">
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}}</a>
+                                                </span>
+                                         </div>
+										<div class="col-md-2">
+												<a href="{{editcourierArray.iqama_id}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 30px;color: red;"></i></a>     
+										</div>
+                                    </div>
+                                    <div class="col-md-12" ng-else>
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput" required>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_Upload'|translate}} </span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}} </span><span class="fileinput-exists">{{'lang_Change'|translate}} </span>
+                                                <input type="file" name="upload_cr" fileread="editcourierArray.upload_cr" accept="application/pdf" required>
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}} </a>
+                                                </span>
+                                            </div>
+                                    </div>
+								</div>	  
+                            </div>
+							
+							 
+                           <div class="form-group">
+						 
+											
+											<div class="row">     
+									  <div class="row col-md-12" ng-if="editcourierArray.license!=''">
+										 <div class="fileinput input-group ng-isolate-scope fileinput-exists col-md-10" data-provides="fileinput" fileread="editcourierArray.license">  
+								
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_Upload'|translate}}</span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}}</span><span class="fileinput-exists">{{'lang_Change'|translate}}</span>
+                                                <input type="hidden" value="" name=""><input type="file" name="license" fileread="editcourierArray.license" accept="application/pdf" class="ng-isolate-scope">
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}}</a>
+                                                </span>
+                                         </div>
+										<div class="col-md-2">
+												<a href="{{editcourierArray.license}}" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 30px;color: red;"></i></a>     
+										</div>
+                                    </div>
+                                    <div class="col-md-12" ng-else> 
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput" required>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_Upload'|translate}} </span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}} </span><span class="fileinput-exists">{{'lang_Change'|translate}} </span>
+                                                <input type="file" name="license" fileread="editcourierArray.license" accept="application/pdf" required>
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}} </a>
+                                                </span>
+                                            </div>
+                                    </div>
+								</div>	  
+                            </div>
+              
+                            <div class="form-group">     
+                            <label>{{'lang_Image'|translate}} <span style="color:red">*</span></label><br>    
+                            <input type="file" name="messanger_image" fileread="editcourierArray.messanger_image" accept="image/*"class="btn btn-primary btn-file"><br><br>
+                            <img src="{{editcourierArray.messanger_image}}" class="img-fluid" width="90px;" height="90px;"> 
+                            <input type="hidden" > 
+                            </div>   
+                            
+                            
+
+                            	<div class="form-group">
+								<label>{{'lang_email'|translate}} </label> 
+								<input type="email" name="email" id="email" class="form-control" ng-pattern="/^([a-z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?)|[7-9][0-9]{9}$/"  ng-model="editcourierArray.email" disabled>
+								 <span ng-if="edit_couriers.email.$error.pattern" style="color:red">{{'lang_entervalidemail'|translate}}</span>
+								</div>  
+                                <div class="form-group"> 
+                                    <label>{{'lang_password'|translate}}  </label>
+                                    <input type="password" class="form-control"  name="password1" ng-model="editcourierArray.password1" > 
+                                     </div> 
+                                
+              				<input name="id" id="id" type="hidden" value="878">
+							<input name="submit" type="submit" class="btn btn-primary" value="Update" ng-disabled="edit_couriers.$invalid" ng-click="EditCourierform(editcourierArray);">
+						
+   						 </div>
+					</div>
+				</div>
+		</section>		
+    </section>		

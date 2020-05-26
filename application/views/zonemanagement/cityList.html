@@ -1,0 +1,126 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="ShowCityZoneByAlpha();">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_zoneManagement'|translate}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Set_City_Zone'|translate}}</li>
+                </ol>
+            </nav>
+   <div class="">
+                <!-- Title -->
+                           
+        
+           
+    <section class="hk-sec-wrapper">
+  <div class="content-wrapper">
+
+<!-- Content area -->
+<div class="content">
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">{{'lang_Set_Default_City_Zone'|translate}}</h5>
+    </div>
+     
+    <div class="panel-body">  
+        <div class="panel panel-default">
+            <div class="panel-body">
+             	
+                    <input type="hidden" name="customer_id" value=" 0 ">
+                    
+                                                            
+                    <input type="hidden" name="country_id" id="country_id" value="">
+                      
+                    
+                    <br>
+                    <div align="center">
+					<a ui-sref="cityList({shid:'A'})" target="_blank"><span>A</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=B&amp;cust_id="><span>B</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=C&amp;cust_id="><span>C</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=D&amp;cust_id="><span>D</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=E&amp;cust_id="><span>E</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=F&amp;cust_id="><span>F</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=G&amp;cust_id="><span>G</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=H&amp;cust_id="><span>H</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=I&amp;cust_id="><span>I</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=J&amp;cust_id="><span>J</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=K&amp;cust_id="><span>K</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=L&amp;cust_id="><span>L</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=M&amp;cust_id="><span>M</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=N&amp;cust_id="><span>N</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=O&amp;cust_id="><span>O</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=P&amp;cust_id="><span>P</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=Q&amp;cust_id="><span>Q</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=R&amp;cust_id="><span>R</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=S&amp;cust_id="><span>S</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=T&amp;cust_id="><span>T</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=U&amp;cust_id="><span>U</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=V&amp;cust_id="><span>V</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=W&amp;cust_id="><span>W</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=X&amp;cust_id="><span>X</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=Y&amp;cust_id="><span>Y</span>|</a>
+                    <a href="system145.php?c=rates&amp;f=edit_rates_city&amp;Alph=Z&amp;cust_id="><span>Z</span>|</a>                
+                    
+                    </div>
+                    <br><br>
+                    
+                    <div class="col-md-2">{{'lang_Search_city'|translate}}</div>
+                    <div class="col-md-8"> 
+                    <input type="text" value="" name="searchfield" ng-model="filterData.searchfield" class="form-control">
+                    </div><br>
+                    
+                    <div class="col-md-2">
+                    <input type="submit" class="btn btn-primary" name="submit" ng-click="ShowCityZone('A',1);" value="Search">
+                    </div><br><br>                        
+                    </form></div>
+                    
+                    <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">   
+                    
+                    <thead>
+                    <tr>
+                    <th class="head0" style="font-size:15px; height:40px;">{{'lang_city'|translate}}</th>
+                    <th class="head0" style="font-size:15px;">{{'lang_Select_Zone'|translate}}</th>
+                    <th class="head0" style="font-size:15px;">{{'lang_city'|translate}}</th>
+                    <th class="head0" style="font-size:15px;">{{'lang_Select_Zone'|translate}}</th>
+                    <th class="head0" style="font-size:15px;">{{'lang_city'|translate}}</th>
+                    <th class="head0" style="font-size:15px;">{{'lang_Select_Zone'|translate}}</th>  
+                    </tr>  
+                    </thead>
+                    
+                    <tbody>
+					
+				
+	  
+	  
+					<tr ng-repeat="data in ShowCityZoneArray" ng-switch on="$index % 3">
+                    <td style="text-align:left;font-size:15px; padding-left:15px;">{{data.city}}<input type="hidden" name="city_3" value="3">
+                    </td>
+                    <td ng-init="GetshowZoneDrop();">  
+                    <span class="field" style="font-weight:bold;">
+					
+                    <select name="name" class="form-control" ng-model="data.zone_id" ng-change="updatezone_id(data.zone_id,data.id)">
+                    <option value="" selected="selected">{{'lang_Please_Select'|translate}}</option> 
+                    <option ng-repeat="datas in CityZonelist" value="{{datas.id}}" >{{datas.name}}</option> 
+                    </select> 
+           
+                    </span>
+                    <span class="alert"  style="color: red;" ng-if="error.zone==true">{{'lang_ZoneNotSelected'|translate}}</span>
+                    </td>
+                       
+                                        
+                    </tr>
+                    <tr>   
+                    </tr> 
+                    </tbody>
+					</table> 
+                    </div>
+                    
+            </div>
+    </div>
+</div>
+</div>  
+</div>
+    </section>
+
+
+  
+    

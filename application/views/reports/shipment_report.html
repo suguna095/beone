@@ -1,0 +1,449 @@
+
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showStaffDropData();showStatusDrop();showOriginDrop();">
+  <ol class="breadcrumb breadcrumb-light bg-transparent">
+    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> {{'lang_Home'|translate}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_reports'|translate}}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_showReport'|translate}}</li>
+  </ol>
+</nav>
+
+ <form name="search_form" method="post" >
+<div class = "">
+  <section class="hk-sec-wrapper">
+    <div class="panel-heading">
+      <h5 class="panel-title">{{'lang_showReport'|translate}}</h5>
+      
+    </div>
+    <br>
+    <div class = "table-responsive" >
+    <table class="table datatable-show-all table-bordered table-hover datatable-highlight panel panel-flat ">
+      <tbody>
+        <tr>
+          <td> {{'lang_customer'|translate}}
+            <select class="select2 select2-multiple form-control" ng-model="SearArr.cust_id" multiple="multiple"   data-placeholder="Choose">
+              <option ng-repeat="cdata in CustDroplistArray" value="{{cdata.id}}">{{cdata.company}}({{cdata.uniqueid}})</option>
+            </select>
+            <div> <br>
+            {{'lang_SelectOnHold'|translate}}
+              <select name="onhold" id="onhold_value" ng-model="SearArr.onhold_value"  class="form-control" >      
+                <option value="">{{'lang_Please_Select'|translate}}</option>
+                <option value="YES">{{'lang_Yes'|translate}}</option>
+                <option value="NO">{{'lang_No'|translate}}</option>
+              </select>
+              <br>
+            </div>
+       
+      
+        </td>
+      
+      
+        <td>  {{'lang_status'|translate}}
+          <select  class="select2 select2-multiple form-control"  ng-model="SearArr.main_status" multiple="multiple" data-placeholder="Choose">
+            <option value="" selected="selected">{{'lang_PleaseSelectStatus'|translate}}</option>
+            <option ng-repeat="data in statuslist" value="{{data.id}}">{{data.main_status}}</option>
+          </select>
+          <br>
+           {{'lang_CurrentStatus'|translate}}
+          <select class="form-control" name="statusBy" ng-model="SearArr.statusBy"  id="statusBy" tabindex="-1" aria-hidden="true">
+            <option value="GEN">{{'lang_GeneralStatus'|translate}}</option>
+            <option value="LAST">{{'lang_LastStatus'|translate}}</option>
+          </select>
+          <br></td>
+        <td>  {{'lang_Open'|translate}}
+          <select name="shipmentStatus" id="shipmentStatus"  ng-model="SearArr.shipmentStatus" class="form-control" tabindex="-1" aria-hidden="true">
+            <option value="O">{{'lang_OPEN'|translate}}</option>
+            <option value="C">{{'lang_CLOSE'|translate}}</option>
+            <option value="OFD">{{'lang_RawReport'|translate}}</option>
+          </select>
+          <br>
+          {{'lang_destinationHub'|translate}}
+          <select  class="select2 select2-multiple form-control" g-model="SearArr.hub" multiple="multiple" data-placeholder="Choose" >
+            <option value="">{{'lang_DestnationHub'|translate}}</option>
+            <option value="Riyadh">{{'lang_Riyadh'|translate}}</option>
+            <option value="Jeddah">{{'lang_Jeddah'|translate}}</option>
+            <option value="Dammam">{{'lang_Dammam'|translate}}</option>
+          </select>
+          <br>
+           {{'lang_ForwardThrough'|translate}}
+          <select id="fwd_th" class="form-control" g-model="SearArr.fwd_th" tabindex="-1" aria-hidden="true">
+            <option value="">{{'lang_ForwardThrough'|translate}}</option>
+            <option value="SMSA">{{'lang_SMSA'|translate}}</option>
+          </select></td>
+      </tr>
+      <tr>
+        <td>  {{'lang_origin'|translate}}
+          <div>
+            <select class="select2 select2-multiple form-control" multiple="multiple"  ng-model="SearArr.cityorigin" data-placeholder="Choose">
+              <option value="">{{'lang_selectOrigin'|translate}}</option>
+              <option ng-repeat="data in originlist" value="{{data.city}}">{{data.city}}</option>
+            </select>
+          </div>
+          <br>
+            {{'lang_destination'|translate}}<br>
+          <select class="select2 select2-multiple form-control" multiple="multiple" ng-model="SearArr.citydestination"  ng-init="showOriginDrop();" data-placeholder="Choose">
+            <option ng-repeat="sdata in originlist" value="{{sdata.id}}">{{sdata.city}}</option>
+          </select>
+          
+          <!--  <div class="multi-select-full">
+                     <select name="citydestination" id="citydestination" class="select2 select2-multiple form-control" ng-model="filterData.citydestination" ng-init="showOriginDrop();" multiple>
+                        <option value="">{{'lang_DestnationHub'|translate}}</option>
+                        <option ng-repeat="data in originlist" value="{{data.id}}">{{data.city}}</option>
+                     </select>
+                  </div> --> 
+          <br>
+          <br>
+            {{'lang_ScheduleStatus'|translate}}
+          <select name="schedule" id="schedule_value" ng-model="SearArr.schedule_value" class="form-control" tabindex="-1" aria-hidden="true">
+            <option value="">{{'lang_Please_Select'|translate}}</option>
+            <option value="Y">{{'lang_Yes'|translate}}</option>
+            <option value="N">{{'lang_No'|translate}}</option>
+          </select>
+          <br>
+          <br>
+          {{'lang_Mode'|translate}}
+          <select name="mode" id="mode"class="form-control" ng-model="SearArr.mode"  tabindex="-1" aria-hidden="true">
+            <option value="">{{'lang_Please_Select'|translate}}</option>
+            <option value="CC">{{'lang_CC'|translate}}</option>
+            <option value="COD">{{'lang_COD'|translate}}</option>
+          </select>
+          <br></td>
+       
+        <td> {{'lang_FromDate'|translate}}
+          <input type="text" name="bt_date1" ng-model="SearArr.bt_date1"   onchange="cal()" class="form-control " id="datepicker1" value="" required="">
+          <br>
+          {{'lang_ToDate'|translate}}
+          <input type="text" name="bt_date2" ng-model="SearArr.bt_date2"  onchange="cal()" class="form-control " id="datepicker2" value="" required=""></td>
+        <td><button type="button" class="btn btn-info btn-lg btn btn-primary" id="gen_report" ng-click="GetShipmentpop('#myModal');">{{'lang_generateReport'|translate}}</button></td>
+      </tr>
+        </tbody>
+      
+    </table>
+    
+    
+    <div ng-bind-html="ShowpageData"></div>
+    </div>
+  </section>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog"> 
+    
+    <!-- Modal content-->
+    <div class="modal-content" style="width: 966px;right: 25%;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+         
+        
+          <br>
+          <h4 style="text-align:center;margin-bottom:20px;">{{'lang_Select_Column_to_download'|translate}}</h4>
+        
+         
+         
+           
+            <div class="col-sm-12">
+              <div class="col-sm-4">
+                <label class="container">
+                 <input type="checkbox" ng-click="GetAllcheck()" ng-model="isAllSelected" value="all">
+                
+                  <span class="checkmark"></span>{{'lang_selectAll'|translate}} </label>
+              </div>
+            </div>
+            <div class="col-sm-4">
+            
+           
+           
+              <label class="container">
+                <input type="checkbox" name="Date" ng-model="checkarr.Date" ng-checked="isAllSelected" ng-init="checkarr.Date=true" >
+                <span class="checkmark"></span>{{'lang_date'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Picked_up_Date" ng-model="checkarr.Picked_up_Date" ng-checked="isAllSelected" value="Picked_up_Date" ng-init="checkarr.Picked_up_Date=true">
+                <span class="checkmark"></span>{{'lang_up_Date_Picked'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Reference" ng-model="checkarr.Reference" value="Reference" ng-checked="isAllSelected" ng-init="checkarr.Reference=true">
+                <span class="checkmark"></span> {{'lang_reference'|translate}}</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Shipper_Reference" ng-model="checkarr.Shipper_Reference" value="Shipper_Reference" ng-checked="isAllSelected" ng-init="checkarr.Shipper_Reference=true">
+                <span class="checkmark"></span>{{'lang_shipperReference'|translate}}#</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="AWB" ng-model="SearArr.AWB" value="AWB" ng-checked="isAllSelected" ng-init="checkarr.AWB=true">
+                <span class="checkmark"></span>{{'lang_AWB'|translate}} #</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Delivery_Attempts" ng-model="checkarr.Delivery_Attempts" value="Delivery_Attempts" ng-checked="isAllSelected" ng-init="checkarr.Delivery_Attempts=true">
+                <span class="checkmark"></span>{{'lang_DeliveryAttempts'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Call_Attempt" ng-model="checkarr.Call_Attempt" value="Call_Attempt" ng-checked="isAllSelected" ng-init="checkarr.Call_Attempt=true">
+                <span class="checkmark"></span>{{'lang_CallAttempts'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Origin" ng-model="checkarr.Origin" value="Origin" ng-checked="isAllSelected" ng-init="checkarr.Picked_up_Date=true">
+                <span class="checkmark"></span>{{'lang_origin'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="HUB" ng-model="checkarr.HUB" value="HUB" ng-checked="isAllSelected" ng-init="checkarr.HUB=true">
+                <span class="checkmark"></span>{{'lang_HUB'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Destination" ng-model="checkarr.Destination" ng-checked="isAllSelected" value="Destination" ng-init="checkarr.Destination=true">
+                <span class="checkmark"></span>{{'lang_destination'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Sender" ng-model="checkarr.Sender" value="Sender" ng-checked="isAllSelected" ng-init="checkarr.Sender=true">
+                <span class="checkmark"></span>{{'lang_sender'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Sender_Address" ng-model="checkarr.Sender_Address" value="Sender_Address" ng-checked="isAllSelected" ng-init="checkarr.Sender_Address=true">
+                <span class="checkmark"></span>{{'lang_senderAddress'|translate}}</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Sender_Phone" ng-model="checkarr.Sender_Phone" value="Sender_Phone" ng-checked="isAllSelected" ng-init="checkarr.Sender_Phone=true">
+                <span class="checkmark"></span>{{'lang_Sender_Mobile'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Receiver" ng-model="checkarr.Receiver" value="Receiver" ng-checked="isAllSelected" ng-init="checkarr.Receiver=true">
+                <span class="checkmark"></span>{{'lang_reciever'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Recevier_Address" ng-model="checkarr.Recevier_Address" value="Recevier_Address" ng-checked="isAllSelected" ng-init="checkarr.Recevier_Address=true">
+                <span class="checkmark"></span>{{'lang_RecieverAddress'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Receiver_Phone" ng-model="checkarr.Receiver_Phone" value="Receiver_Phone" ng-checked="isAllSelected" ng-init="checkarr.Receiver_Phone=true">
+                <span class="checkmark"></span>{{'lang_RecieverPhone'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Mode" ng-model="checkarr.Mode" value="Mode" ng-checked="isAllSelected" ng-init="checkarr.Mode=true">
+                <span class="checkmark"></span> {{'lang_Mode'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Status" ng-model="checkarr.Status" value="Status" ng-checked="isAllSelected" ng-init="checkarr.Status=true">
+                <span class="checkmark"></span> {{'lang_status'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="COD_Amount" ng-model="checkarr.COD_Amount" value="COD_Amount" ng-checked="isAllSelected" ng-init="checkarr.COD_Amount=true">
+                <span class="checkmark"></span>{{'lang_CODAmount'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Pay_Status" ng-model="checkarr.Pay_Status" value="Pay_Status" ng-checked="isAllSelected" ng-init="checkarr.Pay_Status=true">
+                <span class="checkmark"></span>{{'lang_Pay_Status'|translate}}  </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Sub_Category" ng-model="checkarr.Sub_Category" value="Sub_Category" ng-checked="isAllSelected" ng-init="checkarr.Sub_Category=true">
+                <span class="checkmark"></span>{{'lang_Sub_Category'|translate}}  </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="driver_comment" ng-model="checkarr.driver_comment" value="driver_comment" ng-checked="isAllSelected" ng-init="checkarr.driver_comment=true">
+                <span class="checkmark"></span>{{'lang_DriverComment'|translate}}  </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Schedule" ng-model="checkarr.Schedule" value="Schedule" ng-checked="isAllSelected" ng-init="checkarr.Schedule=true">
+                <span class="checkmark"></span>{{'lang_schedule'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Schedule_Channel" ng-model="checkarr.Schedule_Channel" value="Schedule_Channel" ng-checked="isAllSelected" ng-init="checkarr.Schedule_Channel=true">
+                <span class="checkmark"></span>{{'lang_ScheduleChanel'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Schedule_Date" ng-model="checkarr.Schedule_Date" value="Schedule_Date" ng-checked="isAllSelected" ng-init="checkarr.Schedule_Date=true">
+                <span class="checkmark"></span>{{'lang_ScheduleDate'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="On_Hold" ng-model="checkarr.On_Hold" value="On_Hold" ng-checked="isAllSelected" ng-init="checkarr.On_Hold=true"> 
+                <span class="checkmark"></span>{{'lang_OnHold'|translate}}</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="On_Hold_Date" ng-model="checkarr.On_Hold_Date" value="On_Hold_Date" ng-checked="isAllSelected" ng-init="checkarr.On_Hold_Date=true">
+                <span class="checkmark"></span>{{'lang_OnHoldDate'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="On_Hold_Reason" ng-model="checkarr.On_Hold_Reason" value="On_Hold_Reason" ng-checked="isAllSelected" ng-init="checkarr.On_Hold_Reason=true">
+                <span class="checkmark"></span>{{'lang_OnHoldReason'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Driver_Name"  ng-model="checkarr.Driver_Name" value="Driver_Name" ng-checked="isAllSelected" ng-init="checkarr.Driver_Name=true">
+                <span class="checkmark"></span>{{'lang_driverName'|translate}}  </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Driver_Code" ng-model="checkarr.Driver_Code" value="Driver_Code" ng-checked="isAllSelected" ng-init="checkarr.Driver_Code=true"> 
+                <span class="checkmark"></span>{{'lang_DriverCode'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Driver_Mobile" ng-model="checkarr.Driver_Mobile" value="Driver_Mobile" ng-checked="isAllSelected" ng-init="checkarr.Driver_Mobile=true">
+                <span class="checkmark"></span>{{'lang_Driver_Mobile'|translate}}</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Driver_Supplier" ng-model="checkarr.Driver_Supplier" value="Driver_Supplier" ng-checked="isAllSelected" ng-init="checkarr.Driver_Supplier=true">
+                <span class="checkmark"></span>{{'lang_driverSupplier'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Shelve" ng-model="checkarr.Shelve" value="Shelve" ng-checked="isAllSelected" ng-init="checkarr.Shelve=true">
+                <span class="checkmark"></span>{{'lang_Shelve'|translate}}</label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="UID_Account" ng-model="checkarr.UID_Account" value="UID_Account" ng-checked="isAllSelected" ng-init="checkarr.UID_Account=true"> 
+                <span class="checkmark"></span>{{'lang_UIDAccount'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Time_Slot" ng-model="checkarr.Time_Slot" value="Time_Slot" ng-checked="isAllSelected" ng-init="checkarr.Time_Slot=true">
+                <span class="checkmark"></span>{{'lang_TimeSlot'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Area_Street" ng-model="checkarr.Area_Street" value="Area_Street" ng-checked="isAllSelected" ng-init="checkarr.Area_Street=true">
+                <span class="checkmark"></span>{{'lang_AreaStreet'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Area" ng-model="checkarr.Area" value="Area" ng-checked="isAllSelected" ng-init="checkarr.Area=true">
+                <span class="checkmark"></span>{{'lang_Area'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="latitude_longitude" ng-model="checkarr.latitude_longitude" value="latitude_longitude" ng-checked="isAllSelected" ng-init="checkarr.latitude_longitude=true">
+                <span class="checkmark"></span>{{'lang_latitudelongitude'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Deliver_Date" ng-model="checkarr.Deliver_Date" value="Deliver_Date" ng-checked="isAllSelected" ng-init="checkarr.Deliver_Date=true"> 
+                <span class="checkmark"></span>{{'lang_Deliver_Date'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Pieces" ng-model="checkarr.Pieces" value="Pieces" ng-checked="isAllSelected" ng-init="checkarr.Pieces=true">
+                <span class="checkmark"></span>{{'lang_Pieces'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Weight" ng-model="checkarr.Weight" value="Weight" ng-checked="isAllSelected" ng-init="checkarr.Weight=true">
+                <span class="checkmark"></span>{{'lang_Weight'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Description" ng-model="checkarr.Description" ng-true-value="'Description'" value="Description" ng-checked="isAllSelected" ng-init="checkarr.Description=true">
+                <span class="checkmark"></span>{{'lang_destination'|translate}} </label>    
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Forward_through" ng-model="checkarr.Forward_through" value="Forward_through" ng-checked="isAllSelected" ng-init="checkarr.Forward_through=true">
+                <span class="checkmark"></span>{{'lang_ForwardThrough'|translate}} </label>
+            </div>
+            <div class="col-sm-4">
+              <label class="container">
+                <input type="checkbox" name="Forward_awb" ng-model="checkarr.Forward_awb" value="Forward_awb" ng-checked="isAllSelected" ng-init="checkarr.Forward_awb=true">
+                <span class="checkmark"></span>{{'lang_ForwardAwb'|translate}} </label>
+            </div>
+            <div class="col-sm-4 col-sm-offset-4">
+         
+            <div class="row">
+            <div class="col-sm-12">
+              <div class="col-sm-4"> </div>
+              <div class="col-sm-4">
+                <input type="button" name="bt_search" id="bt_search1" ng-click="GetReportFilterDataPage(checkarr);"  value="Download Report" class="btn btn-primary" style="margin-top: 2em;"/>
+              </div>
+            </div>
+            </div>
+            
+            </div>
+       
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer"> </div>
+  </div>
+  <div class="modal-footer"> </div>
+</div>
+</div>
+</form>
+</div>
+<script> 
+ $('#select-all').click(function(event) {   
+    if(this.checked) {
+        // Iterate each checkbox
+        $(':checkbox').each(function() {
+            this.checked = true;                        
+        });
+    } else {
+        $(':checkbox').each(function() { 
+            this.checked = false;                       
+        });
+    }
+});
+	
+</script> <script type="text/javascript">
+        function GetDays(){
+                var dropdt = new Date(document.getElementById("datepicker1").value);
+                var pickdt = new Date(document.getElementById("datepicker2").value);
+                return parseInt((dropdt - pickdt) / (24 * 3600 * 1000));
+        }
+
+        function cal(){
+            var DaysBetween=0;
+                    if(document.getElementById("datepicker2")){
+                         DaysBetween=GetDays();
+						console.log(DaysBetween);
+        }  
+		if( isNaN(DaysBetween))
+			{
+				
+			
+			}
+			else
+        if(DaysBetween>31)
+        {
+            alert("Please select Dates between one month or 31 Days"); 
+            
+            
+            }
+            else
+            {
+             
+            
+                
+                }
+        
+    }
+
+    </script>

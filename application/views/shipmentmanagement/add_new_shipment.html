@@ -1,0 +1,328 @@
+   <nav class="hk-breadcrumb" aria-label="breadcrumb">   
+    <ol class="breadcrumb breadcrumb-light bg-transparent">
+        <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{'lang_shipmentManagement'|translate}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{'lang_addShipment'|translate}}</li>  
+    </ol>
+</nav>
+<div class="">
+   
+   
+
+            <div class="row">
+
+<div class="col-md-6">
+<section class="hk-sec-wrapper">
+	<div class="panel panel-default">
+        <div class="panel-heading">{{'lang_DateAndTime'|translate}}</div><br>  
+        <div class="panel-body">  
+        
+             <input type="hidden" name="cusid" ng-model="editshipmentArray.cusid" />
+            
+            <div class="col-lg-6">
+            <div class="">
+            <label>{{'lang_reference'|translate}}</label>
+            <input type="text" name="booking_id" id="booking_id" class="form-control" ng-model="editshipmentArray.booking_id" required>
+            </div>
+            </div><br>
+			<div class="row">
+            <div class="col-md-6">  
+            <div class="">
+            <label> {{'lang_date'|translate}}</label>
+            <input type="date" name="schedule_date" id="datepicker" class="form-control" ng-model="editshipmentArray.schedule_date" required>
+            </div>
+            </div><br>
+            
+            <div class="col-md-4 col-sm-4">
+            <div class="form-group">
+            <label> {{'lang_time'|translate}}</label>
+            <input type="time" name="time_slot" id="pickup_time" class="form-control" ng-model="editshipmentArray.time_slot" required>
+            </div>
+            </div>
+          </div>  
+        </div>
+	</div>
+	</section>
+</div>
+
+
+<div class="col-md-6">
+<section class="hk-sec-wrapper">
+<div class="panel panel-default">
+<div class="panel-heading">{{'lang_ShipmentType'|translate}}</div><br>
+<div class="panel-body">
+
+    <div class="col-lg-4 col-sm-4">
+        <div class="form-group">
+        <label><h5>{{'lang_ProductType'|translate}}:</h5></label>
+        <br>
+        <input type="radio" name="nrd" value="KVAIMI" ng-model="editshipmentArray.nrd" required>
+        {{'lang_Parcel'|translate}}
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-4">
+        <div class="">
+        <label><h5> {{'lang_PaymentMode'|translate}}</h5></label>
+        <select name="booking_mode" id="Bookingmode" ng-model="editshipmentArray.booking_mode" class="form-control ">
+       <!-- <option value="CASH" >Paid</option>-->
+        <option value="CC">{{'lang_Credit_Card'|translate}}</option>
+        <option value="COD">{{'lang_COD'|translate}}</option>
+        </select>
+        </div>
+    </div><br>
+    
+    <span style="display:none;" id="cod_show_id">
+        <div class="col-lg-4 col-sm-4">
+            <div class="form-group">
+            <label><h5> {{'lang_CODToPayAmount'|translate}} </h5></label>
+            <input type="text" name="total_cod_amt" id="total_cod_amt" class="form-control" ng-model="editshipmentArray.total_cod_amt" required>
+            </div>
+        </div>
+    </span>
+    
+</div>
+</div>
+</section>
+</div>
+</div><br>
+		<section class="hk-sec-wrapper">
+		<div class="panel panel-default">
+
+			<div class="panel-heading">{{'lang_LocationInfo'|translate}}&nbsp;&nbsp;
+			<input type="text" name="shippers_ac_no" id="shippers_ac_no_val" placeholder="Account No." class="form-control" style="width:49%;" ng-model="editshipmentArray.shippers_ac_no">
+			</div><br>
+
+		<div class="panel-body">
+		<div class="row">
+
+			<div class="col-lg-6 col-sm-6">
+					<section class="hk-sec-wrapper">
+						<div class="panel panel-default">
+						
+							<div class="panel-heading">{{'lang_senderInfo'|translate}} </div>
+								<div class="panel-body">
+								
+									<div class="form-group">
+										{{'lang_name'|translate}}<span class="alert">*</span>
+										
+										<input type="text" name="sender_name" id="sender_name_val" value="" class="form-control" ng-model="editshipmentArray.sender_name">
+										
+
+										<div>{{'lang_country'|translate}}:&nbsp;<span id="sender_country_drop"><select name="sel_country" class="form-control input-lg" id="sel_country" ng-model="editshipmentArray.sel_country">
+														<option value="" selected="selected">{{'lang_Please_Select'|translate}}</option><option value="1">{{'lang_SaudiArabia'|translate}}</option></select></span>
+										<span id="alert_country"></span>
+										</div>
+										
+										
+										<div>{{'lang_city'|translate}}:
+											<select  class="form-control input-lg" ng-model="editshipmentArray.sender_city" ng-init="showOriginDrop();">
+												<option value="">{{'lang_selectOrigin'|translate}}</option>  
+												<option ng-repeat="data in originlist" value="{{data.city}}">{{data.city}}</option>
+										  </select>
+										</div>
+										
+										{{'lang_CityCode'|translate}}
+										<input type="text" name="sender_zip" id="sender_zip_val" class="form-control" ng-model="editshipmentArray.sender_zip">
+										
+										{{'lang_address'|translate}}
+										<textarea type="text" name="sender_address" id="sender_address_val" class="form-control"ng-model="editshipmentArray.sender_address"></textarea>
+										
+										
+										{{'lang_mobile'|translate}}
+										<input type="text" name="sender_phone" id="sender_phone_val" class="form-control" ng-model="editshipmentArray.sender_phone">
+										
+										
+										<span style="display:none;"> {{'lang_faxNo'|translate}}
+										<input type="text" name="sender_fax" id="sender_fax_val" class="form-control" ng-model="editshipmentArray.sender_fax"></span>
+										
+										{{'lang_email'|translate}}
+										<input type="text" name="sender_email" id="sender_email_val" class="form-control" ng-model="editshipmentArray.sender_email">
+										
+									</div>
+								</div>
+						</div>
+					</section>
+			</div><br>
+
+				<div class="col-lg-6 col-sm-6">
+					<section class="hk-sec-wrapper">
+						<div class="panel panel-default">
+						<div class="panel-heading">{{'lang_receiverInfo'|translate}}</div>
+							<div class="panel-body">
+					
+								<div class="form-group"> 
+
+									{{'lang_name'|translate}}<span class="alert">*</span>
+									<input type="text" value="" class="form-control typeahead" id="lock_hint1" name="reciever_name" ng-model="editshipmentArray.reciever_name">
+									
+								  
+									<div>{{'lang_country'|translate}}:&nbsp; <span id="new_rec_city"><select name="sel_country_reciver" class="form-control input-lg" id="sel_country_reciver" ng-model="editshipmentArray.sel_country_reciver">
+													<option value="">{{'lang_Please_Select'|translate}}</option><option value="1">{{'lang_SaudiArabia'|translate}}</option></select></span>
+									</div>
+									
+									<div>{{'lang_city'|translate}}:&nbsp; 
+									
+									<select  class="form-control input-lg" ng-model="editshipmentArray.reciever_city" ng-init="showOriginDrop();">
+												<option value="">{{'lang_selectOrigin'|translate}}</option>  
+												<option ng-repeat="data in originlist" value="{{data.city}}">{{data.city}}</option>
+										  </select>
+									
+									</div>
+									
+									{{'lang_CityCode'|translate}}
+									<input type="text" value="" id="reciever_zip" name="reciever_zip" class="form-control" ng-model="editshipmentArray.reciever_zip">
+									
+									{{'lang_address'|translate}}
+									<textarea type="text" name="reciever_address" id="reciever_address" class="form-control" ng-model="editshipmentArray.reciever_address"></textarea>
+									
+									{{'lang_mobile'|translate}}
+									<input type="tel" value="" class="form-control" name="reciever_phone" id="reciever_phone" ng-model="editshipmentArray.reciever_phone">
+									
+									<span style="display:none;"> {{'lang_faxNo'|translate}}
+									<input type="text" value="" name="reciever_fax" class="form-control" ng-model="editshipmentArray.reciever_fax">
+									<span id="reciever_fax" class="alert"></span></span>
+									
+									{{'lang_email'|translate}}
+									<input type="text" value="" name="reciever_email" id="reciever_email" class="form-control" ng-model="editshipmentArray.reciever_email">
+									
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			
+		</div>
+	</div>
+	</div>
+	</section>  
+		<section class="hk-sec-wrapper">
+			<div class="panel panel-default">
+				<div class="panel-heading">{{'lang_Service'|translate}} &amp; {{'lang_PaymentInfo'|translate}}</div><br>
+					<div class="row">
+						<div class="col-sm">
+							<div class="row">
+								<div class="col-md-2">
+								<div class="">{{'lang_status'|translate}}
+								<select name="status" id="code" class="form-control" ng-model="editshipmentArray.code">
+								<option value="12">Booked</option>
+								<option value="4">Pickup Collected</option>
+								</select>
+								</div>
+								</div>
+								<div class="col-md-2">
+								<div class="">{{'lang_Noofparcel'|translate}}
+								  <input type="pieces" name="pieces" class="form-control" ng-model="editshipmentArray.pieces">
+								</div>
+									
+								<div class="col-md-2">
+								
+								
+								</div>
+								</div>
+							</div>
+						</div>	
+					</div>	
+					<br>		
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-6 col-sm-6">
+							<section class="hk-sec-wrapper">
+								<div class="panel panel-default">
+								<div class="panel-heading">{{'lang_Services'|translate}}</div><br>
+								<div class="panel-body">
+
+
+									<div class="row">
+										
+									<div class="col-md-6">
+										<div class="">
+										<label> {{'lang_ServiceMode'|translate}}<span class="alert">*</span></label>
+										<span id="service"> 
+												<select name="service_id"  class="form-control input-lg" id="service" ng-model="editshipmentArray.service_id">
+													<option value="" selected="selected">{{'lang_PleaseSelectService'|translate}}</option><option value="3">{{'lang_Express_Service'|translate}}</option><option value="4">{{'lang_AdvanceService'|translate}}</option></select>
+										</span>
+										</div>
+										</div>
+									
+									<div class="col-md-4">
+										<div class="">
+										<label>{{'lang_ShipmentValue'|translate}}</label>
+										<input type="text" name="declared_charge" class="form-control" id="declared_charge" ng-model="editshipmentArray.declared_charge">
+										</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+									<label>{{'lang_Description'|translate}}</label>
+									<textarea cols="80" rows="5" name="status_describtion" class="form-control" id="location" ng-model="editshipmentArray.status_describtion"></textarea>
+									</div>
+
+									<div class="form-group">
+									<label>{{'lang_SKU'|translate}} </label>
+									<input type="text" name="sku" class="form-control" id="sku" ng-model="editshipmentArray.sku">
+									</div>
+
+								</div>
+							</div>
+							</section>
+						</div>
+
+						<div class="col-lg-6 col-sm-6">
+							<section class="hk-sec-wrapper">
+								<div class="panel panel-default">
+								<div class="panel-heading">{{'lang_PaymentDetail'|translate}}</div><br>
+								<div class="panel-body">
+
+									 
+									
+									<span style="display:none">
+									<label><strong>{{'lang_ChargableWeightKg'|translate}}</strong></label>
+									<input type="text" class="form-control" name="volumetric_weight" id="total_weight_id" ng-model="editshipmentArray.volumetric_weight">
+									</span>
+
+								   
+									<div class="form-group">
+									<label><strong>{{'lang_TotalWeightKg'|translate}}</strong></label>
+									<input type="text" class="form-control" name="weight" id="total_weight" ng-model="editshipmentArray.weight">
+									</div>
+
+									<div class="form-group">
+									<label><strong>{{'lang_DeliveryChargeSAR'|translate}}</strong></label>
+									<input type="text" value="" name="service_charge" class="form-control" ng-model="editshipmentArray.service_charge">
+									</div>
+
+									<div class="form-group">
+									<label><strong>{{'lang_CODhargeSAR'|translate}}<span class="alert"></span></strong></label>
+									<input type="text" name="cod_fees" id="service_tax" class="form-control" ng-model="editshipmentArray.service_tax">
+									</div>
+								   <div class="form-group">
+									<label><strong>{{'lang_AdditionalCharge'|translate}}</strong></label>
+									<input type="text" class="form-control" name="other_charges" ng-model="editshipmentArray.other_charges">
+									</div>
+									<div class="form-group">
+									<label><strong>{{'lang_TotalChargeSAR'|translate}}<span class="alert">*</span></strong></label>
+									<input type="text" name="total_amt" class="form-control" id="show_total_amount_id" ng-model="editshipmentArray.total_amt">
+									</div>
+									
+								</div>
+								</div>
+
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+    <hr>
+        <button type="submit" class="btn btn-primary" name="submit_and_save" id="submit" value="submit" ng-click="shipmentform(editshipmentArray);">{{'lang_Submit'|translate}} &amp; {{'lang_Save'|translate}}</button>
+    &nbsp;      
+	<input name="submit" type="submit" class="btn btn-primary" value="Add Shipment" ng-click="shipmentform(editshipmentArray);">     
+    
+    <button type="reset" id="cancel" class="btn btn-danger" value="submit" style=" margin-right:-10%;">{{'lang_cancel'|translate}}</button>
+    
+
+</section>
+</div>
+

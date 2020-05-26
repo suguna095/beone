@@ -1,0 +1,58 @@
+
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getTransitData();">
+  <ol class="breadcrumb breadcrumb-light bg-transparent">
+    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> {{'lang_Home'|translate}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_Manifest_Management'|translate}}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_Transist_Time_between_hub'|translate}}</li>
+  </ol>
+</nav>
+<div class = "">
+<section class="hk-sec-wrapper">
+  <div class="panel panel-flat">
+    <div class="panel-heading">
+      <h5 class="panel-title">{{'lang_Transist_Time_between_hub'|translate}} {{data.shipper}}</h5>
+    </div>
+    <br>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div id="message"></div>
+                  <form class="stdform" method="post" action="" name="edit_rate" id="edit_rate" enctype="multipart/form-data">
+                    <table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+                      <tbody>
+                        <tr>
+                          <th>{{'lang_From'|translate}}</th>
+                          <th>{{'lang_To'|translate}} </th>
+                          <th>{{'lang_Days'|translate}} </th>
+                          <th>{{'lang_Cutoff'|translate}} </th>
+                        </tr>
+                        <tr ng-repeat="data in TransitData">
+                          <td>{{data.f_name}}</td>
+                          <td>{{data.t_name}}</td>
+                          <td><a ng-dblclick="GetdayUpdateForPage($index,'day1');" id="dayfield2{{$index}}" style="width:24px;"   class="badge badge-info text-white"> {{data.day}}</a>
+                         <input type="text" id="dayfield{{$index}}"  style="display:none; width:50px;"   ng-model="data.day" min="1"   />
+                          <i class="fa fa-check-square fa-1x" id="dayfield3{{$index}}" style="display:none;" ng-click="GetupdateDaytimeData(data.id,$index,data.day,'day');"></i></td>
+                          
+                          <td><div  class="badge badge-warning" id="timefield2{{$index}}" ng-dblclick="GetdayUpdateForPage($index,'time');" style="width:65px;"> {{data.cutoff}}</div>
+                            <div id="timefield1{{$index}}" style="display:none;">
+                              <div class="input-group clockpicker" clock-picker data-autoclose="true" >
+                                <input ng-model="data.cutoff"  type="text"  style="width:110px;">
+                                <span class="input-group-addon"> <span class="glyphicon glyphicon-time"></span> </span> </div>
+                              <i class="fa fa-check-square fa-1x" ng-click="GetupdateDaytimeData(data.id,$index,data.cutoff,'cutoff');" ></i> </div></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

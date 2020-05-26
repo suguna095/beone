@@ -1,0 +1,37 @@
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="editShipmentstatus();">
+   <ol class="breadcrumb breadcrumb-light bg-transparent">
+      <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{'lang_shipmentManagement'|translate}} </li>
+      <li class="breadcrumb-item active" aria-current="page">{{'lang_Add_File'|translate}}</li>
+   </ol>
+</nav>
+<div class = "">
+  
+	<section class="hk-sec-wrapper">
+      <h5 class="hk-sec-title">{{'lang_Add_File'|translate}}</h5>
+      <br>
+        
+	<div class="panel-body">
+		<div class="table-responsive">  
+		    <input type="hidden" name="cusid" ng-model="userselected.cusid" />
+		
+			<div class="col-md-12">
+                         			
+                    <div class="form-group">
+                    <label>{{'lang_File'|translate}}</label><span id="subject_info" class="alert"></span>
+                    <input type="file" name="file_add" class="form-control" ng-model="userselected.file_add">
+                    </div>    
+          
+            </div>
+			<div class="col-md-3">	
+			<label>&nbsp;</label>	
+			<button type="submit" class="btn btn-primary form-control" ng-click="AddShipmentFileform(userselected);">{{'lang_Submit'|translate}}</button>					
+			</div>	
+			
+										
+		</div>  
+	</div>
+				
+		
+	</section>
+</div>

@@ -1,0 +1,65 @@
+  	 
+
+	
+	<nav class="hk-breadcrumb" aria-label="breadcrumb" >
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_News'|translate}} </li>
+			<li class="breadcrumb-item active" aria-current="page"> {{'lang_Show_News'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "container">
+	
+
+	<section class="hk-sec-wrapper" ng-init="showlistdata();">
+		<div class="panel-heading">
+				<h5 class="panel-title">  {{'lang_Show_News'|translate}}</h5>
+		</div><br>
+		<table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+                        
+<thead>
+
+    <tr>
+        <th class="head0">{{'lang_srNo'|translate}} </th>
+        <th class="head1">{{'lang_Heading'|translate}}</th>
+        <th class="head1">{{'lang_date'|translate}}</th>
+        <th class="head0"> {{'lang_action'|translate}} </th>
+    </tr>
+</thead>
+
+                        
+<tbody>
+		<tr ng-repeat="data in ListArray">
+			<td>{{$index+1}}</td>
+			<td>{{data.heading}}</td>
+			<td>{{data.entry_date | date : format : "dd-mm-yy" }}</td>
+			<td>
+			    <div class="btn-group">
+                <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">{{'lang_Toggle_Dropdown'|translate}} </span>
+                </button>
+                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(138px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                <a class="dropdown-item" href="#"><i class="fa fa-check fa-fw"></i>&nbsp;{{'lang_Send_Active'|translate}} </a>
+				<a class="dropdown-item" ui-sref="edit_news({editid: data.id})"><i class="fa fa-pencil-square-o"></i>&nbsp;{{'lang_edit'|translate}} </a>
+				<a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i>&nbsp;{{'lang_Delete'|translate}} </a>
+                
+                </div>
+                </div>  
+			</td>
+        </tr>
+    	
+    	
+    	
+    	
+		
+        
+    	    				
+    	
+  
+</tbody>
+</table>
+</section>	
+
+
+

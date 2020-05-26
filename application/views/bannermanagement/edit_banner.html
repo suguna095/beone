@@ -1,0 +1,52 @@
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="formeditbannershow();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>    {{'lang_Home'|translate}} </a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Banner_Management'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Edit_Banner'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "container">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Edit_Banner'|translate}}</h5>
+		</div><br>
+		<div class="row">
+     	<div class="col-lg-12">
+        <form class="stdform" method="post" action="" name="edit_banner" enctype="multipart/form-data">
+        <input type="hidden" name="banid" ng-model="editbannerArray.banid" />
+                    	<div class="form-group">
+                        	<label>{{'lang_Title'|translate}}</label> <span id="title" class="alert"></span>
+                            <input type="text" class="form-control input-lg  input-lg" name="title" ng-model="editbannerArray.title" Required>
+                           <span class="text-danger" ng-show="edit_banner.title.$error.required">{{'lang_Title_is_required'|translate}}.</span>
+                        </div>
+                        <div class="form-group">
+                        	<label>{{'lang_URL'|translate}}</label><span id="upto250" class="alert"></span>
+                            <input type="text" name="url" class="form-control input-lg  input-lg" ng-model="editbannerArray.url" Required>
+                          <span class="text-danger" ng-show="edit_banner.url.$error.required">{{'lang_URL_required'|translate}}.</span>
+                        
+                        </div>
+                        <div class="form-group">
+                        	<label>{{'lang_Image'|translate}}</label><span id="upto500" class="alert"></span>
+                            <input type="file" name="image_path" fileread="editbannerArray.image_path" accept="image/*" class="form-control input-lg  input-lg">
+              				<input type="hidden" name="old_image_path" ng-model="editArray.image_path" />
+                           <img ng-if="editbannerArray.image_path" src="{{editbannerArray.image_path}}" class="img-fluid">
+                          
+                           
+                        </div>
+                         <div class="form-group">
+                        	<label>{{'lang_Description'|translate}}</label> <span id="flatrate" class="alert"></span>
+                           <textarea name="description" class="form-control input-lg  input-lg" cols="50" rows="10" ng-model="editbannerArray.description" Required></textarea>
+                          <span class="text-danger" ng-show="edit_banner.description.$error.required">{{'lang_Description_is_required'|translate}}.</span>
+                        </div>  
+                        
+                      
+                		
+                  	<input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="edit_banner.$invalid" ng-click="EditBannerform(editbannerArray);">      
+                           
+                       
+                    </form>
+ 		 </div>
+                                
+                            </div>
+		</section>

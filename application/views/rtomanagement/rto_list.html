@@ -1,0 +1,80 @@
+
+<nav class="hk-breadcrumb" aria-label="breadcrumb"  ng-init="ShowRtoCityDrop();">
+  <ol class="breadcrumb breadcrumb-light bg-transparent">
+    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> {{'lang_Home'|translate}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_DRS_Management'|translate}} </li>
+    <li class="breadcrumb-item active" aria-current="page"> {{'lang_ShowRTOList'|translate}} </li>
+  </ol>
+</nav>
+<div class = "">
+ 
+  <section class="hk-sec-wrapper">
+    <div class="panel-heading">
+      <h5 class="panel-title"> {{'lang_ShowRTOList'|translate}}</h5>   
+    </div>
+    <br>
+    <div class="table-responsive">
+    <div class="loader logloder" ng-show="loadershow"></div>
+      <table class="table table-hover table-bordered mb-0">
+        <thead>
+          <tr>
+            <form name="" method="post" action="">
+              <th class="head1" colspan="3"> <input type="text" name="search_val" placeholder="DRS Unique id." ng-model="filterData.searchfield" class="form-control" >
+              </th>
+              <th class="head1" colspan="2" >  
+				
+				<input type="text" name="city_id" id="show_city_dropdown"  placeholder="Select City" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="filterData.city_id">
+              </th>
+              <th class="head1" colspan="2"> <input type="text" name="search_date" id="datepicker1" placeholder="From Date" class="form-control" ng-model="filterData.start_date" >
+              </th>
+              <th class="head1" colspan="2"> <input type="text" name="search_date1" id="datepicker2" placeholder="To Date" class="form-control" ng-model="filterData.end_date" >
+              </th>
+              <th colspan="1"> <input type="button" name="Search" class="btn btn-primary" value="Search" ng-click="ShowRtolist(1,1);">
+              </th>
+            </form>
+            
+          </tr>
+          
+          
+          <tr>
+            <th>#</th>
+            <th>{{'lang_Uniqueid'|translate}} </th>
+            <th> {{'lang_date'|translate}}</th>
+            <th>{{'lang_city'|translate}} </th>
+            <th>{{'lang_Route_code'|translate}} </th>
+            <th>{{'lang_Driver'|translate}} </th>
+            <th>{{'lang_upplier'|translate}} </th>
+            <th>{{'lang_status'|translate}}</th>
+            <th colspan="2">{{'lang_action'|translate}} </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="data in RtolistArray">
+            <td>{{$index+1}}</td>
+            <td><img src="{{data.barcodeImage}}" />{{data.drs_unique_id}}</td>  
+            <td> {{data.drs_date}}</td>
+            <td> {{data.city_id}}</td>
+            <td> {{data.routecode}}</td>
+            <td> {{data.messangerName}}</td>
+            <td>{{data.supplier}}</td>   
+            <td><span ng-if="data.total_shipment==data.totalshipment" class="btn btn-success btn-xs ng-scope">{{'lang_Done'|translate}} {{data.total_shipment}}/{{data.totalshipment}}</span> 
+            <span ng-if="data.total_shipment!=data.totalshipment" class="btn btn-danger btn-xs  ng-scope">{{'lang_Running'|translate}} {{data.total_shipment}}/{{data.totalshipment}}</span></td>
+            <td colspan="2"><div class="btn-group dropdown">
+                <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> </button>
+                <div class="dropdown-menu w-210p"> <a class="dropdown-item"  href="rtoforPrint/{{data.drs_unique_id}}" target="_blank"><i class="fa fa-print fa-fw"></i>&nbsp;{{'lang_Print'|translate}} </a>
+                 <a class="dropdown-item" ui-sref="rto_detail({drs_unique_id:data.drs_unique_id})"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;{{'lang_View'|translate}} </a>
+                 <a class="dropdown-item" ui-sref="update_rto({drs_unique_id:data.drs_unique_id})"><i class="fa fa-refresh"></i>&nbsp;Status Update</a>   
+                
+                </div>
+              </div></td>    
+          </tr>
+          <tr>
+            <td ng-if="RtolistArray==''" colspan="10" style="text-align:center;"> {{'lang_Records_Not_Found'|translate}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button ng-hide="RtolistArray.length==totalCount || RtolistArray==''" class="btn btn-info" ng-click="ShowRtolist(count=count+1,0);" ng-init="count=1">{{'lang_Load_More'|translate}}</button>
+    </div>
+  </section>
+</div>

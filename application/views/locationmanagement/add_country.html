@@ -1,0 +1,78 @@
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="formeditdatashow();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>  {{'lang_Home'|translate}}  </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> {{'lang_Location_Management'|translate}}  </li>
+			<li class="breadcrumb-item active" aria-current="page"> {{'lang_Add_Country'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+	
+	<div class="panel-heading">
+				<h5 class="panel-title"> {{'lang_Add_Country'|translate}}</h5>
+		</div><br>
+		<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-12">
+        
+       					 <form name="add_country" >
+                         
+        				<input type="hidden" name="edit_id" value="">  
+         				<input type="hidden" name="old_country_name" value="">  
+                    
+                        <div class="form-group">
+                        <label>{{'lang_Country_Name'|translate}}  <span style="color:red">*</span></label><span class="error_alert"></span>
+                        <input type="hidden" name="old_country_name" id="old_country_name" value="">       
+						<input type="text" name="country" id="alert_name" ng-model="CountryArray.country" class="form-control" required>
+						<span class="text-danger" ng-show="add_country.country.$error.required">{{'lang_Country_is_Required'|translate}}</span>
+                        </div> 
+                    
+                      <!--   <div class="form-group">
+                        <label>Image  <span style="color:red">*</span></label><span class="error_alert"></span> 
+                        
+                        <input type="file" name="country_flage" fileread="CountryArray.country_flage" accept="image/" id="alert_image" class="form-control" required>
+                        <input type="hidden" name="country_flage_old" value="">
+						<span class="text-danger" ng-show="add_country.country_flage.$error.required">Image is Required</span>
+                        </div> -->
+                        
+                        <div class="form-group">
+                        <label>{{'lang_Title'|translate}} <span style="color:red">*</span></label><span class="error_alert"></span>
+                        <input type="text" name="title" ng-model="CountryArray.title" id="alert_title" class="form-control" required>
+						<span class="text-danger" ng-show="add_country.title.$error.required">{{'lang_Title_is_required'|translate}}</span>   
+                        </div>    
+                    
+                        <div class="form-group">
+                        	<label>{{'lang_Description'|translate}}<span style="color:red">*</span></label><span class="error_alert"></span>
+                            <textarea name="descen" ng-model="CountryArray.descen" id="alert_description" class="form-control" required></textarea>
+							<span class="text-danger" ng-show="add_country.descen.$error.required">{{'lang_Description_is_required'|translate}}</span>
+                       </div>
+                       
+                        <div class="form-group">
+                        <label>{{'lang_Keyword'|translate}}  <span style="color:red">*</span></label><span class="error_alert"></span>
+                        <textarea name="keyword" ng-model="CountryArray.keyword" id="alert_keyword" class="form-control" required></textarea>
+						<span class="text-danger" ng-show="add_country.keyword.$error.required">{{'lang_Keyword_is_required'|translate}}</span>
+                        </div>
+                        
+						  <div class="form-group"> 
+                            <label>{{'lang_Image'|translate}} </label><br>
+                            <input type="file" name="country_flage" fileread="CountryArray.country_flage" accept="image/*" class="btn btn-primary btn-file" required><br><br>
+                            <img  src="{{CountryArray.country_flage}}" class="img-fluid" width="90px;" height="90px;"> 
+                            <input type="hidden" > 
+							<span class="text-danger" ng-show="add_country.country_flage.$error.required">{{'lang_Image_is_Required'|translate}}</span>
+                            </div>    
+							
+						
+						 <button type="submit" class="btn btn-primary" name="submit" value="submit" ng-disabled="add_country.$invalid"   ng-click="AddCountryList(CountryArray);">{{'lang_Submit'|translate}}</button>
+                    </form>
+                    
+ 			 			</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		</section>

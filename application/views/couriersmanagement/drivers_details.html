@@ -1,0 +1,143 @@
+  		<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="EditCouriershow();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_CouriersManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page"> {{'lang_CouriersInfo'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	<section class="hk-sec-wrapper">
+    <div class="breadcrumb-line">
+	   <div class="page-title">
+            <h4><i class="icon-arrow-left52 position-left"></i>
+            <span class="text-semibold">{{'lang_CourierDetails'|translate}}({{editcourierArray.messenger_name}})</span> 
+            
+			 </h4>
+        </div>
+	</div><br>
+    <div class="row">
+
+	<div class="col-md-12 row"> 
+	<div class="col-md-6 uk-overflow-auto" style="padding:12px;padding-left: 30px;">
+	<h4>{{'lang_ViewCourierDetails'|translate}}</h4><br><br/>
+					<table>
+						<tbody>
+                      <tr> 
+                        <td><div class="form-group"><strong>{{'lang_name'|translate}} </strong></div></td>
+                        <td style="padding-left: 10px;"> : {{editcourierArray.messenger_name}}</td>    
+                      </tr>
+                      <tr>
+                        <td><div class="form-group"><strong>{{'lang_EmailAddress'|translate}} </strong></div></td>
+                        <td style="padding-left: 10px;"> : {{editcourierArray.email}}</td>
+                      </tr>
+                       <tr>
+                        <td><div class="form-group"><strong>{{'lang_phone'|translate}} </strong></div></td>
+                         <td style="padding-left: 10px;"> : {{editcourierArray.mobile}}</td>
+                      </tr>
+                       <tr>
+                        <td><div class="form-group"><strong>{{'lang_VehicleNumber'|translate}} </strong></div></td>
+                        <td style="padding-left: 10px;"> : {{editcourierArray.vehicle_number}}</td>
+                      </tr>
+                       <tr>
+                        <td><div class="form-group"><strong>{{'lang_Joindate'|translate}} </strong></div></td>
+                         <td style="padding-left: 10px;"> : {{editcourierArray.joinDate}}</td>
+                      </tr>
+                    <tr>
+                        <td><div class="form-group"><strong>{{'lang_city'|translate}} </strong></div></td>
+                         <td style="padding-left: 10px;"> : {{editcourierArray.city}}</td>
+                      </tr>
+                     
+                     
+                      
+                    
+                      
+                      <!-- <td><button  class="btn btn-danger" ng-click="loadMore(1,1);" >Search</button></td>-->
+                      
+                    </tbody>
+					</table>
+				</div>
+				
+	
+        <div class="col-md-6">
+        <h4 style="padding-top: 20px">{{'lang_BasicDetails'|translate}}</h4> 
+	<div class="row" style="padding-top: 35px;padding-left:10px">	
+
+
+					<table style="width:100%">
+						<tbody>
+                      
+                      <tr>
+                        <td><div class="form-group"><strong>{{'lang_MessengerCode'|translate}}</strong></div></td>
+                        <td style="padding-left: 10px;"> : {{editcourierArray.messenger_code}}</td>
+                      </tr>
+                       <tr>
+                        <td><div class="form-group"><strong>{{'lang_iqama_ID'|translate}}</strong></div></td>
+                        <td style="padding-left: 10px;"> : {{editcourierArray.iqama}}</td> 
+                      </tr>
+                       <tr>
+                        <td><div class="form-group"><strong>{{'lang_Typeofvehicle'|translate}} </strong></div></td>
+                        <td style="padding-left: 10px;"> : {{editcourierArray.typVehicle}}</td>
+                      </tr>
+                      <tr>
+                        <td><div class="form-group"><strong>{{'lang_upplier'|translate}} </strong></div></td>
+                        <td style="padding-left: 10px;"> : {{editcourierArray.supplier}}</td>
+                      </tr>
+                     
+                     
+                      
+                    
+                      
+                      <!-- <td><button  class="btn btn-danger" ng-click="loadMore(1,1);" >Search</button></td>-->
+                      
+                    </tbody>
+					</table>
+		
+			</div>
+		</div>
+       </div> 
+        <br />  <br />
+		
+			<div class="row">	
+	<div class="uk-overflow-auto" style="padding:26px;">
+	<h4  style="padding-left: 10%;">{{'lang_OtherDetails'|translate}} </h4> <br />
+					<table >
+						<tbody>
+                      <tr> 
+                        <td style="vertical-align: -webkit-baseline-middle;"><div class="form-group" style="padding-left: 10%;"><strong>{{'lang_MessangerBoyImage'|translate}}</strong></div></td>
+                        <td style="padding-left: 10%;">:&nbsp;<img  src="{{editcourierArray.messanger_image}}" class="img-fluid" width="40px;" height="40px;"> </td>
+                      </tr>
+                      <tr>
+                        <td><div class="form-group" style="padding-left: 10%;"><strong>{{'lang_Uploadlicense'|translate}} </strong></div></td>
+                        <td style="padding-left: 10%;">:&nbsp;<a href="{{editcourierArray.iqama_id}}"  target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 30px;color: red;"></i> </a>
+                          
+                         
+		 </td> 
+                      </tr>      
+					   <tr>
+                        <td><div class="form-group" style="padding-left: 10%;"><strong>{{'lang_UploadIqamaID'|translate}} </strong></div></td> 
+                        <td style="padding-left: 10%;"> :&nbsp;<a href="{{editcourierArray.license}}"  target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 30px;color: red;"></i> </a>
+        
+		 </td>
+                      </tr>
+                      
+                     
+                     
+                     
+                      
+                    
+                      
+                      <!-- <td><button  class="btn btn-danger" ng-click="loadMore(1,1);" >Search</button></td>-->
+                      
+                    </tbody>
+					</table>
+				</div>
+			</div>
+
+	 
+        
+        
+       
+    
+    </div>
+	</section>	
+</div>

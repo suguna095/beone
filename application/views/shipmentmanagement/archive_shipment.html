@@ -1,0 +1,135 @@
+
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showarchieveship(1,0);loadcountry();">
+  <ol class="breadcrumb breadcrumb-light bg-transparent">
+    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> {{'lang_Home'|translate}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_shipmentManagement'|translate}}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_ArchiveShipment'|translate}}</li>
+  </ol>
+</nav>
+<div class = "">
+  <section class="hk-sec-wrapper">
+  <h5 class="hk-sec-title">{{'lang_ArchiveShipment'|translate}}</h5>
+  <br>
+  <section class="hk-sec-wrapper">
+    <div class="row">
+      <div class="col-sm">
+        <div class="row">
+          <div class="col-md-3">
+            <select class="form-control custom-select" ng-model="exportlimit" name="exprort_limit">
+              <option value="">{{'lang_Select_Export_Limit'|translate}}</option>
+              <option ng-repeat="exdata in dropexportArr" value="{{exdata.i}}">{{exdata.j}}-{{exdata.i}}</option>
+            </select>
+          </div>
+		  
+          <div class="col-md-3">
+            <input class="btn btn-info" type="submit" value="{{'lang_exportToExcelzIP'|translate}}" name="exportData" ng-click="exportToExcel1(exportlimit)"> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="hk-sec-wrapper">
+    <div class="row">
+      <table class="table datatable-show-all table-bordered table-hover datatable-highlight panel panel-flat " >
+        <input type="HIDDEN" name="show_type" value="" />
+        <tr>
+          <td ><select name="user_name" class="form-control" id="user_name" ng-model="filterData.user_id" ng-init="showCustomerDrop();" >
+              <option value="" selected="selected" required="required">{{'lang_selectCustomer'|translate}}</option>
+              <option ng-repeat="data in customerlist" value="{{data.id}}">{{data.name}}</option>
+            </select>
+            <br />
+            <select  class="form-control" ng-change="searchtype(filterData.search_type);" ng-model="filterData.search_type" >
+                <option value="AWB">{{'lang_AWB'|translate}} </option>
+                <option value="SN">{{'lang_SenderName'|translate}}</option>
+                <option value="RE" >{{'lang_ReceiverName'|translate}} </option>
+			</select>
+            <br/>
+          <input type="text" name="search_val_data" id="search_val_data" placeholder="{{transferdata.search_type}}" class="form-control " ng-model="filterData.search_val_data">
+            <br /></td>
+          <td colspan="2"><select name="origin" class="form-control"  id="origin_sel"  ng-model="filterData.origin">
+              <option value="" >{{'lang_selectOrigin'|translate}}</option>
+              <option ng-repeat="data in arrlist" value="{{data.city}}">{{data.city}}</option>
+            </select>
+            <br />
+            <select name="destination" class="form-control"  id="destination"  ng-model="filterData.destination">
+              <option value="" >{{'lang_selectDestination'|translate}}</option>
+              <option ng-repeat="data in arrlist" value="{{data.city}}">{{data.city}}</option>
+            </select></td> 
+          <td colspan="2"><label>{{'lang_From'|translate}}</label>
+		   <input type="text" ng-model="filterData.from_date" id="datepicker2" class="form-control" placeholder="dd-mm-yy" >
+            <br />
+            <label>{{'lang_To'|translate}}</label>
+			 <input type="text" ng-model="filterData.to_date" id="datepicker2" class="form-control" placeholder="dd-mm-yy" ></td>  
+          <td colspan="2"><label>{{'lang_CreationDate'|translate}}</label>
+		  <input type="text" ng-model="filterData.created_date" id="datepicker3" class="form-control" placeholder="dd-mm-yy" >
+		  </td>
+        </tr>
+        <tr>
+          <td><input type="button" name="bt_search" value="{{'lang_search'|translate}}" class="btn btn-primary" ng-click="showarchieveship(1,1);"/></td>
+          <td colspan="2"><span class="btn btn-primary"> {{'lang_totalShipment'|translate}} ({{totalCount}}) </span></td>
+        </tr>
+      </table>
+    </div>
+    <br>
+  </section>
+  <section class="hk-sec-wrapper">
+  <div class = "table-responsive">
+    <table id="testTable_new" class="table table-striped table-bordered table-hover" align="center">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>{{'lang_date'|translate}}</th>
+          <th>{{'lang_reference'|translate}}</th>
+          <th>{{'lang_shipperReference'|translate}}#</th>
+          <th>{{'lang_AWB'|translate}}#</th>
+          <th>{{'lang_DeliveryAttempts'|translate}}</th>
+          <th>{{'lang_CallAttempts'|translate}}</th>
+          <th>{{'lang_origin'|translate}}</th>
+          <th>{{'lang_destination'|translate}}</th>
+          <th>{{'lang_Pieces'|translate}}</th>
+          <th>{{'lang_sender'|translate}}</th>
+          <th>{{'lang_reciever'|translate}}</th>
+          <th>{{'lang_Weight'|translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="data in listarchieveData">
+          <td>{{$index+1}}</td>
+          <td>{{data.schedule_date}}</td>
+          <td>{{data.refused}}</td>
+          <td>{{data.shippers_ref_no}}</td>
+          <td><a ui-sref="track_archive({trackid:data.id})" target="_blank">{{data.slip_no}}</a></td>
+          <td>{{data.d_attempt}}</td> 
+          <td>{{data.call_attempt}}</td>
+          <td>{{data.origin}}</td>
+          <td>{{data.reciever_city}}</td>
+          <td>{{data.pieces}}</td>
+          <td>{{data.sender_name}}</td>
+          <td>{{data.reciever_name}}</td>
+          <td>{{data.weight}}</td>
+        </tr>
+		
+		<!--<tr ng-if="totalCount==''" colspan='13'>
+				No Records Found
+		<tr>-->
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+</section>
+<script>/*
+$(document).ready(function(){
+    $("select").change(function(){
+        $(this).find("option:selected").each(function(){
+            var optionValue = $(this).attr("value");
+            if(optionValue){
+                $(".box").not("." + optionValue).hide();
+                $("." + optionValue).show();
+            } else{
+                $(".box").hide();
+            }
+        });
+    }).change();
+});*/
+</script>

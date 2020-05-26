@@ -1,0 +1,353 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb"  ng-init="showmanifest();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>    {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Manifest_Management'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">Transist Time between hub</li>
+        </ol>
+    </nav>
+	<div class = "container">
+	
+	<section class="hk-sec-wrapper">
+	<div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">Transist Time between hub for Speedzire</h5>
+        </div>
+
+        <div class="panel-body">            	 
+                            
+           
+        
+       
+<div class="row">
+<div class="col-lg-12">
+<div class="panel panel-default">
+<div class="panel-body">
+<div class="row">
+<div class="col-lg-12">
+    <div id="message"></div>
+    <form class="stdform" method="post" action="" name="edit_rate" id="edit_rate" enctype="multipart/form-data">
+      
+  <table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+      <tbody><tr><th>Form</th>
+       <th>TO</th>
+      <th>Days</th>
+       <th>Cutoff</th>
+      
+       </tr><tr>
+      <td>JED</td>  
+      <td>JED</td> 
+      <td><div id="viewDiv1" class="badge badge-info" ondblclick="editDay('1','1')"> 1</div>
+         <div id="editdev1" style="display:none;"> 
+       <input type="number" name="days" id="day_1" min="1" style="width:50px;" value="1">
+      <i class="fa fa-check-square fa-1x" id="iconP_1" onclick="saveDays('1');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv1" class="label label-warning" ondblclick="editCutoff('1','23:00:00')"> 23:00:00</div>
+         <div id="ceditdev1" style="display:none;"> 
+       <input type="time" id="c_1" min="1" style="width:110px;" value="23:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('1');"></i>
+          </div>
+      </td>  
+  </tr>
+    
+        
+        
+       <tr>
+      <td>JED</td>  
+      <td>RUH</td> 
+      <td><div id="viewDiv2" class="badge badge-info" ondblclick="editDay('2','0')"> 0</div>
+         <div id="editdev2" style="display:none;"> 
+       <input type="number" name="days" id="day_2" min="1" style="width:50px;" value="0">
+      <i class="fa fa-check-square fa-1x" id="iconP_2" onclick="saveDays('2');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv2" class="label label-warning" ondblclick="editCutoff('2','00:00:00')"> 00:00:00</div>
+         <div id="ceditdev2" style="display:none;"> 
+       <input type="time" id="c_2" min="1" style="width:110px;" value="00:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('2');"></i>
+          </div>
+      </td>  
+  </tr>
+    
+        
+        
+       <tr>
+      <td>JED</td>  
+      <td>DMM</td> 
+      <td><div id="viewDiv3" class="badge badge-info" ondblclick="editDay('3','0')"> 0</div>
+         <div id="editdev3" style="display:none;"> 
+       <input type="number" name="days" id="day_3" min="1" style="width:50px;" value="0">
+      <i class="fa fa-check-square fa-1x" id="iconP_3" onclick="saveDays('3');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv3" class="label label-warning" ondblclick="editCutoff('3','00:00:00')"> 00:00:00</div>
+         <div id="ceditdev3" style="display:none;"> 
+       <input type="time" id="c_3" min="1" style="width:110px;" value="00:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('3');"></i>
+          </div>
+      </td>  
+  </tr>
+    
+        
+        
+       <tr>
+      <td>JED</td>  
+      <td>UnCovered Zone NEW</td> 
+      <td><div id="viewDiv4" class="badge badge-info" ondblclick="editDay('4','0')"> 0</div>
+         <div id="editdev4" style="display:none;"> 
+       <input type="number" name="days" id="day_4" min="1" style="width:50px;" value="0">
+      <i class="fa fa-check-square fa-1x" id="iconP_4" onclick="saveDays('4');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv4" class="label label-warning" ondblclick="editCutoff('4','00:00:00')"> 00:00:00</div>
+         <div id="ceditdev4" style="display:none;"> 
+       <input type="time" id="c_4" min="1" style="width:110px;" value="00:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('4');"></i>
+          </div>
+      </td>  
+  </tr>
+    
+        
+        
+       <tr>
+      <td>RUH</td>  
+      <td>JED</td> 
+      <td><div id="viewDiv5" class="badge badge-info" ondblclick="editDay('5','0')"> 0</div>
+         <div id="editdev5" style="display:none;"> 
+       <input type="number" name="days" id="day_5" min="1" style="width:50px;" value="0">
+      <i class="fa fa-check-square fa-1x" id="iconP_5" onclick="saveDays('5');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv5" class="label label-warning" ondblclick="editCutoff('5','00:00:00')"> 00:00:00</div>
+         <div id="ceditdev5" style="display:none;"> 
+       <input type="time" id="c_5" min="1" style="width:110px;" value="00:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('5');"></i>
+          </div>
+      </td>  
+  </tr>
+    
+        
+        
+       <tr>
+      <td>RUH</td>  
+      <td>RUH</td> 
+      <td><div id="viewDiv6" class="badge badge-info" ondblclick="editDay('6','1')"> 1</div>
+         <div id="editdev6" style="display:none;"> 
+       <input type="number" name="days" id="day_6" min="1" style="width:50px;" value="1">
+      <i class="fa fa-check-square fa-1x" id="iconP_6" onclick="saveDays('6');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv6" class="label label-warning" ondblclick="editCutoff('6','23:00:00')"> 23:00:00</div>
+         <div id="ceditdev6" style="display:none;"> 
+       <input type="time" id="c_6" min="1" style="width:110px;" value="23:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('6');"></i>
+          </div>
+      </td>  
+  </tr>
+    
+        
+        
+       <tr>
+      <td>RUH</td>  
+      <td>DMM</td> 
+      <td><div id="viewDiv7" class="badge badge-info" ondblclick="editDay('7','1')"> 1</div>
+         <div id="editdev7" style="display:none;"> 
+       <input type="number" name="days" id="day_7" min="1" style="width:50px;" value="1">
+      <i class="fa fa-check-square fa-1x" id="iconP_7" onclick="saveDays('7');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv7" class="label label-warning" ondblclick="editCutoff('7','12:00:00')"> 12:00:00</div>
+         <div id="ceditdev7" style="display:none;"> 
+       <input type="time" id="c_7" min="1" style="width:110px;" value="12:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('7');"></i>
+          </div>
+      </td>  
+  </tr>
+    
+        
+        
+       <tr>
+      <td>RUH</td>  
+      <td>UnCovered Zone NEW</td> 
+      <td><div id="viewDiv8" class="badge badge-info" ondblclick="editDay('8','0')"> 0</div>
+         <div id="editdev8" style="display:none;"> 
+       <input type="number" name="days" id="day_8" min="1" style="width:50px;" value="0">
+      <i class="fa fa-check-square fa-1x" id="iconP_8" onclick="saveDays('8');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv8" class="label label-warning" ondblclick="editCutoff('8','00:00:00')"> 00:00:00</div>
+         <div id="ceditdev8" style="display:none;"> 
+       <input type="time" id="c_8" min="1" style="width:110px;" value="00:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('8');"></i>
+          </div>
+      </td>  
+  </tr>
+    
+        
+        
+       <tr>
+      <td>DMM</td>  
+      <td>JED</td> 
+      <td><div id="viewDiv9" class="badge badge-info" ondblclick="editDay('9','0')"> 0</div>
+         <div id="editdev9" style="display:none;"> 
+       <input type="number" name="days" id="day_9" min="1" style="width:50px;" value="0">
+      <i class="fa fa-check-square fa-1x" id="iconP_9" onclick="saveDays('9');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv9" class="label label-warning" ondblclick="editCutoff('9','00:00:00')"> 00:00:00</div>
+         <div id="ceditdev9" style="display:none;"> 
+       <input type="time" id="c_9" min="1" style="width:110px;" value="00:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('9');"></i>
+          </div>
+      </td>  
+  </tr>
+    
+        
+        
+       <tr>
+      <td>DMM</td>  
+      <td>RUH</td> 
+      <td><div id="viewDiv10" class="badge badge-info" ondblclick="editDay('10','0')"> 0</div>
+         <div id="editdev10" style="display:none;"> 
+       <input type="number" name="days" id="day_10" min="1" style="width:50px;" value="0">
+      <i class="fa fa-check-square fa-1x" id="iconP_10" onclick="saveDays('10');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv10" class="label label-warning" ondblclick="editCutoff('10','00:00:00')"> 00:00:00</div>
+         <div id="ceditdev10" style="display:none;"> 
+       <input type="time" id="c_10" min="1" style="width:110px;" value="00:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('10');"></i>
+          </div>
+      </td>  
+  </tr> 
+    
+        
+        
+       <tr>
+      <td>DMM</td>  
+      <td>DMM</td> 
+      <td><div id="viewDiv11" class="badge badge-info" ondblclick="editDay('11','0')"> 0</div>
+         <div id="editdev11" style="display:none;"> 
+       <input type="number" name="days" id="day_11" min="1" style="width:50px;" value="0">
+      <i class="fa fa-check-square fa-1x" id="iconP_11" onclick="saveDays('11');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv11" class="label label-warning" ondblclick="editCutoff('11','00:00:00')"> 00:00:00</div>
+         <div id="ceditdev11" style="display:none;"> 
+       <input type="time" id="c_11" min="1" style="width:110px;" value="00:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('11');"></i>
+          </div>
+      </td>  
+  </tr>
+    
+        
+        
+       <tr>
+      <td>DMM</td>  
+      <td>UnCovered Zone NEW</td> 
+      <td><div id="viewDiv12" class="badge badge-info" ondblclick="editDay('12','0')"> 0</div>
+         <div id="editdev12" style="display:none;"> 
+       <input type="number" name="days" id="day_12" min="1" style="width:50px;" value="0">
+      <i class="fa fa-check-square fa-1x" id="iconP_12" onclick="saveDays('12');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv12" class="label label-warning" ondblclick="editCutoff('12','00:00:00')"> 00:00:00</div>
+         <div id="ceditdev12" style="display:none;"> 
+       <input type="time" id="c_12" min="1" style="width:110px;" value="00:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('12');"></i>
+          </div>
+      </td>  
+  </tr>
+    
+        
+        
+       <tr>
+      <td>UnCovered Zone NEW</td>  
+      <td>JED</td> 
+      <td><div id="viewDiv13" class="badge badge-info" ondblclick="editDay('13','0')"> 0</div>
+         <div id="editdev13" style="display:none;"> 
+       <input type="number" name="days" id="day_13" min="1" style="width:50px;" value="0">
+      <i class="fa fa-check-square fa-1x" id="iconP_13" onclick="saveDays('13');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv13" class="label label-warning" ondblclick="editCutoff('13','00:00:00')"> 00:00:00</div>
+         <div id="ceditdev13" style="display:none;"> 
+       <input type="time" id="c_13" min="1" style="width:110px;" value="00:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('13');"></i>
+          </div>
+      </td>  
+  </tr>
+    
+        
+        
+       <tr>
+      <td>UnCovered Zone NEW</td>  
+      <td>RUH</td> 
+      <td><div id="viewDiv14" class="badge badge-info" ondblclick="editDay('14','0')"> 0</div>
+         <div id="editdev14" style="display:none;"> 
+       <input type="number" name="days" id="day_14" min="1" style="width:50px;" value="0">
+      <i class="fa fa-check-square fa-1x" id="iconP_14" onclick="saveDays('14');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv14" class="label label-warning" ondblclick="editCutoff('14','00:00:00')"> 00:00:00</div>
+         <div id="ceditdev14" style="display:none;"> 
+       <input type="time" id="c_14" min="1" style="width:110px;" value="00:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('14');"></i>
+          </div>
+      </td>  
+  </tr>
+    
+        
+        
+       <tr>
+      <td>UnCovered Zone NEW</td>  
+      <td>DMM</td> 
+      <td><div id="viewDiv15" class="badge badge-info" ondblclick="editDay('15','0')"> 0</div>
+         <div id="editdev15" style="display:none;"> 
+       <input type="number" name="days" id="day_15" min="1" style="width:50px;" value="0">
+      <i class="fa fa-check-square fa-1x" id="iconP_15" onclick="saveDays('15');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv15" class="label label-warning" ondblclick="editCutoff('15','00:00:00')"> 00:00:00</div>
+         <div id="ceditdev15" style="display:none;"> 
+       <input type="time" id="c_15" min="1" style="width:110px;" value="00:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('15');"></i>
+          </div>
+      </td>  
+  </tr>
+    
+        
+        
+       <tr>
+      <td>UnCovered Zone NEW</td>  
+      <td>UnCovered Zone NEW</td> 
+      <td><div id="viewDiv16" class="badge badge-info" ondblclick="editDay('16','0')"> 0</div>
+         <div id="editdev16" style="display:none;"> 
+       <input type="number" name="days" id="day_16" min="1" style="width:50px;" value="0">
+      <i class="fa fa-check-square fa-1x" id="iconP_16" onclick="saveDays('16');"></i>
+          </div>
+      </td> 
+      <td> <div id="cviewDiv16" class="label label-warning" ondblclick="editCutoff('16','00:00:00')"> 00:00:00</div>
+         <div id="ceditdev16" style="display:none;"> 
+       <input type="time" id="c_16" min="1" style="width:110px;" value="00:00:00">
+      <i class="fa fa-check-square fa-1x" onclick="saveCutoff('16');"></i>
+          </div>
+      </td>  
+  </tr>
+    
+        
+        
+                     
+        </tbody></table>                   
+  </form> 
+</div>
+   
+    </div>
+    </div>
+    </div>
+    </div>
+            </div>
+    </div>
+    </div>
+		
+    </section>	

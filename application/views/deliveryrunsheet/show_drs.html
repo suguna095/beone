@@ -1,0 +1,96 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getDrsData(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_DRS_Management'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_DRS'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Show_DRS'|translate}}</h5>
+		</div><br>
+        <div class="table-responsive">
+		 <table class="table table-hover table-bordered mb-0">
+				<thead>
+					<tr> 
+						<th class="head1" colspan="3">
+						<input type="text" name="search_val" placeholder="DRS Unique id./Route code/City/Driver Name/AWB No." ng-model="filterData.searchfield" class="form-control" onfocus="this.value=''" value="">
+						</th>
+						
+						<th class="head1" colspan="2">
+						<input type="date" name="search_date" placeholder="Date" class="form-control" ng-model="filterData.start_date" value="">
+						</th>
+						
+						<th class="head1" colspan="2">
+						<input type="date" name="search_date1" placeholder="Date" class="form-control" ng-model="filterData.end_date" value="">
+						</th>
+						
+						<th colspan="2">
+						<input type="button" name="Submit" class="btn btn-primary" value="Search" ng-click="getDrsData(1,1);">        </th>
+						
+					</tr>
+					
+					<tr>
+						<th>#</th>
+						<th>{{'lang_Uniqueid'|translate}}</th><th>   
+					
+						{{'lang_date'|translate}}
+					
+					
+						</th>
+						<th>{{'lang_city'|translate}}</th>
+						<th>{{'lang_Route_code'|translate}}</th>
+						<th>{{'lang_Driver'|translate}}</th>     
+						 <th>{{'lang_upplier'|translate}}</th>
+						<th>{{'lang_status'|translate}}</th>
+						<th>{{'lang_action'|translate}}</th>
+					</tr>
+				</thead>
+				<tbody>
+                <tr>
+              <td colspan="15" ><div data-loading> </div></td>
+            </tr>
+				<tr ng-repeat="data in drsData">
+                <td> {{$index+1}}</td>
+                 <td>  <img src="{{data.barcodeImage}}" />{{data.drs_unique_id}}</td>
+                
+                 <td> {{data.drs_date}}</td>    
+                  <td> {{data.city_id}}</td>  
+                  <td> {{data.routecode}}</td> 
+                    <td> {{data.messangerName}}</td>  
+                      <td> </td> 
+                        <td><span ng-if="data.total_shipment==data.totalshipment" class="btn btn-success ng-scope">{{'lang_Done'|translate}} {{data.total_shipment}}/{{data.totalshipment}}</span>
+						<span ng-if="data.total_shipment!=data.totalshipment" class="btn btn-danger  ng-scope">{{'lang_Running'|translate}} {{data.total_shipment}}/{{data.totalshipment}}</span>
+						</td>   
+                          <td>
+                          <div class="btn-group dropdown">
+								<button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								</button>
+								<div class="dropdown-menu w-210p">
+									<a class="dropdown-item" href="drsforPrint/{{data.drs_unique_id}}" target="_blank"><i class="fa fa-print fa-fw"></i>&nbsp;{{'lang_Print'|translate}}</a>
+										<a class="dropdown-item" ui-sref="show_drs_detail({drs_unique_id:data.drs_unique_id})"><i class="fa fa-exclamation fa-fw"></i>&nbsp;{{'lang_View'|translate}}</a>
+									<a class="dropdown-item" ui-sref="delivery_detail({drs_unique_id:data.drs_unique_id})"><i class="fa fa-truck fa-fw" style="color:green;"></i>&nbsp;{{'lang_Delivered'|translate}}</a>   
+								
+								
+									<a class="dropdown-item"  ui-sref="notdelivery_detail({drs_unique_id:data.drs_unique_id})"><i class="fa fa-truck fa-fw" style="color:red;"></i>&nbsp;{{'lang_Not_Delivered'|translate}}</a>
+                                    </div>
+                                    </div>
+                                 
+				
+                          </td>       
+           
+                </tr>  
+				
+               
+				</tbody>
+               
+		 </table>
+         <button ng-hide="drsData.length==totalCount" class="btn btn-info" ng-click="getDrsData(count=count+1,0);" ng-init="count=1">{{'lang_Load_More'|translate}}</button>  
+
+           
+         
+         </div>
+    </section>		

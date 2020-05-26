@@ -1,0 +1,46 @@
+ 	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="viewcmspage(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_CMS_Page'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_CMS_Page'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "container">
+	
+	<section class="hk-sec-wrapper">  
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Show_CMS_Page'|translate}}</h5>
+		</div><br>
+		<table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+                        
+            <thead>
+            <tr>
+            <th class="head0">{{'lang_sNO'|translate}}</th>
+            <th class="head1">{{'lang_Services_Name'|translate}}</th>
+            <th class="head0">{{'lang_action'|translate}}</th>
+            </tr>
+            
+            </thead>
+                        
+            <tbody>
+            <tr ng-repeat="data in viewcmsData">
+           <td>{{$index+1}}</td>
+            <td><a href="">{{data.services_name}}</a></td>
+            <td>
+			    <div class="btn-group">
+                <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">{{'lang_Toggle_Dropdown'|translate}}</span>
+                </button>
+                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(138px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                <a class="dropdown-item" ui-sref="edit_cms({id:data.id})"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp;{{'lang_edit'|translate}}</a> 
+				
+                </div>
+                </div>
+            </td>
+            </tr>
+            
+            </tbody>
+            
+                    </table>
+    </section>				

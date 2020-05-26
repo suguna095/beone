@@ -1,0 +1,140 @@
+   	
+	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getCodlist(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_COD_management'|translate}} </li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_COD_Shipment'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	
+	<section class="hk-sec-wrapper"> 
+	
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Show_COD_Shipment'|translate}}</h5>    
+		</div><br>
+		<div class="panel-heading">
+            
+           {{'lang_Confirmed'|translate}}  :&nbsp; <a class="btn btn-primary" style="background-color:green;"></a>
+            {{'lang_Confirm'|translate}} :&nbsp;<a class="btn btn-danger"> </a>
+            {{'lang_NotAvailable'|translate}} :&nbsp;<a class="btn btn-primary" style="background-color:red;"> </a>
+        </div><br>
+		<div class ="table-responsive">
+		        
+
+		<table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+        <thead>
+        <tr>
+			<th class="head1" colspan="3">
+			<input type="text" ng-model="filterData.from_date" id="datepicker3" class="form-control" placeholder="dd-mm-yy" required="required">
+		
+			</th>
+			
+			 <th class="head1" colspan="3">
+			<input type="text" ng-model="filterData.to_date" id="datepicker4" class="form-control" placeholder="dd-mm-yy" required="required">
+			</th>
+			<th class="head1" colspan="10">
+			<button type="submit" class="btn btn-primary" name="excel" ng-click="getexcelList();">{{'lang_Export_to_Excel'|translate}}   </button> </th>   
+        </tr> 
+		
+		<tr> 
+			<th class="head1" colspan="3">
+			<select name="hub" id="hub" class="form-control"  ng-model="filterData.hub">
+			<option value="">{{'lang_Hub'|translate}}</option> 
+			 <option value="29663">{{'lang_Riyadh'|translate}}</option>
+			<option value="7">{{'lang_Jeddah'|translate}}</option>
+			 <option value="3">{{'lang_Dammam'|translate}}</option>
+			</select>
+			</th>        
+			<th class="head1" colspan="3"> 
+			<input type="text" name="searchcod" ng-model="filterData.drs_unique_id" placeholder="DRS Unique id" class="form-control"  ng-model="filterData.city_id">
+			</th>
+			<th class="head1" colspan="3" ng-init="ShowCodCityDrop();">  
+			<select name="desctination_sel" class="form-control" id="desctination_sel"  ng-model="filterData.city_id">
+			<option value="" selected="selected">{{'lang_selectDestination'|translate}} </option>
+			<option ng-repeat="data in CodlistCityArray" value="{{data.id}}">{{data.city}}</option>
+			</select></th>
+			<div >
+			
+			<th class="head1" colspan="3"> 
+			<input type="text" name="start_date" ng-model="filterData.start_date" id="datepicker1" class="form-control" placeholder="dd-mm-yy" >
+			</th>
+			
+			
+			<th class="head1" colspan="3">
+			<input type="text" name="end_date" ng-model="filterData.end_date" id="datepicker2" class="form-control" placeholder="dd-mm-yy" > 
+			</th>
+			</tr>
+			<tr>
+			<th class="head1" colspan="12">
+			</th>
+			<th>
+			 <input type="submit" name="Search" class="btn btn-primary" value="Search" ng-click="getCodlist(1,1);"> </th> 
+			 
+		   <th>    
+			<a href="printCOD/{{filterData.start_date}}/{{filterData.end_date}}" ng-if="filterData.end_date && filterData.start_date" class=" btn btn-info" target="_blank">{{'lang_Print'|translate}}</a>
+            <a href="printCOD" ng-hide="filterData.end_date && filterData.start_date" class=" btn btn-info" target="_blank">{{'lang_Print'|translate}}</a> <!--<a href="" class="btn btn-success btn-sm" target="_blank">{{'lang_lAbel'|translate}}</a>--> </div>
+    
+			<!---   <a class="btn btn-primary" ui-sref="getPrintlist({start_date:filterData.start_date,end_date:filterData.end_date})" target="_blank">test </a>  
+			<input type="submit" name="Search" class="btn btn-primary" value="Print"  ng-click="getPrintlist(filterData.start_date,filterData.end_date);"></th>
+			-->
+		 </div>  
+		</tr> 
+		
+		
+       </thead>
+	   </table>
+	   
+	   <table class="table datatable-show-all table-bordered table-hover datatable-highlight"> 
+		   <thead>
+                <tr>
+					<th>#</th>
+					<th>{{'lang_Uniqueid'|translate}} </th>
+					<th> {{'lang_date'|translate}} </th>
+					<th>{{'lang_COD_CollectedBy'|translate}} </th>
+					<th>{{'lang_Driver'|translate}}</th>
+					<th>{{'lang_upplier'|translate}} </th>
+					<th>{{'lang_DriverCode'|translate}} </th>
+					<th>{{'lang_POD'|translate}} </th>
+					<th>{{'lang_NP'|translate}} </th>
+					<th>{{'lang_RTW'|translate}} </th>
+					<th>{{'lang_Total_Ship'|translate}} </th>
+					<th>{{'lang_CODAmt'|translate}} </th> 
+                    <th>{{'lang_action'|translate}} </th>
+				</tr>
+            </thead>
+			<tbody>
+			    <tr ng-repeat="data in CodlistArray">
+				<td>{{$index+1}}</td>
+                <td>  <img src="{{data.barcodeImage}}" />{{data.drs_unique_id}}</td> 
+                <td>{{data.drs_date}}</td>
+				<td>{{data.shipment_id}}</td> 
+                <td>{{data.messangerName}}</td>
+				<td>{{data.supplier}}</td>
+                <td>{{data.routecode}}</td> 
+				
+                <td ng-if="data.Del!='0'">
+				<a class="btn btn-success" ui-sref="totalCOD({drs_unique_id:data.drs_unique_id,codstatus:1})" target="_blank">{{data.Del}}</a></td>	
+				<td	ng-else>{{data.Del}}</td>		
+				<td><a class="btn btn-warning" style="font-size:15px;" ui-sref="totalCOD({drs_unique_id:data.drs_unique_id,codstatus:2})" target="_blank" >{{data.NP}}</a></td>
+				<td ng-if="data.NotDel!='0'"><a style="font-size:15px;" class="btn btn-danger" ui-sref="totalCOD({drs_unique_id:data.drs_unique_id,codstatus:5})"target="_blank">{{data.NotDel}}</a></td>	
+				<td	ng-else>{{data.NotDel}}</td>            
+				<td><a class="btn btn-primary" style="font-size:15px;" ui-sref="totalCOD({drs_unique_id:data.drs_unique_id,codstatus:3})" target="_blank" >{{data.allShip}}</a></td>   
+				<td><span class="btn btn-primary btn-sm" style="font-size:15px;">{{data.COD_AMOUNT}}</span></td> 
+                <td ng-if="data.amount_received=='Y'"><a class="btn btn-primary btn-sm">{{'lang_Confirmed'|translate}}</td> 
+				<td ng-else-if="data.totalAdd==data.allShip">
+				<a class="btn btn-success btn-sm" ng-click="GetConfirm(data.id,data.drs_unique_id)"  ng-confirm-click="Do you want to Confirm!">{{'lang_Confirm'|translate}}</a></td>
+				<td ng-else><a class="btn btn-primary btn-sm" style="background-color:red;" onclick="return alert('Shipment processing Incomplete');"> {{'lang_NotAvailable'|translate}}</a> 
+				</td>
+			</tr>
+			<!-- <tr ng-if="CodlistArray==''" colspan="13">
+				No Records Found
+			</tr> -->
+		</tbody>
+		</table>
+		 <button ng-hide="CustomerlistArray.length==totalCount" class="btn btn-info" ng-click="getCodlist(count=count+1,0);" ng-init="count=1">{{'lang_Load_More'|translate}} </button>
+	</div>
+    </section>		
+</div>
+

@@ -1,0 +1,70 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showeditaboutus();">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_generalSetting'|translate}} </li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_About_Us'|translate}} </li>
+                </ol>
+    </nav>
+	<div class = "">
+	
+	
+	<section class="hk-sec-wrapper">
+	<h5 class="hk-sec-title">{{'lang_Edit_About_Us'|translate}} </h5><br>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+                
+                    <form class="stdform"  enctype="multipart/form-data"  name="edit_about_us"  id="edit_about_us">
+                   <input type="hidden" name="rid" ng-model="abtArray.rid" /> 
+                    <div class="form-group">
+                        <label>{{'lang_Heading_English'|translate}} </label>
+                       <input type="text" name="heading" class="form-control"  ng-model="abtArray.heading_en" required>
+                    
+                         <span class="text-danger" ng-show="edit_about_us.heading_en.$error.required">{{'lang_Heading_English_required'|translate}}.</span>
+
+                    </div>
+                    
+					<div class="form-group">
+                        <label>
+						{{'lang_Heading_Arabic'|translate}} </label>
+                       <input type="text" name="heading_ar" class="form-control" ng-model="abtArray.heading_ar" required>
+                       <span class="text-danger" ng-show="edit_about_us.heading_ar.$error.required">{{'lang_Heading_Arabic_required'|translate}} .</span>
+                    </div>
+              
+                    <div class="form-group">
+                        <label>{{'lang_Description_English'|translate}} </label>
+                          <textarea name="description_en" ng-model="abtArray.description_en" class="form-control" ></textarea>
+					
+                        
+                         <span class="text-danger" ng-show="edit_about_us.description_en.$error.required">{{'lang_Description_English_required'|translate}}.</span>
+                    </div>
+					
+					 <div class="form-group">
+                        <label>{{'lang_Description_Arabic'|translate}}</label>
+                         <textarea name="description_ar" ng-model="abtArray.description_ar"  class="form-control" ></textarea>
+                                    
+                              
+                                    
+						
+                        <span class="text-danger" ng-show="edit_about_us.description_ar.$error.required">{{'lang_Description_Arabic_required'|translate}} .</span>
+                    </div>
+                   
+                  <div class="form-group">
+                        <label>{{'lang_Image'|translate}} </label>
+                        <input type="file" name="image" fileread="abtArray.image" accept="image/*"  class="form-control"><br>
+                       <input type="hidden" name="old_image" ng-model="editArray.old_image" />
+                        <img ng-if="abtArray.image" src="{{abtArray.image}}" class="img-fluid">
+                        
+                       
+                        </div>
+                  
+                   <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="edit_about_us.$invalid" ng-click="Addformabts(abtArray);">
+                
+                    </form>
+                        
+       			 </div>
+        	</div>
+        </div>
+	</section>
+			

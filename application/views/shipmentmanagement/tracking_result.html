@@ -1,0 +1,442 @@
+<style>
+.panel-default > .panel-heading {
+    color: #333333;
+    background-color: #dedddd;
+    border-color: #ddd;
+	padding: 15px;
+}
+.panel-heading {
+    position: relative;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+</style>
+ <section class="hk-sec-wrapper" ng-init="GetShipmentDetailshow();">
+<div class="content-wrapper">
+<div class="page-header page-header-default"> 
+    <div class="page-header-content"> 
+        <div class="page-title">  
+            <h6><i class="icon-arrow-left52 position-left"></i> 
+            <span class="text-semibold">   {{'lang_details'|translate}}  - ({{'lang_TrackingNo'|translate}}. :{{DetailListArray.slip_no}}) /  ({{'lang_ReferenceNo'|translate}}. :{{DetailListArray.booking_id}})  </span>
+			</h6>
+            <input type="hidden" name="slip_no" ng-model="DetailListArray.slip_no" /> 
+            
+            
+        <a class="heading-elements-toggle"><i class="icon-more"></i></a> 
+		</div>
+		 
+        <div class="heading-elements" style="float:right">
+            <div class="heading-btn-group">
+                <a href="" class=" btn btn-info btn-sm" target="_blank">{{'lang_lAbel'|translate}}</a>
+                <a href="" class="btn btn-success btn-sm" target="_blank">{{'lang_lAbel'|translate}}</a> 
+				
+					 
+            </div>   
+        </div>     
+	</div>
+
+   
+</div>
+        	
+            
+            
+                 
+<div class="content"> 
+             
+             
+             
+               
+	
+	
+	<div class="row" style="margin-top: 5%;">
+		<div class="col-md-12">  
+			 
+		</div>
+    	<div class="col-md-6">
+     		<div class="panel panel-default">
+				
+          		<div class="panel-heading">{{'lang_senderInfo'|translate}}</div>
+                <div class="panel-body">
+				
+                    <div class="table-responsive">  
+                    <table class="table table-hover table-bordered">
+                        <tbody>
+                       
+                         <tr>
+                        <td class="bold">{{'lang_SenderAccountno'|translate}}</td>
+                        <td class="captial">{{DetailListArray.sender_name}}</td>
+                        </tr>
+                        
+                        <tr>
+                        <td class="bold">{{'lang_SenderName'|translate}}</td>
+                        <td class="captial">{{DetailListArray.sender_name}}</td>
+                        </tr>
+                        
+                        <tr>
+                        <td class="bold">{{'lang_Sender_Mobile'|translate}}</td>
+                        <td class="captial">{{DetailListArray.sender_phone}}</td>
+                        </tr>
+                        
+                        <tr>
+                        <td class="bold">{{'lang_senderAddress'|translate}}</td>
+                        <td class="captial">{{DetailListArray.sender_address}}</td>
+                        </tr>
+                        
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+			</div>
+		</div>
+                 
+		<div class="col-md-6">
+			<div class="panel panel-default">
+                <div class="panel-heading">{{'lang_receiverInfo'|translate}}</div>
+                <div class="panel-body">
+                    <div class="table-responsive">  
+                    <table class="table table-hover table-bordered">
+    
+                    <tbody>
+                      <tr>
+                        <td class="bold">{{'lang_ReceiverName'|translate}}</td>
+                        <td class="captial">{{DetailListArray.reciever_name}}</td>
+                      </tr>
+                      
+                      <tr>
+                        <td class="bold">{{'lang_ReceiverMobile'|translate}}</td>
+                        <td class="captial">{{DetailListArray.reciever_phone}}</td>
+                      </tr>
+                      
+                      <tr>
+                        <td class="bold">{{'lang_ReceiverAddress'|translate}}</td>
+                        <td class="captial">{{DetailListArray.reciever_address}}</td>
+                      </tr>
+                      
+                    </tbody>
+                    
+                    </table>
+                    </div>
+                </div>
+			</div>
+		</div>
+
+		<div class="col-md-12"> 
+			<div class="panel panel-default">
+				<div class="panel-heading">{{'lang_ShipmentInfo'|translate}}</div>
+                <div class="panel-body">
+                    <div class="table-responsive"> 
+                    <table class="table table-hover table-bordered">
+
+                    <tbody>
+                      <tr>
+                        <td class="bold">{{'lang_ReferenceNo'|translate}}.</td>
+                        <td class="captial"> {{DetailListArray.booking_id}} </td>
+                      </tr>
+					  <tr>
+                        <td class="bold">{{'lang_ShipperReferenceNo'|translate}}.</td>
+                        <td class="captial"> {{DetailListArray.shippers_ref_no}}</td>
+                     </tr>
+                        
+                    <tr>
+                        <td class="bold">{{'lang_EntryDate'|translate}}</td>
+                        <td class="captial">{{DetailListArray.entry_date}}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="bold">{{'lang_origin'|translate}}</td>
+                        <td class="captial">
+                        {{DetailListArray.origin}}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="bold">{{'lang_destination'|translate}}</td>
+                        <td class="captial">{{DetailListArray.destination}}</td>
+                    </tr>
+					 <tr>
+                        <td class="bold">{{'lang_No_of_Pieces'|translate}}</td>
+                        <td class="captial">{{DetailListArray.pieces}}</td>
+                    </tr>
+					 <tr>
+                        <td class="bold">{{'lang_PaymentMode'|translate}}</td>
+                        <td class="captial">{{DetailListArray.mode}}</td>
+                    </tr>
+					<tr>
+                        <td class="bold">{{'lang_ScheduleChanel'|translate}}</td>
+                        <td class="captial">{{'lang_NA'|translate}}</td>
+                    </tr>
+					
+					<tr>
+                        <td class="bold">{{'lang_Shipping_Zone'|translate}}</td>
+                        <td class="captial">{{DetailListArray.shipping_zone}}</td>
+                    </tr>
+					<tr>
+                        <td class="bold">{{'lang_Shelveno'|translate}}</td>
+                        <td class="captial">{{DetailListArray.shelv_no}}</td>
+                    </tr>
+					<tr>
+                        <td class="bold">{{'lang_ShelveLocation'|translate}}</td>
+                        <td class="captial">{{DetailListArray.menifest_location}}</td>
+                    </tr>
+					<tr>
+                        <td class="bold">{{'lang_OnHold'|translate}}</td>
+                        <td class="captial">{{DetailListArray.onHold_Confirm}}</td>
+                    </tr>
+                   
+                    <tr>
+                        <td class="bold">{{'lang_netPrice'|translate}}</td> 
+                        <td class="captial">{{DetailListArray.topay_amount}}</td>
+                    </tr>
+                 
+                    <tr>
+                        <td class="bold">{{'lang_Scheduled'|translate}}</td>
+                        <td class="captial">
+                       {{DetailListArray.schedule_status}}  </td>
+                    </tr>
+                                      
+                    <tr>
+                        <td class="bold">{{'lang_Weight'|translate}}</td>
+                        <td class="captial">{{DetailListArray.weight}} Kg</td>
+                    </tr>
+                    
+                    <tr>
+                    <td class="bold">{{'lang_status'|translate}} :</td>
+                    <td class="captial" style="background-color:#AEFFAE; ">
+                    <span class=" icon-square-down-right"></span> {{DetailListArray.status}}
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td class="bold">{{'lang_StoreLink'|translate}}</td>
+                    <td class="captial">{{DetailListArray.store_link}}</td>
+                    </tr>
+                
+				 <tr>
+                    <td class="bold"> {{'lang_userType'|translate}}</td>
+                    <td class="captial">{{DetailListArray.user_type}}</td>
+                    </tr>
+                    <tr>
+                    <td class="bold">{{'lang_ProductType'|translate}}</td>
+                    <td class="captial">{{DetailListArray.product_type}}</td>
+                    </tr>
+					<tr>
+                    <td class="bold">{{'lang_ProductDescription'|translate}}</td>
+                    <td class="captial">{{DetailListArray.contents}}</td>
+                    </tr>
+                    </tbody>
+                    
+                    </table>
+                    </div>
+                </div>
+			</div>
+		</div>
+            
+       <div class="col-md-12">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">{{'lang_Dimension_Info'|translate}}</div>
+                <div class="panel-body" >
+                
+                                <div style="padding: 15px;"><strong>#1.</strong> &nbsp;0CM &nbsp;x&nbsp;0CM &nbsp;x&nbsp;0CM&nbsp;x&nbsp;2Kg &nbsp;<strong>{{'lang_SKU'|translate}}:</strong>&nbsp;{{DetailListArray.sku}}  &nbsp;<strong>{{'lang_Description'|translate}}:</strong>&nbsp; {{DetailListArray.status_describtion}}</div>
+                                </div>
+      		</div>
+      	</div>
+
+ 		 <div class="col-md-12">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">{{'lang_Description'|translate}}</div>
+        		<div class="panel-body">
+                <div class="table-responsive"> 
+                <table class="table table-hover table-bordered">
+        
+                <tbody>
+                <tr>
+                <th class="head1">{{'lang_Description'|translate}}:</th>
+                <td class="head0">{{shipmentCourierArray.messenger_name}}</td>
+                <th class="head1"> {{'lang_Code'|translate}}:</th>
+                <td class="head0">{{shipmentCourierArray.messenger_code}}</td> 
+                </tr> 
+                
+                 
+                <tr>
+                <th class="head1">{{'lang_city'|translate}} :</th>
+                <td class="head0">{{shipmentCourierArray.city}}</td>
+                <th class="head1">{{'lang_mobile'|translate}} :</th>
+                <td class="head0">{{shipmentCourierArray.mobile}}</td>
+                
+                </tr>  
+                                
+                                <tr>
+                <!--<th class="head1">Branch :</th>
+                <td class="head0">1</td>-->
+                <th class="head1">{{'lang_email'|translate}} :</th>
+                <td class="head0">{{shipmentCourierArray.email}}</td>
+                <th class="head1">{{'lang_VehicleNumber'|translate}} :</th>
+                <td class="head0">{{shipmentCourierArray.vehicle_number}}</td>
+                </tr>  
+                                
+                <!--                <tr>
+                <th class="head1">Vehicle Number :</th>
+                <td class="head0">738 EGU2</td>
+                <th class="head1">&nbsp;</th>
+                <td class="head0">&nbsp;</td>
+                </tr>  
+                -->
+                
+                                <tr>
+                <th class="head1">{{'lang_Photo'|translate}}:</th>
+                <td class="head0">
+                <img src="{{shipmentCourierArray.messanger_image}}" width="100" height="100"></td>
+                <th class="head1"></th>
+                <td class="head0"></td>
+                </tr>  
+                                
+                </tbody>
+  				</table>
+                </div>
+  </div>
+			</div>
+		</div>  
+  		
+<div class="col-md-12">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">Image{{'lang_Photo'|translate}}</div>
+        		<div class="panel-body">
+        		<div class="table-responsive">  
+                <table class="table table-hover table-bordered">
+    
+                <tbody>
+                <tr>
+                <th class="head1"> {{'lang_POD'|translate}} :</th>
+                <td class="head0"><img src="https://tamco.fast-option.com/signature_img/STS4507937059.png" width="100" height="100"></td>
+                <th class="head1">{{'lang_Receiver_Photo'|translate}}</th>
+                <td class="head0"> <img src="https://tamco.fast-option.com/receiver_img/STS4507937059.png" width="100" height="100"></td>
+                </tr>
+                </tbody>
+                
+                </table>
+                </div>
+                </div>
+			</div>
+		</div>		
+		<div class="col-md-12">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">{{'lang_Pickup_History'|translate}}</div>
+                <div class="panel-body">
+                <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" style="font:8px;">
+                <thead>
+                    <tr>
+                    <th>#</th>
+                  
+                    <th>{{'lang_Pickup_Date'|translate}}</th>
+                    <th>{{'lang_Pickup_Time'|translate}}</th>
+                    
+                     <th>{{'lang_userName'|translate}}</th>
+                   
+                    <th>{{'lang_Image'|translate}}</th>
+                   
+                    </tr>
+                </thead>
+                     
+                <tbody>
+                                                                                                              <tr>
+                        <td>2</td>
+                      
+                      
+                        <td>13-01-2020</td>
+                          <td>12:07:44</td>
+                         
+						  
+						  <td>{{'lang_Admin_user'|translate}}</td>
+                 <td class="head0"> <img src="" width="100px;" height="100px;"></td>
+                 
+                        
+                    </tr>
+                                                                                         			
+                </tbody>
+                </table>
+                </div>
+                </div>
+                </div>
+                </div>
+       
+		
+         <div class="col-md-12">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">{{'lang_Scheduling_History'|translate}}</div>
+                <div class="panel-body">
+                <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover" style="font:8px;">
+                <thead>
+                    <tr>
+                    <th>#</th>
+                  
+                    <th>{{'lang_AreaStreet'|translate}}</th>
+                      <th>{{'lang_Area'|translate}}</th>
+                     <th>{{'lang_Channel'|translate}}</th>
+                   
+                    <th>{{'lang_scheduleDate'|translate}}</th>
+                    <th>{{'lang_time'|translate}}</th>
+                       <th>Update By{{'lang_recordNotFound'|translate}}</th>
+                        <th>{{'lang_name'|translate}}</th>
+                    </tr>
+                </thead>
+                     
+                <tbody>
+                                    <tr>
+                    	<td colspan="12">{{'lang_recordNotFound'|translate}}</td>
+                    </tr>
+                			
+                </tbody>
+                </table>
+                </div>
+                </div>
+                </div>
+                </div>
+                
+		        <div class="col-md-12">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">{{'lang_LatestStatus'|translate}}</div>
+                <div class="panel-body">
+                <div class="table-responsive">  
+                <table class="table table-hover table-bordered">
+                
+                <thead>
+                <tr>
+                <th class="head1">{{'lang_srNo'|translate}}</th>
+                <th class="head0">{{'lang_date'|translate}} </th>
+                <th class="head1">{{'lang_Activities'|translate}}</th>    
+                <th class="head0">{{'lang_Location'|translate}}</th>
+                <th class="head0">{{'lang_CityCode'|translate}}</th>
+                <th class="head0">{{'lang_Code'|translate}}</th>
+                <th class="head1">{{'lang_details'|translate}}</th>
+                <th class="head0">{{'lang_userName'|translate}}</th>
+                <th class="head1">{{'lang_comment'|translate}}</th>
+                </tr>
+                </thead>
+                  
+                <tbody>     
+                 <tr ng-repeat="data in shipmentStatusArray">
+                 <td ng-if="shipmentStatusArray=='null'">{{'lang_recordNotFound'|translate}}</td>
+                <td class="first style3">{{$index+1}}</td>
+                <td>{{data.entry_date}} </td>
+                <td>{{data.Activites}}</td>
+                <td>{{data.new_location}}</td>
+                <td>{{data.city_code}}</td>
+               <td>{{data.code}}</td>
+               <td>{{data.Details}}</td>
+                <td>{{data.user_id}}</td>
+                <td>{{data.comment}}</td>
+                </tr>
+             
+            </tbody>
+                 
+        		</table>
+                </div>
+        		</div>
+        	</div>
+        </div>
+         
+		 
+		        		</div>
+        		</div>
+        	</div>

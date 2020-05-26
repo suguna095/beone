@@ -1,0 +1,130 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showOnHoldReport(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_reports'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_ShowOnHoldReport'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "" ng-controller="reportCtrl">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+		<h5 class="panel-title">{{'lang_ShowOnHoldReport'|translate}}</h5>
+		</div><br>
+		<section class="hk-sec-wrapper">
+		<table class="table table-hover mb-0">
+        
+        <thead>
+        
+        
+        <tr>
+        <td colspan="8">
+        <div class="row">
+        
+        <div class="col-md-3">
+        <input type="date" name="search_date" id="search_date" class="form-control" ng-model="filterData.start_date">
+        </div>
+      
+        <div class="col-md-3">
+        <select name="main_status" class="form-control"  ng-model="filterData.main_status">
+        <option value=""> {{'lang_status'|translate}}</option>
+        <option value="OH"> {{'lang_OnHold'|translate}}</option>
+        <option value="OHR"> {{'lang_Removed_OnHOld'|translate}}</option>
+        <option value="RFDE">{{'lang_Ready_for_Delivery'|translate}}</option>
+        </select>
+        </div>
+          
+        <div class="col-md-3">
+		  <input type="button" name="bt_search" value="Search" class="btn btn-primary" ng-click="showOnHoldReport(1,1);">
+        </div>
+         <div class="col-md-3">
+		<input class="btn-info" type="button"  value="Export to Zip" ng-click="exportToExcelonHold_report('#onHold_report')">        </div>
+        
+        </div>								
+        </td>
+        </tr>
+        					
+        
+        </thead>
+		
+        </table>
+		</section>
+		<div class = "table-responsive">
+		<table class="table table-hover mb-0" id="onHold_report">
+            <thead>
+							<tr>
+								<th>{{'lang_date'|translate}}</th>
+                                <th>{{'lang_Update_By'|translate}}</th>
+								<th>{{'lang_reference'|translate}}#</th>
+								<th>{{'lang_AWB'|translate}}#</th>
+                                <th>{{'lang_DeliveryAttempts'|translate}}</th>
+								<th>{{'lang_origin'|translate}}</th>
+								<th>{{'lang_destination'|translate}}</th>
+                                <th>{{'lang_RecieverName'|translate}} </th>
+                                <th>{{'lang_RecieverAddress'|translate}} </th>
+                                <th>{{'lang_RecieverPhone'|translate}}</th>
+                                <th>{{'lang_Mode'|translate}}</th>
+								<th>{{'lang_status'|translate}}</th>
+                                <th>{{'lang_CODAmount'|translate}}</th>
+								<th>{{'lang_Sub_Category'|translate}}</th>
+                                <th>{{'lang_details'|translate}}</th>
+                                <th>{{'lang_DriverComment'|translate}} </th>
+                                <th>{{'lang_ScheduleChanel'|translate}}</th>
+                                <th>{{'lang_OnHold'|translate}}</th>
+                                <th>{{'lang_driverName'|translate}} </th>
+                                <th>{{'lang_Supplier_Name'|translate}}</th>
+                                <th>{{'lang_Shelve'|translate}} </th>
+                                <th>{{'lang_CustomerAccount'|translate}} </th>
+                                <th>{{'lang_ScheduleDate'|translate}}  </th>
+                                <th>{{'lang_ScheduleChanel'|translate}}</th>
+                                <th>{{'lang_TimeSlot'|translate}} </th>
+								<th>{{'lang_AreaStreet'|translate}} </th>
+                                <th>{{'lang_Area'|translate}}</th>
+                             <th>{{'lang_latitudelongitude'|translate}}</th>  
+                            </tr>
+			</thead>
+		
+		<tbody>
+		            <tr  ng-repeat="data in onHolddata">
+						<td>{{$index+1}}</td>
+						<td>{{data.status_date}}</td>
+						<td>{{data.username}}</td>
+						<td>{{data.slip_no}}</td>
+						<td>{{data.total_attempted}}</td>
+						<td>{{data.origin}}</td>
+						<td>{{data.reciever_city}}</td>
+						<td class="text_cap">{{data.reciever_name}}</td>
+						<td class="text_cap"> {{data.reciever_address}}</td>
+						<td class="text_cap">{{data.reciever_phone}}</td>
+						<td class="text_cap">{{data.mode}}</td>
+						<td class="text_cap">{{data.new_status}}</td>
+						<td ng-if="data.client_type=='B2C' && data.mode=='COD'">COD ({{data.total_cod_amt}})</td>
+						<td ng-else>COD ({{data.total_count}})
+						</td>
+						<td><span class=" icon-blocked"></span>{{data.Activites}}</td>
+						<td> {{data.Details}}  </td>
+						<td>{{data.comment}}</td>
+						 <td ng-if="data.schedule_status=='' || data.schedule_status=='N'" ><span class="btn btn-danger  btn-xs">{{'lang_No'|translate}}</span></td>
+					<td ng-else><span class="btn btn-success  btn-xs">{{'lang_Yes'|translate}}</span> </td>
+						<td>{{data.refused}}</td>
+						<td><span class="btn btn-success btn-xs">{{data.messenger_name}}</span></td>
+						<td> {{data.supplier_name}} </td>
+						<td>{{data.shelv_no}}</td>
+						<td>{{data.uniqueid}} </td>
+						<td>{{data.schedule_date}}</td>
+						<td><span class="label label-success">{{data.schedule_type}}</span></td>
+						<td>{{data.time_slot}}</td>
+						<td>{{data.area_street}}</td>
+						<td>{{data.area}}</td>
+						<td>{{data.dest_lat}},{{data.dest_lng}}</td>
+						</tr>
+						<tr>
+					<td ng-if="onHolddata==''" colspan="12" align="center" style="text-align:center;">
+						{{'lang_NoRecords_Found'|translate}}
+					</td> 
+                </tr> 
+						
+		    </tbody>
+		</table>
+		</div>
+		</section>

@@ -1,0 +1,79 @@
+   <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getPickupLocataionreport(1,0);">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Pickup_Location'|translate}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Show_Pickup_Location'|translate}}</li>
+                </ol>
+            </nav>
+  <div class="container">
+                <!-- Title -->
+            
+        
+           
+     <section class="hk-sec-wrapper">
+     <div class="breadcrumb-line">
+                <div class="hk-pg-header">
+                <h4><i data-feather="arrow-left-circle"></i></i> 
+                <span class="text-semibold"></span>{{'lang_Show_Pickup_Location'|translate}}</h4>
+                </div>
+            </div>
+      <div class="col-sm">
+     <div class="row">
+      <div class="col-md-3">
+        <input type="text" name="searchfield" class="form-control" ng-model="filterData.searchfield" placeholder="Enter Customer Name.." onfocus="this.value=''">
+     </div>
+       <div class="col-md-3">
+      <span class="input-group-btn">
+        <button class="btn btn-primary clear" type="button" name="Submit" value="Search" ng-click="getPickupLocataionreport(1,1);"></i> {{'lang_search'|translate}}</button>
+      </span>
+    </div>
+  </div></div><br>
+    <div class="row">
+    
+    
+    <div class="col-md-12">
+      
+     <table class="table datatable-show-all table-bordered table-hover datatable-highlight" style="align-items: center;">
+                        
+<thead>
+    <tr>
+        <th class="head0">{{'lang_sNO'|translate}}</th>
+        <th class="head1">{{'lang_Customer_Name'|translate}}</th>
+         <th class="head1">{{'lang_Location_Number'|translate}}</th>
+       <th class="head0">{{'lang_address'|translate}}</th>
+         <th class="head1">{{'lang_Area'|translate}}</th>
+    </tr>
+</thead>
+                        
+<tbody>
+        <tr ng-repeat="data in PickupLocArray"> 
+          <td>{{$index+1}}</td>
+          <td>{{data.cust_id}}</td>
+          <td>{{data.location_number}}</td>
+          <td>{{data.address}}</td>
+          <td>{{data.area}}</td>
+        
+    
+      </tr>
+         
+</tbody>
+</table>
+        </div>
+   
+   
+           
+  
+                                         
+                                      
+                                          
+</div>
+</section>
+
+
+  
+</div>
+</div>
+
+    
+
+      

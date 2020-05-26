@@ -1,0 +1,97 @@
+
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showuserlist();">
+  <ol class="breadcrumb breadcrumb-light bg-transparent">
+    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">User Management</li>
+    <li class="breadcrumb-item active" aria-current="page">Show User</li>
+  </ol>
+</nav>
+<div class="container">
+<div class="breadcrumb-line">
+  <div class="hk-pg-header">
+    <h4><i data-feather="arrow-left-circle"></i></i> 
+            <span class="text-semibold"></span>Show User</h4>
+  </div>
+</div>
+<section class="hk-sec-wrapper">
+  <div class="panel-heading">
+    <h5 class="panel-title">Show User</h5>
+  </div>
+  <br> <form name="search_form" method="post" action="">
+  <div class="table-responsive">
+  <table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+    <thead>
+      <tr>
+        <th class="head1" colspan="7">
+            <div class="row">
+            <div class="col-sm">
+            <div class="row">
+            <div class="col-md-9">
+              <input type="text" name="search_val" value="" class="form-control" placeholder="Search By User Name" onfocus="this.value=''">
+            </div>
+            <br>
+            <div class="col-md-3">
+              <input type="submit" name="Submit" class="btn btn-primary" value="Search" onclick="return Valid_search(document.search_form);">
+            </div>
+            <label style="color:#F00;">
+            <div id="search_val" style="display:inline;"></div>
+            </label>
+           </div>
+    
+      </div>
+    
+      </div>
+        </th>
+    
+    
+    
+      <th colspan="1"> <a href="" class="btn btn-success"><i class="fa fa-building"></i>Add  User</a> </th>
+    </tr>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Usertype</th>
+      <th>User Name</th>
+      <th>Branch Location</th>
+      <th>Action</th>
+    </tr>
+      </thead>
+    
+    <tbody>
+      <tr ng-repeat="data in listData">
+        <td>{{$index+1}}</td>
+        <td>{{data.name}}</td>
+        <td>{{data.phone}}</td>
+        <td>{{data.email}}</td>
+        <td><span class="label label-primary" ng-if="data.usertype=='A'">Admin</span><span class="label label-primary" ng-if="data.usertype=='M'">Manager</span><span class="label label-primary" ng-if="data.usertype=='O'">Agent</span><span class="label label-primary" ng-if="data.usertype=='S'">Admin</span></td>
+        <td>{{data.username}}</td>
+        <td>{{data.branch_location}}</td>
+        <td>
+		    <div class="btn-group dropdown">
+					    <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        <div class="dropdown-menu w-210p">
+						<a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Edit</a>
+						<a class="dropdown-item" href="#">Delete</a>
+						
+                        </div>
+                    </div>
+		</td>
+      
+        
+      </tr>
+      
+      
+      <tr>
+        <td colspan="9" align="center">
+            <input type="hidden" name="pageval" id="pagevalid" value="0">
+        </td>
+      </tr>
+    </tbody>
+  </table> </div></form>
+</section>
+</div>

@@ -1,0 +1,88 @@
+      <script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip.js"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip-utils.js"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/FileSaver.js"></script>
+	<nav class="hk-breadcrumb" aria-label="breadcrumb"  ng-init="notFoundData();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>    {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Manifest_Management'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_Not_Found_Orders'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+	<div class="panel panel-flat">
+    
+    <div class="panel-heading">
+    <h5 class="panel-title">  
+    <input class="btn-primary" type="button" onclick="create_zip();" value="Export to Excel ZIP"></h5>
+    </div>
+      
+         <form name="smform" method="post">
+         <input type="hidden" name="drs_unique_id" value="{{nfoundid}}">
+	<table class="table datatable-show-all table-bordered table-hover datatable-highlight" id="testTable_new">
+    
+    <thead>
+            <tr>
+        <th>{{'lang_srNo'|translate}} </th>
+        <th>{{'lang_SelectAll'|translate}} <br><input type="checkbox" onclick="toggle2(this)" name="selectAll[]" value=""></th>
+        <th>{{'lang_AWB_No'|translate}} .</th>
+        <th>{{'lang_ProductType'|translate}} </th>
+        <th>{{'lang_origin'|translate}}</th>
+        <th>{{'lang_destination'|translate}} </th>
+        <th>{{'lang_sender'|translate}} </th>
+        <th>{{'lang_Receiver'|translate}} </th>
+        <th>{{'lang_status'|translate}} </th>
+        <th>{{'lang_Receive'|translate}} </th>
+        </tr>
+    </thead>
+    
+    <tbody>
+            <tr ng-repeat="data in NotFoundarray">
+        <td>{{$index+1}}</td>
+		<td>Select All <br><input type="checkbox" onclick="toggle2(this)" name="selectAll[]" value=""></td>
+		<td>{{data.slip_no}}</td>
+		<td>{{data.nrd}}</td>
+		<td>{{data.origin}}</td>
+		<td>{{data.destination}}</td>
+		<td>{{data.sender_name}}</td>
+		<td>{{data.reciever_name}}</td>
+		<td>{{data.code}}</td>
+		<td>{{data.arrived}}</td>
+        </tr>
+		<td ng-if="NotFoundarray==''" colspan="10" align="center"> 
+        <h4 style="color:red;">{{'lang_NoData_Found'|translate}}</h4>
+        </tbody>
+    </table>
+     </form>
+    </div>
+    </section>	
+    <SCRIPT>
+
+function create_zip() {
+var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+ tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+ tab_text = tab_text + '<x:Name>Test Sheet</x:Name>';
+ tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+ tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+ tab_text = tab_text + "<table border='1px'>";
+//get table HTML code
+ tab_text = tab_text + $('#testTable_new').html();
+ tab_text = tab_text + '</table></body></html>';
+	
+	/*var zip = new JSZip();
+	zip.add(Date()+"_manifest details.xls", tab_text);
+	content = zip.generate();
+	zip.file(Date()+"_manifest details.xls"); // the file
+	location.href="data:application/zip;base64," + content;*/
+	
+	var zip = new JSZip();
+zip.file(Date()+" menifest details.xls", tab_text);
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    saveAs(content, Date()+" menifest details.zip");
+});
+	
+
+}
+</SCRIPT>

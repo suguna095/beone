@@ -1,0 +1,112 @@
+<nav class="hk-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>  {{'lang_Home'|translate}}  </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> {{'lang_Location_Management'|translate}}  </li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Add_City'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title"> {{'lang_Add_City'|translate}}</h5>
+		</div><br>
+		<div class="row">
+     	<div class="col-lg-12">
+        <div class="content">
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            
+            <!--<div class="heading-elements">
+                    <ul class="icons-list">
+                        <li><a data-action="collapse"></a></li>
+                        <li><a data-action="reload"></a></li>
+                        <li><a data-action="close"></a></li>
+                    </ul>
+                </div>-->
+</div>
+
+<div class="panel-body">
+ 
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+
+				<form name="add_cityr">
+                
+        <input type="hidden" name="edit_id" value="">  
+        <input type="hidden" name="State_name" value=""> 
+        <input type="hidden" name="Country_name" value=""> 
+        <input type="hidden" name="old_city_name" value=""> 
+      
+                    
+                <div class="form-group" ng-init="ShowCourierCityDrop();">
+                <label> {{'lang_SelectCountry'|translate}}<span style="color:red">*</span></label>
+                <span id="alert_country" class="alert"></span>
+                
+                    <select name="country" id="sel_country" ng-model="CityrArray.country" class="form-control input-lg" required>
+						<option value="" selected="selected">{{'lang_Please_Select'|translate}}</option>
+						<option ng-repeat="data in CourierCityArray" value="{{data.country}}">{{data.country}}</option></select>
+						<span class="text-danger" ng-show="add_cityr.country.$error.required">{{'lang_Country_is_Required'|translate}}</span>
+                    </div>
+                        
+                <div class="form-group">
+                <label>{{'lang_City_Name'|translate}} <span style="color:red">*</span></label>
+                <span id="alert_city_name" class="alert"></span>
+                <input type="text" name="city" ng-model="CityrArray.city" id="city_name" class="form-control" value="" required>
+				<span class="text-danger" ng-show="add_cityr.city.$error.required">{{'lang_City_Name_is_Required'|translate}}</span>
+                </div> 
+                <div class="form-group">
+                <label> {{'lang_SMSA_City'|translate}}<span style="color:red">*</span></label>
+                <span id="alert_title" class="alert"></span>
+                <input type="text" name="samsa_city" ng-model="CityrArray.samsa_city" id="city_code" class="form-control" required>
+				<span class="text-danger" ng-show="add_cityr.samsa_city.$error.required">{{'lang_SMSA_City_is_Required'|translate}}</span>
+               </div>   
+                <div class="form-group">
+                <label> {{'lang_CityCode'|translate}}<span style="color:red">*</span></label>
+                <span id="alert_title" class="alert"></span>
+                <input type="text" name="city_code" ng-model="CityrArray.city_code" id="city_code" class="form-control" required>
+				<span class="text-danger" ng-show="add_cityr.city_code.$error.required">{{'lang_City_Code_is_Required'|translate}}</span>
+               </div>   
+                    
+                <div class="form-group">
+                <label>{{'lang_Title'|translate}} <span style="color:red">*</span></label>
+                <span id="alert_title" class="alert"></span>
+                <input type="text" name="title" ng-model="CityrArray.title" id="title" class="form-control" required>
+				<span class="text-danger" ng-show="add_cityr.title.$error.required">{{'lang_Title_is_required'|translate}}</span>
+                </div> 
+                  
+                <div class="form-group">
+                <label>{{'lang_Description'|translate}} <span style="color:red">*</span></label>
+                <span id="alert_description" class="alert"></span>
+                <textarea name="descen" ng-model="CityrArray.descen" id="description" class="form-control" required></textarea>
+			
+				<span class="text-danger" ng-show="add_cityr.descen.$error.required">{{'lang_Description_is_required'|translate}}</span>
+                
+                </div>
+                
+                <div class="form-group">
+                <label>{{'lang_Keyword'|translate}}<span style="color:red">*</span></label> 
+                <span id="alert_keyword" class="alert"></span>
+                <textarea name="keyword" ng-model="CityrArray.keyword" id="keyword" class="form-control" required></textarea>
+				<span class="text-danger" ng-show="add_cityr.keyword.$error.required">{{'lang_Keyword_is_required'|translate}}</span>
+                </div>
+                        
+                            
+				 <input name="submit" type="submit" class="btn btn-primary" value="{{'lang_Submit'|translate}}" ng-disabled="add_cityr.$invalid"  ng-click="AddCityList(CityrArray);">
+                       
+                </form>
+                
+ 			</div>
+        </div>
+	</div>
+</div>
+
+</div>
+</div> 
+</div>
+ 		 </div>
+                               
+                            </div> 
+		</section>

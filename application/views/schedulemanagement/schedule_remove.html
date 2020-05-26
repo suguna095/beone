@@ -1,0 +1,63 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>    {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_ScheduleManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_BulkScheduleRemove'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	<div class="breadcrumb-line">
+	   
+	</div>
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_BulkScheduleRemove'|translate}}</h5>
+		</div><br>
+		
+	
+	  
+	  
+		<div class="panel panel-flat">
+       
+        <div class="panel-body">
+		
+		
+	  
+	  
+        <form name="schedule_remove" id="schedule_remove"> 
+		<input type="hidden" name="slip_no"  />
+        <div id="schedule_yes" style="display:block">
+        <div class="col-md-12">   
+
+	 <div class="col-md-12"  ng-if="retunArr1">
+          <div class="alert alert-success" ng-repeat="edata in retunArr1.success_update">{{'lang_UpdateStatusAWBno'|translate}}  {{edata}} </div>
+            <div class="alert alert-warning" ng-repeat="edata in retunArr1.wrong_awb">{{'lang_wrong_AWB_no'|translate}} {{edata}} </div>
+            <div class="alert alert-warning" ng-repeat="edata in retunArr1.onholdArray">{{'lang_on_hold_AWB_no'|translate}} {{edata}} </div>
+            <div class="alert alert-warning" ng-repeat="edata in retunArr1.Already_delvrd_return">{{'lang_Delivered_Or_Return_AWB_no'|translate}} {{edata}} </div>
+      </div> 
+
+	  
+          <div class="form-group" id="not_schedule_box">
+            <textarea rows="8" id="show_awb_no" name="slip_no" ng-model="removeArray.slip_no" placeholder="{{'lang_PleaseEnterYourAWBNumber'|translate}}" required="" class="form-control"></textarea>
+          </div>
+        </div>
+        
+        <div class="row">
+        <div class="col-sm">
+        <div class="row">
+        <div class="col-md-4">
+        <label>{{'lang_comment'|translate}}</label> 
+        <input class="form-control" name="comment" ng-model="removeArray.comment" placeholder="{{'lang_CSAComment'|translate}}" required>    
+        </div>
+
+        <div class="col-md-4">
+            <label>&nbsp;</label>
+            <button type="submit" ng-hide="schedule_remove.$invalid" class="btn btn-primary form-control" ng-click="GetScheduleRemove(removeArray);">{{'lang_ScheduleRemove'|translate}}</button>
+        </div>
+      </div>
+	  </div>
+    </div>
+  </div>
+  </form>
+</div>
+</section>

@@ -1,0 +1,38 @@
+  	<nav class="hk-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Manifest_Management'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Verification_Date_Update'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+	<div class="panel-heading">
+            <h5 class="panel-title">{{'lang_Verification_Date_Update'|translate}}</h5>
+            
+    </div><br>
+    
+    <div class="col-md-12"  ng-if="retunArr1">
+          <div class="alert alert-success" ng-repeat="edata in retunArr1.success_update">{{'lang_UpdateStatusAWBno'|translate}}  {{edata}} </div>  
+            <div class="alert alert-warning" ng-repeat="edata in retunArr1.wrong_awb">{{'lang_wrong_AWB_no'|translate}} {{edata}} </div>
+            <div class="alert alert-warning" ng-repeat="edata in retunArr1.onholdArray">{{'lang_on_hold_AWB_no'|translate}}{{edata}} </div>
+            <div class="alert alert-warning" ng-repeat="edata in retunArr1.Already_delvrd_return">{{'lang_Delivered_Or_Return_AWB_no'|translate}} {{edata}} </div>
+          </div>
+	<form role="form"  method="post"  enctype="multipart/form-data" name="date_update"  id="date_update">
+	<div class="row">
+        <div class="col-sm">
+            <div class="row">
+			    <div class="col-md-12">
+				<textarea class="form-control mt-15" name="awb_no" rows="6" placeholder="Please Enter your AWB No." ng-model="update_dateArray.awb_no" required></textarea>
+				<span class="text-danger" ng-show="date_update.awb_no.$error.required">{{'lang_AWBNo_Required'|translate}} </span>
+				</div>
+				<div class="col-md-2"><br>
+				    <label>&nbsp;&nbsp;</label>
+                    <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="date_update.$invalid" ng-click="updateform(update_dateArray);">
+                </div>
+			</div>
+		</div>
+    </div>	
+</form>	
+   </section>		

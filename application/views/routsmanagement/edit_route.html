@@ -1,0 +1,82 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="EditRoutshow();GetCountryDropshow();">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_RouteManagement'|translate}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_EditRoute'|translate}}</li>
+                </ol>
+            </nav>
+   <div class="">
+                <!-- Title -->
+                            
+           
+<section class="hk-sec-wrapper">
+   <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">{{'lang_EditRoute'|translate}}</h5> 
+        </div><br>
+
+<div class="panel-body">
+	<div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+               <div class="loader logloder" ng-show="loadershow"></div>  
+       
+        			<form class="stdform stdform2"  name="edit_route" id="edit_route" enctype="multipart/form-data">   
+                    
+       				<input type="hidden" name="routeid" ng-model="editrouteArray.routeid" /> 
+                    
+                    <div class="form-group">
+                    <label>{{'lang_SelectCountry'|translate}}  <span style="color:red">*</span></label>
+                    
+                    <select name="country_id" id="country_id" class="form-control" ng-model="editrouteArray.country_id" ng-change="ShowRouteCityDrop(editrouteArray.country_id)" required>
+					<option value="">{{'lang_Please_Select'|translate}}</option>
+                     <option ng-repeat="ctdata in CountryData" value="{{ctdata.id}}">{{ctdata.country}}</option></select>
+					 
+					<span class="text-danger" ng-show="edit_route.country_id.$error.required">{{'lang_Routeisrequired'|translate}}</span>
+                    </div>
+                        
+                    <div class="form-group" >
+                    <label>{{'lang_selectCity'|translate}}  <span style="color:red">*</span></label>
+                 
+				 <input type="text" name="city_id" id="show_city_dropdown"  placeholder="City" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="editrouteArray.city_id"> 
+				 
+                    
+                    	<span class="text-danger" ng-show="edit_route.city_id.$error.required">{{'lang_RouteCodeisrequired'|translate}}.</span>
+                    </div>
+                       <div class="form-group"> 
+                    <label>{{'lang_Route'|translate}}  <span style="color:red">*</span></label>
+                    <input type="text" class="form-control" name="route" id="route" ng-model="editrouteArray.route" required>
+					
+					 <span class="text-danger" ng-show="edit_route.route.$error.required">{{'lang_Routeisrequired'|translate}}</span>
+					 
+                    </div> 
+                     <div class="form-group">
+                    <label>{{'lang_Route_code'|translate}}  <span style="color:red">*</span></label>
+                    <input type="text" class="form-control" name="routecode" id="routecode" ng-model="editrouteArray.routecode" required >
+					<span class="text-danger" ng-show="edit_route.routecode.$error.required">{{'lang_RouteCodeisrequired'|translate}}.</span>
+                    </div> 
+					
+                    <div class="form-group">
+                    <label>{{'lang_ArabicKeyword'|translate}} <span style="color:red">*</span></label></span> 
+                    <input type="text" class="form-control" name="keyword" id="keyword" ng-model="editrouteArray.keyword" required >
+					<span class="text-danger" ng-show="edit_route.keyword.$error.required">{{'lang_ArabicKeywordisrequired'|translate}}.</span>
+                    </div> 
+                        
+                        
+                   <input name="submit" type="button" class="btn btn-primary" value="Submit" ng-disabled="edit_route.$invalid" ng-click="EditRouteform(editrouteArray);">   
+                  </form>
+ 			    </div>
+                               
+             </div>
+        </div>
+    </div>
+</div>
+ 
+</div>
+</section>
+
+
+  
+		
+		

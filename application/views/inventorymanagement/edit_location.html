@@ -1,0 +1,50 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="EditLocationshow();GetCountryDropshow();"> 
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_InventoryManagement'|translate}}</li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_ShowShelveLocation'|translate}}</li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_EditShelveLocation'|translate}}</li>
+                </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+	<h5>{{'lang_EditShelveLocation'|translate}}</h5><br>
+	<section class="hk-sec-wrapper">
+	 <form class="stdform"  name="edit_location"  enctype="multipart/form-data">
+	 <input type="hidden" name="loid" ng-model="editlocationArray.sheid" /> 
+	<div class="row">
+        <div class="col-sm">
+            <div class="row">
+                <div class="col-md-8">
+				<label>{{'lang_SelectCountry'|translate}}</label>    
+				<select class="form-control custom-select mt-8" name="country_id" ng-model="editlocationArray.country_id" ng-change="Getcitydropdata(locationArray.country_id);" Required>
+				         <option value="">--{{'lang_select'|translate}}--</option>
+                        <option ng-repeat="ctdata in CountryData" value="{{ctdata.id}}">{{ctdata.country}}</option>
+                       
+                </select>
+				<span class="text-danger" ng-show="edit_location.country_id.$error.required">{{'lang_country'|translate}}</span>
+				</div>
+				<div class="col-md-8"><br>
+				<label>{{'lang_selectCity'|translate}}</label>
+				
+				<input type="text" name="city_id" id="show_shelvecity_dropdown"  placeholder="Shelve city" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="editlocationArray.city_id">      
+				<span class="text-danger" ng-show="add_location.city_id.$error.required">{{'lang_city'|translate}}</span>
+
+
+				<span class="text-danger" ng-show="edit_location.city_id.$error.required">{{'lang_city'|translate}}</span>
+				</div>
+				<div class="col-md-8"><br>
+				<label>{{'lang_ShowShelveLocation'|translate}}</label>
+                    <input type="text" class="form-control mt-8" name="shelv_location" ng-model="editlocationArray.shelv_location" Required>
+                   <span class="text-danger" ng-show="edit_location.shelv_location.$error.required">{{'lang_ShowShelveLocation'|translate}}</span> 
+                </div><br>
+			</div>
+     	</div>
+	</div><br>
+		<input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="edit_location.$invalid" ng-click="EditLocationform(editlocationArray);">
+
+	</form>
+	<br>
+	</section>
+	</div> 

@@ -1,0 +1,248 @@
+     <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getcsaschedulelist(1,0);">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Operation_Filter'|translate}}</li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_CSA_Schedule_Issue'|translate}} </li>
+                </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+	<h5 class="hk-sec-title">{{'lang_CSA_Schedule_Issue'|translate}}</h5>{{'lang_Shipment_CS_since_3_days'|translate}} <br>   <br/> 
+	<section class="hk-sec-wrapper">
+	<div class="row">
+	<div class="col-md-3">
+	<b>{{'lang_From'|translate}}:</b>
+	   <input type="text"  class="form-control"  id="datepicker1" name="searchfield" ng-model="filterData.searchfield"  placeholder="yy-mm-dd">
+	</div>
+	<div class="col-md-3">    
+	<b>{{'lang_To'|translate}}:</b>
+	   <input type="text" class="form-control"  id="datepicker2"  name="searchfield" ng-model="filterData.to_date" placeholder="yy-mm-dd">
+	</div>    
+	<div class="col-md-2">
+        <input type="submit" name="Submit" style="margin-top:22px;" value="{{'lang_generateReport'|translate}}" class="btn btn-primary" ng-click="getcsaschedulelist(1,1);">
+    </div>
+	<div class="col-md-2">
+		<span class="btn btn-primary" style="margin-top:22px;">{{'lang_Total'|translate}} <span ng-if="totalCount>0">({{totalCount}})</span> <span ng-else>(0)</span></span>  
+		</div>   
+	
+	<div class="col-md-1">
+        <button type="button" style="margin-top:22px;" name="bt_search" data-toggle="tooltip" data-placement="top" title="Download Excel Report"  onclick="create_zip();" class="btn btn-primary" ><i class="fa fa-file-excel-o fa-2x"  aria-hidden="true"></i></button>
+    </div>
+	</div>
+	</section>
+	
+	<div class = "table-responsive">
+	<table  class="table table-striped table-bordered table-hover" align="center">
+	        <thead>
+                <tr>
+                    <th>{{'lang_sNO'|translate}} </th>
+                    <th>{{'lang_reference'|translate}}</th>
+                    <th>{{'lang_AWB'|translate}}#</th>
+                    <th>{{'lang_CallAttempts'|translate}} </th>
+                    <th>{{'lang_DeliveryAttempts'|translate}} </th>
+                    <th>{{'lang_origin'|translate}} </th>
+                    <th>{{'lang_destination'|translate}} </th>
+                     <th>{{'lang_RecieverName'|translate}}</th>
+                    <th>{{'lang_RecieverAddress'|translate}} </th>
+                    <th>{{'lang_RecieverPhone'|translate}}</th>
+                    <th>{{'lang_Mode'|translate}} </th>
+                    <th>{{'lang_status'|translate}} </th>
+                    <th>{{'lang_CODAmount'|translate}} </th>
+					 <th>{{'lang_Sub_Category'|translate}} </th>
+                    <th>{{'lang_details'|translate}} </th>
+                    <th>{{'lang_DriverComment'|translate}} </th>
+					 <th>{{'lang_ScheduleChanel'|translate}} </th>
+                    <th>{{'lang_OnHold'|translate}}</th>
+                    <th>{{'lang_Driver_name'|translate}} </th>
+                    <th>{{'lang_Supplier_Name'|translate}} </th>
+                    <th>{{'lang_Shelve'|translate}} </th>
+					 <th>{{'lang_Customer_Account'|translate}} </th>
+                    <th>{{'lang_SenderName'|translate}}  </th>
+                   
+                  
+					 <th>{{'lang_TimeSlot'|translate}} </th>
+                    <th>{{'lang_AreaStreet'|translate}} </th>
+                    <th>{{'lang_Area'|translate}} </th>
+                    <th>{{'lang_latitudelongitude'|translate}}</th>
+					<th>{{'lang_date'|translate}} </th>
+                    <th>{{'lang_Update_By'|translate}} </th>
+					 <th>{{'lang_scheduleDate'|translate}} </th>
+                </tr>
+            </thead>
+			<tbody>
+			    <tr ng-repeat="data in ordercsalistArray">
+				   <td>{{$index+1}}</td>
+					<td>{{data.shippers_ref_no}}</td>
+					<td><a ui-sref="details({shid:data.id})" target="_blank">{{data.slip_no}}</a></td>
+					<td>{{data.call_attempt}}</td>
+					<td>{{data.d_attempt}}</td>
+					<td>{{data.origin}}</td>
+					<td>{{data.destination}}</td>
+					<td>{{data.reciever_name}}</td>
+					<td>{{data.reciever_address}}</td>
+					<td>{{data.reciever_phone}}</td>
+					<td>{{data.mode}}</td>
+					<td ng-bind-html="data.showStatus"></td>
+					<td>{{data.total_cod_amt}}</td>
+					<td>{{data.sub_category}}</td>
+					<td>{{data.details}}</td>
+					<td>{{data.comment}}</td>
+					<td><span class="btn btn-danger" ng-if="data.schedule_status=='N' || data.schedule_status==''">No</span><span class="btn btn-success" ng-if="data.schedule_status=='Y'">Yes</span></td>
+					<td>{{data.onHold_Confirm}}</td>
+					<td>{{data.messanger_id}}</td>
+					<td>{{data.supplier}}</td>
+					<td>{{data.shelv_no}}</td>
+					<td>{{data.uidshow}}</td>
+					<td>{{data.sender_name}}</td>
+					
+				
+					<td>{{data.time_slot}}</td>
+					
+					
+                   
+					<td>{{data.area_street}}</td>
+					<td>{{data.area}}</td>
+					<td>{{data.dest_lng}}, {{data.dest_lat}}</td>
+                    <td>{{data.entry_date1}}</td>
+                    <td>{{data.username}}</td>
+				<td>{{data.schedule_date}}</td>
+					
+				
+				</tr>
+				<tr>
+					<td ng-if="ordercsalistArray==''" colspan="30" align="center" style="text-align:center;">
+						{{'lang_NoRecords_Found'|translate}} 
+					</td> 
+					
+                </tr>
+			</tbody>
+			
+	    </table>
+		</div>
+          <button ng-hide="ordercsalistArray.length==totalCount || ordercsalistArray==0" class="btn btn-info" ng-click="getcsaschedulelist(count=count+1,0);" ng-init="count=1">{{'lang_Load_More'|translate}}</button> 
+		</section>
+		
+		
+
+
+      
+	   
+	 <div style="display:none;">  
+	   <table id="testTable_new" class="table table-striped table-bordered table-hover" >   
+	        <thead>
+                <tr>
+                    <th>{{'lang_sNO'|translate}} </th>
+                    <th>{{'lang_reference'|translate}}</th>
+                    <th>{{'lang_AWB'|translate}}#</th>
+                    <th>{{'lang_CallAttempts'|translate}} </th>
+                    <th>{{'lang_DeliveryAttempts'|translate}} </th>
+                    <th>{{'lang_origin'|translate}} </th>
+                    <th>{{'lang_destination'|translate}} </th>
+                     <th>{{'lang_RecieverName'|translate}}</th>
+                    <th>{{'lang_RecieverAddress'|translate}} </th>
+                    <th>{{'lang_RecieverPhone'|translate}}</th>
+                    <th>{{'lang_Mode'|translate}} </th>
+                    <th>{{'lang_status'|translate}} </th>
+                    <th>{{'lang_CODAmount'|translate}} </th>
+					 <th>{{'lang_Sub_Category'|translate}} </th>
+                    <th>{{'lang_details'|translate}} </th>
+                    <th>{{'lang_DriverComment'|translate}} </th>
+					 <th>{{'lang_ScheduleChanel'|translate}} </th>
+                    <th>{{'lang_OnHold'|translate}}</th>
+                    <th>{{'lang_Driver_name'|translate}} </th>
+                    <th>{{'lang_Supplier_Name'|translate}} </th>
+                    <th>{{'lang_Shelve'|translate}} </th>
+					 <th>{{'lang_Customer_Account'|translate}} </th>
+                    <th>{{'lang_SenderName'|translate}}  </th>
+                   
+                  
+					 <th>{{'lang_TimeSlot'|translate}} </th>
+                    <th>{{'lang_AreaStreet'|translate}} </th>
+                    <th>{{'lang_Area'|translate}} </th>
+                    <th>{{'lang_latitudelongitude'|translate}}</th>
+					<th>{{'lang_date'|translate}} </th>
+                    <th>{{'lang_Update_By'|translate}} </th>
+					 <th>{{'lang_scheduleDate'|translate}} </th>
+                </tr>
+            </thead>
+			<tbody>
+			    <tr ng-repeat="data in ordercsalistArray">
+				   <td>{{$index+1}}</td>
+					<td>{{data.shippers_ref_no}}</td>
+					<td>{{data.slip_no}}</td>
+					<td>{{data.call_attempt}}</td>
+					<td>{{data.d_attempt}}</td>
+					<td>{{data.origin}}</td>
+					<td>{{data.destination}}</td>
+					<td>{{data.reciever_name}}</td>
+					<td>{{data.reciever_address}}</td>
+					<td>{{data.reciever_phone}}</td>
+					<td>{{data.mode}}</td>
+					<td ng-bind-html="data.showStatus"></td>
+					<td>{{data.total_cod_amt}}</td>
+					<td>{{data.sub_category}}</td>
+					<td>{{data.details}}</td>
+					<td>{{data.comment}}</td>
+					<td><span class="btn btn-danger" ng-if="data.schedule_status=='N' || data.schedule_status==''">No</span><span class="btn btn-success" ng-if="data.schedule_status=='Y'">Yes</span></td>
+					<td>{{data.onHold_Confirm}}</td>
+					<td>{{data.messanger_id}}</td>
+					<td>{{data.supplier}}</td>
+					<td>{{data.shelv_no}}</td>
+					<td>{{data.uidshow}}</td>
+					<td>{{data.sender_name}}</td>
+					
+				
+					<td>{{data.time_slot}}</td>
+					
+					
+                   
+					<td>{{data.area_street}}</td>
+					<td>{{data.area}}</td>
+					<td>{{data.dest_lng}}, {{data.dest_lat}}</td>
+                    <td>{{data.entry_date1}}</td>
+                    <td>{{data.username}}</td>
+				<td>{{data.schedule_date}}</td>
+					
+				
+				</tr>
+				<tr>
+					<td ng-if="ordercsalistExcelArray==''" colspan="30" align="center" style="text-align:center;">
+						{{'lang_NoRecords_Found'|translate}} 
+					</td> 
+					
+                </tr>
+			</tbody>
+			
+	    </table>
+</div>
+
+
+<SCRIPT>
+function create_zip() {
+var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+ tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+ tab_text = tab_text + '<x:Name>Test Sheet</x:Name>';
+ tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+ tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+ tab_text = tab_text + "<table border='1px'>";
+//get table HTML code
+ tab_text = tab_text + $('#testTable_new').html();
+ tab_text = tab_text + '</table></body></html>';    
+  
+  /*var zip = new JSZip();
+  zip.add(Date()+"_manifest details.xls", tab_text);
+  content = zip.generate();
+  zip.file(Date()+"_manifest details.xls"); // the file
+  location.href="data:application/zip;base64," + content;*/
+  
+  var zip = new JSZip();
+zip.file(Date()+" Csa Schedule Issue.xls", tab_text);
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    saveAs(content, Date()+" Csa Schedule Issue.zip");
+});
+  
+
+}
+</SCRIPT>	

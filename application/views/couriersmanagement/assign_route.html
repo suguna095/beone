@@ -1,0 +1,64 @@
+<style>
+     .active, .inactive {
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        .active, .inactive {
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        i.active {
+            color: #5cb85c;
+        }
+
+        i.inactive {
+            color: #d9534f;
+        }
+    </style>   	
+	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="AssignRootshow();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>    {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_CouriersManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page"> {{'lang_AssignRoute'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	<div class="breadcrumb-line">
+	    <div class="hk-pg-header">
+            <h4><i data-feather="arrow-left-circle"></i></i> 
+            <span class="text-semibold"></span> {{'lang_AssignRoute'|translate}}</h4>
+		</div>
+	</div>
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_AssignRoute'|translate}} </h5>
+		</div><br>
+		<table class="table datatable-basic">
+							 <thead>
+            
+             <tr>
+            <th>{{'lang_srNo'|translate}} </th>
+            <th>{{'lang_Routecode'|translate}} </th>
+            <th>{{'lang_Route'|translate}} </th>
+            <th>{{'lang_action'|translate}} </th>
+            </tr>
+            </thead>
+            
+            <tbody>
+			 <tr ng-repeat="data in editcourierArray">
+					<td>{{$index+1}}</td>
+					<td class="text_cap">{{data.routecode}}</td>
+					<td class="text_cap">{{data.route}}</td>
+					<td>   
+					 <div class="custom-control custom-checkbox checkbox-teal">
+						<input type="checkbox" class="custom-control-input" id="customCheck{{$index}}" value="{{data.routeid}}" ng-model="data.routeid"  ng-checked="data.routeid" ng-change="GetupdatePrivilageData(data.routeid,editcourierArray.courierid,data.id);">
+						<label class="custom-control-label" for="customCheck{{$index}}"></label>
+                      </div>
+					 </td>
+					</td>
+					</tr>
+            </tbody>
+			</table>
+    </section>		

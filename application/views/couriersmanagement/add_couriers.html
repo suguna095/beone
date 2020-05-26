@@ -1,0 +1,163 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="GetCountryDropshow();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_CouriersManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Add_Couriers'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	<div class="breadcrumb-line">
+	    <div class="hk-pg-header">
+            <h4><i data-feather="arrow-left-circle"></i></i> 
+            <span class="text-semibold"></span>{{'lang_Add_Couriers'|translate}}</h4>    
+		</div>
+	</div>
+	
+	<section class="hk-sec-wrapper">
+	<div class="panel-body">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+			<div class="loader logloder" ng-show="loadershow"></div>
+				<div class="panel-body">
+				<form class="stdform"  name="add_couriers" enctype="multipart/form-data">
+					<div class="row">
+    					<div class="col-lg-12"> 
+    
+						
+           					<div class="form-group"> 
+              				<label>{{'lang_Name'|translate}} <span style="color:red">*</span></label> 
+              				<input type="text" name="messenger_name" id="name" class="form-control" ng-model="courierArray.messenger_name" required> 
+							<!-- <span class="text-danger" ng-show="add_couriers.messenger_name.$error.required">{{'lang_Name_is_required'|translate}}.</span> -->
+                            </div> 
+                             
+                           
+                  			                                
+                            <div class="form-group"> 
+                            <label>{{'lang_country'|translate}} <span style="color:red">*</span></label>
+                           
+							
+							<select class="form-control custom-select mt-8" name="country_id" ng-model="courierArray.country_id" ng-change="Getcitydropdata(courierArray.country_id);" Required>
+				        <option value="">--{{'lang_select'|translate}}--</option>
+                        <option ng-repeat="ctdata in CountryData" value="{{ctdata.id}}">{{ctdata.country}}</option>
+                       
+                </select>
+                            </div>
+                            
+            				                            
+                            <div class="form-group" ng-init="ShowCourierCityDrop();" > 
+                            <label>{{'lang_city'|translate}} <span style="color:red">*</span></label>
+                           
+							<input type="text" name="city" id="show_city_dropdown"  placeholder="City" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="courierArray.city"> 
+                            </div> 
+                                 
+            				<div class="form-group"> 
+                            <label>{{'lang_Code'|translate}} <span style="color:red">*</span></label>
+                            <span id="rout_dropdown_show">  <input type="text" name="messenger_code" class="form-control" id="code" ng-model="courierArray.messenger_code" Required></span>
+                            </div>  
+                            
+                            <div class="form-group"> 
+                            <label>{{'lang_mobile'|translate}} <span style="color:red">*</span></label>
+                            <input type="tel" maxlength="10" name="mobile" id="mobile" class="form-control" ng-model="courierArray.mobile" Required> 
+                            </div>
+                            
+
+							<div class="form-group">
+								<label>{{'lang_email'|translate}} <span style="color:red">*</span></label> 
+								<input type="email" name="email" id="email" class="form-control" ng-pattern="/^([a-z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?)|[7-9][0-9]{9}$/"  ng-model="courierArray.email" Required>
+								 <span ng-if="add_couriers.email.$error.pattern" style="color:red">{{'lang_entervalidemail'|translate}}</span>
+								</div>     
+
+					 
+              
+                            <div class="form-group"> 
+                            <label>{{'lang_iqama_ID'|translate}} <span style="color:red">*</span></label>
+                            <input type="text" class="form-control" id="iqama" name="iqama" ng-model="courierArray.iqama" Required> 
+                            </div>    
+							
+							   <div class="form-group"> 
+                            <label>{{'lang_Typeofvehicle'|translate}}  <span style="color:red">*</span></label>
+                            <input type="text" class="form-control" id="typVehicle" name="typVehicle" ng-model="courierArray.typVehicle" Required> 
+                            </div>   
+              
+                            <!--<div class="form-group"> 
+                            <label>{{'lang_Color'|translate}}  </label>
+                            <input type="color" class="form-control" id="color" name="color" > 
+                            </div> --> 
+							
+							<div class="form-group" ng-init="ShowCourierSupplierDrop();"> 
+                            <label>{{'lang_upplier'|translate}} <span style="color:red">*</span></label>
+								<span id="city_dropdown_show">
+								<select class="form-control custom-select mt-8" name="city_id" ng-model="courierArray.supplier" Required>
+									<option value="">--Select--</option>
+									 <option ng-repeat="cdata in supplierDropArr" value="{{cdata.id}}">{{cdata.name}}</option>
+								</select>
+								</span>
+                            </div> 
+						
+                            <div class="form-group"> 
+                            <label>{{'lang_Joindate'|translate}} <span style="color:red">*</span></label>
+                            <input type="text" class="form-control" id="datepicker1" name="joinDate" ng-model="courierArray.joinDate" Required>
+                            </div>    
+              
+                            <div class="form-group"> 
+                          	<label>{{'lang_password'|translate}} <span style="color:red">*</span></label>
+                          	<input type="password" class="form-control" id="password" name="password" ng-model="courierArray.password" Required> 
+                           	</div> 
+                                
+                            <div class="form-group"> 
+                          	<label>{{'lang_VehicleNumber'|translate}} <span style="color:red">*</span> </label>
+                          	<input type="text" id="vehicle_no" class="form-control input-lg  input-lg" name="vehicle_number" ng-model="courierArray.vehicle_number" Required> 
+                           	</div> 
+                            <div class="form-group">
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput" Required>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_UploadIqamaID'|translate}} </span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+												<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}}</span><span class="fileinput-exists">{{'lang_Change'|translate}} </span>
+                                                <input type="file"  name="iqama_id" fileread="courierArray.iqama_id" accept="application/pdf" Required> 
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}} </a>
+                                                </span>
+                                            </div>
+                            </div>
+							
+							 <div class="form-group">
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput" Required>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_Uploadlicense'|translate}} </span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+												<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}} </span><span class="fileinput-exists">{{'lang_Change'|translate}} </span>
+                                                <input type="file" name="license" fileread="courierArray.license"  accept="application/pdf" Required>
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}} </a>
+                                                </span>
+                                            </div>
+                            </div>
+										
+                          
+                               
+                            <div class="form-group"> 
+                            <label>{{'lang_Image'|translate}}<span style="color:red">*</span></label><br>
+                            <input type="file" name="messanger_image" fileread="courierArray.messanger_image" accept="image/*" class="btn btn-primary btn-file" Required><br><br>
+                            <img  src="{{courierArray.messanger_image}}" class="img-fluid" width="90px;" height="90px;"> 
+                            <input type="hidden" > 
+                            </div>      
+           
+           
+              				<input name="id" id="id" type="hidden" value="">
+              				<input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="add_couriers.$invalid" ng-click="Courierform(courierArray);">
+						</form>
+   						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>   
+</div>
+
+</section>		

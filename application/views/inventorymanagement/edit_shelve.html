@@ -1,0 +1,49 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="EditShelveshow();GetCountryDropshow();">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_InventoryManagement'|translate}}</li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_ShowShelve'|translate}}</li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_EditShelve'|translate}}</li>
+                </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+	<h5>{{'lang_EditShelve'|translate}}</h5><br>
+	<section class="hk-sec-wrapper">
+	<form class="stdform" method="post" name="edit_shelve" action="" enctype="multipart/form-data">    
+	<input type="hidden" name="sheid" ng-model="editshelveArray.sheid" /> 
+	<div class="row">
+        <div class="col-sm">
+    <div class="form-group">
+			<label class="text-bold">{{'lang_SelectCountry'|translate}}</label>
+			<select class="form-control custom-select" name="country_id" ng-model="editshelveArray.country_id" ng-change="Getcitydropdata(editshelveArray.country_id);" Required>
+				<option value="">--{{'lang_select'|translate}}--</option>
+                        <option ng-repeat="ctdata in CountryData" value="{{ctdata.id}}">{{ctdata.country}}</option>
+			</select>
+			<span class="text-danger" ng-show="edit_shelve.country_id.$error.required">{{'lang_country'|translate}}</span>
+		   </div>
+		   <div class="form-group">
+			<label class="text-bold">{{'lang_selectCity'|translate}}</label>    
+		
+				<input type="text" name="city_id" id="show_city_dropdown"  placeholder="city" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="editshelveArray.city_id" ng-change="GetshalevelocationDrop(shelveArray.city_id);"  Required>   
+			<span class="text-danger" ng-show="edit_shelve.city_id.$error.required">{{'lang_city'|translate}}</span>
+		   </div>
+		   <div class="form-group">
+			<label class="text-bold">{{'lang_ShelveLocation'|translate}}</label>
+			<select class="form-control custom-select" name="shelv_location" ng-model="editshelveArray.shelv_location" Required>
+					<option value="" selected="selected">--{{'lang_select'|translate}}--</option>
+					<option ng-repeat="sldata in shelveDropArr" value="{{sldata.id}}">{{sldata.shelv_location}}</option> 
+			</select>
+			<span class="text-danger" ng-show="edit_shelve.shelv_location.$error.required">{{'lang_ShelveLocation'|translate}}</span>
+		   </div>
+		   <div class="form-group">
+				<label for="inputText">{{'lang_ShelveNo'|translate}}</label>
+				<input type="text"  class="form-control" aria-describedby="textHelpBlock" name="shelv_no" ng-model="editshelveArray.shelv_no" Required>
+			<span class="text-danger" ng-show="edit_shelve.shelv_no.$error.required">{{'lang_ShelveNo'|translate}}</span>
+			</div>
+			<input name="submit" type="button" class="btn btn-primary" value="Submit" ng-disabled="edit_shelve.$invalid" ng-click="EditShelveform(editshelveArray);">
+			</div>
+    </div>		
+    </section>
+    </section>	

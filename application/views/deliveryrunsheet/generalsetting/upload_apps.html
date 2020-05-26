@@ -1,0 +1,158 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showuploadapp();">
+				<ol class="breadcrumb breadcrumb-light bg-transparent">
+					<li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+					<li class="breadcrumb-item active" aria-current="page"> {{'lang_App'|translate}} </li>
+					<li class="breadcrumb-item active" aria-current="page"> {{'lang_App'|translate}}</li>
+				</ol>
+	</nav>
+	<div class="container">
+				<!-- Title -->
+			
+            
+    
+	        <div class="breadcrumb-line">
+			<div class="hk-pg-header">
+			<h4><i data-feather="arrow-left-circle"></i></i> 
+                <span class="text-semibold"> {{'lang_Datatables'|translate}} </span> -  {{'lang_Upload_App'|translate}} </h4>
+			</div>
+			</div>
+				<!-- /Title -->
+				
+				<!-- Row -->
+	
+	<div class="panel panel-flat">
+	<section class="hk-sec-wrapper">
+	<div class="col-sm-6">
+        <div class="panel-heading">
+           <h4><i class="glyphicon glyphicon-th-large"></i></i></i> 
+                <span class="text-semibold"> {{'lang_Upload_App'|translate}}</span></h4>
+        </div>
+	</div>
+	<br>
+		<div class="row">
+			<div class = "container">
+				<div class = "col-xl-12">
+				
+				
+					<section class="hk-sec-wrapper">
+                            
+                        <div class="row">
+                            <div class="col-sm">
+								<div class="col-sm-6">
+                                    <form name="upload_app" method="post"  enctype="multipart/form-data"  id="upload_app">
+                                        <div class="form-group">
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> {{'lang_Upload_App'|translate}} </span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+												<span class=" btn btn-primary btn-file"><span class="fileinput-new"> {{'lang_SelectFile'|translate}} </span><span class="fileinput-exists"> {{'lang_Change'|translate}} </span>
+                                                <input type="file" name="upload" fileread="upload_appArray.image" accept="image/*" required>
+												
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput"> {{'lang_Remove'|translate}} </a>
+                                                </span>
+                                            </div>
+
+                                        </div>
+										<div class="form-group">
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> {{'lang_Screen_Shot'|translate}} </span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new"> {{'lang_SelectFile'|translate}} </span><span class="fileinput-exists"> {{'lang_Change'|translate}}</span>
+                                                <input type="file" name="screen" fileread="upload_appArray.image1" accept="image1/*" required>
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput"> {{'lang_Remove'|translate}}</a>
+                                                </span>
+                                            </div>
+                                        </div>
+										<div class="form-group">
+            
+                                         <label> {{'lang_Upload_Path'|translate}} </label>
+                                         <input type="text" name="upload_path" class="form-control"  ng-model="upload_appArray.upload_path" required>
+			                             <span class="text-danger" ng-show="upload_app.upload_path.$error.required"> {{'lang_Upload_Path_required'|translate}}</span>
+                                        </div>
+										
+										<div class="form-group">
+            
+                                        <label> {{'lang_Description'|translate}} </label>
+                                        <textarea name="description"  class="form-control" ng-model="upload_appArray.description" required></textarea>
+										<span class="text-danger"  ng-show="upload_app.description.$error.required"> {{'lang_Description_required'|translate}} .</span>
+                                        </div>
+			
+			
+		                            <div class="form-group"> 
+									
+                                     <label> {{'lang_email'|translate}} </label>
+                                     <input type="email" id="myEmail" name="email" multiple class="form-control" ng-model="upload_appArray.email"> 
+									 
+			                        </div>
+                                     <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="upload_app.$invalid" ng-click="Addform(upload_appArray);">
+									 
+                                    </form>
+									
+                                </div>
+                            </div>
+							
+						</div>
+                    </section>
+					<section class="hk-sec-wrapper">
+                            
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div class="table-wrap">
+                                        <table id="datable_1" class="table table-hover w-100 display pb-30">
+										
+                                            <thead>
+                                                <tr>
+                                                    <th> {{'lang_srNo'|translate}}</th>
+                                                    <th> {{'lang_Apps'|translate}} </th>
+                                                    <th> {{'lang_Screen_Shot'|translate}} </th>
+                                                    <th> {{'lang_Upload_Path'|translate}} </th>
+                                                    <th> {{'lang_Description'|translate}} </th>
+                                                    <th> {{'lang_action'|translate}} </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="data in uploadappData">
+                                                    <td>{{$index+1}}</td>
+                                                    <td> 
+													<img src="{{data.screen_shot}}" id="screen_shot" height="80" width="120"> <i class="fa fa-download" ng-click="download()" aria-hidden="true"></i></td>
+													<td>{{data.upload_path}}</td>
+                                                    <td>{{data.description}}</td>
+                                                    <td></td> 
+                                                    <td>
+													<div class="btn-group">
+                                                       <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                                                       <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                       <span class="sr-only"> {{'lang_Toggle_Dropdown'|translate}} </span>
+                                                       </button>
+                                                       <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(138px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                       <a class="dropdown-item" ng-click="GetAppdelete(data.id)" ng-confirm-click="Do you want to Delete?"><i class="fa fa-trash-o fa-fw"></i>&nbsp; {{'lang_Delete'|translate}} </a> 
+                                                        </div>
+                                                    </div>
+													</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                            
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                    </section>
+				</div>
+	
+			</div>
+				<!-- /Row -->
+		</div>
+		</section>
+		</div>
+		</div> 
+
+    
+			

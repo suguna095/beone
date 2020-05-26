@@ -1,0 +1,85 @@
+
+   <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showseo();">
+   
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Seo'|translate}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Show_Seo'|translate}}</li>
+                </ol>
+            </nav>
+  <div class="">
+                <!-- Title -->
+            
+        
+           
+     <section class="hk-sec-wrapper">
+     <div class="breadcrumb-line">
+                <div class="hk-pg-header">
+                <h4><i data-feather="arrow-left-circle"></i></i> 
+                <span class="text-semibold"></span> {{'lang_Show_Seo'|translate}}</h4>    
+                </div>
+            </div>
+    <div class="row">
+    
+    
+    <div class="col-md-12">
+       
+     <table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+                        
+<thead>
+    <tr>
+        <th class="head0">{{'lang_sNO'|translate}}</th>
+        <th class="head1">{{'lang_Name'|translate}}</th>
+        <th class="head1">{{'lang_Title'|translate}}</th>
+        <th class="head0">{{'lang_Keyword'|translate}}</th>
+        <th class="head0">{{'lang_Description'|translate}}</th>
+        <th class="head0">{{'lang_action'|translate}}</th>
+      
+    </tr>
+</thead>
+                        
+<tbody>
+        <tr ng-repeat="data in seoData">
+			<td>{{$index+1}}</td>
+			<td>{{data.name}}</td>
+			<td>{{data.title}}</td>
+			<td>{{data.keyword}}</td>
+			<td>{{data.des}}</td>
+			<td>
+			   <div class="btn-group dropdown">
+							<button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							</button>
+							
+							<div class="dropdown-menu w-210p">
+							<a class="dropdown-item" ui-sref="edit_seo({seoid:data.id})"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp;{{'lang_edit'|translate}}</a>      
+														
+							</div>
+						</div>
+			</td>
+      </tr>
+         
+                  
+     
+  
+</tbody>
+</table>
+        </div>
+   
+   
+           
+  
+                                         
+                                      
+                                          
+</div>
+</section>
+
+
+  
+</div>
+
+
+    
+
+      

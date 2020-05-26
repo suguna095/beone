@@ -1,0 +1,97 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="Editstaffshow();GetCountryDropshow();">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"> {{'lang_StaffManagement'|translate}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_EditStaff'|translate}}</li>
+                </ol>
+            </nav>
+   <div class="">
+                <!-- Title -->
+                           
+        
+           
+<section class="hk-sec-wrapper">
+    <div class="panel-heading">
+            <h5 class="panel-title">{{'lang_EditStaff'|translate}} </h5>  
+        </div><br>
+    <div class="row">    
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+             <div class="loader logloder" ng-show="loadershow"></div>
+				<div class="panel-body">
+       
+        			<form class="stdform stdform2"  name="edit_staff" id="edit_staff" enctype="multipart/form-data">
+                    
+       				<input type="hidden" name="staffid" ng-model="editstaffArray.staffid" /> 
+         
+                    <div class="form-group">
+                    <label>{{'lang_Name'|translate}} <span style="color:red">*</span></label>
+                    <input type="text" name="name" class="form-control" ng-model="editstaffArray.name" required>
+					<span class="text-danger" ng-show="edit_staff.name.$error.required">{{'lang_Name_is_required'|translate}}</span>
+                    </div>
+                        
+                    <div class="form-group">
+                    <label>{{'lang_address'|translate}} <span style="color:red">*</span></label>
+                    <input type="text" name="address" class="form-control" ng-model="editstaffArray.address" required>
+					<span class="text-danger" ng-show="edit_staff.address.$error.required">{{'lang_Addressisrequired'|translate}}.</span>
+                    </div>
+                    
+                    <div class="form-group">
+                    <label>{{'lang_phone'|translate}} <span style="color:red">*</span></label>
+                    <input type="text" name="phone" maxlength="10" minlength="10" pattern="[0-9]*"  class="form-control" ng-model="editstaffArray.phone" required>
+					<span class="text-danger" ng-show="edit_staff.phone.$error.required">{{'lang_Phoneisrequired'|translate}}.</span>  
+                    </div>
+                        
+                    <div class="form-group">
+                    <label>{{'lang_email'|translate}} <span style="color:red">*</span></label>
+                    <input type="email" name="email" class="form-control"  ng-model="editstaffArray.email" required>   
+					<span class="text-danger" ng-show="edit_staff.email.$error.required">{{'lang_Emailisrequired'|translate}}.</span>      
+                    </div>  
+						 
+                    <div class="form-group"> 
+                    <label>{{'lang_country'|translate}} <span style="color:red">*</span></label>
+                    <select name="sel_country" id="sel_country" class="form-control" ng-model="editstaffArray.country_id" ng-change="showOriginDrop(editstaffArray.country_id);">
+			        <option value="">{{'lang_Please_Select'|translate}}</option>
+                     <option ng-repeat="ctdata in CountryData" value="{{ctdata.id}}">{{ctdata.country}}</option></select>
+                    </div>
+
+							
+                     <div class="form-group" >
+                        <label>{{'lang_BranchLocation'|translate}}<span style="color:red">*</span></label><span id="city"></span>
+                            <input type="text" name="sel_country" id="show_city_dropdown"  placeholder="Branch Location" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="editstaffArray.branch_location">     
+                	    
+                    </div>    
+                    
+                           
+                             
+					<div class="form-group">
+						<label>{{'lang_AssignPrivilege'|translate}} <span style="color:red">*</span></label>
+						<select name="privilege" id="privilege" ng-model="editstaffArray.privilege" class="form-control"> 
+								<option value="">{{'lang_Please_Select'|translate}}</option>						 
+								<option value="CSA">{{'lang_Customer_Services_Assistant'|translate}}</option>
+								<option value="CSM">{{'lang_Customer_Services_Manager'|translate}}</option>
+								<option value="OPA">{{'lang_Customer_Permission_Manager'|translate}}</option>
+								<option value="RTO">{{'lang_Return_To_Officer'|translate}}</option>
+								<option value="FIN">{{'lang_Finance'|translate}}</option>
+                                <option value="IT">{{'lang_Information_Tech_team'|translate}}</option> 
+						</select>
+                    </div> 
+                    <div class="form-group">
+						<label>{{'lang_password'|translate}}<span style="color:red">*</span></label>  
+						<input type="password" class="form-control" name="password" ng-model="editstaffArray.password1" required>
+						<span class="text-danger" ng-show="edit_staff.password.$error.required">{{'lang_Passwordisrequired'|translate}}.</span>
+						
+                    </div>
+                    <input name="id" id="id" type="hidden" value="2">
+                     
+                    <input name="submit" type="submit" class="btn btn-primary" value="Update" ng-disabled="edit_staff.$invalid" ng-click="EditStaffform(editstaffArray);">
+ 
+ 			  	</div>
+            </div>
+        </div>
+    </div>		
+</section>
+
+
+  
+    

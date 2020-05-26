@@ -1,0 +1,172 @@
+
+<nav class="hk-breadcrumb" aria-label="breadcrumb"  ng-init="showreadyDeliverDeatils(1,0);"> 
+  <ol class="breadcrumb breadcrumb-light bg-transparent">
+    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}} </a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_shipmentManagement'|translate}} </li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_ShowRFD_Detail'|translate}}</li>
+  </ol>
+</nav>
+<div class = "">
+
+<section class="hk-sec-wrapper">
+  <h5>{{'lang_ShowRFD_Detail'|translate}} </h5>   
+  
+  	<div style="float:right; margin-bottom: 10px;">
+       
+				<input type="submit" class="btn btn-primary"  name="submit" value="Export To Excel"  onclick="create_zip();"> <!--ng-click="exportToExcelss('#tableId')"-->
+			</div>
+            <br>
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered mb-0" id="printTable">
+      <thead>
+        <tr>
+          <th class="head1">{{'lang_srNo'|translate}} </h5>
+  </th>
+          <th class="head0">{{'lang_Awbno'|translate}} </h5>
+  </th>
+          <th class="head0" >{{'lang_Shelveno'|translate}} </h5>      
+  . </th>
+          <th class="head1">{{'lang_address'|translate}} </h5>
+  </th>
+          <th class="head0" > {{'lang_Area'|translate}} </h5> 
+  </th>
+          <th class="head1">{{'lang_OnHold'|translate}} </h5>
+  </th>
+          <th class="head1">{{'lang_schedule'|translate}} </h5>
+   </th>
+          <th class="head0">{{'lang_Channel'|translate}} </h5>
+   </th>
+          <th class="head1">{{'lang_ScheduleDate'|translate}} </h5>
+   </th>
+          <th class="head1">{{'lang_TimeSlot'|translate}} </h5>
+   </th>
+          <th class="head1">{{'lang_Driver_name'|translate}} </h5>
+   </th>
+          <th class="head0">{{'lang_DriverCode'|translate}} </h5>
+   </th>
+          <th class="head1">{{'lang_Driver_Mobile'|translate}} </h5>
+  </th>
+          <th class="head0"> {{'lang_driverSupplier'|translate}} </h5>
+  </th>
+        </tr>
+      </thead>
+      <tbody>
+       
+        <tr  ng-repeat="data in listreadyDetailsArr">
+          <td>{{$index+1}}</td>
+          <td>{{data.slip_no}}</td>
+          <td>{{data.shelv_no}}</td>
+          <td>{{data.reciever_address}}</td>
+          <td>{{data.area}}</td>
+          <td><button class="btn btn-danger" ng-if="data.refused=='YES'">{{data.refused}}</button>
+            <button class="btn btn-info" ng-if="data.refused=='NO'">{{'lang_NO'|translate}}</button></td>
+          <td><button class="btn btn-success" ng-if="data.schedule_status=='Y'">{{'lang_Yes'|translate}}</button>
+            <button class="btn btn-danger" ng-if="data.schedule_status==''">{{'lang_NO'|translate}}</button></td>
+          <td><button class="btn btn-success" ng-if="data.schedule_status=='Y'">{{data.schedule_type}}</button>
+            <button class="btn btn-warning" ng-if="data.schedule_status==''">{{'lang_NA'|translate}}</button></td>
+          <td>{{data.schedule_date}}</td>
+          <td>{{data.time_slot}}</td>
+          <td>{{data.messenger_name}}</td>
+          <td>{{data.messenger_code}}</td>
+          <td>{{data.mobile}}</td>
+          <td>{{data.supplier_name}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<div style="display:none" ng-init="showExcelDeliverDeatils();"> 
+    <table class="table table-hover table-bordered mb-0" id="tableId">  
+      <thead>
+        <tr>
+          <th class="head1">{{'lang_srNo'|translate}} </h5>
+  </th>
+          <th class="head0">{{'lang_Awbno'|translate}} </h5>
+  </th>
+          <th class="head0" >{{'lang_Shelveno'|translate}} </h5>      
+  . </th>
+          <th class="head1">{{'lang_address'|translate}} </h5>
+  </th>
+          <th class="head0" > {{'lang_Area'|translate}} </h5>
+  </th>
+          <th class="head1">{{'lang_OnHold'|translate}} </h5>
+  </th>
+          <th class="head1">{{'lang_schedule'|translate}} </h5>
+   </th>
+          <th class="head0">{{'lang_Channel'|translate}} </h5>
+   </th>
+          <th class="head1">{{'lang_ScheduleDate'|translate}} </h5>
+   </th>
+          <th class="head1">{{'lang_TimeSlot'|translate}} </h5>
+   </th>
+          <th class="head1">{{'lang_Driver_name'|translate}} </h5>
+   </th>
+          <th class="head0">{{'lang_DriverCode'|translate}} </h5>
+   </th>
+          <th class="head1">{{'lang_Driver_Mobile'|translate}} </h5>
+  </th>
+          <th class="head0"> {{'lang_driverSupplier'|translate}} </h5>
+  </th>
+        </tr>
+      </thead>
+      <tbody>
+       
+        <tr  ng-repeat="data in listExcelDetailsArr">
+          <td>{{$index+1}}</td>
+          <td>{{data.slip_no}}</td>
+          <td>{{data.shelv_no}}</td>
+          <td>{{data.reciever_address}}</td>
+          <td>{{data.area}}</td>
+          <td><button class="btn btn-danger" ng-if="data.refused=='YES'">{{data.refused}}</button>
+            <button class="btn btn-info" ng-if="data.refused=='NO'">{{'lang_NO'|translate}}</button></td>
+          <td><button class="btn btn-success" ng-if="data.schedule_status=='Y'">{{'lang_Yes'|translate}}</button>
+            <button class="btn btn-danger" ng-if="data.schedule_status==''">{{'lang_NO'|translate}}</button></td>
+          <td><button class="btn btn-success" ng-if="data.schedule_status=='Y'">{{data.schedule_type}}</button>
+            <button class="btn btn-warning" ng-if="data.schedule_status==''">{{'lang_NA'|translate}}</button></td>
+          <td>{{data.schedule_date}}</td>
+          <td>{{data.time_slot}}</td>
+          <td>{{data.messenger_name}}</td>
+          <td>{{data.messenger_code}}</td>
+          <td>{{data.mobile}}</td>
+          <td>{{data.supplier_name}}</td>
+        </tr>
+		<tr>
+					<td ng-if="listExcelDetailsArr==''" colspan="14" align="center" style="text-align:center;">
+						No Today Shipments Available
+					</td> 
+					
+                </tr>  
+      </tbody>
+    </table>
+  </div>
+  </section>
+  
+  <SCRIPT>
+
+function create_zip() {
+var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+ tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+ tab_text = tab_text + '<x:Name>Test Sheet</x:Name>';
+ tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+ tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+ tab_text = tab_text + "<table border='1px'>";
+//get table HTML code
+ tab_text = tab_text + $('#printTable').html();
+ tab_text = tab_text + '</table></body></html>';
+  
+  /*var zip = new JSZip();
+  zip.add(Date()+"_manifest details.xls", tab_text);
+  content = zip.generate();
+  zip.file(Date()+"_manifest details.xls"); // the file
+  location.href="data:application/zip;base64," + content;*/
+  
+  var zip = new JSZip();
+zip.file(Date()+" Show RFD Detail.xls", tab_text);
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    saveAs(content, Date()+" Show RFD Detail.zip");
+});
+  
+
+}
+</SCRIPT>

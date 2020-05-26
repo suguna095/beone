@@ -1,0 +1,59 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getDrsDetailData();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Delivery Run Sheet</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_DRS_Detail'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+    <div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Show_DRS_Detail'|translate}}</h5> 
+		</div><br>
+	
+                   <a style="float:right; margin-right:40px; margin-bottom:20px;color:white" class="position-right btn btn-primary" href="drsforPrint/{{uidshow}}" target="_blank"><i class="fa fa-print" aria-hidden="true"></i>
+{{'lang_Print'|translate}}</a>
+
+		 <table class="table datatable-show-all table-bordered table-hover datatable-highlight" id="printSectionId">
+        <thead>
+                  
+       		 <tr>
+                <th class="head1">{{'lang_srNo'|translate}}</th>
+                <th class="head0">{{'lang_AwbNo'|translate}}</th>
+                <th class="head0">{{'lang_ProductType'|translate}}</th>
+				<th class="head0">{{'lang_address'|translate}}</th>
+                <th class="head1">Driver Name</th>            
+                <th class="head1">{{'lang_status'|translate}}</th>
+                <th class="head1">{{'lang_action'|translate}}</th>
+        
+    <!--<th class="head0">{{'lang_action'|translate}}</th>            </tr>-->  
+        </thead>
+        	
+        <tbody>
+          <tr ng-repeat="data in editdrsDataArray">
+            <td>{{$index+1}}</td>
+            <td>{{data.shipment_id}}</td> 
+        	<td>{{data.nrd}}</td>
+			<td>{{data.reciever_address}}</td>
+             <td>{{data.messangerName}}</td> 
+           <td>{{data.code}}</td>  
+         <td>
+          <div class="btn-group dropdown">
+					    <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        <div class="dropdown-menu w-210p">
+                         <a ng-if="data.delivered=='Y'" style="cursor:pointer;" class="dropdown-item" ng-click="updateShipmentStatus(data.id)" ng-confirm-click="return confirm('Do you want open this shipment, driver have to update it again ?');" title="for mistake updation, Open shipment"><i class="fa fa-folder-open"></i>Open Shipment</a>
+
+						<a ng-if="useradmin=='1'" style="cursor:pointer;" class="dropdown-item" ng-click="GetShipmentdelete(data.id)" ng-confirm-click="Do you want to Delete?"><i class="fa fa-trash-o fa-fw"></i>Delete</a> 
+						
+                        </div>
+            </div>  
+            </td>
+               </tr>
+                   
+                
+                </tbody>
+	</table>
+    </section>		

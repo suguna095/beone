@@ -1,0 +1,57 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showtestimonial();">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_generalSetting'|translate}} </li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_Testimonial'|translate}} </li>
+                </ol>
+    </nav>
+	<div class = "container">
+	<div class="breadcrumb-line">
+	    <div class="hk-pg-header">
+            <h4><i data-feather="arrow-left-circle"></i></i> 
+            <span class="text-semibold"></span>{{'lang_Show_Testimonial'|translate}}</h4>
+		</div>
+	</div>
+	<section class="hk-sec-wrapper">
+	<h5 class="hk-sec-title">{{'lang_Testimonial'|translate}} </h5><br>
+	<section class="hk-sec-wrapper">
+	<form name="uplaod_file" method="post" action="" enctype="multipart/form-data">
+	<a ui-sref="add_feedback"><button type="button" class="btn btn-primary" style="float:right;">{{'lang_AddTestimonial'|translate}} </button></a>
+ <table id="datable_1" class="table table-hover w-100 display pb-30">
+	        <thead>
+                <tr>
+                    <th>{{'lang_srNo'|translate}} </th>
+                    <th>{{'lang_name'|translate}} </th>
+                    <th>{{'lang_email'|translate}} </th>
+                    <th>{{'lang_Image'|translate}} </th>
+                    <th>{{'lang_Joindate'|translate}} </th>
+					<th>{{'lang_action'|translate}} </th>
+                </tr>
+            </thead>
+			<tbody>
+			    <tr ng-repeat="data in showtestimonial">
+                    <td>{{index+1}}</td>
+                    <td>{{data.name}}</td>
+                    <td>{{data.email}}</td>
+                    <td>{{data.image}}</td>
+                    <td>{{data.date}}</td>
+                    <td>
+					<div class="btn-group">
+                    <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">{{'lang_Toggle_Dropdown'|translate}}  </span>
+                    </button>
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(138px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+					
+					
+						<a class="dropdown-item" ng-click="GetAbtsdelete(data.id)" ng-confirm-click="Do you want to Delete?"><i class="fa fa-trash-o fa-fw"></i>&nbsp;{{'lang_delete'|translate}} </a>
+                    </div>
+				</div>	  
+					</td>
+                </tr>
+			</tbody>
+	    </table>
+		</form>
+	</section>
+	</section>
+			

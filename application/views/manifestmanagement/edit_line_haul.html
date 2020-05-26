@@ -1,0 +1,36 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getEditData();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Manifest_Management'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Line_Haul'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+	<div class="panel-heading">
+            <h5 class="panel-title">{{'lang_Line_Haul'|translate}}</h5>
+    </div><br>
+	<table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+                        
+            <thead>
+            <tr>
+            <th class="head1" colspan="8">
+           <form role="form"  method="post"  enctype="multipart/form-data" name="add_com"  id="add_com">
+		   <input type="hidden" name="name" ng-model="edit_compidArray.editid" />
+            <div class="form-group">
+            <input type="hidden" value="" name="edit_id">
+            <label> {{'lang_Add_Company'|translate}} </label>
+            <input type="text" name="name" class="form-control"  ng-model="edit_compidArray.name" Required>
+			
+            </div>
+            <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="add_com.$invalid" ng-click="edit_comform(edit_compidArray);">
+            </form>
+            </th>
+			
+            </tr>
+            
+     </tbody>
+            
+                    </table>
+   </section>	

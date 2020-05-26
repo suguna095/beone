@@ -1,0 +1,100 @@
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="ViewCountryList(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>    {{'lang_Home'|translate}} </a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Location_Management'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Location_List'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Location_List'|translate}}</h5>
+		</div><br>
+		<div class="row">
+     	<div class="col-lg-12">
+        <div class="panel panel-flat">
+   
+     
+    <table class="table table-striped table-bordered table-hover">
+    <tbody><tr>
+        <th class="head1" colspan="5">
+        <form method="POST" id="bar_code_Frm" name="bar_code_Frm">
+		
+		
+                <a ui-sref="add_state" title="Add New State">
+        <button type="button" class="btn btn-primary">{{'lang_Add_State'|translate}}</button></a> 
+        
+                
+                <a ui-sref="add_country" title="Add New Country"> 	
+        <button type="button" class="btn btn-primary">{{'lang_Add_Country'|translate}}</button></a>  
+
+        <a ui-sref="add_city" title="Add New Country"> 	
+        <button type="button" class="btn btn-primary">{{'lang_Add_City'|translate}}</button></a> 
+
+		</form> 
+        </th>
+        
+        <form name="search_form" method="post" action=""></form>    
+       <!--  <th colspan="12">
+        <input type="text" name="search_val" placeholder="Please Enter Your City" class="form-control" ng-model="filterData.country">
+        </th> 
+        
+        <th>
+        <input type="submit" name="Submit" value="Search" class="btn btn-primary" ng-click="ViewCountryList(1,1);">
+        <label><div id="search_val" style="display:inline;"></div></label>
+        </th> -->
+        
+        
+	</tr> 
+	</tbody></table>
+    
+    <table class="table table-striped table-bordered table-hover">
+             
+    <thead>
+        <tr>
+            <th width="5%">{{'lang_srNo'|translate}}</th>
+            <th width="20%">{{'lang_Country_Name'|translate}}</th>
+                        <th width="20%">{{'lang_actions'|translate}}</th>                                    
+        </tr>
+    </thead>
+    
+    <tbody>
+                <tr ng-repeat="data in ShowcountrylistArrar">
+        <td>{{$index+1}}</td>
+        <td>
+        <a ui-sref="country_detail({country:data.country})">{{data.country}}</a></td>
+        
+                
+        <td>
+                 
+        <a ui-sref="edit_country({id:data.id})" class="fa fa-pencil-square-o label label-info" title="Edit">
+                
+        </a>                 
+        
+                
+        &nbsp;
+                
+                         
+        <a style="cursor:pointer" title="Delete" ng-click="Countrydatadelete(data.id);" ng-confirm-click="Do you want to Delete?" class="fa fa-trash-o label label-warning">         
+                </a></td>
+        </tr>
+        <tr>
+		 
+    <td colspan="6" align="center" ng-if="ShowcountrylistArrar==''">
+    <form name="frm_pagi" action="" method="post">
+    <input type="hidden" name="pageval" id="pagevalid" value="0">
+   {{'lang_recordNotFound'|translate}}
+    </form>
+    </td>
+    </tr>
+        
+    </tbody>
+    
+	</table>
+                    
+</div>
+ 		 </div>
+                                
+                            </div>
+		</section>

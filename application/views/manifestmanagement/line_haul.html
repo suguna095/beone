@@ -1,0 +1,83 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="get_comp_list();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>    {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Manifest_Management'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Line_Haul'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+	<div class="panel-heading">
+            <h5 class="panel-title">{{'lang_Line_Haul'|translate}}</h5>
+    </div><br>
+	<table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+                        
+            <thead>
+            <tr>
+            <th class="head1" colspan="8">
+           <form role="form"  method="post"  enctype="multipart/form-data" name="add_com"  id="add_com">
+            <div class="form-group">
+            
+            <label> {{'lang_Add_Company'|translate}} </label>
+			
+            <input type="text" name="comp_name" class="form-control"  ng-model="add_comArray.comp_name" Required>
+			<span class="text-danger" ng-show="add_com.comp_name.$error.required">{{'lang_Add_Company_Required'|translate}} </span>
+            </div>
+            <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="add_com.$invalid" ng-click="add_comform(add_comArray);">
+            </form>
+            </th>
+            </tr>
+            
+            <tr>
+            <th class="head0">{{'lang_srNo'|translate}}</th>
+            <th class="head1">{{'lang_Companyname'|translate}} </th>
+            <th class="head0">{{'lang_action'|translate}} </th>
+            </tr>
+            
+            </thead>
+			
+                        
+            <tbody>
+            <tr ng-repeat="data in get_comp">
+                <td>{{$index+1}}</td>
+                <td>{{data.name}}</td>
+                <td>
+			    <div class="btn-group dropdown">
+					    <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        <div class="dropdown-menu w-210p">
+                        <a class="dropdown-item" ui-sref="edit_line_haul({editid: data.id})"><i class="fa fa-pencil-square-o"></i>&nbsp;{{'lang_edit'|translate}} </a>
+						
+						
+						<a class="dropdown-item" ui-sref="transit_time({getid:data.id})"><i class="fa fa-map"></i>&nbsp;{{'lang_Transist_Time'|translate}} </a>
+						<a class="dropdown-item" ng-click="Getdelete(data.id)" ng-confirm-click="Do you want to Delete?"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>   
+						
+                        </div>
+            </div> 
+                </td>
+            </tr>
+			
+           
+			
+           
+			
+			
+           
+                        			
+            <tr>
+            <td colspan="8" align="center">
+            
+            <form name="frm_pagi" action="" method="post">
+            <input type="hidden" name="pageval" id="pagevalid" value="0">
+            
+            </form>
+            
+            </td>
+            </tr>
+            
+            </tbody>
+            
+                    </table>
+   </section>	

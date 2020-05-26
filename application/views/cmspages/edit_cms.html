@@ -1,0 +1,139 @@
+   <style>
+.marquee-text .card {
+	border-radius: 0 !important;
+}
+.overlay {
+	background-color:#FFFFFF;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 9999999;
+	top: 0px;
+	left: 0px;
+	opacity: .5; /* in FireFox */
+	filter: alpha(opacity=50); /* in IE */
+}
+.loader {
+	position:fixed;
+	top:34%;
+	border: 16px solid #FFFFFF;
+	border-radius: 50%;
+	border-top: 16px solid #00CC67;
+	width: 200px;
+	height: 200px;
+	-webkit-animation: spin 2s linear infinite; /* Safari */
+	animation: spin 2s linear infinite;
+	text-align:center;
+	margin-left: 30%;
+	z-index: 9999999999999 !important;
+	opacity: .5; /* in FireFox */
+	filter: alpha(opacity=50); /* in IE */
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+ 0% {
+-webkit-transform: rotate(0deg);
+}
+ 100% {
+-webkit-transform: rotate(360deg);
+}
+}
+ @keyframes spin {
+ 0% {
+transform: rotate(0deg);
+}
+ 100% {
+transform: rotate(360deg);
+}
+}
+
+.m-0.marquee-text.pcoded-content {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 69px;
+}
+</style>
+   
+   	 <nav class="hk-breadcrumb" aria-label="breadcrumb" >
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_CMS_Page'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Edit_CMS_Page'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "container">
+      <!-- <div class="loader logloder" ></div>-->
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Edit_CMS_Page'|translate}}</h5> 
+		</div><br>
+		<div class="panel-body" ng-init="EditCMSshow();">
+					<div class="col-lg-12"> 
+                        
+        				<form class="stdform" name="service_desc" id="service_desc" enctype="multipart/form-data">
+       
+                        <div class="form-group">
+                        <label>{{'lang_Heading'|translate}}</label>                           
+                        <input type="text" class="form-control" name="heading" ng-model="editcmsArray.heading" >
+                         <span class="text-danger" ng-show="service_desc.heading.$error.required">{{'lang_heading_is_required'|translate}}.</span>
+                        </div>
+						
+						<div class="form-group">
+                        <label>{{'lang_Arabic_Heading'|translate}}</label>                           
+                        <input type="text" class="form-control" name="heading_ar" ng-model="editcmsArray.heading_ar" >
+                         <span class="text-danger" ng-show="service_desc.heading_ar.$error.required">{{'lang_heading_Arabic_is_required'|translate}}</span>
+                        </div>
+						
+                  		<div class="form-group">
+		                    <label>{{'lang_Content'|translate}}</label>
+		                    <span id="content_id" class="alert"></span>
+							<textarea class="form-control summernote mt-15" name="content" rows="6" placeholder="Textarea" ng-model="editcmsArray.content" Required></textarea>
+							<span class="text-danger" ng-show="service_desc.editcmsArray.content.$error.required">Name is required.</span>
+	                    </div>
+						
+						<div class="form-group">
+		                    <label>{{'lang_Arabic_Content'|translate}}</label>
+		                    <span id="content_ar" class="alert"></span>
+							<textarea class="form-control summernote mt-15" name="content_ar" rows="6" placeholder="Textarea" ng-model="editcmsArray.content_ar" Required></textarea>
+							<span class="text-danger" ng-show="service_desc.editcmsArray.content_ar.$error.required">{{'lang_Name_is_required'|translate}}.</span>
+	                    </div>
+
+                      
+						
+                        <div class="form-group">
+                        <label>{{'lang_Image'|translate}}</label>
+                         <div class="fileinput input-group ng-isolate-scope fileinput-exists" data-provides="fileinput">  
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_Upload'|translate}}</span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"> <span class="fileinput-filename"></span></div> 
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}}</span><span class="fileinput-exists">{{'lang_Change'|translate}}</span>
+                                                <input type="hidden" value="" name=""><input type="file" name="image_con" fileread="editcmsArray.image_con" accept="image/*" class="ng-isolate-scope">
+                                                </span>
+                                               <!-- <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}}</a>-->
+                                                </span>
+                                            </div>
+											<br>
+											
+											
+                                            
+											
+											
+											<img  ng-if="editcmsArray.image_con && !editcmsArray.newimage_con " src="{{editcmsArray.image_con}}" class="img-fluid" width="90px;" height="90px;"> 
+                                            <img  ng-if="editcmsArray.newimage_con" src="{{editcmsArray.newimage_con}}" class="img-fluid" width="90px;" height="90px;"> 
+						 
+						 
+                         
+                        </div>
+                     
+                       	<input name="id" type="hidden" value="36">
+                       	<input name="submit_ser" type="submit" value="Update" class="btn btn-primary" ng-disabled="service_desc.$invalid" ng-click="CMS_update(editcmsArray);">
+                     
+        				</form> 
+ 			  		</div>
+				</div>
+</section>	

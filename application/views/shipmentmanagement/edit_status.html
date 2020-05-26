@@ -1,0 +1,115 @@
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="editShipmentstatus();GetmainstatusDrop();">
+   <ol class="breadcrumb breadcrumb-light bg-transparent">
+      <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Shipment Management </li>
+      <li class="breadcrumb-item active" aria-current="page">Edit Status</li>
+   </ol>
+</nav>
+<div class = "container">
+  
+	<section class="hk-sec-wrapper">
+      <h5 class="hk-sec-title">Shipment Status Update - (Tracking No.: {{userselected.booking_id}}/ (Reference No. : {{userselected.slip_no}}))</h5>
+      <br>
+      
+	<div class="panel-body">
+		<div class="table-responsive">  
+		    <input type="hidden" name="cusid" ng-model="userselected.cusid" />
+			<div class="col-md-12"> 
+				<div class="form-group">
+					<input type="hidden" name="slip_no" ng-model="userselected.slip_no">
+					<input type="hidden" name="statu_id" value="14">  
+				</div>
+			</div>
+			
+			<div class="col-md-12"> 
+				<div class="form-group">
+					<label>Select Status</label>
+					<select name="userid" ng-change="getdetails()" ng-model="userselected.userid" class="form-control  input-lg"  >
+					<option value="" selected="selected">Please Select Status</option>
+					<option value="1">Not Delivered</option>
+					<option value="3">On Process</option>
+					<option value="4">Pick Up Collected</option>
+					<option value="5">Out for delivery</option>
+                    <option value="7">Shelve</option>     
+                    <option value="8">IN Transit</option>
+                    <option value="10">Hold for pickup</option>
+                    <option value="11">Delivered</option>
+                    <option value="13">Received Inbound</option>
+                    <option value="14">Ready For Delivery </option>
+                    <option value="15">General Update</option>
+                    <option value="20">Booked-reverse pick</option>
+                    <option value="21"> Cancelled as per Client request.</option>
+                    <option value="24">Return from Delivery station</option>
+                    <option value="25">Under Investigation</option>
+                    <option value="26">Assign to Driver</option>
+                    <option value="27">Confirm Request </option>
+                    <option value="28">Cancel Request </option>
+                    </select>
+				</div>
+			</div>
+		
+  
+
+
+			<div class="col-md-12">
+				<div class="form-group">
+				<label>Comment	</label>
+				<textarea rows="3" name="comment" class="form-control"  ng-model="userselected.comment" ></textarea>	
+				</div>
+			</div>
+			
+			<div id="show_sub" ng-show='result'>
+				<div class="col-md-12">
+					<div class="form-group">
+					<label>Select Reason</label>
+					<span id="show_sub_status"> <select name="sub_category" id="sub_category" class="form-control"  ng-model="userselected.sub_category" >
+					<option value="" selected="selected">Please Select</option><option value="RF">Customer Refused</option><option value="MW">Mobile Wrong</option><option value="MC">Mobile Close</option><option value="NA">No Answer</option><option value="CNL">Customer Not in location</option><option value="CNC">Customer Does Not Have Cash</option><option value="DD">Driver Delayed</option><option value="PD">Price Discrepancy </option><option value="COP">Customer Want To Open The Package</option><option value="DO">Duplicate Order</option><option value="WAR">Wrong Area/CS Issue</option><option value="OCA">Out of Coverage Area</option><option value="CNAD">Customer Not Aware For Any Delivery</option><option value="CNI">Customer Does Not Have ID</option><option value="RFD">Reschedule For Future Date</option><option value="RSD">Reschedule For Tomorrow</option><option value="RSP">Request for Self Pickup</option></select>
+					</div>
+				</div>
+			</div>   
+					 
+			<div class="col-md-12" id="show_shelve_number" ng-show='result1' >
+				<div class="form-group">
+				<label>Shelve Number</label>
+				<div class="awesomplete">
+                <input type="text" name="shelv_no" id="shelve_number" autofocus=""  placeholder="Shelve No." class="awesomplete ui-autocomplete-input watermark width_set form-control" autocomplete="off" aria-autocomplete="list"  ng-model="userselected.shelv_no" >
+                </span>
+                </div>
+				</div>
+			</div>
+			
+			<div class="col-md-12" id="deliver_number" ng-show='result2'>
+				<div class="form-group">
+				<label>Receiver number</label>
+				<input type="text" name="reciever_number" id="reciever_name" class="form-control"  ng-model="userselected.reciever_number" >
+				</div>
+			</div>
+			
+			<div class="col-md-12" id="deliver_name" ng-show='result2'>
+				<div class="form-group">
+				<label>Receiver Name</label>
+				<input type="text" name="reciever_name" id="reciever_number" class="form-control"  ng-model="userselected.reciever_name" >
+				</div>
+			</div>
+			
+			<div id="route_code" >
+			</div>
+			<div class="col-md-12" id="massenger_name" ng-show='result3'>
+				<div class="form-group">
+				<label>Messagner Name</label>
+					<div class="awesomplete"><input type="text" name="messanger_id" id="show_messanger_dropdown" autofocus="" placeholder="Courier" class="awesomplete ui-autocomplete-input watermark width_set form-control" autocomplete="off" aria-autocomplete="list"  ng-model="userselected.messanger_id" ></div>
+				</div>
+			</div>
+			
+			<div class="col-md-12">	
+			<label>&nbsp;</label>	
+			<button type="submit" class="btn btn-primary form-control" ng-click="EditShipmentStatusform(userselected);">Submit</button>					
+			</div>	
+			
+										
+		</div>  
+	</div>
+				
+		
+	</section>
+</div>

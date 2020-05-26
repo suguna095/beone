@@ -1,0 +1,93 @@
+   		
+        <script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip.js"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip-utils.js"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/FileSaver.js"></script>
+        <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="GetsearchShelveNo(1,0);ShowShelveCityDrop();">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_InventoryManagement'|translate}}</li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_ShowInventory'|translate}}</li>
+                </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+	<h5>{{'lang_ShowInventory'|translate}}</h5><br>
+	<section class="hk-sec-wrapper">
+	<div class="panel-body">
+        
+        
+		
+		<div class = "container">
+		<div class = "row">
+		
+				<select class="form-control custom-select mt-15" ng-model="filterData.destination"> 
+				        <option value="">--{{'lang_selectDestination'|translate}}--</option> 
+                        <option ng-repeat="cdata in ShelveCityArray" value="{{cdata.id}}">{{cdata.city}}</option>
+                      
+                </select> 
+				
+				<input class="form-control mt-15" type="text" ng-model="filterData.shelv_no" placeholder="Shelve No."><br><br><br>
+				
+				<input type="submit" value="search" class="btn btn-primary mr-15" ng-click="GetsearchShelveNo(1,1);"></hr> 
+		 <input class="btn-primary" type="button" value="Export to Zip" style="float:right;" onclick="create_zip();" >
+		</div>
+        <br>           
+        <table class="table datatable-show-all table-bordered table-hover datatable-highlight" id="show_shelve_print">
+        
+            <thead>
+          
+            <tr>
+            <th class="head1">#</th>
+            <th class="head0">{{'lang_city'|translate}}</th>
+            <th class="head1">{{'lang_ShelvNo'|translate}}.</th>
+            <th class="head0">{{'lang_NoofShipment'|translate}}</th>
+            
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-repeat="data in InventoryFatchArr">
+			<td>{{$index+1}}</td>
+			<td>{{data.destination}}</td>
+			<td><a class="btn btn-warning" ui-sref="view_shipment({shelv_no:data.shelv_no})" >{{data.shelv_no}}</a>  </td>
+			<td>{{data.count}}</td>     
+			</tr>
+			
+			  <tr ng-if="InventoryFatchArr==''" >
+				<td colspan='4'> {{'lang_NoRecords_Found'|translate}}</td> 
+			</tr> 
+			</tbody>
+			</table>
+            <button type="button"  class="btn btn-info btn-sm" ng-click="GetsearchShelveNo(count=count+1,0);" ng-init="count=1" ng-if="totalCount>0">{{'lang_Load_More'|translate}}</button>
+	</section>
+	</section>		
+<SCRIPT>
+
+function create_zip() {
+var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+ tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+ tab_text = tab_text + '<x:Name>Test Sheet</x:Name>';
+ tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+ tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+ tab_text = tab_text + "<table border='1px'>";
+//get table HTML code
+ tab_text = tab_text + $('#show_shelve_print').html();
+ tab_text = tab_text + '</table></body></html>';
+	
+	/*var zip = new JSZip();
+	zip.add(Date()+"_manifest details.xls", tab_text);
+	content = zip.generate();
+	zip.file(Date()+"_manifest details.xls"); // the file
+	location.href="data:application/zip;base64," + content;*/
+	
+	var zip = new JSZip();
+zip.file(Date()+" Show Shelve.xls", tab_text);
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    saveAs(content, Date()+" Show Shelve.zip");
+});
+	
+
+}
+</SCRIPT>

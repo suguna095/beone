@@ -1,0 +1,431 @@
+
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showlistship(1, 0);showOriginDrop();">
+    <ol class="breadcrumb breadcrumb-light bg-transparent">
+        <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> {{'lang_Home'|translate}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{'lang_shipmentManagement'|translate}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{'lang_showShipment'|translate}}</li>
+    </ol>
+</nav>
+<div class="loader logloder" ng-show="loadershow"></div>
+<section class="hk-sec-wrapper ">
+    <h5 class="hk-sec-title">{{'lang_allShipment'|translate}}</h5>
+    <br>
+    
+
+    <form method="post" action="bulkPrintAbw">
+        <section class="hk-sec-wrapper">
+        <div class="row">
+            <div class="col-sm">
+                <div class="row">
+                    <!--<form class="form-inline" method="post" action="ShipmentManagement/GetshipmentExportData">-->
+
+                    <!--<div class="form-group ml-10">--> 
+                    <div class="col-md-3">
+                        <select id="exportlimit" class="form-control custom-select" ng-model="exportlimit" name="exprort_limit" required="">
+                            <option value="" selected>Select Export Limit</option>
+                            <option ng-repeat="exdata in dropexportArr" value="{{exdata.i}}" >{{exdata.j}}-{{exdata.i}}</option>  
+                        </select>
+                    </div>
+                    <!--</div>-->
+
+
+
+                    <div class="col-md-3 exptcls"> 
+                        <!--ng-click="exportToExcel(exportlimit)-->
+                        <input class="btn btn-info" type="submit" value="Export to Excel ZIP" id="exportData" name="exportData" >
+                        <!-- <input class="btn btn-info" type="submit" value="Export to Excel ZIP" name="exportData" onclick="create_zip()"> --> 
+
+                    </div>
+                    <!--</form>-->
+                </div>
+            </div>
+        </div>
+    </section>
+        <section class="hk-sec-wrapper">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="row">
+                        <input type="HIDDEN" name="show_type" value="">
+                        <div class="col-md-3">
+                            <select name="date_type" id="date_type" class="form-control  " ng-model="filterData.date_type" >
+                                <option value="" selected="selected">{{'lang_PleaseSelectDate'|translate}} </option>
+                                <option value="c_date">{{'lang_CreationDate'|translate}} </option>
+                                <option value="m_date">{{'lang_ModificationDate'|translate}}</option>
+                                <option value="sch_date" selected="selected">{{'lang_ScheduledDate'|translate}}</option>
+                            </select><br/>
+                        </div>
+                        <div class="col-md-3">
+                            <span id="search_val">
+                                <input type="text" ng-model="filterData.date_val_data" id="datepicker3" class="form-control" placeholder="dd-mm-yy" >
+
+                            </span>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" placeholder="Delivery Attempts " class="form-control " onfocus="this.value = ''" min="0" value="" ng-model="filterData.attempt_search">
+
+                            </span> </div>
+                        <div class="col-md-3">
+                            <select  class="form-control" ng-change="searchtype(filterData.search_type);" ng-model="filterData.search_type" >
+                                <option value="AWB">{{'lang_AWB'|translate}} </option>
+                                <option value="SN">{{'lang_SenderName'|translate}}</option>
+                                <option value="RE" >{{'lang_ReceiverName'|translate}} </option>
+                                <option value="SE">{{'lang_Shippermobile'|translate}}</option>
+                                <option value="RP">{{'lang_Receivermobile'|translate}}</option>
+                                <option value="BN">{{'lang_ReferenceNumber'|translate}}</option>
+                                <option value="Email">{{'lang_email'|translate}}</option>
+                            </select><br/>
+                        </div>
+                        <div class="col-md-3">
+
+                            <input type="text" name="search_val_data" id="search_val_data" placeholder="{{transferdata.search_type}}" class="form-control " ng-model="filterData.search_val_data">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" name="shelve_number" id="shelve_number" value="" class="form-control" placeholder="Shelve No." ng-model="filterData.shelve_number">
+                        </div>
+                        <div class="col-md-3">
+                            <select name="staff" id="staff" class="form-control input-lg" ng-init="showStaffDrop();"  ng-model="filterData.staff">
+                                <option value="" >{{'lang_Select_Staff'|translate}}</option>
+                                <option ng-repeat="data in stafflist" value="{{data.id}}">{{data.messenger_name}}</option>
+                            </select><br/>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="user_name" class="form-control" id="user_name" ng-model="filterData.customer" ng-init="showCustomerDrop();" >
+                                <option value=""  required="required">Select Customer</option>
+                                <option ng-repeat="data in customerlist" value="{{data.id}}">{{data.name}}</option>
+                            </select><br/>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="onhold" id="onhold" class="form-control input-lg" ng-model="filterData.onhold" >
+                                <option value="">{{'lang_SelectOnholdStatus'|translate}}</option>
+                                <option selected="selected" value="YES">{{'lang_Yes'|translate}}</option>
+                                <option value="NO">{{'lang_No'|translate}}</option>
+                            </select><br/>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="main_status" id="main_status" class="form-control  input-lg" ng-model="filterData.main_status" ng-init="showStatusDrop();">
+                                <option value="" selected="selected">{{'lang_PleaseSelectStatus'|translate}}</option>
+                                <option ng-repeat="data in statuslist" value="{{data.id}}">{{data.main_status}}</option>
+                            </select>   
+                        </div>
+                        <div class="col-md-3">
+                            <select name="shipmentStatus" id="shipmentStatus" class="form-control" ng-model="filterData.shipmentStatus">
+                                <option  value="">{{'lang_All'|translate}}</option>
+                                <option  value="O">{{'lang_OPEN'|translate}}</option>
+                                <option value="C">{{'lang_CLOSE'|translate}}</option>
+                                <option value="OFD">{{'lang_RawReport'|translate}}</option>
+                            </select><br/>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" ng-model="filterData.bt_date1" id="datepicker1" class="form-control" placeholder="dd-mm-yy" >
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" ng-model="filterData.bt_date2" id="datepicker2" class="form-control" placeholder="dd-mm-yy" >
+
+                        </div>
+                        <div class="col-md-3">
+                            <select  class="form-control input-lg" ng-model="filterData.cityorigin" >
+                                <option value="">{{'lang_selectOrigin'|translate}}</option>
+                                <option ng-repeat="data in originlist" value="{{data.id}}">{{data.city}}</option>
+                            </select><br/>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="citydestination" id="citydestination" class="form-control" ng-model="filterData.citydestination" ng-init="showOriginDrop();" >
+                                <option value="">{{'lang_DestnationHub'|translate}}</option>
+                                <option ng-repeat="data in originlist" value="{{data.id}}">{{data.city}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="schedule" id="schedule_value" class="form-control input-lg" ng-model="filterData.schedule">
+                                <option value="">{{'lang_ScheduledStatus'|translate}}</option>
+                                <option selected="selected" value="Y">Yes</option>
+                                <option value="N">No</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+
+                            <select name="fwd_th" id="fwd_th" class="form-control" ng-model="filterData.fwd_th">
+                                <option value="">{{'lang_ForwardThrough'|translate}}</option>
+                                <option value="SMSA">{{'lang_SMSA'|translate}}</option>
+                                <option value="BEONE">{{'lang_Beone'|translate}}</option>
+                                <option value="Speedzi">{{'lang_Speedzi'|translate}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="button" name="bt_search" value="Search" class="btn btn-primary" ng-click="showlistship(1, 1);">
+                        </div>
+
+                        <div class="col-md-1">
+                            <input type="button" name="delete_cust" class="btn btn-danger" value="Delete" onclick="return confirm('Do You  want to delete ?');" ng-click="DeleteCustomer(listData)">
+                        </div>
+                        <!--  <td style="text-align:center; "><input type="submit" name="bulk_print" class="btn btn-info" value="AWB Label A4"></td>-->
+                        <div class="col-md-2">
+                            <input type="submit" name="bulklable_print" class="btn btn-success" value="AWB Label 4*6">
+                        </div>
+                        <div class="col-md-3"><span class="btn btn-primary"> {{'lang_totalShipment'|translate}} ({{totalCount}}) </span></div>
+
+                    </div>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+
+            <div>&nbsp;</div>
+            <div class="table-responsive">
+                <table id="exportable"  class="table table-striped table-bordered table-hover" align="center">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" name="update_all[]" ng-modal="data.checked" ng-click="selectAllFriends()" /> 
+                                <br/>
+                                {{'lang_SelectAll'|translate}}</th> 
+                            <th>{{'lang_date'|translate}}</th>
+                            <th>{{'lang_reference'|translate}}</th>
+                            <th>{{'lang_shipperReference'|translate}}</th>
+                            <th>{{'lang_AWB'|translate}}#</th>
+                            <th>{{'lang_DeliveryAttempts'|translate}}</th>
+                            <th>{{'lang_CallAttempts'|translate}}</th>
+                            <th>{{'lang_origin'|translate}}</th>
+                            <th>{{'lang_destination'|translate}}</th>
+                            <th>{{'lang_Pieces'|translate}}</th>
+                            <th>{{'lang_sender'|translate}}</th>
+                            <th>{{'lang_reciever'|translate}}</th>
+                            <th>{{'lang_ForwardThrough'|translate}}</th>
+                            <th>{{'lang_AirwayBillNo'|translate}}.</th>
+                            <th>{{'lang_status'|translate}}</th>
+                            <th>{{'lang_Pay_Status'|translate}}</th>
+                            <th>{{'lang_PayableStatus'|translate}}</th>
+                            <th>{{'lang_RecievableStatus'|translate}}</th>
+                            <th>{{'lang_schedule'|translate}}</th>
+                            <th>{{'lang_scheduleChannel'|translate}}</th>
+                            <th>{{'lang_OnHold'|translate}}</th>
+                            <th>{{'lang_OnHoldReason'|translate}}</th>
+                            <th>{{'lang_OnHoldDate'|translate}}</th>
+                            <th>{{'lang_OnHoldConfirm'|translate}}</th>
+                            <th>{{'lang_OnHoldDays'|translate}}</th>
+                            <th>{{'lang_driverName'|translate}}</th>
+                            <th>{{'lang_DriverComment'|translate}}</th>
+                            <th>{{'lang_details'|translate}}</th>
+                            <th>{{'lang_driverSupplier'|translate}}</th>
+                            <th>{{'lang_Warehouse'|translate}}</th>
+                            <th>{{'lang_Shelve'|translate}}</th>
+                            <th>{{'lang_scheduleDate'|translate}}</th>
+                            <th>{{'lang_Weight'|translate}}</th>
+                            <th>{{'lang_action'|translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr ng-repeat="data in listData">
+                            <td>{{$index + 1}}<br/>
+                                <input  type="checkbox" name="CheckshidIds[]" ng-model="data.checked" value="{{data.slip_no}}"/></td>
+                            <td >{{data.entrydate| date:'M/d/yyyy HH:mm:ss'}}</td>
+                            <td ng-if="data.booking_id != ''">{{data.booking_id}}</td>
+                            <td ng-else>--</td>
+                            <td ng-if="data.shippers_ref_no != ''">{{data.shippers_ref_no}}</td>
+                            <td ng-else>--</td>
+                            <td><a ui-sref="details({shid:data.id})" target="_blank">{{data.slip_no}}</a><br>
+                                <p ng-if="data.delever_time != ''">(Old Awb# {{data.delever_time}})</p></td>
+                            <td>{{data.d_attempt}}</td>
+                            <td>{{data.call_attempt}}</td>
+                            <td>{{data.origin}}</td>
+                            <td>{{data.reciever_city}}</td>
+                            <td>{{data.pieces}}</td>
+                            <td>{{data.sender_name}}</td>
+                            <td><a href="" target="_blank">{{data.reciever_name}}</a><br></td>
+                            <td ng-if="data.frwd_awb_no != ''">{{data.frwd_throw}}</td>
+                            <td ng-else>N/A</td>
+                            <td>{{data.frwd_awb_no}}</td>
+                            <td style="background-color:#AEFFAE;" ><p ng-bind-html="data.delivered_show"></p>
+                                <p >{{data.total_cod_amt}}</p>
+                                <p ng-if="data.code != ''">{{data.show_code}}</p></td>
+                            <td><span class="btn btn-success " ng-if="data.amount_collected == 'Y'">{{'lang_Paid'|translate}}</span> <span class="btn btn-danger " ng-else>{{'lang_Pending'|translate}}</span></td>
+                            <td><span class="btn btn-success " ng-if="data.pay_invoice_no != '' && pay_invoice_status == 'YES'">{{'lang_CLOSED'|translate}}</span> <span class="btn btn-danger " ng-else>{{'lang_Invoice_Created'|translate}}</span></td>
+                            <td><span class="btn btn-success " ng-if="data.pay_invoice_no != '' && rec_invoice_status == 'YES'">{{'lang_CLOSED'|translate}}</span> <span class="btn btn-danger " ng-else>{{'lang_Invoice_Created'|translate}}</span></td>
+                            <td><span class="btn btn-success" ng-if="data.schedule_status == 'Y'">{{'lang_Yes'|translate}}</span><span class="btn btn-danger" ng-else>{{'lang_No'|translate}}</span></td>
+                            <td><span class="btn btn-success " ng-if="schedule_type">{{data.schedule_type}}</span><span class="btn btn-danger " ng-else>{{'lang_NA'|translate}}</span></td>
+                            <td><span class="btn btn-success " ng-if="data.refused == 'YES'">{{data.refused}}</span><span class="btn btn-danger " ng-else>{{'lang_No'|translate}}</span></td>
+                            <td><span class="btn btn-success " ng-if="data.refused == 'YES'">{{data.onHold_Reason}}</span><span class="btn btn-danger " ng-else>{{'lang_No'|translate}}</span></td>
+                            <td><span class="btn btn-success" ng-if="data.refused == 'YES'">{{data.onHold_Date}}</span><span class="btn btn-danger " ng-else>{{'lang_NA'|translate}}</span></td>
+                            <td><span class="btn btn-success" ng-if="data.onHold_Confirm == 'YES'">Yes</span><span class="btn btn-danger " ng-else>{{'lang_No'|translate}}</span></td>
+                            <td>{{data.onHold_Days}}</td>
+                            <td>{{data.messenger_name}}</td>
+                            <td>{{data.comment}}</td>
+                            <td>{{data.Details}}</td>
+                            <td>{{data.messenger_code}}</td>
+                            <td>{{data.shelv_no_1}}</td>
+                            <td>{{data.shelv_no}}</td>
+                            <td><span ng-if="data.schedule_status == 'Y'">{{data.schedule_date}}</span><span ng-else>{{'lang_NA'|translate}}</span></td>
+                            <td ><span ng-if="data.weight">{{data.weight}}</span><span ng-else>--</span></td>
+                            <td><div class="btn-group dropdown">
+                                    <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> </button>
+                                    <div class="dropdown-menu w-210p"> <!--<a class="dropdown-item" ui-sref="edit_shipment({cusid:data.id})"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp;Edit</a>--> <a class="dropdown-item" ng-click="GetShipmentdelete(data.id)" ng-confirm-click="Do you want to Delete?"><i class="fa fa-trash-o fa-fw"></i>&nbsp;Delete</a> <!--<a class="dropdown-item" ui-sref="print_shipment({cusid:data.id})">LabelA4</a>--> 
+                                        <a class="dropdown-item" href="awbPrint/{{data.slip_no}}" target="_blank"> <i class="fa fa-file-pdf-o"></i>&nbsp; {{'lang_labels'|translate}}</a>  
+                                        <!--  <a class="dropdown-item" ui-sref="edit_status({cusid:data.id})"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp;Update</a>--> 
+                                        <a class="dropdown-item" ng-click="Getpopoprncustdetais(data.id, '#exampleSendSMS', 'one');" style="cursor:po<br />
+                                           ;"><i class="fa fa-credit-card"></i>&nbsp;{{'lang_SMS'|translate}}</a> 
+                                        <!-- <a class="dropdown-item" ui-sref="attachfile_shipment({cusid:data.id})"><i class="fa fa-file-text-o"></i>&nbsp;Attach File</a>-->
+                                        <a href="#" class="dropdown-item" ng-click="GetmanifestScanData(data.id, data.slip_no);"> <i class="fa fa-exchange"></i>&nbsp;Transfer Shipment</a>
+                                    </div>
+                                </div></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button type="button" class="btn btn-info" ng-click="showlistship(count = count + 1, 0);" ng-init="count = 1" >{{'lang_Load_More'|translate}}</button>
+
+            </div>
+            </div>  
+        </section>
+    </form>
+
+    <div class="modal" id="transferShipment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">{{'lang_Transfer_Shipment'|translate}}</h6> 
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" ng-model="transferdata.id" />
+                    <input type="hidden" name="slip_no" ng-model="transferdata.slip_no" />
+                    <h6 class="text-semibold"></h6>
+                    <label>{{'lang_city'|translate}}</label>
+                    <span id="city_dropdown_show">
+                        <select class="form-control input-lg" name="city_dest" id="city_dest" ng-model="transferdata.city_dest">
+                            <option value="">{{'lang_Please_Select'|translate}}</option>
+                            <option ng-repeat="data in arrlist" value="{{data.city}}">{{data.city}}</option>   
+                        </select>
+                    </span>
+                    <hr>
+                    <h6 class="text-semibold"></h6>
+                    <label>{{'lang_address'|translate}}</label>
+                    <textarea name="address" rows="3" class="form-control" ng-model="transferdata.address"></textarea>
+                    <hr>
+                    <h6 class="text-semibold"></h6>
+                    <button type="text" class="btn btn-info" name="shipment_transfer" ng-click="TransferShipment(transferdata);">{{'lang_Submit'|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="exampleSendSMS" tabindex="-1" role="dialog" aria-hidden="true" >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">{{'lang_SendSMS'|translate}} </h6>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" ng-model="transferdata.id" />
+                    <input type="hidden" name="slip_no" ng-model="transferdata.slip_no" />
+                    <h6 class="text-semibold"></h6>
+                    <select class="form-control" name="mobile_no" ng-change="getphonedetails()" ng-model="transferdata.mobile_no" >
+                        <option value="">{{'lang_Please_Select'|translate}}</option>
+                        <option value="1">{{'lang_sender'|translate}}</option>
+                        <option value="2">{{'lang_Receiver'|translate}}</option>
+                    </select>
+                    <hr>
+                    <input type="text" name="sender_phone" class="form-control" ng-model="transferdata.sender_phone"  ng-show='result1'>
+                    <input type="text" name="reciever_phone"  class="form-control" ng-model="transferdata.reciever_phone"  ng-show='result2'>
+                    <hr>
+                    <h6 class="text-semibold"></h6>
+                    <span id="select_temp">
+                        <select class="form-control" ng-change="GettemplateMessage(transferdata.template_name);"  ng-model="transferdata.template_name" >
+                            <option value="">{{'lang_Please_Select'|translate}}</option>
+                            <option ng-repeat="tempdata in templateArray" value="{{tempdata.id}}">{{tempdata.template_name}}</option>
+                        </select>
+                    </span>
+                    <hr>
+                    <h6 class="text-semibold"> </h6>
+                    <span id="messages1">
+                        <textarea  rows="5"  class="form-control" ng-modal="transferdata.templates">{{transferdata.templates}}</textarea>
+                    </span>
+                    <hr>
+                    <h6 class="text-semibold"></h6>
+                    <span id="working_upgrade_button">
+                        <button type="text" class="btn btn-info" placeholder="Street" name="send_sms"  ng-click="sendSmsShipment(transferdata);"> {{'lang_Update'|translate}}</button>
+                    </span> </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="updateshowPop" class="modal fade">
+    <div class="modal-dialog" >
+        <div class="modal-content"  style="min-height:500px;">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Transfer Shipment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" ng-model="ManifestScanArr.id" />
+                <input type="hidden" ng-model="ManifestScanArr.slip_no" />   
+
+                <div class="alert alert-danger" id="success-alert" ng-if="errormess != ''">{{errormess}}</div>
+                <div class="alert alert-success" id="success-alert" ng-if="succmess != ''">{{succmess}}</div>
+
+                <h6 class="text-semibold"></h6>
+                <label>City</label>    
+                <select  class="form-control input-lg" ng-model="ManifestScanArr.origin" >  
+                    <option value="">{{'lang_selectOrigin'|translate}}</option>
+                    <option ng-repeat="data in originlist" value="{{data.id}}">{{data.city}}</option>
+                </select>
+
+                <hr>                                    
+                <h6 class="text-semibold"></h6>
+                <label>Address</label>
+                <textarea name="address" rows="3" class="form-control" ng-model="ManifestScanArr.address"></textarea>
+                <hr>
+                <h6 class="text-semibold"></h6>
+                <button type="submit" class="btn btn-info" name="shipment_transfer" ng-click="transferShip(ManifestScanArr);">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<SCRIPT>
+
+    function create_zip() {
+        var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel"><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/>';
+        tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+        tab_text = tab_text + '<x:Name>Test Sheet</x:Name>';
+        tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+        tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+        tab_text = tab_text + "<table border='1px'>";
+//get table HTML code
+        tab_text = tab_text + $('#testTable_new').html();
+        tab_text = tab_text + '</table></body></html>';
+
+        /*var zip = new JSZip();
+         zip.add(Date()+"_manifest details.xls", tab_text);
+         content = zip.generate();
+         zip.file(Date()+"_manifest details.xls"); // the file
+         location.href="data:application/zip;base64," + content;*/
+
+        var zip = new JSZip();
+        zip.file(Date() + " All Shipment Details.xls", tab_text);
+        zip.generateAsync({type: "blob"})
+                .then(function (content) {
+                    saveAs(content, Date() + " All Shipment Details.zip");
+                });
+
+
+    }
+    $(function(){
+        $('#exportData').click(function(e){
+            e.preventDefault();
+           if($('#exportlimit').val()){
+                $('form').attr('action','ShipmentManagement/GetshipmentExportData');
+                $('form').submit();
+           }
+           else{
+               $('.exptcls_err').remove();
+               $('.exptcls').after("<p class='exptcls_err text-danger'>Please select limit</p>");
+           }
+           
+        })
+    })
+</SCRIPT>

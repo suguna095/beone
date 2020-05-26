@@ -1,0 +1,158 @@
+	 <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getupdatelist(1,0);">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>    {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Operation_Filter'|translate}}</li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_Reschedule_for_FutureUpdate'|translate}}e</li>
+                </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+	<h5 class="hk-sec-title">{{'lang_Reschedule_for_FutureUpdate'|translate}}</h5>{{'lang_Shipment_which_Schedule_for_future_date_not_yet_dispatched'|translate}} <br>  <br/>
+	<section class="hk-sec-wrapper">
+	<div class="row">
+		<div class="col-md-3">
+            <b>{{'lang_From'|translate}}:</b>
+            <input type="text" name="search_date"  id="datepicker1" class="form-control" ng-model="filterData.from_date" placeholder="yy-mm-dd">
+            </div>
+            <div class="col-md-3">
+                <b>{{'lang_To'|translate}}:</b>
+                <input type="text" name="to_date"   id="datepicker2"  class="form-control" ng-model="filterData.to_date" placeholder="yy-mm-dd">
+            </div>
+			<div class="col-md-2">
+				<input type="submit" name="submit" style="margin-top:22px;" value="{{'lang_generateReport'|translate}}" class="btn btn-primary" ng-click="getupdatelist(1,1);">
+			</div>
+			<div class="col-md-3">
+			<span class="btn btn-primary" style="margin-top:22px;"> {{'lang_totalShipment'|translate}} ({{totalCount}})</span>  
+			</div>
+	
+	<div class="col-md-1">
+        <button type="button" name="bt_search" style="margin-top:22px;" data-toggle="tooltip" data-placement="top" title="Download Excel Report"  onclick="create_zip();"  class="btn btn-primary" ><i class="fa fa-file-excel-o fa-2x"  aria-hidden="true"></i></button>
+    </div>
+	</div>
+	</section>
+	
+	<div class = "table-responsive">
+	<table  class="table table-striped table-bordered table-hover" >
+	        <thead>
+                <tr>
+                    <th>{{'lang_sNO'|translate}} </th>
+                    <th>{{'lang_reference'|translate}}</th>
+                    <th>{{'lang_AWB'|translate}}#</th>
+                    <th>{{'lang_origin'|translate}} </th>
+                    <th>{{'lang_destination'|translate}} </th>
+                    <th>{{'lang_RecieverName'|translate}}</th>
+                    <th>{{'lang_RecieverAddress'|translate}} </th>
+                    <th>{{'lang_RecieverPhone'|translate}}</th>
+                   <th>{{'lang_Mode'|translate}} </th>
+                    <th>{{'lang_status'|translate}} </th>
+                    <th>{{'lang_CODAmount'|translate}} </th>
+					<th>{{'lang_Customer_Account'|translate}} </th>
+                    <th>{{'lang_SenderName'|translate}}  </th>
+                </tr>
+            </thead>
+			<tbody>
+			    <tr ng-repeat="data in orderupdateArray">
+				    <td>{{$index+1}}</td>
+					<td>{{data.shippers_ref_no}}</td>
+					<td><a ui-sref="details({shid:data.id})" target="_blank">{{data.slip_no}}</a></td>
+					<td>{{data.origin}}</td>
+					<td>{{data.destination}}</td>
+					<td>{{data.reciever_name}}</td>
+					<td>{{data.reciever_address}}</td>
+					<td>{{data.reciever_phone}}</td>
+					<td>{{data.mode}}</td>
+					<td>{{data.status}}</td>
+					<td>{{data.total_cod_amt}}</td>
+					<td>{{data.uidshow}}</td>
+					<td>{{data.sender_name}}</td>
+				</tr>
+				<tr>
+					<td ng-if="orderupdateArray==''" colspan="13" align="center" style="text-align:center;">
+						{{'lang_NoRecords_Found'|translate}} 
+					</td> 
+					
+                </tr>
+			</tbody>
+			
+	    </table>
+		</div>
+           <button ng-hide="orderupdateArray.length==totalCount || orderupdateArray==0" class="btn btn-info" ng-click="getupdatelist(count=count+1,0);" ng-init="count=1">{{'lang_Load_More'|translate}}</button> 
+		</section>
+		</section>
+		
+		<div style="display:none;" ng-init="FutureUpdateExcel();">
+		<table id="testTable_new" class="table table-striped table-bordered table-hover" align="center">
+	        <thead>
+                <tr>
+                    <th>{{'lang_sNO'|translate}} </th>
+                    <th>{{'lang_reference'|translate}}</th>
+                    <th>{{'lang_AWB'|translate}}#</th>
+                    <th>{{'lang_origin'|translate}} </th>
+                    <th>{{'lang_destination'|translate}} </th>
+                    <th>{{'lang_RecieverName'|translate}}</th>
+                    <th>{{'lang_RecieverAddress'|translate}} </th>
+                    <th>{{'lang_RecieverPhone'|translate}}</th>
+                   <th>{{'lang_Mode'|translate}} </th>
+                    <th>{{'lang_status'|translate}} </th>
+                    <th>{{'lang_CODAmount'|translate}} </th>
+					<th>{{'lang_Customer_Account'|translate}} </th>
+                    <th>{{'lang_SenderName'|translate}}  </th>
+                </tr>
+            </thead>
+			<tbody>
+			    <tr ng-repeat="data in FutureExcelList">
+				    <td>{{$index+1}}</td>
+					<td>{{data.shippers_ref_no}}</td>
+					<td>{{data.slip_no}}</td>
+					<td>{{data.origin}}</td>
+					<td>{{data.destination}}</td>
+					<td>{{data.reciever_name}}</td>
+					<td>{{data.reciever_address}}</td>
+					<td>{{data.reciever_phone}}</td>
+					<td>{{data.mode}}</td>
+					<td>{{data.status}}</td>
+					<td>{{data.total_cod_amt}}</td>
+					<td>{{data.uidshow}}</td>
+					<td>{{data.sender_name}}</td>
+				</tr>
+				<tr>
+					<td ng-if="FutureExcelList==''" colspan="13" align="center" style="text-align:center;">
+						{{'lang_NoRecords_Found'|translate}} 
+					</td> 
+					
+                </tr>
+			</tbody>
+			
+	    </table>
+		</div>
+  	
+<SCRIPT>
+
+function create_zip() {
+var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+ tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+ tab_text = tab_text + '<x:Name>Test Sheet</x:Name>';
+ tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+ tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+ tab_text = tab_text + "<table border='1px'>";
+//get table HTML code
+ tab_text = tab_text + $('#testTable_new').html();
+ tab_text = tab_text + '</table></body></html>';
+  
+  /*var zip = new JSZip();
+  zip.add(Date()+"_manifest details.xls", tab_text);
+  content = zip.generate();
+  zip.file(Date()+"_manifest details.xls"); // the file
+  location.href="data:application/zip;base64," + content;*/
+  
+  var zip = new JSZip();
+zip.file(Date()+" Future Update.xls", tab_text);
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    saveAs(content, Date()+" Future Update.zip");
+});
+  
+
+}
+</SCRIPT>

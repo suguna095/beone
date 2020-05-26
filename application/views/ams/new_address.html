@@ -1,0 +1,59 @@
+  	<nav class="hk-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Address_Management'|translate}} </li>   
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Add_New_Address'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "container">    
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Add_New_Address'|translate}}</h5>
+		</div><br>
+		<section class="hk-sec-wrapper">
+		<form class="stdform" method="post" name="add_address" action="" enctype="multipart/form-data">
+		<div class="row">
+				<div class="col-sm">
+					<div class="row">
+					
+							<div class="col-md-6">
+							<label>{{'lang_city'|translate}} </label><span id="city"></span>
+							<select class="form-control" type="text" name="city" id="city" ng-model="amsArray.city" Required>  <option value="">{{'lang_selectCity'|translate}} </option><option value="Beijing">Beijing</option><option value="Guangzhou">Guangzhou</option><option value="Shanghai">Shanghai</option><option value="Hong Kong">Hong Kong</option><option value="Dammam">Dammam</option><option value="Hayel">Hayel</option><option value="Al Hassa ">Al Hassa </option><option value="Madina">Madina</option><option value="Jeddah">Jeddah</option><option value="Makkah">Makkah</option><option value="Taif">Taif</option><option value="Arar">Arar</option><option value="Al Khobar">Al Khobar</option><option value="Bureida">Bureida</option><option value="Hafer Albaten">Hafer Albaten</option><option value="Jubail">Jubail</option><option value="Khafji">Khafji</option><option value="Khamis mushit">Khamis mushit</option><option value="Oneza">Oneza</option><option value="Rass">Rass</option><option value="Skaka">Skaka</option><option value="Tabuk">Tabuk</option><option value="Al Qatif">Al Qatif</option><option value="Jizan">Jizan</option><option value="Abha">Abha</option><option value="Yanbu">Yanbu</option><option value="Badayeh">Badayeh</option><option value="Methneb">Methneb</option><option value="Bukeiriah">Bukeiriah</option><option value="Towal">Towal</option><option value="29">Samtta</option><option value="30">Ahd Masarha </option><option value="Abo Aresh">Abo Aresh </option><option value="Bqiq">Bqiq</option><option value="Sebya">Sebya</option><option value="Besh">Besh</option><option value="35">Jizan economic city </option><option value="Muhayl Aseer">Muhayl Aseer</option><option value="Muzahmiah">Muzahmiah</option><option value="Quweya">Quweya </option><option value="Durma">Durma</option><option value="Laith">Laith</option>
+							</select>
+							<span class="text-danger" ng-show="add_address.city.$error.required">{{'lang_city'|translate}}</span>
+							</div>
+						<div class="col-sm-6">
+							<label>{{'lang_name'|translate}} </label>
+							<input type="text" class="form-control" id="name" name="name" ng-model="amsArray.name" Required>
+			 			<span class="text-danger" ng-show="add_address.name.$error.required">{{'lang_name'|translate}}</span>
+						</div>
+						<div class="col-sm-6"><br>
+							<label>{{'lang_phone'|translate}} </label>
+							<input type="tel" maxlength="10" minlength="10" name="mobile" class="form-control" id="phone" ng-model="amsArray.mobile" Required>
+						<span class="text-danger" ng-show="add_address.mobile.$error.required">{{'lang_phone'|translate}} </span>
+						</div> 
+						  
+						<div class="col-sm-6"><br>
+							<label>{{'lang_Zip_Code'|translate}} </label>
+							<input type="text" name="zip_code" class="form-control" id="zip_code" ng-model="amsArray.zip_code" Required>
+						<span class="text-danger" ng-show="add_address.zip_code.$error.required">{{'lang_Zip_Code'|translate}}</span>
+						</div>
+						<div class="col-sm-6"><br>
+							<label>{{'lang_address'|translate}} </label>
+							 <textarea rows="6" name="address" class="form-control" ng-model="amsArray.address" Required></textarea>
+						<span class="text-danger" ng-show="add_address.address.$error.required">{{'lang_address'|translate}}</span>
+						</div>	
+						<div class="col-sm-6"><br>
+							<label>{{'lang_email'|translate}} </label>
+							<input type="email" name="email" class="form-control" id="email" ng-model="amsArray.email" Required>
+						<span class="text-danger" ng-show="add_address.email.$error.required">{{'lang_email'|translate}}</span>
+						</div> <br>
+													
+						<input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="add_address.$invalid" ng-click="Amsform(amsArray);">  
+					
+				</div> 
+			</div>
+		</div>					
+		</form>		
+</section>		

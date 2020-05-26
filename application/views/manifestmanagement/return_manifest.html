@@ -1,0 +1,96 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="returnmanifest(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Manifest_Management'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Return_Manifest'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+	<div class="panel-heading">
+            <h5 class="panel-title">{{'lang_Return_Manifest'|translate}}</h5> 
+    </div>
+	 <div class="row">
+     
+                    <div class="col-sm">
+                        <div class="row">
+						<div class="col-md-3">
+						
+                        <input type="text" class="form-control mt-35" placeholder="AWB No." ng-model="filterData.scan_awb" ng-keyup="$event.keyCode == 13 && CheckslipNo(filterData.scan_awb);">  <br>
+						</div> 
+						  
+						
+						
+						<div class="col-md-3">
+						<label>{{'lang_customer'|translate}} </label>
+                        <span id="alert_name" class="error_alert"></span> <select name="user_name" class="form-control" id="user_name" ng-model="filterData.user_name">
+					    <option value="" >{{'lang_selectCustomer'|translate}} </option>
+                        <option ng-repeat="cdata in CustomerDropArr" value="{{cdata.id}}">{{cdata.company}}&nbsp;({{cdata.uniqueid}})</option></select>
+                        </div>
+                        <div class="col-md-3 container" ng-init="showOriginDrop();" >    
+                            <label>{{'lang_From'|translate}} </label>
+                          
+                        <input type="text" name="shelv_no" id="show_city_dropdown"  placeholder="Origin" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="filterData.origin">     
+                        </div>
+					
+					    <div class="col-md-3"  ng-init="showDestinationDrop();" > 
+                               
+                            <label>{{'lang_To'|translate}} </label>
+                                <input type="text" name="shelv_no" id="show_detination_dropdown"  placeholder="Destination" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="filterData.destination">  
+                            
+						</div>
+                        
+						<div class="col-md-4"><br>
+                        <label>&nbsp;</label>
+                        <button type="button" class="btn btn-primary" ng-click="returnmanifest(1,1);">{{'lang_View_Shipment'|translate}} </button>
+						</div>
+						</div>
+						</div>
+					<br>      
+		<table class="table datatable-show-all table-bordered table-hover datatable-highlight" style="margin-top:10px">
+          <thead>
+            <tr>
+              <th class="head1"> <input type="checkbox" name="update_all[]" ng-modal="data.checked"  ng-click="selectAllFriendsreturn()" />
+              
+                <br> {{'lang_srNo'|translate}}</th>
+            
+              <th>{{'lang_AWB_No'|translate}}</th>
+              <th>{{'lang_Shipper'|translate}}</th>
+              <th>{{'lang_Consignee'|translate}}</th>
+              <th>{{'lang_Attempts'|translate}}</th>
+             <th>{{'lang_Pieces'|translate}} </th>
+                    <th >{{'lang_WEIGHT'|translate}}</th>
+                    <th > {{'lang_origin'|translate}} </th>
+                    <th >{{'lang_destination'|translate}} </th>
+            </tr>
+            
+            
+          </thead>
+          <tbody>
+            <tr ng-repeat= "data in manifestData">
+		    <td><input  type="checkbox" name="CheckshidIds[]" id="checkslip{{data.slip_no}}" ng-model="data.checked" value="{{data.slip_no}}"/> <br/>{{$index+1}}</td>
+			
+			<td>{{data.slip_no}}</td>
+			<td>{{data.sender_name}}</td>
+			<td>{{data.reciever_name}}</td>
+			<td>{{data.d_attempt}}</td>
+			<td>{{data.pieces}}</td>
+			<td>{{data.weight}}</td>
+			<td>{{data.sender_city}}</td>
+			<td>{{data.reciever_city}}</td>
+            </tr>
+			<tr ng-if="manifestData==''" >
+                    <td colspan="10">
+					No Records Found   
+                    </td>
+        </tr>
+		  </tbody>
+          
+          
+        </table>
+		<button type="button" class="btn btn-primary"  ng-click="GetupdatemanifestChekData(manifestData);">  {{'lang_Manifest'|translate}}</button>
+		<button ng-hide="manifestData.length==totalCount" class="btn btn-success" ng-click="returnmanifest(count=count+1,0);" ng-init="count=1">{{'lang_Load_More'|translate}}</button>
+
+    </section>	
+</div>

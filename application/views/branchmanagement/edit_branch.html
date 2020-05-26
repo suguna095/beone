@@ -1,0 +1,82 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="Editbranchshow();">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}} </a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Branch_Management'|translate}}  </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_EditBranch'|translate}}</li>
+                </ol>
+            </nav>
+   <div class="container">
+                <!-- Title -->
+                            <div class="breadcrumb-line">
+                <div class="hk-pg-header">
+                <h4><i data-feather="arrow-left-circle"></i></i> 
+                <span class="text-semibold"></span>{{'lang_EditBranch'|translate}}</h4>
+                </div>
+            </div>
+        
+           
+     <section class="hk-sec-wrapper">
+    <div class="row">
+    
+    
+    <div class="col-md-12">
+       <div class="panel-heading"><b>{{'lang_EditBranch'|translate}}</b></div>
+    </div><br>
+     <div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+        			<form class="stdform"  name="edit_branch">
+                    <input type="hidden" name="branchid" ng-model="editbranchArray.branchid" /> 
+                    <div class="form-group"> 
+                   <label>{{'lang_country'|translate}}</label>
+                    <select name="sel_country" id="sel_country" class="form-control" onchange="createCityDropdownById_messanger(this.value);">
+			       <option value="">{{'lang_Please_Select'|translate}}</option><option value="1" selected="selected">{{'lang_SaudiArabia'|translate}}</option></select>
+                    </div>
+                    
+                    <div class="form-group" ng-init="ShowBranchCityDrop();">
+                    <label>{{'lang_Branch_City'|translate}} </label>
+                    <span id="city_dropdown_show">   
+                    <select name="city" id="city" class="form-control" ng-model="editbranchArray.city">
+                    <option value="">{{'lang_Please_Select'|translate}}</option>
+                     <option ng-repeat="data in BranchCityArray" value="{{data.id}}">{{data.city}}</option>   
+                    </select> 
+                    </span>
+                    </div>
+                  
+                    <div class="form-group">
+                    <label>{{'lang_Branch_Name'|translate}} </label>
+                 	<input type="text"  class="form-control"  name="branch_city" ng-model="editbranchArray.branch_city" Required>
+					<span class="text-danger" ng-show="edit_branch.branch_city.$error.required">{{'lang_Branch_Name_required'|translate}}.</span>
+                    </div>
+                    
+                    <div class="form-group">
+                    <label>{{'lang_Branch_Management'|translate}} </label>
+                    <input type="text"  class="form-control"  name="branch_peson" ng-model="editbranchArray.branch_peson" Required>  
+					<span class="text-danger" ng-show="edit_branch.branch_peson.$error.required">{{'lang_Branch_Management'|translate}} .</span>
+                    </div>
+                        
+                    <div class="form-group">
+                    <label>{{'lang_Branch_address'|translate}}</label>
+                    <textarea name="branch_address"  class="form-control" ng-model="editbranchArray.branch_address" Required>Bangalore</textarea>
+					<span class="text-danger" ng-show="edit_branch.branch_address.$error.required">{{'lang_Branch_address_required'|translate}}</span>
+                    </div>
+                        
+                    <div class="form-group">
+                    <label>{{'lang_Contact_No'|translate}}</label>
+                    <input type="text"  class="form-control" name="branch_contact" ng-model="editbranchArray.branch_contact" Required>
+					<span class="text-danger" ng-show="edit_branch.branch_contact.$error.required">{{'lang_Contact_No_required'|translate}}</span>
+                    </div>
+                     
+                    <input name="id" type="hidden" value="2">
+                    <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="edit_branch.$invalid" ng-click="EditBranchform(editbranchArray);">
+	
+					</form>
+ 				</div>
+			</div>
+		</div>                       
+</div>
+</section>
+
+
+  
+    

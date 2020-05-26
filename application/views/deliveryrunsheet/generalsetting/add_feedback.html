@@ -1,0 +1,57 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}   </a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_generalSetting'|translate}} </li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_Testimonial'|translate}} </li>
+                </ol>
+    </nav>
+	<div class = "">
+	
+	</div>
+	<section class="hk-sec-wrapper">
+	<h5 class="hk-sec-title">{{'lang_Add_Feedback'|translate}}</h5><br>
+	<section class="hk-sec-wrapper">
+	
+	<form name="uplaod_file" enctype="multipart/form-data" >
+	<input type="hidden" name="editid" ng-model="editArray.editid" /> 
+	        <div class="col-sm-8">
+                <div class="form-group">
+                    <label for="inputText">{{'lang_name'|translate}} </label>
+                    <input type="text" id="inputText" name="name" ng-model="fedArray.name" class="form-control" aria-describedby="textHelpBlock">
+                 </div>   
+            </div>
+			<div class="col-sm-8">
+                <div class="form-group">
+                    <label for="inputText"> {{'lang_email'|translate}} </label>
+                    <input type="email" name="email" id="inputText" ng-model="fedArray.email" class="form-control" aria-describedby="textHelpBlock">
+                </div>   
+            </div>
+			<div class="col-sm-8">
+                <div class="form-group">
+                    <label>{{'lang_Description'|translate}} </label>
+                    <textarea name="message" ng-model="fedArray.message" class="form-control" ></textarea>
+                </div> 
+            </div>
+			<div class="col-sm-8">
+			<div class="form-group">
+			    <label>{{'lang_Image'|translate}} </label>
+                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text">{{'lang_Upload_App'|translate}} </span>
+                    </div>
+                    <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                    <span class="input-group-append">
+					<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}} </span><span class="fileinput-exists">{{'lang_Change'|translate}} </span>
+                    <input type="file" name="image" fileread="fedArray.image" accept="image/*" required>
+                    </span>
+                    <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}} </a>
+                    </span>
+                </div>
+             </div>
+			</div>
+			<button type="submit" class="btn btn-primary" ng-click="Addfed(fedArray);">{{'lang_add'|translate}} </button>
+			<button type="button" class="btn btn-danger">{{'lang_cancel'|translate}}</button>
+	</form>
+	</section>
+	</section>
+			

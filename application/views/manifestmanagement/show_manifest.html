@@ -1,0 +1,250 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb"  ng-init="showmanifest(1,0);ShowCityDropdata();ShowHubDropdata();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Manifest_Management'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Show_Manifest'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+    	 <div class="loader logloder" ng-show="loadershow"></div>
+	<div class="panel-heading">
+            <h5 class="panel-title">{{'lang_Show_Manifest'|translate}} </h5>
+    </div><br>
+	<div class="table-responsive">
+	 <table class="table table-hover table-bordered mb-0">
+	    <thead>
+            <tr> 
+            <form name="search_form" method="post" action=""></form>
+            <th class="head1" colspan="3">
+           <p>Uniqueid:</p>			
+            <input type="text" name="uniqueid" placeholder="uniqueid" ng-model="filterData.uniqueid" class="form-control" >
+            </th>
+            <th class="head1" colspan="3"> 
+			<p>From Date:</p>
+            <input type="date" ng-model="filterData.from_date"  class="form-control" placeholder="dd-mm-yy" >
+            </th>
+			
+			 <th class="head1" colspan="3"> 
+			 <p>To Date:</p>
+            <input type="date" ng-model="filterData.to_date"  class="form-control" placeholder="dd-mm-yy" >
+            </th>
+			
+			</tr>
+			<tr>
+			
+			 <th class="head1" colspan="3"> 
+			 <p>Origin:</p>
+            <input type="text" name="mfrom" id="show_city_dropdown"  placeholder="Select Origin" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="filterData.mfrom">
+            </th>
+			 <th class="head1" colspan="3"> 
+			  <p>Destination:</p>
+			 <input type="text" name="mto" id="show_city_dropdownss"  placeholder="Select Destination" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="filterData.mto">
+            </th>
+			<th class="head1" colspan="3">
+           <input type="button" name="submit" value="Search" style="float:right;" class="btn btn-danger" ng-click="showmanifest(1,1);">
+		   </th>
+            </tr>
+            <tr>
+            <th>{{'lang_srNo'|translate}} .</th>
+            <th>{{'lang_Uniqueid'|translate}} </th>
+            <th>{{'lang_Line_Haul'|translate}} </th>
+            <th>Origin </th>
+            <th>{{'lang_destination'|translate}} </th>
+            <th>{{'lang_date'|translate}} </th>
+            <th>{{'lang_BarCode_Number'|translate}} </th> 
+            <th>{{'lang_status'|translate}} </th>
+            <th>{{'lang_action'|translate}} </th>
+            </tr>
+        </thead>
+        
+		<tbody>
+        
+		<tr ng-repeat="data in manifestArray|filter:searchText">
+        <td class="first style3">{{$index+1}}</td>
+        <td>{{data.uniqueid}}</td>
+        <td>{{data.line_hule}} </td>
+        <td>{{data.mfrom}}</td>
+        <td>{{data.mto}}</td>
+        <td>{{data.mdate}}</td>
+        <td><img src ="{{data.barcodeImage}}"/>{{data.uniqueid}}</td> 
+        <td>            
+       	   <a href="#" class="btn btn-primary btn-xs" ng-click="GetmanifestScanData(data.id,data.uniqueid,data.return_menifest);" style="height:40px;padding-bottom: 19px;padding-top: 0px;"> {{'lang_Receive_manifest'|translate}} </a>
+           <a href="#" class="btn btn_primary label bg-success btn-xs text-white">({{data.mtotal_Yes}})
+           </a>
+           <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#update_location_183699">
+           ({{data.mtotal_NO}})
+           </a>
+        </td>
+		<td>
+        
+		    <div class="btn-group dropdown">
+					    <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        
+                        <div class="dropdown-menu w-210p">
+                        <a class="dropdown-item" style="cursor:pointer;" ng-click="GetUpdatemanifestActive(data.uniqueid,'N');" ng-if="data.status=='Y'" role="button" ng-confirm-click="Do you want to Inactive?"><i class="fa fa-check fa-fw"></i>Active </a>
+                         <a class="dropdown-item" style="cursor:pointer;" ng-click="GetUpdatemanifestActive(data.uniqueid,'Y');" ng-if="data.status=='N'"><i class="glyphicon glyphicon-remove" ng-confirm-click="Do you want to Active?"></i>{{'lang_Inactive'|translate}}</a>
+						<a class="dropdown-item" style="cursor:pointer;" ng-click="Getmanifestdelete(data.uniqueid)" ng-confirm-click="Do you want to Delete?"><i class="fa fa-trash-o fa-fw"></i>Delete</a>  
+						<a class="dropdown-item" href="printmanifestView/{{data.uniqueid}}" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> {{'lang_Print'|translate}} </a>
+						<a class="dropdown-item" ui-sref="show_manifest_detail({manid:data.uniqueid})"><i class="fa fa-eye" aria-hidden="true"></i>  
+{{'lang_View'|translate}} </a> 
+						<a class="dropdown-item" ui-sref="show_not_found({nfoundid:data.uniqueid})"><i class="fa fa-ban" aria-hidden="true"></i> {{'lang_Not_Found_Orders'|translate}} </a>  
+						<a class="dropdown-item" style="cursor:pointer;" ng-click="GetlineHaul(data.uniqueid)" ><i class="fa fa-plus" aria-hidden="true"></i> 
+ {{'lang_Add_Lin_Haul_Detail'|translate}} </a> 
+						
+                        </div>
+            </div> 
+        </td>
+        </tr>
+		
+		 <tr ng-if="manifestArray==''" >
+                    <td colspan="9">
+					No Records Found   
+                    </td>
+        </tr>
+		
+       
+	  
+		
+		</tbody>
+	 </table><br>
+	 
+	  <button ng-hide="manifestArray.length==totalCount" class="btn btn-success" ng-click="showmanifest(count=count+1,0);" ng-init="count=1">{{'lang_Load_More'|translate}} </button>
+	  </div>
+    </section>	
+    
+    <div id="updateshowPop" class="modal fade">
+<div class="modal-dialog" >
+<div class="modal-content"  style="min-height:500px;">
+
+<div class="modal-header">
+        <h5 class="modal-title">{{'lang_UpdateStatus'|translate}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+<div class="table-responsive">
+<div class="panel panel-flat">
+<input type="hidden" ng-model="awb_no"  name="awb_no"  />
+<div class="col-md-12">
+
+<div class="form-group">   
+<label>{{'lang_Scan_barcode'|translate}}</label>
+<input type="text"  ng-model="ManifestScanArr.awb" class="form-control" ng-enter="GetscanManifest()" />                                       
+<input type="hidden" ng-model="ManifestScanArr.uniqueid" />    
+<input type="hidden" ng-model="ManifestScanArr.id" /> 
+<input type="hidden"  ng-model="ManifestScanArr.return_menifest"/>       
+</div>
+<div class="form-group">
+
+
+</div>
+
+
+
+</div>
+
+<div class="alert alert-danger" id="success-alert" ng-if="errormess!=''">{{errormess}}</div>
+<div class="alert alert-success" id="success-alert" ng-if="succmess!=''">{{succmess}}</div>
+
+<div class="col-md-12 table-responsive" >
+<table class="table table-bordered table-striped table-hover table-condensed">
+<tr>
+<th>{{'lang_Awbno'|translate}}</th>
+<th>{{'lang_sender'|translate}}</th>
+<th>{{'lang_origin'|translate}}</th>
+<th>{{'lang_destination'|translate}}</th> 
+<th>{{'lang_Receive'|translate}}</th> 
+
+ 
+</tr>
+<tr ng-repeat="data2 in scanManifestReturnArr"> 
+<td>{{data2.slip_no}}</td>
+<td>{{data2.sender_name}}</td>
+<td>{{data2.origin}}</td>  
+<td>{{data2.destination}}</td> 
+<td>{{data2.receive}}</td> 
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="modal fade" id="linepopsho" tabindex="-1" role="dialog" aria-hidden="true">   
+    <div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h6 class="modal-title">{{'lang_Show_Menifest_Line_houl'|translate}} {{line_detailArray.uniqueid}} #</h6>
+				<button type="button" class="close" id="update_location" data-dismiss="modal">×</button>
+			</div>
+			<form role="form"  method="post"  enctype="multipart/form-data" name="line_detail"  id="line_detail"> 
+			
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-sm">
+						<form class="add_manifest"  name="add_manifest" >
+						<div class="row">
+							<div class="col-md-4">
+								
+								<div class="form-group">
+                                <label>{{'lang_Line_Haul'|translate}} </label>
+                                <select name="line_hule" class="form-control" id="line_hule" ng-model="line_detailArray.line_hule" required>
+					            <option value="" selected>{{'lang_PleaseSelectStatus'|translate}} </option>
+                                <option ng-repeat="ldata in lineHaleDrop" value="{{ldata.id}}">{{ldata.name}}</option>
+                                </select>
+                               <span ng-if="!line_detailArray.line_hule" style="color:red">{{'lang_Nameisrequired'|translate}}</span> 
+                                </div>
+								
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+                                <label>{{'lang_driverName'|translate}}  </label>
+                                <input type="text" name="driver_name" ng-model="line_detailArray.driver_name" class="form-control" required>
+                               <span ng-if="!line_detailArray.driver_name" style="color:red">{{'lang_Driver_Name_is_required'|translate}}</span> 
+                                </div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+                                <label>{{'lang_Plate_No'|translate}}. </label>
+                                <input type="text" name="plate_number" ng-model="line_detailArray.plate_number" class="form-control" required>
+                              <span ng-if="!line_detailArray.plate_number" style="color:red">{{'lang_PlatNo_is_required'|translate}}</span> 
+                                </div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+                                <label>{{'lang_Driver_Mobile'|translate}} </label>
+                                <input type="text" name="driver_mobile" ng-model="line_detailArray.driver_mobile" class="form-control" required>
+								<span ng-if="add_manifest.driver_mobile.$error.required" style="color:red">{{'lang_Privilege_is_required'|translate}}</span>
+                                 <span ng-if="!line_detailArray.driver_mobile" style="color:red"> {{'lang_Driver_Mobile_No_is_required'|translate}}</span>
+                                </div>
+							</div>
+							<div class="col-md-4">
+								
+                                <label>{{'lang_Iqama'|translate}}  </label>
+                                <input type="file" name="image" fileread="line_detailArray.image" accept="image/*"  class="form-control" required>
+                              <span ng-if="line_detailArray.iquma_copy"><img src="{{line_detailArray.iquma_copy}}" width="100" /> </span> 
+                              <!-- <span ng-if="!line_detailArray.iquma_copy" style="color:red">Image is required</span> -->
+							</div>
+							<div class="col-md-4">
+							</div>
+							
+						<div class="col-md-4">
+						 <label>&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                       <button  type="button" class="btn btn-success" name="update_linehoul" ng-disabled="add_manifest.$invalid"  ng-click="GetUpdateshowlineData(line_detailArray);">{{'lang_Update'|translate}} </button>						
+					   </div> 
+					   </div>
+					   </form>
+					</div>
+				</div>
+			</div>
+			</form>
+		</div> 
+	</div>
+</div>
+			

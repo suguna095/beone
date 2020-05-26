@@ -1,0 +1,69 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showOriginDropUpdate();">
+    
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Manifest_Management'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page"> {{'lang_Bulk_Create_Manifes'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	 <div class="loader logloder" ng-show="loadershow"></div>
+	<section class="hk-sec-wrapper">
+	<div class="panel-heading">
+            <h5 class="panel-title"> {{'lang_Bulk_Create_Manifes'|translate}}</h5>
+    </div><br>
+	<div class="row">
+     <div class="col-md-12" ng-if="bulkmanifesterr">
+        <div class="alert alert-danger" ng-if="bulkmanifesterr.abw_no">{{bulkmanifesterr.abw_no}}</div>
+        <div class="alert alert-danger" ng-if="bulkmanifesterr.user_name">{{bulkmanifesterr.user_name}}</div>
+        <div class="alert alert-danger" ng-if="bulkmanifesterr.mto">{{bulkmanifesterr.mto}}</div>
+        <div class="alert alert-danger" ng-if="bulkmanifesterr.mfrom">{{bulkmanifesterr.mfrom}}</div>
+         <div class="alert alert-danger" ng-if="bulkmanifesterr.deliverd_awb" ng-repeat="deldata in bulkmanifesterr.deliverd_awb">this awb no status not proper {{deldata}}</div>
+          <div class="alert alert-danger" ng-if="bulkmanifesterr.wrong_cust" ng-repeat="deldata in bulkmanifesterr.wrong_cust">this awb no wrong customer {{deldata}}</div>
+          <div class="alert alert-danger" ng-if="bulkmanifesterr.refused_awb" ng-repeat="deldata in bulkmanifesterr.refused_awb">this awb no refused {{deldata}}</div>
+           <div class="alert alert-success" ng-if="bulkmanifesterr.menifest_awbs" ng-repeat="deldata in bulkmanifesterr.menifest_awbs">this awb no updated {{deldata}}</div>
+        
+      </div>
+        <div class="col-sm">
+            <div class="row">
+            
+			    <div class="col-md-12">
+				<textarea class="form-control mt-15" rows="6" ng-model="updateArr.awb_no" placeholder="Please Enter your AWB No."></textarea>
+				</div>
+				<div class="col-md-3" ng-if="usertype=='A'" ng-show="citydropshow" ><br>
+				<label ng-if="usertype=='A'">{{'lang_From'|translate}}{{usertype}}</label>
+                 
+                    <select name="mfrom" id="mfrom" ng-model="updateArr.mfrom" class="form-control" ng-if="usertype=='A'">
+                     <option value="">{{'lang_From'|translate}}</option>
+                    <option ng-repeat="fdata in originlist" value="{{fdata.id}}">{{fdata.city}}</option>
+					</select>          
+				</div>
+				<div class="col-md-3" ng-show="citydropshow"><br>
+                <label>{{'lang_To'|translate}}</label>
+                    <select name="mto" id="mto" ng-model="updateArr.mto" class="form-control">
+                    <option value="">{{'lang_To'|translate}}</option>
+                     <option ng-repeat="tdata in originlist" value="{{tdata.id}}">{{tdata.city}}</option>
+					</select>  
+				</div>
+                <div class="col-md-3" ng-show="custIDshow"><br>
+                <label>Customer</label>
+                    <select name="user_name" id="user_name" ng-model="updateArr.user_name" class="form-control">
+                    <option value="">Customer</option>
+                     <option ng-repeat="ctdata in CUstomerArr" value="{{ctdata.id}}">{{ctdata.company}}/{{ctdata.uniqueid}}</option>
+					</select>  
+				</div>
+				<div class="col-md-3"><br>
+                   <label>{{'lang_Menifest_Type'|translate}} </label>
+                   <select name="return" id="return" ng-model="updateArr.return" ng-change="GetcheckManifestType(updateArr.return);" class="form-control" required>
+				   <option value="N">Dispatch To Hub</option>
+                   <option value="Y">Return To Shipper</option>
+                   </select>
+                </div>
+				<div class="col-md-2"><br>
+				    <label>&nbsp;&nbsp;</label>
+                    <button type="button" name="submit" class="btn btn-primary form-control text-white" ng-click="GetUpdateBulkManifestPage();">{{'lang_Create_Manifest'|translate}} </button>
+                </div>
+			</div>
+		</div>
+    </div>		
+   </section>	

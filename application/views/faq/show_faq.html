@@ -1,0 +1,70 @@
+   <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="showfaq();">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Freque_ntly_Asked_Question'|translate}}</li>
+                    
+                </ol>
+            </nav>
+  <div class="">
+                <!-- Title -->
+          
+        
+           
+     <section class="hk-sec-wrapper">     
+    <div class="row">
+    
+    
+    <div class="col-md-12">
+       <div class="panel-heading"><i class="fa fa-user fa-2x default_color" style="margin-bottom: 10PX;"></i>&nbsp;{{'lang_Freque_ntly_Asked_Question'|translate}}</div><br>
+     <table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+                        
+<thead>
+    <tr>
+        <th class="head0">{{'lang_sNO'|translate}}.</th>
+        <th class="head1">{{'lang_Questions'|translate}}</th>
+        <th class="head1">{{'lang_Answers'|translate}}</th>
+        <th class="head0">{{'lang_action'|translate}}</th>
+    </tr>
+</thead>
+                        
+<tbody>
+        <tr ng-repeat="data in faqData">  
+        <td>{{$index+1}}</td>
+        <td>{{data.question}}</td>
+        <td>{{data.answer}}</td>
+        <td>
+		    <div class="btn-group dropdown">
+					    <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        <div class="dropdown-menu w-210p">
+						<a class="dropdown-item" ui-sref="edit_faq({faqid:data.id})"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp;{{'lang_edit'|translate}}</a> 
+						
+						<a class="dropdown-item" ng-click="GetFaqdelete(data.id)" ng-confirm-click="Do you want to Delete?"><i class="fa fa-trash-o fa-fw"></i>&nbsp;Delete</a>       
+						
+                        </div> 
+                    </div>
+        </td>
+      </tr>
+         
+</tbody>
+</table>
+        </div>
+   
+   
+           
+  
+                                         
+                                      
+                                          
+</div>
+</section>
+
+
+  
+</div>
+
+
+    
+ 
+      

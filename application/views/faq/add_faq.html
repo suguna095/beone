@@ -1,0 +1,55 @@
+   <nav class="hk-breadcrumb" aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Freque_ntly_Asked_Question'|translate}}</li>
+                
+                </ol>
+            </nav>
+  <div class="">
+                <!-- Title -->
+            
+         
+        
+    
+     <section class="hk-sec-wrapper">
+	 <form class="stdform" name="add_faq" enctype="multipart/form-data">
+    <div class="row">
+    
+    
+    <div class="col-md-12">
+       <div class="panel-heading"><i class="fa fa-user fa-2x default_color"></i> {{'lang_Freque_ntly_Asked_Question'|translate}} </div>
+     
+        </div>
+   
+    <div class="col-md-12">
+	<div class="form-group">
+      <h6 class="mt-40 mb-20">{{'lang_Questions'|translate}}</h6> 
+      <input type="text" name="question" class="form-control"  ng-model="faqArray.question" Required>
+	  <span class="text-danger" ng-show="add_faq.question.$error.required">{{'lang_Questions_is_required'|translate}}.</span> 
+	   </div>
+            <div class="form-group">
+               <h6 class="mt-40 mb-20">{{'lang_Answers'|translate}}</h6>
+
+            <textarea rows="8"  name ="answer" required="" class="form-control" ng-model="faqArray.answer" Required></textarea>
+             <span class="text-danger" ng-show="add_faq.answer.$error.required">{{'lang_Answers_is_required'|translate}}.</span>     
+           
+            </div>
+			</div>
+            <input name="submit" type="submit" class="btn btn-primary" value="{{'lang_Submit'|translate}}" ng-disabled="add_faq.$invalid" ng-click="AddFaqform(faqArray);">
+          
+  
+                                         
+                                      
+                                          
+</div>
+ </form>
+</section>
+</section>
+
+  
+</div>
+
+
+    
+
+      

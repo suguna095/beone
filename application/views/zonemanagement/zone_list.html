@@ -1,0 +1,80 @@
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="GetShowZoneList(1,0);">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_zoneManagement'|translate}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Add_Zone_List'|translate}}</li>
+                </ol>
+            </nav>
+   <div class="">
+                <!-- Title -->
+                           
+        
+           
+    <section class="hk-sec-wrapper">
+   <div class="content">
+	<div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title"><span ng-if="editMessage==true">&nbsp;{{'lang_edit'|translate}}</span> <span ng-if="editMessage==false">&nbsp;{{'lang_add'|translate}}</span>&nbsp;{{'lang_Zone_List'|translate}}</h5>
+        </div><br>
+        <div class="panel-body">
+        
+            <table class="table datatable-show-all table-bordered table-hover datatable-highlight">  
+            <thead>
+                <tr>
+                <th colspan="8">
+                <form name="add_zone" enctype="multipart/form-data">
+                
+                
+                <input type="text" name="name" id="zone" placeholder="Add New Zone" ng-model="zoneArray.name" class="form-control" Required>
+                <br>
+               
+			 
+                <input ng-if="editMessage==false" name="Add" type="submit" class="btn btn-primary" value="Add" ng-disabled="add_zone.$invalid" style="margin-top: 22px;" ng-click="AddZoneform(zoneArray);">  
+                            
+                <input ng-if="editMessage==true" name="Update" type="submit" class="btn btn-primary" value="Update" ng-disabled="add_zone.$invalid" style="margin-top: 22px;" ng-click="EditZoneform(zoneArray);"> 
+				</form>
+                </th>
+                </tr> 
+                
+                <tr>
+                <th>{{'lang_sNO'|translate}}</th>
+                <th>{{'lang_Zone_Name'|translate}}</th>
+				<th>{{'lang_status'|translate}}</th>
+                <th>{{'lang_action'|translate}}</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+            <tr ng-repeat="data in ShowZoneArray">
+                <td>{{$index+1}}</td>
+                <td>{{data.name}}</td>
+				<td>
+						
+			             <span class="badge badge-danger" ng-if="data.status=='N'">{{'lang_Inactive'|translate}}</span>
+                         <span class="badge badge-success"  ng-if="data.status=='Y'">{{'lang_active'|translate}}</span>
+						</td>
+				<td>		
+			    <div class="btn-group dropdown">
+                <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> </button>
+                <div class="dropdown-menu w-210p">
+				<a class="dropdown-item" style="cursor: pointer" ng-click="ShowZoneactiveStatus(data.id,'Y')" ng-if="data.status=='N'" ng-confirm-click="Do you want to Active?"><i class="fa fa-check fa-fw"></i>Active</a> 
+				<a class="dropdown-item" style="cursor: pointer" ng-click="ShowZoneactiveStatus(data.id,'N')" ng-if="data.status=='Y'" ng-confirm-click="Do you want to Inactive?"><i class="glyphicon glyphicon-remove"></i>Inactive</a> 
+				<a style="cursor: pointer" class="dropdown-item" ng-click="EditZoneshow(data.id);" ><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp;{{'lang_edit'|translate}}</a> 
+			
+				<a class="dropdown-item" ng-click="GetZonedelete(data.id)"  ng-confirm-click="Do you want to Delete?"> <i class="fa fa-trash-o fa-fw"></i>Delete</a>  
+                </div>
+			</td> 
+                </tr> 
+            </tbody> 
+            
+            </table>   
+                    
+        </div>
+	</div>
+</div>
+    </section>
+
+
+  
+    

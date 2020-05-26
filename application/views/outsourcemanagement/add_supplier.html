@@ -1,0 +1,103 @@
+  	<nav class="hk-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_OutsourceManagement'|translate}} </li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_AddSupplier'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_AddSupplier'|translate}}</h5>    
+		</div><br>
+		            <form name="add_supplier">
+                    <div class="form-group">
+                    <label>{{'lang_Name'|translate}} <span style="color:red">*</span></label>
+                    <input type="text" class="form-control"  name="name" ng-model="supplierArray.name" Required>
+					
+                    </div>
+                    
+                    <div class="form-group" ng-init="ShowOutCityDrop();">
+                    <label>{{'lang_city'|translate}} <span style="color:red">*</span></label><span id="city"></span>
+                    <select class="form-control" type="text" name="city"  ng-model="supplierArray.city" Required>  <option value="">{{'lang_selectCity'|translate}} </option>
+					<option ng-repeat="data in OutCityArray" value="{{data.id}}">{{data.city}}</option>
+					</select>
+                    </div>
+                                         
+                    <div class="form-group">
+                    <label>{{'lang_phone'|translate}} <span style="color:red">*</span></label>
+                    <input type="tel" maxlength="10" minlength="10" name="mobile" class="form-control" ng-model="supplierArray.mobile" Required>
+                    </div>
+                    
+                    <div class="form-group">
+                    <label>{{'lang_RateperDelivery'|translate}} <span style="color:red">*</span></label>
+                    <input type="text" maxlength="10" minlength="1" name="rate" class="form-control" ng-model="supplierArray.rate" Required>
+                    </div>
+                    
+					<div class="form-group">
+                     <label> {{'lang_ContractDate'|translate}}  <span style="color:red">*</span></label>
+                    <input class="form-control" type="date" name="entry_date"  ng-model="supplierArray.entry_date" Required>
+                     </div>
+					 <div class="form-group">
+						<label>{{'lang_VatNo'|translate}} <span style="color:red">*</span></label>
+						<input class="form-control" type="text" name="vat_no" ng-model="supplierArray.vat_no" Required>  
+                     </div>
+					<div class="form-group">
+						<label> {{'lang_UploadCRpdf'|translate}} <span style="color:red">*</span> </label>
+						
+                                        <div class="form-group mb-0">
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput" required>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_Upload'|translate}} </span>
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}} </span><span class="fileinput-exists">{{'lang_Change'|translate}} </span>
+                                                <input type="file" name="upload_cr" fileread="supplierArray.upload_cr" accept="application/pdf" required>
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}} </a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                <br>
+						<label>{{'lang_UploadIDpdf'|translate}} <span style="color:red">*</span> </label>
+                                        <div class="form-group mb-0">
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput" required>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_Upload'|translate}} </span>   
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}} </span><span class="fileinput-exists">{{'lang_Change'|translate}} </span>
+                                                <input type="file" name="upload_id" fileread="supplierArray.upload_id" accept="application/pdf" required>
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}} </a>
+                                                </span>
+                                            </div>
+                                        </div>
+                              <br>
+						<label>{{'lang_UploadContractpdf'|translate}} <span style="color:red">*</span>  </label> 
+			
+                                        <div class="form-group mb-0"> 
+                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput" required>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">{{'lang_Upload'|translate}} </span> 
+                                                </div>
+                                                <div class="form-control text-truncate" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                                <span class="input-group-append">
+														<span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}} </span><span class="fileinput-exists">{{'lang_Change'|translate}} </span>
+                                                <input type="file" name="upload_contact" fileread="supplierArray.upload_contact" accept="application/pdf" required>
+                                                </span>
+                                                <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}} </a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                 
+					</div><br>
+ 					
+                    <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="add_supplier.$invalid" ng-click="Supplierform(supplierArray);"> 
+                      
+                   
+</section>		
+</div>

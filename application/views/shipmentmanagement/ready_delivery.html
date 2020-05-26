@@ -1,0 +1,97 @@
+  <nav class="hk-breadcrumb" aria-label="breadcrumb"  ng-init="showreadyDeliver(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}   </a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_shipmentManagement'|translate}} </li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_All_RFD'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "container">
+	
+	<section class="hk-sec-wrapper">
+	<h5>{{'lang_Show_RFD'|translate}} </h5><br>
+	 <table class="table table-hover table-bordered mb-0">
+	    <thead>
+        <tr> 
+        <form name="search_form" method="post" action=""></form>
+        <th class="head1" colspan="2">
+        <input type="text" ng-model="filterData.drs_unique_id" placeholder="DRS Unique id" class="form-control"> 
+        </th>
+		 <th class="head1" colspan="2">
+        <input type="text" ng-model="filterData.routecode" placeholder="Route code" class="form-control">
+        </th>
+       
+		<th class="head1" colspan="2" ng-init="showOriginDropss();">
+		<input type="text" name="city_id" id="show_city_dropdown"  placeholder="City" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="filterData.city_id"> 
+		</th> 
+		<th class="head1" colspan="2" ng-init="Showsupplist();">
+		<input type="text" name="messanger_id" id="show_city_dropdownss"  placeholder="Driver Name" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="filterData.messanger_id"> 
+		</th> 
+         
+		</tr>
+        <tr>
+		<th class="head1" colspan="2" ng-init="ShowCustlist();">
+		<input type="text" name="messanger_id" id="show_city_dropdownss1"  placeholder="Supplier Name" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="filterData.messanger_id1"> 
+		</th> 
+		
+		<th class="head1" colspan="2">
+        <input type="text" ng-model="filterData.search_date" placeholder="dd-mm-yyyy" id="datepicker1" class="form-control" onfocus="this.value=''" value=""> 
+        </th>
+        <th class="head1" colspan="2">
+        <input type="text" ng-model="filterData.search_date1" placeholder="dd-mm-yyyy" id="datepicker2" class="form-control" onfocus="this.value=''" value="">
+        </th>
+        
+        <th colspan="2">
+        <input type="button" name="Submit" class="btn btn-primary" value="Search" ng-click="showreadyDeliver(1,1);">        </th>
+        
+		
+		
+        </tr>
+        
+		<tr>
+            <th>#</th>
+            <th>{{'lang_Uniqueid'|translate}} </th>
+            <th> 
+           {{'lang_date'|translate}} 
+          
+            </th>
+            <th>{{'lang_city'|translate}} </th>
+            <th>{{'lang_Route_code'|translate}} </th>
+            <th>{{'lang_Driver'|translate}} </th>
+            <th>{{'lang_upplier'|translate}} </th>
+            <th>{{'lang_action'|translate}} </th>
+    	</tr>
+    </thead>
+	<tbody>
+     <tr>
+              <td colspan="8" ><div data-loading> </div></td>
+            </tr>
+	    <tr ng-repeat="data in listDeleteedShipmentData">  
+            	<td>{{$index+1}}</td> 
+            <td><img src="{{data.barcodeImage}}"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{data.drs_unique_id}}</td>
+            <td>{{data.drs_date}}</td>
+            <td>{{data.city_id}}</td>
+            <td>{{data.routecode}}</td>
+            <td>{{data.messenger_name}}</td>
+            <td>{{data.supplier_name}}</td>
+          
+            <td><div class="btn-group">
+                <button type="button" class="btn btn-primary"><i class="icon-list"></i></button>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">{{'lang_Toggle_Dropdown'|translate}} </span>
+                </button>
+                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(138px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                <a class="dropdown-item" href="drsreadyforPrint/{{data.drs_unique_id}}" target="_blank"><i class="fa fa-print fa-fw"></i>{{'lang_Print'|translate}} </a>
+				<a class="dropdown-item" ui-sref="ready_delivery_details({uid:data.drs_unique_id})"><i class="fa fa-exclamation fa-fw"></i>{{'lang_View'|translate}} </a>
+                </div>
+             </div></td>
+        </tr>
+		<tr>
+					<td ng-if="listDeleteedShipmentData==''" colspan="8" style="text-align:center;">   
+						{{'lang_NoRecords_Found'|translate}}   
+					</td>
+					
+                </tr>  
+		
+	</tbody>
+	</table>
+	</section>

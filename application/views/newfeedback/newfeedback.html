@@ -1,0 +1,131 @@
+
+	<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip.js"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip-utils.js"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/FileSaver.js"></script>
+    <nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getshelvelist(1,0);">
+  	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getFeedbackreport(1,0);">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_Feedback'|translate}} </li>
+			<li class="breadcrumb-item active" aria-current="page"> {{'lang_Show_New_Feedback'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "">       
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_Show_New_Feedback'|translate}}</h5>
+		</div><br>
+		<table class="table datatable-show-all table-bordered table-hover datatable-highlight">
+           <form method="post" action=""></form>
+        
+            <thead>
+                <tr>
+                
+        		<th colspan="2">
+                    <label>{{'lang_date'|translate}}</label>
+                     <input type="text" name="update_date" id="datepicker1" class="form-control"  ng-model="filterData.update_date" placeholder="search Date.." > 
+                </th>
+                <th colspan="2">
+                    <label>{{'lang_Rating'|translate}}</label>   
+                    <input type="text" name="searchfield" class="form-control" ng-model="filterData.rating" placeholder="search Rating.." >
+                </th>
+            
+            	<th colspan="1">
+            <input type="submit" name="Submit" class="btn btn-primary" value="{{'lang_search'|translate}}" ng-click="getFeedbackreport(1,1);"></th>
+            <th colspan="1">
+			<input class="btn-primary" type="button" value="{{'lang_exportToExcel'|translate}}" style="float:right;" onclick="create_zip();" >
+    		</th>		
+              
+                </tr>                      
+        </thead><thead>
+            <tr>
+                <th class="head0">{{'lang_srNo'|translate}} .</th>    
+                <th class="head1">{{'lang_date'|translate}} </th>
+                <th class="head0">{{'lang_AWB_Ref'|translate}} .</th>
+                <th class="head0">{{'lang_Subject'|translate}} </th> 
+                <th class="head1">{{'lang_details'|translate}} </th> 
+				<th class="head1">{{'lang_Rating'|translate}} 
+		</th>
+            </tr>
+        </thead>
+                        
+        <tbody>
+            <tr ng-repeat="data in FeedbackArray"> 
+                <td>{{$index+1}}</td>
+                <td>{{data.update_date}}</td>
+                <td>{{data.awb_no}}</td>
+                <td>{{data.comment}}</td>
+                <td>{{data.comment}}</td>  
+				 <td ng-if="data.rating=='1'"> <i class="fa fa-star"></td>   
+				<td ng-if="data.rating=='2'"><i class="fa fa-star" ><i class="fa fa-star"></td> 
+				<td ng-if="data.rating=='3'"><i class="fa fa-star" ><i class="fa fa-star"><i class="fa fa-star" ></td> 
+				<td ng-if="data.rating=='4'"><i class="fa fa-star" ><i class="fa fa-star" ><i class="fa fa-star" ><i class="fa fa-star" ></td> 
+				<td ng-if="data.rating=='5'"><i class="fa fa-star" ><i class="fa fa-star"><i class="fa fa-star" ><i class="fa fa-star"><i class="fa fa-star" ></td> 
+		   </tr>
+           <tr ng-if="FeedbackArray==''">
+               <td colspan="6">No Records Found</td>   
+         </tr>         
+        			
+        </tbody>
+	</table>
+    </section>	
+	<div style="display:none;">
+<table id="feed_new">	
+<thead>
+            <tr>
+                <th class="head0">{{'lang_srNo'|translate}} .</th>    
+                <th class="head1">{{'lang_date'|translate}} </th>
+                <th class="head0">{{'lang_AWB_Ref'|translate}} .</th>
+                <th class="head0">{{'lang_Subject'|translate}} </th> 
+                <th class="head1">{{'lang_details'|translate}} </th> 
+				 
+		</th>
+            </tr>
+        </thead>
+                        
+        <tbody>
+            <tr ng-repeat="data in FeedbackArray"> 
+                <td>{{$index+1}}</td>
+                <td>{{data.update_date}}</td>
+                <td>{{data.awb_no}}</td>
+                <td>{{data.comment}}</td>
+                <td>{{data.comment}}</td>  
+				
+		   </tr>
+           <tr ng-if="FeedbackArray==''">
+               <td colspan="5">No Records Found</td>   
+         </tr>         
+        			
+        </tbody>
+	</table>
+	</div>
+	<SCRIPT>
+
+function create_zip() {
+var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+ tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+ tab_text = tab_text + '<x:Name>Test Sheet</x:Name>';
+ tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+ tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+ tab_text = tab_text + "<table border='1px'>";
+//get table HTML code
+ tab_text = tab_text + $('#feed_new').html();
+ tab_text = tab_text + '</table></body></html>';
+	
+	/*var zip = new JSZip();
+	zip.add(Date()+"_manifest details.xls", tab_text);
+	content = zip.generate();
+	zip.file(Date()+"_manifest details.xls"); // the file
+	location.href="data:application/zip;base64," + content;*/
+	
+	var zip = new JSZip();
+zip.file(Date()+" New Feedbsck.xls", tab_text);
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    saveAs(content, Date()+" New Feedbsck.zip");
+});
+	
+
+}
+</SCRIPT>

@@ -1,0 +1,212 @@
+
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="customerpaymentshow();">
+  <ol class="breadcrumb breadcrumb-light bg-transparent">
+    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i> {{'lang_Home'|translate}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_customerManagement'|translate}}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{'lang_Payment_Information'|translate}}  ({{invoice_month_year}})</li>
+  </ol>
+</nav>
+<div class = "">
+  
+  <section class="hk-sec-wrapper" style="margin:2%">   
+    <div class="col-md-12"> 
+      <!--   Kitchen Sink -->
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="table-responsive" style="overflow:scroll;">
+            <table class="table table-striped table-bordered table-hover">    
+              <thead>
+                <tr>
+                  <form  method="post">
+                  </form>
+                  <td colspan="4"><span>
+                    <select name="main_status" id="main_status" class="form-control  input-lg" ng-model="filterData.main_status" ng-init="showStatusDrop();">
+                      <option value="">{{'lang_PleaseSelectStatus'|translate}}</option>
+                      <option ng-repeat="data in statuslist" value="{{data.id}}">{{data.main_status}}</option>
+                    </select>
+                    </span></td>
+                  <td colspan="2"><span>
+                    <select name="search_type" id="search_type" class="form-control input-lg  user-success" ng-model="filterData.search_type">
+                      <option value="">{{'lang_Please_Select'|translate}} </option>
+                      <option value="CC">{{'lang_CC'|translate}} </option>
+                      <option value="COD">{{'lang_COD'|translate}} </option>
+                      <option value="CASH">{{'lang_Paid'|translate}}</option>
+                    </select>
+                    </span></td>
+                  <td colspan="3"><span>
+                    <select name="transfer_status" id="transfer_status" class="form-control input-lg  user-success" ng-model="filterData.transfer_status">
+                      <option value="">{{'lang_Please_Select'|translate}}</option>
+                      <option value="Y">{{'lang_Paid'|translate}} </option>
+                      <option value="N">{{'lang_Unpaid'|translate}}</option>
+                    </select>
+                    </span></td>
+                  <!-- <td colspan="2"><input type="submit" name="Submit" value="Search" class="btn btn-default" style=""></td>  -->
+                  <td colspan="12"><div class="row">
+                      <div class="col-md-4">
+                        <input type="text" name="bt_date1" class="form-control  user-success" id="datepicker1" ng-model="filterData.bt_date1">
+                      </div>
+                      <div class="col-md-4">
+                        <input type="text" name="bt_date2" class="form-control  user-success" id="datepicker2" ng-model="filterData.bt_date2" >
+                      </div>
+                      <div class="col-md-4">
+                        <input type="button" name="bt_search" value="Search Date" class="btn btn-default">
+                      </div>
+                    </div></td>
+                </tr>
+                <tr>
+                  <th>{{'lang_srNo'|translate}}</th>
+                  <th>{{'lang_Awbno'|translate}}</th>
+                  <th>{{'lang_Created_Date'|translate}}</th>
+                  <th>{{'lang_Delivery_Date'|translate}}</th>
+                  <th>{{'lang_Consignee_Name'|translate}}</th>
+                  <th>{{'lang_origin'|translate}}</th>
+                  <th>{{'lang_destination'|translate}}</th>
+                  <th>{{'lang_status'|translate}}</th>
+                  <th>{{'lang_Service_Type'|translate}}</th>
+                  <th>{{'lang_CODAmount'|translate}}</th>
+                  <th>{{'lang_CODfees'|translate}}</th>
+                  <th>{{'lang_netTotal_SAR'|translate}}</th>
+                  <th class="head0"> {{'lang_netTotal'|translate}}</th>
+                  <th class="head1">{{'lang_Transfer_COD_Charge'|translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="data in paymentinfoArr">
+                  <td>{{$index+1}}</td>
+                  <td>{{data.slip_no}}</td>
+                  <td>{{data.entrydate}}</td>
+                  <td><span ng-if="data.delever_date!=''">{{data.delever_date}} </span> <span ng-if="!data.delever_date">{{'lang_NA'|translate}} </span></td>
+                  <td>{{data.reciever_name}}</td>
+                  <td>{{data.sender_city}}</td>
+                  <td>{{data.reciever_city}}</td>
+                  <td ng-if="data.mode=='COD'" style="background-color:#AEFFAE;" >{{data.delivered}}</td>
+                  <td>{{data.mode}}</td>
+                  <td>{{data.total_cod_amt}}</td>
+                  <td><span ng-if="paymentinfo.delivered!=10"> {{data.cod_fees}}</span> <span ng-if="paymentinfo.delivered==10"> </span></td>
+                  <td>{{data.total_amt}}</td>
+                  <td ><span ng-if="data.amount_collected=='N'" class="btn_orange"> <a class="dropdown-item" style="cursor:pointer" ng-click="GetEmailSendPopup(data.invoice_id,'#exampleModalForms');">{{'lang_Receive_Shipping'|translate}} </a> </span> <span ng-if="data.amount_collected!='N'" style="cursor:pointer;">{{'lang_Paid'|translate}}</span></td>
+                  
+                  <td ng-if="data.mode=='COD'"><span ng-if="data.cod_paid=='N'"> <a ng-click="invoice_paid_cod_form_id_pop(data.invoice_id,'invoice_paid_cod_form_id'); " class="btn_orange" style="cursor:pointer;"> {{'lang_Pay_COD'|translate}} </a> </span> <span ng-if="data.cod_paid!='N'" style="cursor:pointer;">{{'lang_Paid'|translate}}</span></td>
+                  <td ng-if="data.mode!='COD'"> {{'lang_NA'|translate}} </td>
+                </tr>
+                <tr>
+                  <td colspan="15" align="center"><br>
+                    <button type="submit" value="paid_total_amt" name="paid_total_amt" class="btn btn-info">{{'lang_Receive_All_Shipment_Charge'|translate}}</button>
+                    <input type="hidden" name="user_id" value="64">
+                    <input type="hidden" name="year_month" value="September-2019">
+                    <button type="submit" value="paid_total_Cod" name="paid_total_Cod" class="btn btn-info">{{'lang_Paid_All_COD_Charge'|translate}}</button>
+                    <a href="https://tamco.fast-option.com/print.php?c=shipment&amp;f=generateInvoiceNumber_cc&amp;user_id=64&amp;type=CC&amp;year_month=" target="_blank">
+                    <button class="btn btn-warning">{{'lang_CC_Invoice'|translate}}</button>
+                    </a> <a href="https://tamco.fast-option.com/print.php?c=shipment&amp;f=generateInvoiceNumber_cod&amp;user_id=64&amp;type=COD	&amp;year_month=" target="_blank">
+                    <button class="btn btn-warning">{{'lang_COD_Invoice'|translate}}</button>
+                    </a> <a href="https://tamco.fast-option.com/print.php?c=shipment&amp;f=generateInvoiceNumber_rts&amp;user_id=64&amp;type=RTS	&amp;year_month=" target="_blank">
+                    <button class="btn btn-warning">{{'lang_RTS_Invoice'|translate}}</button>
+                    </a> <a href="https://tamco.fast-option.com/print.php?c=shipment&amp;f=generateInvoiceNumber&amp;user_id=64&amp;year_month=">
+                    <button class="btn btn-warning">{'lang_View_Invoice'|translate}}</button>
+                    </a> <a href="https://tamco.fast-option.com/print.php?c=shipment&amp;f=generateInvoiceNumber&amp;user_id=64&amp;year_month=&amp;print=P">
+                    <button class="btn btn-success">{{'lang_Export_to_Excel'|translate}}</button>
+                    </a> 
+                    <!--
+		    onclick="tableToExcel('testTable_new', 'Print')" 
+		   <a href="https://tamco.fast-option.com/system145.php?c=customer&f=export_customer&user_id=64&year_month=" class="button">
+            <button class="stdbtn btn_orange">Download Excel File</button>
+            
+            </a> --> 
+                    <a href="https://tamco.fast-option.com/print.php?c=shipment&amp;f=new_lable_set&amp;cust_id=64&amp;year_month=" target="_blank" class="button">
+                    <button class="btn btn-success">{{'lang_Monthy_Invoice'|translate}}</button>
+                    </a> 
+                    <!--  <button class="stdbtn btn_orange">Generate PDF</button>--> 
+                    <br></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- End  Kitchen Sink --> 
+    </div>
+  </section>
+  <div class="modal" id="exampleModalForms" tabindex="-1" role="dialog" aria-labelledby="exampleModalForms" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div style="background-color: #fff;border:2px solid #FB9337;text-align:center;padding:0px;margin:0px">
+          <div style="margin:0px; padding: 3px 0px 2px 0px;text-align:center;background-color:#FB9337;border:1px solid #FB9337;width:100%;"> <a title="Upgrade Package" class="VSlabel" style="text-weight:bold;text-decoration:none;color:#fff;"><b>{{'lang_Receive_Payment'|translate}}</b></a>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+          </div>
+        </div>
+        <div style=" height:auto; background-color:#FCFCFC; padding:8px;">
+          <form action="" method="post" name="enter_amount">
+            <input type="hidden"  ng-model="paymentPopArr.cust_id">
+            <input type="hidden"  id="update_invoice_id"  ng-model="paymentPopArr.invoice_id">
+            <input type="hidden"  ng-model="paymentPopArr.year_month_group">
+            <input type="hidden"  ng-model="paymentPopArr.total_cod_amt">
+            <input type="hidden" class="form-control" ng-model="paymentPopArr.total_amt">
+            <div class="text-center"><b>{{paymentPopArr.year_month_group}}</b></div>
+            <br>
+            <div class="clearfix form-group">
+              <div class="col-md-5"><strong>{{'lang_Amount'|translate}}</strong></div>
+              <div class="col-md-12">
+                <input type="text" class="form-control"  id="paid_amount" ng-model="paymentPopArr.due_amout">
+              </div>
+            </div>
+            <div class="clearfix form-group">
+              <div class="col-md-5"><b>{{'lang_PaymentMode'|translate}}</b></div>
+              <div class="col-md-12">
+                <select name="payment_mode" class="form-control">
+                  <option value="Bank">{{'lang_Bank'|translate}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="clearfix form-group">
+              <div class="col-md-5"></div>
+              <div class="col-md-12">
+                <button type="button" class="btn btn-warning " name="submit_enter_amount" ng-click="GetupdateReceive_Payment(paymentPopArr);">{{'lang_Receive_Shipment_Charge'|translate}}</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div id="invoice_paid_cod_form_id" style="display:none; box-shadow: 0 0 15px #888888;  position:fixed; vertical-align:middle; top:50%; left:50%; margin-top:-125px; margin-left:-150px; z-index:99999">
+  <div  style="width:400px; background-color: #fff;border:2px solid #FB9337;text-align:center;padding:0px;margin:0px">
+    <div style="margin:0px; padding: 3px 0px 2px 0px;text-align:center;background-color:#FB9337;border:1px solid #FB9337;width:100%;"> <a title="Upgrade Package" class="VSlabel" style="text-weight:bold;text-decoration:none;color:#fff;"><b>{{'lang_Pay_COD_Payment'|translate}}</b></a> <img src="{$site_url}/images/converter_close.png" class="hand" onclick="invoice_enter_cod_amount_close('{$data1[data].slip_no}');" align="right" style="cursor:pointer"  /> </div>
+  </div>
+  <div style=" height:auto; background-color:#FCFCFC; padding:8px;">
+    <form action="" method="post" name="enter_amount">
+    <input type="hidden"  ng-model="paymentPopArr.cust_id">
+            <input type="hidden"  id="update_invoice_id"  ng-model="paymentPopArr.invoice_id">
+            <input type="hidden"  ng-model="paymentPopArr.year_month_group">
+            <input type="hidden"  ng-model="paymentPopArr.total_cod_amt">
+            <input type="hidden" class="form-control" ng-model="paymentPopArr.total_amt">
+     
+      <div class="text-center"><b>{{paymentPopArr.year_month_group}}</b></div>
+      <br />
+      <div class="clearfix form-group">
+        <div class="col-md-5 text-right"><strong>{{'lang_Amount'|translate}}</strong></div>
+        <div class="col-md-7">
+          <input type="text" class="form-control" readonly="readonly"  ng-model="paymentPopArr.total_cod_amt" />
+        </div>
+      </div>
+      
+      
+      <div class="clearfix form-group">
+        <div class="col-md-5 text-right"><b>{{'lang_PaymentMode'|translate}}</b></div>
+        <div class="col-md-7">
+          <select name="payment_mode"  class="form-control">
+            <option value="Bank">{{'lang_Bank'|translate}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="clearfix form-group">
+        <div class="col-md-5"></div>
+        <div class="col-md-7">
+          <button type="submit" class="btn btn-warning " name="submit_enter_cod_amount" value="submit" >{{'lang_Pay_COD'|translate}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>

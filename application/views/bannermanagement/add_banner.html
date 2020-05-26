@@ -1,0 +1,53 @@
+<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="formeditdatashow();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>  {{'lang_Home'|translate}}  </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> {{'lang_Banner_Management'|translate}}  </li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_Add_Banner'|translate}} </li>
+        </ol>
+    </nav>
+	<div class = "container">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title"> {{'lang_Add_Banner'|translate}}</h5>
+		</div><br>
+		<div class="row">
+     	<div class="col-lg-12">
+        <form class="stdform" method="post" action="" name="add_banner" enctype="multipart/form-data">
+        
+                    	<div class="form-group">
+                        	<label>{{'lang_Title'|translate}} </label> <span id="title" class="alert"></span>
+                            <input type="text" class="form-control input-lg  input-lg" name="title" ng-model="bannerArray.title" required>
+                            <span class="text-danger" ng-show="add_banner.title.$error.required">{{'lang_Title_is_required'|translate}} .</span>
+                        </div>
+                        <div class="form-group">
+                        	<label>{{'lang_URL'|translate}} </label><span id="upto250" class="alert"></span>
+                            <input type="text" name="url" class="form-control input-lg  input-lg" ng-model="bannerArray.url" required>
+                            <span class="text-danger" ng-show="add_banner.url.$error.required">{{'lang_URL_required'|translate}} .</span>
+                        
+                        </div>
+                        <div class="form-group">
+                        	<label>{{'lang_Image'|translate}} </label><span id="upto500" class="alert"></span>
+                            <input type="file" name="image"  fileread="bannerArray.image" accept="image/*" class="form-control input-lg  input-lg">
+              				
+                          
+                           
+                        </div>
+                         <div class="form-group">
+                        	<label>{{'lang_Description'|translate}} </label> <span id="flatrate" class="alert"></span>
+                            <textarea name="description" class="form-control input-lg  input-lg" cols="50" rows="10" ng-model="bannerArray.description" required> {{'lang_Your_goods_are_good_hands'|translate}} .</textarea>
+                            <span class="text-danger" ng-show="add_banner.description.$error.required">{{'lang_Description_is_required'|translate}} .</span>
+                        </div> 
+                        
+                      
+                		
+                  	      
+                        <input name="submit" type="submit" class="btn btn-primary" value="Submit" ng-disabled="add_banner.$invalid" ng-click="AddBannerform(bannerArray);">   
+                       
+                    </form>
+ 		 </div>
+                                <!-- /.col-lg-6 (nested) -->
+                                
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+		</section>

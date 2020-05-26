@@ -1,0 +1,183 @@
+   
+   <script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip.js" class="ng-scope"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip-utils.js" class="ng-scope"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/FileSaver.js" class="ng-scope"></script>
+   <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="warehouse_manage();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_WarehouseManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page">{{'lang_SecurityCheck'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title">{{'lang_SecurityCheck'|translate}}</h5>
+		</div><br>
+	
+        <div class="row">
+         <div class="form-group">
+           <param name="SRC" value="y" />
+                  <div style="display:none">
+            <audio id="audio" controls>
+            <source src="https://tamco.fast-option.com/templates/js/apx_tone_alert_7.mp3" type="audio/ogg">
+                     </audio></div>
+                            </div>
+            <div class="col-sm">
+                <div class="row">  
+                    <div class="col-md-3">
+                         <input type="text" id=""  ng-model="drs_id"class="form-control" placeHolder='DRS Id' />
+                    </div>
+                    <div class="col-md-3">
+                      <input type="text" id="scan_awb" my-enter="securitycheckScan()" ng-model="slip_no"class="form-control" placeHolder='Scan shipments' />
+                    </div>
+					
+                    <div class="col-md-6">
+                        <input type="button" ng-click="create_menifest();" value='Verify'class="btn btn-primary" />
+                    </div> <br/>
+					<div class="row">
+                    
+					 <div class="col-md-5" style="margin-top:15px; margin-left:15px;" >  <input class="btn btn-info" type="button" onclick="create_zip();" value="Export Completed" ></div>
+                 <div class="col-md-6" > <input class="btn btn-info" type="button" onclick="create_zip1();" value="Export ALL" style="margin-top:15px; margin-left: 150%"></div> <br/>
+                </div><br/>
+			</div><br/>
+			
+	    <div class="row">
+        
+                  <div ng-if='warning' class="alert alert-warning">{{warning}} </div>          
+                  <div ng-if='Message' class="alert alert-success">{{Message}} </div>
+                </div>
+				</div>
+                <div>&nbsp;</div>
+				<div class="row">
+            <div class="col-sm"><br/><br/>
+                <div class="row"> 		
+        			
+					<div class="col-md-6">
+					    <section class="hk-sec-wrapper">
+							<div class="panel panel-default">
+								<div class="panel-body">{{'lang_Sort'|translate}}</div>
+							</div>
+						</section>	
+							<table class="table table-hover mb-0" id="show_messanger_print1">
+								<thead>
+									<tr>
+										<th class="head1">{{'lang_srNo'|translate}}</th>
+										<th class="head0">{{'lang_AwbNo'|translate}}.</th>
+										<th class="head0">{{'lang_ScanedTotal'|translate}}</th>
+										<th class="head0">{{'lang_origin'|translate}}</th>
+										<th class="head1">{{'lang_destination'|translate}}</th>
+										<th class="head1">{{'lang_Remove'|translate}}</th>
+									</tr>
+								</thead>
+								<tbody>
+								    <tr  ng-repeat=" data in shipments | reverse" >
+                  <td>{{$index+1}}</td>
+                  <td>{{data.slip_no}}</td>
+                  <td>({{data.scanned}})|({{data.pieces}})</td>
+                  <td>{{data.origin}}</td>
+                  <td>{{data.destination}}</td>
+                    <td><a ng-click="removeData(data.slip_no)">
+          <span class="glyphicon glyphicon-remove"></span>
+        </a></td>
+                </tr>
+								</tbody>
+							</table>
+					</div>
+					
+					<div class="col-md-6">
+					
+					<section class="hk-sec-wrapper">
+						<div class="panel panel-default">
+							<div class="panel-body">{{'lang_completed'|translate}}</div>
+						</div>
+					</section><br>
+						
+							<table class="table table-hover mb-0" id="show_messanger_print">
+								<thead>
+									<tr>
+										<th class="head1">{{'lang_srNo'|translate}}</th>
+										<th class="head0">{{'lang_AwbNo'|translate}}.</th>
+										<th class="head0">{{'lang_ScanedTotal'|translate}}</th>
+										<th class="head0">{{'lang_destination'|translate}}</th>
+										<th class="head1">{{'lang_Remove'|translate}}</th> 
+									</tr>
+								</thead>
+								<tbody>
+								    <tr  ng-repeat=" data in complited | reverse">
+                  <td>{{$index+1}}</td>
+                  <td>{{data.slip_no}}</td>
+                  <td>({{data.scanned}})|({{data.pieces}})</td>
+                  <td>{{data.origin}}</td>
+                  <td>{{data.destination}}</td>
+               
+                </tr>
+								</tbody>
+							</table>
+						
+					</div>
+				</div>
+            </div>
+        </div>			
+   
+<SCRIPT>
+
+function create_zip() {
+var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+ tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+ tab_text = tab_text + '<x:Name>complited-manifest</x:Name>';
+ tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+ tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+ tab_text = tab_text + "<table border='1px'>";
+//get table HTML code
+ tab_text = tab_text + $('#show_messanger_print').html();
+ tab_text = tab_text + '</table></body></html>';
+ 
+	
+	/*var zip = new JSZip();
+	zip.add(Date()+"_manifest details.xls", tab_text);
+	content = zip.generate();
+	zip.file(Date()+"_manifest details.xls"); // the file
+	location.href="data:application/zip;base64," + content;*/
+	
+	var zip = new JSZip();
+zip.file(Date()+" complited-manifest.xls", tab_text);
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    saveAs(content, Date()+" complited-manifest.zip");
+});
+	
+
+}
+
+function create_zip1() {
+var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+ tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+ tab_text = tab_text + '<x:Name>complited-manifest</x:Name>';
+ tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+ tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+ tab_text = tab_text + "<table border='1px'>";
+//get table HTML code
+ tab_text = tab_text + $('#show_messanger_print1').html();
+ tab_text = tab_text + '</table></body></html>';
+ 
+  
+  /*var zip = new JSZip();
+  zip.add(Date()+"_manifest details.xls", tab_text);
+  content = zip.generate();
+  zip.file(Date()+"_manifest details.xls"); // the file
+  location.href="data:application/zip;base64," + content;*/
+  
+  var zip = new JSZip();
+zip.file(Date()+" complited-manifest.xls", tab_text);
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    saveAs(content, Date()+" complited-manifest.zip");
+});
+  
+
+}
+
+</SCRIPT>

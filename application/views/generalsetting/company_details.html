@@ -1,0 +1,143 @@
+  
+   <nav class="hk-breadcrumb" aria-label="breadcrumb" >
+    <ol class="breadcrumb breadcrumb-light bg-transparent">
+        <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{'lang_generalSetting'|translate}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{'lang_companyDetails'|translate}}</li> 
+    </ol>
+</nav>
+<!-- /Breadcrumb -->
+
+
+<div class="" ng-init="company();">  
+    <!-- Title -->
+     <section class="hk-sec-wrapper" >     
+<section class="hk-sec-wrapper">   
+                <h5 class="hk-sec-title">{{'lang_companyDetails'|translate}}</h5><br>
+                <h5 class="hk-sec-title"><i class="glyphicon glyphicon-user"></i>  {{'lang_adminLoginSetup'|translate}}</h5><br>
+                <div class="row">
+                    <div class="col-sm">
+                       
+                            <div class="form-group">
+                                <label for="inputText">{{'lang_userName'|translate}}</label><span style="color:red">*</span>
+                                <input type="text" name="user" ng-model="adminArray.username"  id="user" class="form-control" aria-describedby="textHelpBlock" ng-model="adminArray.user" required>
+                            
+                            
+                                
+                            </div>
+                        
+                        
+                            <div class="form-group">
+                                <label for="inputPassword5">{{'lang_password'|translate}}</label><span style="color:red">*</span>
+                                 <div class="input-group">
+                                <input type="{{ typePassword ? 'text' : 'password' }}"  name="password" ng-model="adminArray.password"  id="password" class="form-control" aria-describedby="passwordHelpBlock" ng-model="adminArray.password" required>
+                                      <span class="input-group-btn">
+<button class="btn btn-default " ng-click="togglePassword()" type="button"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                </div>
+                                
+
+                            
+                               
+                            </div>
+                        
+                    </div>
+                    
+                </div>
+                <input name="submit" type="submit" class="btn btn-primary" value="{{'lang_Submit'|translate}}" ng-disabled="admin.$invalid" ng-click="userform(adminArray);">
+</section>
+</form>
+<form role="form"  name="company" enctype="multipart/form-data" class="form-horizontal" id="company">	
+<section class="hk-sec-wrapper" >     
+                <h5 class="hk-sec-title"><i class="fa fa-building-o"></i>  {{'lang_companyInfo'|translate}}</h5><br>
+                <div class="row">
+                    <div class="col-sm">
+                        
+                            <div class="form-group">
+                                <label for="inputText">{{'lang_companyName'|translate}} <span style="color:red">*</span></label><span id="alert_company_name" class="alert"></span>   
+                                <input type="text" name="company_name" id="company_company_name" class="form-control"  ng-model="companyArray.company_name" required>  
+                                <span class="text-danger" ng-show="company.company_name.$error.required">{{'lang_Nameisrequired'|translate}}</span>
+                            </div>
+                              
+                       
+                       
+                            <div class="form-group">
+                                <label for="inputText">{{'lang_companyAddress'|translate}} <span style="color:red">*</span></label><span id="alert_company_address" class="alert"></span>
+                                <input type="text" name="company_address" id="company_company_address" class="form-control"  ng-model="companyArray.company_address" required>
+                        
+                            </div>
+                       
+                        
+                            <div class="form-group">
+                                <label for="inputText">{{'lang_phone'|translate}} <span style="color:red">*</span></label><span id="alert_phone" class="alert"></span>
+                                <input type="text" name="phone" id="company_phone" class="form-control"  ng-model="companyArray.phone" ng-maxlength="10"  required >
+                            
+                            </div>
+                        
+
+                        
+                            <div class="form-group">
+                                <label for="inputText">{{'lang_vAT'|translate}} <span style="color:red">*</span></label>
+                                <input type="text" name="vat" id="company_vat" class="form-control"  ng-model="companyArray.vat" required>
+                            
+                            </div>
+                       
+
+                        
+                            <div class="form-group">
+                                <label for="inputText">{{'lang_infoEmail'|translate}} <span style="color:red">*</span></label>
+                                <input type="email" name="email" id="email" class="form-control"  ng-model="companyArray.email" required>
+                                
+                            </div>
+                             <div class="form-group">
+                                <label for="inputText">{{'lang_supportEmail'|translate}} <span style="color:red">*</span></label>
+                                <input type="email" name="support_email" id="support_email" class="form-control"  ng-model="companyArray.support_email" required >
+                                
+                            </div>
+                            
+                             <div class="form-group">
+                                <label for="inputText">{{'lang_webmasterEmail'|translate}} <span style="color:red">*</span></label>
+                                <input type="email" name="webmaster_email" id="webmaster_email" class="form-control"  ng-model="companyArray.webmaster_email" required>
+                            
+                            </div>
+							<div class="form-group"> 
+                        <label>{{'lang_Upload_logo'|translate}}</label><br>    
+                        <label class="switch"> 
+                            <input type="checkbox" ng-model="companyArray.uploadFiles" >  
+                            <span class="slider round"></span> 
+                        </label>   
+                     </div> 
+							
+                             <label class="text-bold">{{'lang_logo'|translate}} <span style="color:red">*</span></label> 
+                            <div class="form-group">
+                                
+                                
+                                <div class="fileinput input-group ng-isolate-scope fileinput-exists" data-provides="fileinput">  
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">{{'lang_Upload'|translate}}</span>
+                                    </div>
+                                    <div class="form-control text-truncate" data-trigger="fileinput"> <span class="fileinput-filename"></span></div> 
+                                    <span class="input-group-append">
+                                            <span class=" btn btn-primary btn-file"><span class="fileinput-new">{{'lang_SelectFile'|translate}}</span><span class="fileinput-exists">{{'lang_Change'|translate}}</span>
+                                    <input type="hidden" value="" name=""><input type="file" name="logo" fileread="companyArray.logo" accept="image/*" class="ng-isolate-scope">
+                                    </span>
+                                   <!-- <a href="#" class="btn btn-secondary fileinput-exists" data-dismiss="fileinput">{{'lang_Remove'|translate}}</a>-->
+                                    </span>
+                                </div>
+                                <br>
+                                
+                                
+                                
+                                
+                                
+                                <img  ng-if="companyArray.logo && !companyArray.newLogo " src="{{companyArray.logo}}" class="img-fluid" width="90px;" height="90px;"> 
+                                <img  ng-if="companyArray.newLogo" src="{{companyArray.newLogo}}" class="img-fluid" width="90px;" height="90px;">
+                            </div>
+                    </div>
+                </div>
+  
+<input name="submit" type="submit" class="btn btn-primary" value="{{'lang_Submit'|translate}}"  ng-disabled="company.$invalid"   ng-click="companyform(companyArray);">
+</form>	
+
+    <!-- /Title -->
+</section>            
+</div>		

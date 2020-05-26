@@ -1,0 +1,146 @@
+   <script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip.js" class="ng-scope"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/jszip-utils.js" class="ng-scope"></script>
+<script type="text/javascript" src="https://tamco.fast-option.com/templates/js/FileSaver.js" class="ng-scope"></script>
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="getInventoryreport(1,0);ShowCityDropdata();ShowHubDropdata();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{'lang_WarehouseManagement'|translate}}</li>
+			<li class="breadcrumb-item active" aria-current="page"> {{'lang_InventoryReport'|translate}}</li>
+        </ol>
+    </nav>
+	<div class = "">
+	
+	<section class="hk-sec-wrapper">
+		<div class="panel-heading">
+				<h5 class="panel-title"> {{'lang_InventoryReport'|translate}}</h5>    
+		</div><br>
+	  
+		
+        <!--<button type="button" data-toggle="tooltip" data-placement="top" title="Download Excel Report" onclick="create_zip()" class="btn btn-info"><i class="fa fa-file-excel-o fa-2x" aria-hidden="true"></i></button>-->
+					 <button type="button"  data-toggle="tooltip" data-placement="top" title="Download Excel Report"  onclick="create_zip()" class="btn btn-info" ><i class="fa fa-file-excel-o fa-2x"  aria-hidden="true"></i></button> <br> <br/>
+			<div class="col-sm">
+          <div class="row">
+            <input type="HIDDEN" name="show_type" value="">
+		 <div class="col-md-3" style="margin-top:20px;">
+		 <p>From Date:</p>
+		 <input type="date" ng-model="filterData.from_date"  class="form-control" placeholder="dd-mm-yy" >
+		  </div>
+		  
+		  <div class="col-md-3" style="margin-top:20px;">
+		  <p>To Date:</p>
+		 <input type="date" ng-model="filterData.to_date"  class="form-control" placeholder="dd-mm-yy" >
+		  </div>
+		  
+            <div class="col-md-3" style="margin-top:20px;">
+			 <p>Origin:</p>
+              <input type="text" name="origin" id="show_city_dropdown"  placeholder="Select Origin" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="filterData.origin"> 
+              </div>
+			  
+             <div class="col-md-3" style="margin-top:20px;">
+			 <p>Destination:</p>
+               <input type="text" name="destination" id="show_city_dropdownss"  placeholder="Select Destination" class="awesomplete ui-autocomplete-input watermark width_set form-control" ng-model="filterData.destination">
+            </div> 
+			
+            <div class="col-md-3" style="margin-top:20px;"> 
+			<p>Schedule Status:</p>
+               <select name="schedule_status" id="schedule_value" class="form-control input-lg" ng-model="filterData.schedule_status">
+                <option value="" selected="selected">{{'lang_ScheduledStatus'|translate}}</option>  
+                <option  value="Y">Yes</option>
+                <option value="N">No</option> 
+              </select><br>
+              </div>
+			  
+            <div class="col-md-3" style="margin-top:40px;"> 
+          <input type="button" name="submit" value="Search" style="float:right;" class="btn btn-danger" ng-click="getInventoryreport(1,1);">
+		  </div>
+          </div>
+        </div>			
+		<div class="table-responsive"  id="tableToExport">
+			<table id="printTable" class="table table-striped table-bordered table-hover">  
+                    
+                <thead>
+					<tr>
+						<th colspan="15">
+						   
+    
+						</th>
+					</tr>      
+					
+					<tr>
+						<th>{{'lang_srNo'|translate}}</th>
+						<th>{{'lang_AwbNo'|translate}}</th>
+						<th>{{'lang_origin'|translate}}</th>
+						<th>{{'lang_destination'|translate}}</th>
+						<th>{{'lang_ScheduleStatus'|translate}}</th>
+						<th>{{'lang_ScheduleType'|translate}}</th>
+						<th>{{'lang_scheduleDate'|translate}}</th>
+						<th>{{'lang_OnHold'|translate}}</th> 
+						<th>{{'lang_DriverCode'|translate}}</th>
+						<th>{{'lang_LastOfd'|translate}}</th>
+						<th>{{'lang_ReportType'|translate}}</th>
+						<th>{{'lang_date'|translate}}</th>
+						<th>{{'lang_User'|translate}}</th>
+					</tr>
+				</thead> 
+                 
+                <tbody>
+                    <tr ng-repeat="data in InventoryListArray"> 
+						<td>{{$index+1}}</td>
+						<td>{{data.awb_no}}</td>
+						<td>{{data.origin}}</td>
+						<td>{{data.destination}}</td>
+						<td>{{data.schedule_status}}</td>
+						<td>{{data.shedule_type}}</td>
+						<td>{{data.shedule_date}}</td>
+						<td>{{data.refused}}</td>
+						<td>{{data.messenger_code}}</td>
+						<td>{{data.status}}</td> 
+						<td>{{data.report_type}}</td>
+						<td>{{data.entry_date}}</td>
+						<td>{{data.username}}</td>
+					</tr>            
+
+								
+					   <tr ng-if="InventoryListArray==''"> 
+                    <td colspan="13">
+                      
+                  No Records Found 
+                  </td>
+                </tr>       
+
+								
+					
+				</tbody>  
+                 			
+			</table>
+        </div>
+    </section>		
+<SCRIPT>
+
+function create_zip() {
+var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+ tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+ tab_text = tab_text + '<x:Name>Test Sheet</x:Name>';
+ tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+ tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+ tab_text = tab_text + "<table border='1px'>";
+//get table HTML code
+ tab_text = tab_text + $('#printTable').html();
+ tab_text = tab_text + '</table></body></html>';
+	
+	/*var zip = new JSZip();
+	zip.add(Date()+"_manifest details.xls", tab_text);
+	content = zip.generate();
+	zip.file(Date()+"_manifest details.xls"); // the file
+	location.href="data:application/zip;base64," + content;*/
+	
+	var zip = new JSZip();
+zip.file(Date()+" Inventory Report.xls", tab_text);
+zip.generateAsync({type:"blob"})
+.then(function(content) {
+    saveAs(content, Date()+"Inventory Report.zip");
+});
+	
+
+}
+</SCRIPT>

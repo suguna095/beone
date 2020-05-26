@@ -1,0 +1,59 @@
+   	<nav class="hk-breadcrumb" aria-label="breadcrumb" ng-init="ShowupdateRTOData();">
+        <ol class="breadcrumb breadcrumb-light bg-transparent">
+            <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>{{'lang_Home'|translate}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Update RTW</li>
+			<li class="breadcrumb-item active" aria-current="page">Update RTW</li>
+        </ol>
+    </nav>
+    <section class="hk-sec-wrapper">
+	<div class = "">
+	<div class="breadcrumb-line">
+	    <div class="hk-pg-header">
+            <h4><i data-feather="arrow-left-circle"></i></i> 
+            <span class="text-semibold"></span>Shipment Details</h4>
+		</div>
+	</div>     
+
+	<table class="table datatable-show-all table-bordered table-hover datatable-highlight" style="margin-top:10px">
+        <thead>
+          <tr>
+            <th class="head1"> <input type="checkbox" name="update_all[]" ng-modal="data.checked"  ng-click="selectAllFriendsreturn()" />
+            
+              <br> {{'lang_srNo'|translate}}</th>
+              <th class="head0">{{'lang_AwbNo'|translate}}</th>
+              <th class="head0">Delivery Attempt</th>
+              <th class="head0">Address</th>
+              <th class="head1">Courier Name</th>    
+              <th class="head1">Schedule Date</th>
+              <th class="head1">Reasons</th>
+          </tr>
+          
+          
+        </thead>
+        <tbody>
+          <tr ng-repeat= "data in editRtoDataArray">
+                <td><input  type="checkbox" name="CheckshidIds[]" id="checkslip{{data.slip_no}}" ng-model="data.checked" value="{{data.slip_no}}"/> <br/>{{$index+1}}</td>
+                <td>{{data.slip_no}}</td> 
+                <td>{{data.d_attempt}}</td>
+			    <td>{{data.reciever_address}}</td>  
+                <td>{{data.messangerName}}</td> 
+                <td>{{data.schedule_date}}</td> 
+                <td>{{data.show_code}}</td> 
+          </tr>
+          <tr ng-if="editRtoDataArray==''" >    
+                  <td colspan="7">   
+                  No Records Found   
+                  </td>
+      </tr>
+        </tbody>     
+        
+        
+      </table>
+      <button type="button" class="btn btn-primary"  ng-click="GetupdateChekData(editRtoDataArray);"> Confirm</button>     
+
+  </section>
+
+
+	
+
+

@@ -1,0 +1,220 @@
+   
+    <nav class="hk-breadcrumb" aria-label="breadcrumb"  ng-init="payablecod_print();">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+                    <li class="breadcrumb-item"><a href="#"><i class="glyphicon glyphicon-home"></i>   {{'lang_Home'|translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'lang_Bulk_Invoice_Management'|translate}} </li>
+					<li class="breadcrumb-item active" aria-current="page">{{'lang_Bulk_COD_Invoices'|translate}} </li>
+                </ol>
+    </nav>
+<div class = "">
+ <div class="centercontent tables">
+  <div id="contentwrapper" class="contentwrapper">
+    <div class="contenttitle2">
+      <h3>
+      
+      {{'lang_Invoice_Detail'|translate}} ({{invoiceArray.invoice_no}})
+  
+      </h3>
+      
+      <br>
+    </div>
+ 
+        <a onclick="javascript:printDiv('printme')" style="cursor:pointer;">
+    <button style="float:right;" class="btn btn-danger">{{'lang_Print'|translate}}</button>
+    </a>
+        <input class="btn-primary" type="button" onclick="create_zip();" value="Export to Excel" style="float:;">   
+ <br>
+  
+    
+    
+    <div id="printme" style="100%;"> 
+    
+    
+    <!-- This code is for print button -->
+     <script language="javascript">
+            function printDiv(divName)
+       {
+                  var printContents = document.getElementById(divName).innerHTML;
+                  var originalContents = document.body.innerHTML;
+ 
+                  document.body.innerHTML = printContents;
+                  window.print();
+                  document.body.innerHTML = originalContents;
+            }
+     </script>
+     
+    <!-- Export To Excel -->
+   
+      <!-- Export To Excel -->
+    
+    <style type="text\css" media="print">
+  @media #print
+  {
+    display: none;
+  }
+  </style>
+
+      
+  <style>
+    table, th, td
+  {
+    border: 1px solid black;
+    padding:2px;
+    }
+    th 
+  {
+    background-color: #CCC;
+    color: #000;
+    width:10%;
+    }
+    </style>
+     
+     <br>
+     
+        <table id="print" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
+<!--<div>
+<span style="float:left;"><b style="font-size:22px;">Invoice Number:- </b><br />
+            <b>Customer Name:-&nbsp;sam</b> <br />
+            <b>Date:- </b></span>
+            <span style="float:right; "><img src="https://tamco.fast-option.com/logofolder/logo1567638297.png"  /><br />TAM EXPRESS COMPANY</span>
+</div>
+<br /><br /><br /><br /><br />-->
+<tbody><tr><td colspan="5"></td><td colspan="3" style="text-align:center;"><strong>{{'lang_Tax_Invoice'|translate}}- فاتورة ضريبية</strong></td><td colspan="9"></td></tr>
+        <tr>
+      <td colspan="5" style="padding:2%;">
+      <b>{{'lang_UIDAccountNumber'|translate}}:-&nbsp;{{invoiceArray.account_number}} - رقم الحساب</b><br> 
+      
+      <b>{{'lang_Customers_Name'|translate}}:-&nbsp;{{invoiceArray.name}} - اسم العميل</b> <br>
+      
+      <b>{{'lang_address'|translate}}:-&nbsp;{{invoiceArray.address}} - عنوان</b><br>
+      
+       <b>{{'lang_BankAccountNumber'|translate}}:-{{invoiceArray.account_number}} - الحساب البنكي</b><br>
+      <b>{{'lang_AccountManager'|translate}} :-{{invoiceArray.account_manager}}</b><br>
+      <b>{{'lang_VatId_No'|translate}}.:-&nbsp;{{invoiceArray.vat}} - الرقم الضريبي </b>
+      <br>
+       <b>{{'lang_Currency'|translate}}:-{{'lang_SAR'|translate}}</b>
+      </td>
+           <td colspan="3" align="center">
+    <img src="https://tamco.fast-option.com/logofolder/logo1567638297.png" height="100px;"></td>
+    <td colspan="9">
+       <b align="left">{{'lang_TAMEXPRESSCOMPAN'|translate}}  –  شركة تم إكسبريس 
+ </b><br>
+    <b>{{'lang_VatId_No'|translate}}.:-&nbsp;{{invoiceArray.vat}} - الرقم الضريبي </b><br>
+    <b>{{'lang_Invoice_No'|translate}}:-&nbsp;{{invoiceArray.invoice_no}} - رقم الفاتورة</b><br>
+    <b>{{'lang_Invoice_Date'|translate}}:-&nbsp;{{invoiceArray.invoice_date}} - تاريخ الفاتورة</b>
+    </td>
+        </tr>
+        <tr>
+          <td colspan="18" align="justify">&nbsp;</td>
+        </tr>
+        <tr>
+          <th>{{'lang_srNo'|translate}}.</th>
+        <th>{{'lang_Ref_No'|translate}}. / الرقم المرجعي</th>
+          <th>{{'lang_AWB_No'|translate}}  / رقم البوليصة</th>
+          <th>{{'lang_Close_Date'|translate}}  / تاريخ التوصيل</th>
+          <th>{{'lang_DeliveryAttempts'|translate}}</th> 
+          <th>{{'lang_origin'|translate}}  / المصدر</th>
+          <th>{{'lang_destination'|translate}}  / الوجهة</th>
+           <th>{{'lang_WEIGHT'|translate}}  (Kg) / الوزن</th>
+          <th>{{'lang_No_of_Pieces'|translate}}  / عدد القطع</th>
+          <th>{{'lang_Service_Type'|translate}}  / نوع الخدمة</th>        
+          <th>{{'lang_CODAmount'|translate}}  / قيمة التحصيل</th>
+         <th>{{'lang_CODFees'|translate}}  / رسوم التحصيل</th>
+          <th>{{'lang_ReturnCharge'|translate}}  / قيمة الإرجاع</th>     
+          <th>{{'lang_Shipping_Service'|translate}}  / المجموع الصافي</th>
+      <th>{{'lang_Total'|translate}} </th>
+          <th>{{'lang_vAT'|translate}} </th> 
+          <th>{{'lang_Grand_Total'|translate}} </th>
+       
+        </tr>
+                              
+      <tr>
+        <td align="center">{{$index+1}}</td>
+       <td align="center">{{invoiceArray.refrence_no}}</td>
+        <td align="center">{{invoiceArray.awb_no}}</td>
+        
+        
+       
+        <th>{{invoiceArray.close_date}}</th>
+         <td align="center">{{invoiceArray.d_attempt}}</td>
+        <td align="center">{{invoiceArray.origin}}</td>
+        <td align="center">{{invoiceArray.destination}}</td>
+       <td style="background-color:#AEFFAE; ">{{invoiceArray.weight}} Kg</td>
+       <td align="center">{{invoiceArray.qty}}</td>
+    <td align="center">{{invoiceArray.mode}}</td>
+    <td align="center">{{invoiceArray.cod_amount}}</td>
+    <td align="center">{{invoiceArray.cod_charge}}</td>
+        <td align="center">{{invoiceArray.return_charge}}</td>
+    <td align="center">{{invoiceArray.service_charge}}</td>
+    <td align="center">{{invoiceArray.total}}</td>
+      <td align="center">{{invoiceArray.vat}}</td>
+      <td align="center"> {{invoiceArray.total}}</td>
+      
+      
+    <form action="" name=""></form>
+    <input type="hidden" name="invoic_no_b" id="invoic_no_b" value="C51201971563785355">
+    
+      </tr> 
+             
+       <tr> 
+        <td colspan="9" style="text-align:center; ">&nbsp;</td>
+       <td style="text-align:right; font-size:18px;"><b> {{'lang_Total'|translate}}  ({{'lang_SAR'|translate}})</b>  </td> 
+    <td style="text-align:right; font-size:18px;"><b> {{invoiceArray.cod_charge}}</b>
+        </td>
+        <td style="text-align:right; font-size:18px;"><b>{{invoiceArray.return_charge}} </b></td>
+        <td style="text-align:right; font-size:18px;"><b>{{invoiceArray.service_charge}} </b></td> 
+        
+       
+        
+         <td style="text-align:right; font-size:18px;"><b> {{invoiceArray.total}}
+      </b>
+        </td>
+     <td align="center"><strong> </strong></td>
+     <td align="center"><strong>{{invoiceArray.vat}}</strong></td>
+     <td align="center"><strong> {{invoiceArray.total}}</strong></td>
+        </tr> 
+      </tbody>
+   <tbody><tr> 
+<td colspan="17">
+   <table align="left" width="30%">
+    
+    <tbody><tr> <th colspan="2">{{'lang_Summary'|translate}}  - ملخص</th> </tr>
+   <tr>
+    <th>{{'lang_Total_Customer_Collection'|translate}}  – اجمالي تحصيلات العميل</th><th>{{'lang_SAR'|translate}}  250</th>
+    </tr>
+    <tr><td align="justify">{{'lang_Less'|translate}}:{{'lang_CODFees'|translate}} - رسوم التحصيل</td><td align="center">{{'lang_SAR'|translate}}  -{{invoiceArray.cod_charge}}</td></tr>
+
+    <tr><td align="justify">{{'lang_Less'|translate}}: {{'lang_ShipmentCharge'|translate}} - تكلفة توصيل الشحنات</td><td align="center">SAR -{{invoiceArray.return_charge}}</td></tr>
+     <tr><td align="justify">{{'lang_Less'|translate}}: {{'lang_ReturnCharge'|translate}} – رسوم الإرجاع</td><td align="center">{{'lang_SAR'|translate}}  -{{invoiceArray.service_charge}}</td></tr>
+
+    <tr><td align="justify">{{'lang_Less'|translate}}: {{'lang_Bank_fees'|translate}}   – رسوم التحويل البنكي</td><td align="center">{{'lang_SAR'|translate}}  0</td></tr>
+    <tr><td align="justify">{{'lang_Less'|translate}}: {{'lang_Discount'|translate}} - الخصم</td><td align="center">{{'lang_SAR'|translate}}  0</td></tr>
+
+    <tr>
+    <th align="justify">{{'lang_Total_Invoice_before_VAT'|translate}}   – اجمالي الفاتورة قبل الضريبة</th><th>{{'lang_SAR'|translate}}  -20</th></tr>
+   <!-- <td></td>-->
+    
+    <tr>
+    <td>{{'lang_VAT_Percentage'|translate}}- نسبة الضريبة</td> <td align="center">5%</td> 
+    </tr>
+    <tr>
+    <td>{{'lang_VAT_Amount'|translate}} - قيمة الضريبة</td> <td align="center">{{'lang_SAR'|translate}}  -1</td>
+    </tr>
+    <tr>
+    <th align="justify">{{'lang_Total_Invoice_after_VAT'|translate}}  - اجمالي الفاتورة بعد الضريبة</th><th>- 21</th></tr>
+    
+   <tr><th align="justify">{{'lang_Amount_To_be_Transfered'|translate}} - اجمالي المبلغ الواجب تحويله</th><th>{{'lang_SAR'|translate}}  229</th></tr> 
+    </tbody></table>
+    </td>
+    </tr>    
+  </tbody>  
+</table>
+    
+
+
+</div>
+</div>
+</div>
+</div>
+
+
